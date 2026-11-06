@@ -41,6 +41,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
     - **Silences**: ~1 s after the question to the viewer, ~0.8 s before the verdict (« … Non. »).
     - **Ending loops** to the opening image, with the question on top; no long cards after the twist (people leave there).
     - Expressive faces: big eyes, strong brows, one clear emotion per line (lib.js toon moods).
+13. **Emotion & mix**: give every beat an emotion with `EMO = {id: 'mystere'|'menace'|'tension'|'neutre'|'complice'|'question'|'excite'|'choc'|'amuse'}` (see voice.py). Sound effects stay under the voice (`SFX` ≈ 0.3, auto-ducked); the creator complained when effects covered the voice.
 12. Voice: Henri in natural mode (engine/voice.py splits sentences, varies intonation, adds breaths and a warm room tone).
     Write spoken text like speech (« t'es », « on prend que les malins »), short sentences, « … » where suspense is wanted.
     The creator's own voice works too (`VOICE_FILE=… engine/build.sh`) but he prefers Henri for now.

@@ -15,7 +15,20 @@ exec(open(os.path.join(D, 'beats.py')).read(), ns)
 BEATS, PROS = ns['BEATS'], ns.get('PROS', {})
 VOICE = ns.get('VOICE', 'fr-FR-HenriNeural')
 DEF = ns.get('DEFAULT_PROS', ('+18%', '+10Hz', '+0%'))
-NATURAL = ns.get('NATURAL', True)  # phrase-by-phrase delivery, varied intonation, breaths, warm room tone
+NATURAL = ns.get('NATURAL', True)
+# Emotion presets (Henri can't truly act, so emotion = speed, pitch, loudness and pauses). Use as 5th BEATS field or EMO={id: name}.
+EMOTIONS = {
+  'mystere':  (('+2%', '-8Hz', '-8%'), 1.5),   # slow, low, quiet, long pauses — hooks, suspense
+  'menace':   (('-2%', '-12Hz', '+0%'), 1.4),  # low and heavy — threats, verdicts
+  'tension':  (('+8%', '-2Hz', '+0%'), 1.3),
+  'neutre':   (('+18%', '+8Hz', '+0%'), 1.0),  # storytelling
+  'complice': (('+16%', '+14Hz', '+0%'), 1.1), # talking to the viewer
+  'question': (('+14%', '+18Hz', '+0%'), 1.2),
+  'excite':   (('+28%', '+20Hz', '+10%'), 0.7),# idea, enthusiasm
+  'choc':     (('+10%', '+24Hz', '+12%'), 0.8),# surprise
+  'amuse':    (('+20%', '+16Hz', '+0%'), 0.9),
+}
+EMO = ns.get('EMO', {})  # phrase-by-phrase delivery, varied intonation, breaths, warm room tone
 SR = 44100
 LEAD = 0.02
 cache = os.path.join(D, 'vo'); os.makedirs(cache, exist_ok=True)
@@ -76,7 +89,9 @@ async def main():
     parts.append(np.zeros(int(SR * LEAD), np.float32))
     for b in BEATS:
         bid, show, spoken, pause = b[0], b[1], b[2], b[3]
-        base = PROS.get(bid, DEF); start = t; words_all = []
+        emo = b[4] if len(b) > 4 else EMO.get(bid)
+        base = PROS.get(bid, EMOTIONS[emo][0] if emo in EMOTIONS else DEF); gapk = EMOTIONS[emo][1] if emo in EMOTIONS else 1.0
+        start = t; words_all = []
         ph = phrases(spoken) if NATURAL else [spoken]
         for k, p in enumerate(ph):
             pr = base
@@ -88,7 +103,7 @@ async def main():
             parts.append(a); t += len(a) / SR
             if k < len(ph) - 1:
                 mark = next((m for m in ('...', '…', '?', '!', '.', ':', ';') if p.endswith(m)), '.')
-                g = GAP.get(mark, 0.15) + float(rng.uniform(-0.03, 0.04))
+                g = GAP.get(mark, 0.15) * gapk + float(rng.uniform(-0.03, 0.04))
                 if NATURAL and g >= 0.3 and k % 2 == 1:
                     br = breath(); parts.append(np.zeros(int(SR * (g - 0.22) / 2), np.float32)); parts.append(br); parts.append(np.zeros(int(SR * (g - 0.22) / 2), np.float32))
                 else: parts.append(np.zeros(int(SR * g), np.float32))

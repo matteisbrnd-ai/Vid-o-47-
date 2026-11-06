@@ -8,7 +8,8 @@ import json, os, re, sys, wave
 import numpy as np
 D = sys.argv[1]; SR = 44100; rng = np.random.default_rng(7)
 ns = {'os': os, 'HERE': D}; exec(open(os.path.join(D, 'beats.py')).read(), ns)
-CUES, MUS = ns.get('CUES', []), ns.get('MUSIC', 0.26)
+CUES, MUS = ns.get('CUES', []), ns.get('MUSIC', 0.2)
+SFX = ns.get('SFX', 0.35)  # overall sound-effect level (voice must always stay on top)
 src = open(os.path.join(D, 'timeline.js')).read(); TL = json.loads(src[src.index('{'):src.rindex('}') + 1]); BEATS = {b['id']: b for b in TL['beats']}
 w = wave.open(os.path.join(D, 'vo.wav')); vo = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
 N = len(vo) + SR
@@ -85,6 +86,10 @@ while t0 < N / SR:
 mus /= np.max(np.abs(mus)) + 1e-9
 voN = np.zeros(N); voN[:len(vo)] = vo
 e = np.convolve(np.abs(voN), np.ones(int(SR * 0.15)) / int(SR * 0.15), 'same'); duck = 1 - 0.5 * np.clip(e * 7, 0, 1)
-mix = voN + MUS * mus * duck + sfx; fade = int(SR * 1.2); mix[-fade:] *= np.linspace(1, 0, fade); mix = mix / np.max(np.abs(mix)) * 0.92
+voN = voN / (np.max(np.abs(voN)) + 1e-9) * 0.9
+sduck = 1 - 0.75 * np.clip(e * 9, 0, 1)            # effects drop by up to -12 dB while the voice speaks
+sfx = sfx / (np.max(np.abs(sfx)) + 1e-9) * SFX * sduck
+mix = voN + MUS * mus * duck + sfx; fade = int(SR * 1.2); mix[-fade:] *= np.linspace(1, 0, fade)
+mix = np.tanh(mix * 1.1) / np.tanh(1.1)               # soft limiter instead of peak-normalising on the loudest effect
 with wave.open(os.path.join(D, 'mix.wav'), 'wb') as o: o.setnchannels(1); o.setsampwidth(2); o.setframerate(SR); o.writeframes((mix * 32767).astype(np.int16).tobytes())
 print('mix ok', round(N / SR, 1), 's')

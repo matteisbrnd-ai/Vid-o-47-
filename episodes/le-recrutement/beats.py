@@ -1,6 +1,7 @@
 # Le recrutement — Henri (natural mode). Same scenes as le-recrutement-voix.
-PROS = {'ff': ('+8%', '-4Hz', '+0%'), 's2': ('+16%', '+14Hz', '+0%'), 's3a': ('+12%', '+4Hz', '+0%'), 's5': ('+18%', '+14Hz', '+0%'),
-        's6': ('+22%', '+16Hz', '+5%'), 's7a': ('+0%', '-4Hz', '+0%'), 's7b': ('-10%', '-10Hz', '+5%'), 's7c': ('+14%', '+6Hz', '+0%')}
+EMO = {'ff': 'mystere', 's1': 'neutre', 's2': 'question', 's3a': 'menace', 's3': 'neutre', 's4': 'tension', 's5': 'complice',
+       's6': 'excite', 's7a': 'tension', 's7b': 'menace', 's7c': 'menace', 'q': 'complice'}
+SFX = 0.3
 BEATS = [
   ('ff',  "Si tu rates ce test… t'es trop bête pour entrer dans le gang.", "Si tu rates ce test… t'es trop bête pour entrer dans le gang.", 0.25),
   ('s1',  "47 veut entrer dans la bande la plus redoutée de la ville.", "Quarante-sept veut entrer dans la bande la plus redoutée de la ville.", 0.1),
