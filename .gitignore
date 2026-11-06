@@ -6,3 +6,6 @@ episodes/*/mix.wav
 episodes/*/vo.wav
 episodes/*/_anim.html
 episodes/*/sheet.jpg
+episodes/*/voix.*
+episodes/*/user_clean.wav
+episodes/*/asr.json

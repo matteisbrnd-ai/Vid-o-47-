@@ -157,7 +157,7 @@ function endCards(t, qLines) { const id = curId(t);
 
 // ---------- captions: 1–3 upper-case words, current word in orange, dark pill, above TikTok's UI ----------
 function captions(t) { resetCam(); const b = TL.beats.find(b => t >= b.start && t < b.next - 0.07); if (!b || !b.words.length) return;
-  const toks = b.show.replace(/\s+([?!:;»])/g, ' $1').split(/\s+/).filter(Boolean), m = b.words.length;
+  const toks = b.show.replace(/\s+([?!:;»])/g, ' $1').split(/[ \t\n]+/).filter(Boolean), m = b.words.length;
   const tt = toks.map((w, i) => ({ w: w.toUpperCase(), t0: b.words[Math.min(m - 1, Math.floor(i * m / toks.length))].t0 }));
   const chunks = []; let cur = []; font(64, 'Mont'); const width = ws => ws.reduce((a, w) => a + x.measureText(w.w).width + 24, 0);
   tt.forEach(w => { if (cur.length && (cur.length >= 3 || width([...cur, w]) > 640 || /[.!?…,]$/.test(cur[cur.length - 1].w))) { chunks.push(cur); cur = []; } cur.push(w); }); if (cur.length) chunks.push(cur);
