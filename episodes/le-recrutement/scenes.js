@@ -1,5 +1,5 @@
 // Le recrutement — scenes (same shot list as the reference: flash-forward cell, exterior, corridor, tub room, game-show podiums, ✅ then ❌).
-const TGT = { ff: [540, 1100, 1.0], hook: [540, 1100, 1.0], s1: [540, 1050, 1.0], s2: [540, 1120, 1.15], s3: [540, 1150, 0.95], s4: [540, 1200, 1.0],
+const TGT = { ff: [540, 1100, 1.0], s1: [540, 1050, 1.0], s2: [540, 1120, 1.15], s3: [540, 1150, 0.95], s4: [540, 1200, 1.0],
   s5: [540, 960, 1.0], s6: [540, 1150, 0.95], s7: [560, 1150, 1.0], q: [540, 1150, 0.95], share: [540, 1150, 0.95] };
 const GUARD = { hat: 'hair', hairCol: '#1f1a18', shades: true, body: '#1d1f24', body2: '#121317', pants: '#15171c', num: false, collar: true };
 function guardT(px, py, s, t, o = {}) { toon(px, py, s, { t, ...GUARD, ...o }); }
@@ -39,9 +39,12 @@ function gameShow(t, hi) { resetCam(); const g = x.createRadialGradient(540, 700
   x.fillStyle = '#24324a'; x.fillRect(0, 1470, W, 450); x.lineWidth = 8; x.strokeStyle = OL; x.beginPath(); x.moveTo(0, 1470); x.lineTo(W, 1470); x.stroke();
   p47(540, 2050, 0.9, t, { look: hi < 0 ? 0 : (hi - 1), mood: 'worried' }); }
 function draw(t) {
-  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, id === 'ff' ? Math.max(0, 1 - t * 3) * 14 : 0, t);
-  if (id === 'ff' || id === 'hook') { cell(t); const k = eIO(seg(t, 0, 1.6)); guardT(lerp(140, 380, k), 1600, 0.78, t, { mood: 'angry', look: 1 }); guardT(lerp(560, 800, k), 1600, 0.78, t, { mood: 'angry', look: -1 });
-    p47(lerp(350, 590, k), 1580, 0.78, t, { mood: 'shock', armsUp: true, sweat: true }); }
+  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, 0, t);
+  if (id === 'ff') { const tc = 1.1;
+    if (t < tc) { cell(t); const k = eIO(seg(t, 0, tc)); guardT(lerp(140, 420, k), 1600, 0.78, t, { mood: 'angry', look: 1 }); guardT(lerp(560, 840, k), 1600, 0.78, t, { mood: 'angry', look: -1 }); p47(lerp(350, 630, k), 1580, 0.78, t, { mood: 'shock', armsUp: true, sweat: true }); }
+    else { cam(750, 760, 2.2 - 0.15 * seg(t, tc, B.ff.end), Math.max(0, 1 - (t - tc) * 4) * 18, t); cell(t);
+      x.save(); x.beginPath(); x.rect(680, 700, 140, 110); x.clip(); x.fillStyle = '#1b1d24'; x.fillRect(680, 700, 140, 110); toon(750, 1005, 0.36, { t, mood: 'shock', look: Math.sin(t * 5) }); x.restore();
+      x.strokeStyle = '#2b2e35'; x.lineWidth = 12; for (let b = 0; b < 3; b++) { x.beginPath(); x.moveTo(705 + b * 45, 700); x.lineTo(705 + b * 45, 810); x.stroke(); } } }
   if (id === 's1') { if (t < WF('s1', /chef/i)) { hideoutExt(t); p47(lerp(-100, 400, eIO(seg(t, t0, t0 + 2))), 1640, 0.7, t, { walk: t < t0 + 2 ? t * 2 : 0, mood: 'smile', look: 1 }); }
     else { corridor(t); p47(320, 1640, 0.8, t, { look: 1 }); cast('boss', 760, 1640, 0.8, t, { look: -1, mood: 'smug' }); } }
   if (id === 's2') { corridor(t); p47(320, 1640, 0.8, t, { look: 1, mood: 'worried' }); cast('boss', 760, 1640, 0.8, t, { look: -1, mood: 'smug' }); }
@@ -54,8 +57,7 @@ function draw(t) {
     if (id === 's7' && out > 0) { guardT(lerp(-120, -420, out), 1580, 0.62, t, { look: 1 }); guardT(lerp(330, 30, out), 1580, 0.62, t, { look: -1 }); }
     cast('boss', 890, 1580, 0.62, t, { look: -1, mood: id === 's7' ? 'angry' : 'smug' }); }
   resetCam();
-  if (id === 'ff') { txt('?', 300, 520, 200, C.yellow, { sw: 16 }); paperCard([['1 MAUVAISE RÉPONSE', 62], ['= LA CAVE', 80, C.red]], 540, 400, 1, { w: 600 }); }
-  if (id === 'hook') { paperCard([['LE TEST QUE', 60], ['47 A RATÉ', 96, C.red]], 540, 430, 1, { w: 560 }); rewindFx(t, B.hook.next); }
+  if (id === 'ff') { paperCard([['TU RISQUES LA CAVE', 76, C.red], ['SI TU RATES CE TEST', 60]], 540, 380, 1, { w: 720 }); if (t > 1.1) { onoma('BAM !', 760, 1150, P(t, 1.1, 0.2), 150); txt('?', 300, 900, 220, C.yellow, { sw: 16 }); } rewindFx(t, B.ff.next); }
   if (id === 's1' && t > WF('s1', /bande/i) && t < WF('s1', /chef/i)) bigWord('LA BANDE', P(t, WF('s1', /bande/i)), 380, C.yellow);
   if (id === 's2') speech('« COMMENT VOUS CHOISISSEZ ? »', 420, 640, pop(t, t0), 52);
   if (id === 's3' && t > WF('s3', /verre/i)) pill('1 VERRE · 1 CASSEROLE · 1 SEAU', 540, 360, P(t, WF('s3', /verre/i)), C.brown);

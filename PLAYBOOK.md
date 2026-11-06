@@ -21,7 +21,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 ## The winning format (from the data below — keep it)
 
 1. **30–40 s.** Longer videos lose people: completion went from 3–7 % (60 s) to 24 % (37 s).
-2. **Open with the ending** (beat `ff`, 2–3 s): the shocking result on screen + one sentence
+2. **Open with the ending, talking to the viewer** (beat `ff`, 2–3 s, one sentence in « tu » with a personal stake, e.g. « Tu risques la cave si tu rates ce test. » — the reference hit says « Tu risques l'asile… »; a hook about 47 instead of « toi » felt flat to the creator): the shocking result on screen + one sentence
    (« Il a sauvé le musée… et il a été viré. »), then `rewindFx` ◀◀ back to the start. Voice and text from 0.0 s.
 3. **A story, not a logic puzzle.** Best performers: someone did something strange / a lie was spotted
    (gardien 2 162 views, 24 % completion). Pure logic (lampe, interrupteurs, coffres) stays ~700–1 100.
