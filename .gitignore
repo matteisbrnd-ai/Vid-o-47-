@@ -1,0 +1,8 @@
+node_modules/
+episodes/*/vo/
+episodes/*/stills/
+episodes/*/silent.mp4
+episodes/*/mix.wav
+episodes/*/vo.wav
+episodes/*/_anim.html
+episodes/*/sheet.jpg

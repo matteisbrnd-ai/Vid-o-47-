@@ -1,0 +1,86 @@
+# Les Énigmes de 47 — playbook
+
+TikTok **@lesenigmesde47**. One riddle a day starring **47**, a likeable small-time thief
+(orange beanie, dark sweater with an orange « 47 »). French audience, mostly 13–25.
+This file is the memory of the project: read it before making anything, update it after every weekly run.
+
+## How to make a video
+
+```
+episodes/<slug>/beats.py    # script: BEATS = [(id, shown_text, spoken_text, pause_s)], PROS (emotion per line), CUES (extra sounds)
+episodes/<slug>/scenes.js   # drawing: function draw(t) using engine/lib.js
+./engine/build.sh episodes/<slug> --stills 0.5,3,6,...   # quick preview -> episodes/<slug>/sheet.jpg (look at it!)
+./engine/build.sh episodes/<slug>                        # final -> videos/<slug>.mp4 + .jpg (≈1 min of compute)
+```
+`episodes/la-panne/` is the reference example: copy it and change the content.
+Voice: Microsoft « Henri » (edge-tts), default `+25% / +12Hz`. Spoken text writes numbers in words
+(« Quarante-sept », « vingt-et-une heures ») so the voice reads them right; shown text keeps « 47 », « 21 h ».
+Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être malin. ») end every video; call
+`endCards(t, [...])` at the end of `draw`.
+
+## The winning format (from the data below — keep it)
+
+1. **30–40 s.** Longer videos lose people: completion went from 3–7 % (60 s) to 24 % (37 s).
+2. **Open with the ending** (beat `ff`, 2–3 s): the shocking result on screen + one sentence
+   (« Il a sauvé le musée… et il a été viré. »), then `rewindFx` ◀◀ back to the start. Voice and text from 0.0 s.
+3. **A story, not a logic puzzle.** Best performers: someone did something strange / a lie was spotted
+   (gardien 2 162 views, 24 % completion). Pure logic (lampe, interrupteurs, coffres) stays ~700–1 100.
+4. **Answer fits in one word** (« il dormait », « la neige », « dimanche »). People must be able to comment fast.
+5. **No solution in the video.** Ask the question, ask for a one-word answer, ask to share. Post the solution
+   the next day as a pinned comment. (Videos with the solution got fewer comments and no better completion.)
+6. **One clear line**: 3–4 clues max, all pointing to the same answer. When a script tried to be « harder » by
+   adding side stories, the creator said « ça part dans tous les sens ». Harder = subtler clue, not more noise.
+7. **Rules must be crystal clear** in the setup (a viewer complained « c'est mal expliqué » on the switches riddle).
+8. **Never reuse** a riddle already listed below. Rewrite classic riddles with new details and 47 as hero.
+9. Description template: `<hook phrase> <emoji> Es-tu capable de … ? Envoie-la à quelqu'un qui pense être malin 😏 #enigme #reflexion #devinette #cassetete #pourtoi`
+10. TikTok AI label: always `isAigc: true` (synthetic voice).
+
+## Publishing (Metricool → TikTok)
+
+- Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
+- Video must be a public URL: push the mp4 to this repo, then use
+  `https://raw.githubusercontent.com/matteisbrnd-ai/Vid-o-47-/main/videos/<slug>.mp4`.
+- `createScheduledPost` with `autoPublish: true`, `draft: false`, `tiktokData.title` (required), `privacyOption: PUBLIC_TO_EVERYONE`, `isAigc: true`.
+- **Free plan: max 20 published posts per calendar month.** Schedule Monday→Friday at **18:00** via Metricool
+  (best slot measured: 12 h and 18 h); the 2 weekend videos are sent to the creator to post himself.
+  Before scheduling, count what is already scheduled/published this month (`getScheduledPosts`) and never exceed 20.
+- **Always get the creator's OK** on the week's videos before scheduling (he chose « avec ma validation »).
+
+## Weekly routine (every Monday)
+
+1. Read stats: Metricool `getAnalyticsDataByMetrics` for tiktok (views, likes, comments, shares, saves per post,
+   last 7 days) — and/or ask the creator for TikTok Studio screenshots (retention curve, % watched to the end).
+2. Append the numbers to the table below and write 2–3 lines of **lessons** (what beat the median, why).
+3. Write 7 new riddles applying the format + lessons, build them, look at every `sheet.jpg`, fix, build finals.
+4. Push videos, send the creator: the 7 videos, descriptions, solutions (for next-day pinned comment), the planning.
+5. After his OK: schedule Mon–Fri 18:00 in Metricool (within the 20/month limit), weekend ones go to him.
+6. Commit everything (episodes, videos, this file).
+
+## Riddles already used (do not repeat)
+
+baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · pizza 8 parts · casino mot de passe ·
+deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
+3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
+alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir)
+
+## Stats log
+
+| Date posted | Video | Length | Views | Likes | Comments | Shares | Saves | Avg watch | Completion | Notes |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 2026-10-26 | La bonne porte (old style) | 32 s | 671 | 29 | 1 | – | 2 | 10.8 s | 5.1 % | |
+| 2026-10-30 | Le test (baignoire) | 61 s | 949 | 88 | 17 | – | 9 | 16.7 s | 7.1 % | open question, most comments |
+| 2026-10-31 | Les 3 portes | 61 s | 808 | 55 | 3 | – | 5 | 11.2 s | 2.8 % | posted 10:51, weak |
+| 2026-11-01 | Le casino (with solution) | 65 s | 764 | 59 | 6 | – | 4 | 15.1 s | 3.4 % | same time as pizza |
+| 2026-11-01 | La pizza (with solution) | 62 s | 795 | 44 | 2 | – | 4 | 16.6 s | 4.2 % | ~50 % gone before 0:03 |
+| 2026-11-03 | Les mèches (with solution) | 48 s | 1 073 | 57 | 3 | 1 | 8 | 18.4 s | 9.7 % | toon style, strong hook image |
+| 2026-11-05 | Le gardien de nuit | 37 s | 2 050 | 141 | 14 | 1 | 5 | 18.6 s | 24.3 % | **best**: flash-forward, story, 1-word answer |
+| 2026-11 | La lampe | 37 s | 1 007 | | | | | | | |
+| 2026-11 | Les interrupteurs | 32 s | 736 | | | | | | | « mal expliqué » |
+| 2026-11 | La douane | 39 s | 718 | | | | | | | |
+| 2026-11 | Le chalet | 43 s | 786 | | | | | | | people found « neige » |
+| 2026-11-06 | L'alibi | 30 s | 771 | | | | | | | first hours only |
+| 2026-11-06 | Les coffres | 30 s | 680 | | | | | | | big debate in comments |
+
+Account on 2026-11-06: 40 followers, 1 273 likes. Plateau 650–1 100 views = TikTok's first test batch;
+the lever is the first 3 s (hook) + shares.
