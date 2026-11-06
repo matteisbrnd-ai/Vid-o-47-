@@ -1,6 +1,7 @@
-// Le recrutement — scenes (same shot list as the reference: flash-forward cell, exterior, corridor, tub room, game-show podiums, ✅ then ❌).
-const TGT = { ff: [540, 1100, 1.0], s1: [540, 1050, 1.0], s2: [540, 1120, 1.15], s3: [540, 1150, 0.95], s4: [540, 1200, 1.0],
-  s5: [540, 960, 1.0], s6: [540, 1150, 0.95], s7: [560, 1150, 1.0], q: [540, 1150, 0.95], share: [540, 1150, 0.95] };
+// Le recrutement (voix du créateur) — fixes from the review agents: viewer-facing hook, 47 thrown in the cell,
+// tight framing / close-ups, almost no cards (captions carry the text), silence before « Non », ending loops to the opening shot.
+const TGT = { ff: [600, 1150, 1.35], s1: [460, 1250, 1.25], s2: [560, 1230, 1.45], s3a: [790, 1050, 2.1], s3: [540, 1250, 1.05], s4: [560, 1330, 1.35],
+  s5: [540, 960, 1.0], s6: [230, 1120, 1.9], s7a: [890, 1120, 2.1], s7b: [890, 1120, 2.3], s7c: [540, 1250, 1.05], q: [750, 760, 2.2] };
 const GUARD = { hat: 'hair', hairCol: '#1f1a18', shades: true, body: '#1d1f24', body2: '#121317', pants: '#15171c', num: false, collar: true };
 function guardT(px, py, s, t, o = {}) { toon(px, py, s, { t, ...GUARD, ...o }); }
 function cell(t) { room('#e9eef2', '#d5dde4', '#c9d1d9'); for (let r = 0; r < 12; r++) for (let k = -2; k < 10; k++) { x.strokeStyle = 'rgba(0,0,0,.06)'; x.lineWidth = 4; x.strokeRect(k * 140, r * 140 - 200, 140, 140); }
@@ -38,32 +39,35 @@ function gameShow(t, hi) { resetCam(); const g = x.createRadialGradient(540, 700
   items(t, 220, 820, 1.0, hi);
   x.fillStyle = '#24324a'; x.fillRect(0, 1470, W, 450); x.lineWidth = 8; x.strokeStyle = OL; x.beginPath(); x.moveTo(0, 1470); x.lineTo(W, 1470); x.stroke();
   p47(540, 2050, 0.9, t, { look: hi < 0 ? 0 : (hi - 1), mood: 'worried' }); }
+
+function spiralEyes(cx, cy, r) { x.strokeStyle = OL; x.lineWidth = 6; [-1, 1].forEach(d => { x.beginPath(); for (let a = 0; a < 12; a += 0.3) x.lineTo(cx + d * r * 1.1 + Math.cos(a) * a * r / 14, cy + Math.sin(a) * a * r / 14); x.stroke(); }); }
+function thrown(t, k) { // 47 flies and lands lying on the cell floor
+  const px = lerp(560, 760, k), py = lerp(1590, 1560, k); x.save(); x.translate(px, py); x.rotate(-1.45 * eOut(k)); toon(0, 0, 0.8, { t, mood: 'shock', armsUp: true, sweat: true }); x.restore(); }
+function doorWindow(t, who) { // close-up of the cell door hatch with a face behind the bars
+  x.save(); x.beginPath(); x.rect(680, 700, 140, 110); x.clip(); x.fillStyle = '#1b1d24'; x.fillRect(680, 700, 140, 110); who(); x.restore();
+  x.strokeStyle = '#2b2e35'; x.lineWidth = 12; for (let b = 0; b < 3; b++) { x.beginPath(); x.moveTo(705 + b * 45, 700); x.lineTo(705 + b * 45, 810); x.stroke(); } }
+function loopShot(t) { cell(t); doorWindow(t, () => toon(750, 1005, 0.36, { t, mood: 'shock', look: Math.sin(t * 5) })); }
 function draw(t) {
-  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, 0, t);
-  if (id === 'ff') { const tc = 1.1;
-    if (t < tc) { cell(t); const k = eIO(seg(t, 0, tc)); guardT(lerp(140, 420, k), 1600, 0.78, t, { mood: 'angry', look: 1 }); guardT(lerp(560, 840, k), 1600, 0.78, t, { mood: 'angry', look: -1 }); p47(lerp(350, 630, k), 1580, 0.78, t, { mood: 'shock', armsUp: true, sweat: true }); }
-    else { cam(750, 760, 2.2 - 0.15 * seg(t, tc, B.ff.end), Math.max(0, 1 - (t - tc) * 4) * 18, t); cell(t);
-      x.save(); x.beginPath(); x.rect(680, 700, 140, 110); x.clip(); x.fillStyle = '#1b1d24'; x.fillRect(680, 700, 140, 110); toon(750, 1005, 0.36, { t, mood: 'shock', look: Math.sin(t * 5) }); x.restore();
-      x.strokeStyle = '#2b2e35'; x.lineWidth = 12; for (let b = 0; b < 3; b++) { x.beginPath(); x.moveTo(705 + b * 45, 700); x.lineTo(705 + b * 45, 810); x.stroke(); } } }
-  if (id === 's1') { if (t < WF('s1', /chef/i)) { hideoutExt(t); p47(lerp(-100, 400, eIO(seg(t, t0, t0 + 2))), 1640, 0.7, t, { walk: t < t0 + 2 ? t * 2 : 0, mood: 'smile', look: 1 }); }
-    else { corridor(t); p47(320, 1640, 0.8, t, { look: 1 }); cast('boss', 760, 1640, 0.8, t, { look: -1, mood: 'smug' }); } }
-  if (id === 's2') { corridor(t); p47(320, 1640, 0.8, t, { look: 1, mood: 'worried' }); cast('boss', 760, 1640, 0.8, t, { look: -1, mood: 'smug' }); }
-  if (id === 's3' || id === 's4') { tubRoom(t, id === 's3' ? 0.4 + 0.6 * seg(t, t0, WF('s3', /candidat/i)) : 1, id === 's3' && t < WF('s3', /candidat/i)); p47(190, 1580, 0.62, t, { look: 1, mood: 'neutral' }); cast('boss', 890, 1580, 0.62, t, { look: -1, mood: 'smug', armUp: id === 's4' }); }
-  if (id === 's5') { const hi = t > WF('s5', /seau/i) ? 2 : t > WF('s5', /casserole/i) ? 1 : t > WF('s5', /verre/i) ? 0 : -1; gameShow(t, hi); }
-  if (id === 's6' || id === 's7' || id === 'q' || id === 'share') { tubRoom(t, 1); const ok = id === 's6' && t > WF('s6', /seau/i), no = id !== 's6' && (id !== 's7' || t > WF('s7', /non/i));
-    resetCam(); cam(fx, fy, z, 0, t); items(t, 230, 1640, 0.9, ok || no ? 2 : -1, { 2: ok ? 'ok' : no ? 'no' : null });
-    const out = id === 's7' ? eIO(seg(t, WF('s7', /gardes/i), B.s7.end + 0.3)) : id === 'q' || id === 'share' ? 1 : 0;
-    if (out < 1) p47(lerp(190, -260, out), 1580, 0.62, t, { look: 1, mood: id === 's7' ? 'shock' : 'smile', armUp: id === 's6' && t > WF('s6', /idée/i), armsUp: id === 's7' && out > 0 });
-    if (id === 's7' && out > 0) { guardT(lerp(-120, -420, out), 1580, 0.62, t, { look: 1 }); guardT(lerp(330, 30, out), 1580, 0.62, t, { look: -1 }); }
-    cast('boss', 890, 1580, 0.62, t, { look: -1, mood: id === 's7' ? 'angry' : 'smug' }); }
+  const id = curId(t), t0 = S(id); let [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, 0, t);
+  if (id === 'ff') { const tt = 1.1;
+    if (t < 0.75) { cell(t); const k = eIO(seg(t, 0, 0.75)); guardT(lerp(200, 420, k), 1600, 0.8, t, { mood: 'angry', look: 1 }); guardT(lerp(640, 860, k), 1600, 0.8, t, { mood: 'angry', look: -1 }); toon(lerp(420, 640, k), 1580, 0.8, { t, mood: 'shock', armsUp: true, sweat: true }); }
+    else if (t < tt) { cell(t); guardT(420, 1600, 0.8, t, { mood: 'angry', look: 1, armsUp: true }); thrown(t, seg(t, 0.75, tt)); }
+    else { cam(750, 760, 2.2, Math.max(0, 1 - (t - tt) * 4) * 18, t); cell(t); doorWindow(t, () => cast('boss', 750, 1005, 0.36, t, { mood: 'smug', look: -0.5 })); } }
+  if (id === 's1') { hideoutExt(t); p47(lerp(-100, 470, eIO(seg(t, t0, t0 + 1.8))), 1640, 0.75, t, { walk: t < t0 + 1.8 ? t * 2 : 0, mood: 'smile', look: 1 }); }
+  if (id === 's2') { corridor(t); p47(380, 1640, 0.85, t, { look: 1, mood: 'neutral' }); cast('boss', 760, 1640, 0.85, t, { look: -1, mood: 'smug' }); }
+  if (id === 's3a') { corridor(t); p47(380, 1640, 0.85, t, { look: 1, mood: 'worried' }); cast('boss', 760, 1640, 0.85, t, { look: -0.5, mood: 'smug' }); }
+  if (id === 's3' || id === 's4') { tubRoom(t, id === 's3' ? 0.4 + 0.6 * seg(t, t0, WF('s3', /candidat/i)) : 1, id === 's3' && t < WF('s3', /candidat/i)); p47(190, 1580, 0.62, t, { look: 1 }); cast('boss', 890, 1580, 0.62, t, { look: -1, mood: 'smug', armUp: id === 's4' }); }
+  if (id === 's5') { const hi = t > WF('s5', /saut|seau/i) ? 2 : t > WF('s5', /casserole/i) ? 1 : t > WF('s5', /vert|verre/i) ? 0 : -1; gameShow(t, hi); }
+  if (['s6', 's7a', 's7b', 's7c'].includes(id)) { tubRoom(t, 1); const ok = id === 's6' && t > WF('s6', /saut|seau/i), no = id === 's7b' || id === 's7c';
+    resetCam(); cam(fx, fy, z, id === 's7b' ? Math.max(0, 1 - (t - t0) * 4) * 10 : 0, t); items(t, 230, 1640, 0.9, ok || no ? 2 : -1, { 2: ok ? 'ok' : no ? 'no' : null });
+    const out = id === 's7c' ? eIO(seg(t, t0 + 0.2, B.s7c.next)) : 0;
+    p47(lerp(190, -260, out), 1580, 0.62, t, { look: 1, mood: id === 's6' ? 'smile' : id === 's7a' ? 'neutral' : 'shock', armUp: id === 's6' && t > WF('s6', /idée/i), armsUp: id === 's7c' });
+    if (id === 's7c') { guardT(lerp(-60, -420, out), 1580, 0.62, t, { look: 1 }); guardT(lerp(390, 30, out), 1580, 0.62, t, { look: -1, mood: 'angry' }); }
+    cast('boss', 890, 1580, 0.62, t, { look: -1, mood: id === 's7b' || id === 's7c' ? 'angry' : 'smug' }); }
+  if (id === 'q') loopShot(t);
   resetCam();
-  if (id === 'ff') { paperCard([['TU RISQUES LA CAVE', 76, C.red], ['SI TU RATES CE TEST', 60]], 540, 380, 1, { w: 720 }); if (t > 1.1) { onoma('BAM !', 760, 1150, P(t, 1.1, 0.2), 150); txt('?', 300, 900, 220, C.yellow, { sw: 16 }); } rewindFx(t, B.ff.next); }
-  if (id === 's1' && t > WF('s1', /bande/i) && t < WF('s1', /chef/i)) bigWord('LA BANDE', P(t, WF('s1', /bande/i)), 380, C.yellow);
-  if (id === 's2') speech('« COMMENT VOUS CHOISISSEZ ? »', 420, 640, pop(t, t0), 52);
-  if (id === 's3' && t > WF('s3', /verre/i)) pill('1 VERRE · 1 CASSEROLE · 1 SEAU', 540, 360, P(t, WF('s3', /verre/i)), C.brown);
-  if (id === 's4') { paperCard([['VIDER', 80], ['LE JACUZZI', 80, C.red]], 540, 420, P(t, t0 + 0.1), { w: 480 }); }
-  if (id === 's5') paperCard([['TU PRENDS QUOI ?', 80]], 540, 300, P(t, t0), { w: 560 });
-  if (id === 's6' && t > WF('s6', /idée/i)) { txt('💡', 160, 860, 120, '#fff', { stroke: false }); speech('« LE SEAU, C\'EST LE PLUS GRAND ! »', 440, 760, pop(t, WF('s6', /seau/i) - 0.2), 48); }
-  if (id === 's7' && t > WF('s7', /non/i)) stamp('NON', pop(t, WF('s7', /non/i)), 420);
-  endCards(t, [["QU'EST-CE QU'IL", 70], ['FALLAIT FAIRE ?', 90, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]]);
+  if (id === 'ff' && t > 1.1) { onoma('BAM !', 760, 1150, P(t, 1.1, 0.2), 150); txt('?', 300, 900, 220, C.yellow, { sw: 16 }); rewindFx(t, B.ff.next); }
+  if (id === 's6' && t > WF('s6', /idée/i)) txt('💡', 330, 520, 130, '#fff', { stroke: false });
+  if (id === 's7b') stamp('NON', pop(t, t0), 460);
+  if (id === 'q') { txt('?', 300, 900, 220, C.yellow, { sw: 16 }); paperCard([["QU'EST-CE QU'IL FALLAIT FAIRE ?", 58, C.red], ['ENVOIE-LA À QUELQU\'UN DE MALIN', 40]], 540, 380, P(t, t0 + 0.2), { w: 820 }); }
 }

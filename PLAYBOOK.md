@@ -32,6 +32,18 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
    adding side stories, the creator said « ça part dans tous les sens ». Harder = subtler clue, not more noise.
 7. **Rules must be crystal clear** in the setup (a viewer complained « c'est mal expliqué » on the switches riddle).
 8. **Never reuse** a riddle already listed below. Rewrite classic riddles with new details and 47 as hero.
+11. **Lessons from the 3 review agents (2026-11-06) — apply to every video:**
+    - **Action at frame 1, in close-up**: something is happening (thrown into a cell, door slams, BAM), never a static line-up with a sign.
+      Hook stakes judge the viewer (« t'es trop bête pour… », like « tu risques l'asile »), not just 47.
+    - **No permanent sign on screen**: the captions carry the text. Use icons/pills (clock, €, calendar) and at most one question card at the end.
+    - **Tight framing**: characters ≥ half the screen height, close-ups on faces for key lines (the idea, the verdict). Contrasted backgrounds; never dark characters on a dark background.
+    - **New shot every 2–3 s**: one setting per clue, cut on each new piece of information; avoid « characters standing in a row talking ».
+    - **Silences**: ~1 s after the question to the viewer, ~0.8 s before the verdict (« … Non. »).
+    - **Ending loops** to the opening image, with the question on top; no long cards after the twist (people leave there).
+    - Expressive faces: big eyes, strong brows, one clear emotion per line (lib.js toon moods).
+12. Voice: Henri in natural mode (engine/voice.py splits sentences, varies intonation, adds breaths and a warm room tone).
+    Write spoken text like speech (« t'es », « on prend que les malins »), short sentences, « … » where suspense is wanted.
+    The creator's own voice works too (`VOICE_FILE=… engine/build.sh`) but he prefers Henri for now.
 9. Description template: `<hook phrase> <emoji> Es-tu capable de … ? Envoie-la à quelqu'un qui pense être malin 😏 #enigme #reflexion #devinette #cassetete #pourtoi`
 10. TikTok AI label: always `isAigc: true` (synthetic voice).
 

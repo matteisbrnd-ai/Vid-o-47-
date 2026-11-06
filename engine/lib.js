@@ -73,19 +73,20 @@ function toon(px, py, s, o = {}) {
   if (hat === 'beret') { ell(10, HY - HR + 20, HR + 20, 56, hc, 8, -0.08); }
   if (hat === 'hair') { x.beginPath(); x.moveTo(-HR - 4, HY - 10); x.quadraticCurveTo(-HR, HY - HR - 40, 0, HY - HR - 30); x.quadraticCurveTo(HR, HY - HR - 40, HR + 4, HY - 10); x.quadraticCurveTo(HR - 30, HY - 80, 40, HY - 100); x.quadraticCurveTo(-60, HY - 70, -HR + 20, HY - 20); x.closePath(); fs(o.hairCol || '#3a2a22', 8); }
   if (o.white) { [-1, 1].forEach(d => ell(d * (HR - 10), HY - 50, 50, 46, '#f4f4f4', 6)); }
-  const look = (o.look || 0) * 14, blink = o.blink && o.t != null && (t % 3.4) < 0.12, eyeY = HY + 10, eyeR = o.mood === 'shock' ? 40 : 34;
+  const look = (o.look || 0) * 14, blink = o.blink && o.t != null && (t % 3.4) < 0.12, eyeY = HY + 10, eyeR = o.mood === 'shock' ? 48 : 41;
   [-55, 55].forEach(ex => { if (blink) { x.beginPath(); x.moveTo(ex - 28, eyeY); x.quadraticCurveTo(ex, eyeY + 12, ex + 28, eyeY); x.lineWidth = 7; x.strokeStyle = OL; x.stroke(); return; }
-    ell(ex, eyeY, eyeR * 0.85, eyeR, '#ffffff', 6); ell(ex + look, eyeY + 4, 15, 17, '#2a1d16', 0); x.fillStyle = '#fff'; x.beginPath(); x.arc(ex + look + 6, eyeY - 4, 5, 0, 7); x.fill(); });
+    ell(ex, eyeY, eyeR * 0.85, eyeR, '#ffffff', 6); ell(ex + look * 1.2, eyeY + 5, 19, 22, '#2a1d16', 0); x.fillStyle = '#fff'; x.beginPath(); x.arc(ex + look * 1.2 + 7, eyeY - 4, 7, 0, 7); x.fill(); });
+  if (o.mood === 'smile' || o.mood === 'smug') { x.fillStyle = 'rgba(230,110,90,.35)'; [-1, 1].forEach(d => { x.beginPath(); x.ellipse(d * 92, HY + 62, 26, 14, 0, 0, 7); x.fill(); }); }
   if (o.glasses) { x.lineWidth = 7; x.strokeStyle = OL; [-55, 55].forEach(ex => { x.beginPath(); x.arc(ex, eyeY, 46, 0, 7); x.stroke(); }); }
   if (o.shades) { rrc(-55, eyeY, 100, 54, 16, '#121317', 6); rrc(55, eyeY, 100, 54, 16, '#121317', 6); }
-  const br = { neutral: [0, 0], smile: [-4, 4], worried: [10, -14], shock: [-18, 0], smug: [8, 8], angry: [-12, 16] }[o.mood || 'neutral'];
-  x.lineWidth = 10; x.strokeStyle = o.white ? '#bdbdbd' : '#3a2a22'; x.lineCap = 'round';
+  const br = { neutral: [0, 0], smile: [-6, 6], worried: [12, -18], shock: [-24, 0], smug: [10, 12], angry: [-14, 22] }[o.mood || 'neutral'];
+  x.lineWidth = 13; x.strokeStyle = o.white ? '#bdbdbd' : '#3a2a22'; x.lineCap = 'round';
   [-1, 1].forEach(d => { x.beginPath(); x.moveTo(d * 85, eyeY - 52 + br[0]); x.lineTo(d * 30, eyeY - 52 + br[0] + br[1]); x.stroke(); });
   x.beginPath(); x.moveTo(6, HY + 40); x.quadraticCurveTo(24, HY + 62, 0, HY + 70); x.lineWidth = 6; x.strokeStyle = SKIN2; x.stroke();
   if (o.mustache) { x.fillStyle = o.white ? '#dcdcdc' : '#5a3a22'; x.beginPath(); x.moveTo(-60, HY + 92); x.quadraticCurveTo(-30, HY + 66, 0, HY + 84); x.quadraticCurveTo(30, HY + 66, 60, HY + 92); x.quadraticCurveTo(0, HY + 100, -60, HY + 92); x.fill(); x.lineWidth = 4; x.strokeStyle = OL; x.stroke(); }
   x.lineWidth = 7; x.strokeStyle = OL; const MY = HY + 100;
-  if (o.mood === 'smile' || o.mood === 'smug') { x.beginPath(); x.moveTo(-40, MY - 6); x.quadraticCurveTo(0, MY + 34, 44, MY - 10); if (o.mood === 'smile') { x.closePath(); x.fillStyle = '#7a2a2a'; x.fill(); } x.stroke(); }
-  else if (o.mood === 'shock') ell(0, MY + 8, 24, 30, '#5a1a1a', 6);
+  if (o.mood === 'smile' || o.mood === 'smug') { x.beginPath(); x.moveTo(-50, MY - 8); x.quadraticCurveTo(0, MY + 44, 54, MY - 14); if (o.mood === 'smile') { x.closePath(); x.fillStyle = '#7a2a2a'; x.fill(); } x.stroke(); }
+  else if (o.mood === 'shock') ell(0, MY + 12, 30, 38, '#5a1a1a', 6);
   else if (o.mood === 'worried') { x.beginPath(); x.moveTo(-36, MY + 10); x.quadraticCurveTo(-18, MY - 6, 0, MY + 8); x.quadraticCurveTo(18, MY - 6, 36, MY + 8); x.stroke(); }
   else { x.beginPath(); x.moveTo(-30, MY + 2); x.quadraticCurveTo(0, MY + 12, 30, MY + 2); x.stroke(); }
   if (o.sweat) ell(HR - 20, HY - 40 + ((t * 40) % 30), 12, 18, '#8fd0ff', 4);
@@ -151,7 +152,7 @@ function followTap(t, t0) { const p = eBack(seg(t, t0, t0 + 0.3)), on = t > t0 +
 
 // standard ending: question card, then the share call (beat ids 'q' and 'share' in beats.py)
 function endCards(t, qLines) { const id = curId(t);
-  if (id === 'q') paperCard(qLines, 540, 430, P(t, S('q') + 0.1), { w: 700 });
+  if (id === 'q') { paperCard(qLines, 540, 400, P(t, S('q') + 0.1), { w: 760 }); if (t > S('q') + 1.2) pill("ENVOIE-LA À UN POTE MALIN", 540, 680, P(t, S('q') + 1.2), C.red); }
   if (id === 'share') { resetCam(); x.fillStyle = `rgba(10,8,20,${0.55 * P(t, S('share'))})`; x.fillRect(0, 0, W, H);
     paperCard([['ENVOIE-LA À', 70], ["QUELQU'UN QUI PENSE", 62], ['ÊTRE MALIN', 92, C.red]], 540, 800, P(t, S('share')), { w: 860 }); } }
 
