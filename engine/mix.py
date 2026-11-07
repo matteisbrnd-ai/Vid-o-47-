@@ -53,13 +53,34 @@ FX = {
  'wind': lambda: 0.22 * lp(noise(3.0), 0.03) / 0.05 * np.sin(np.pi * T(3.0) / 3.0) * 0.05,
  'rewind': lambda: chirp(0.7, lambda t: 200 + 1600 * (t / 0.7) ** 2, 0.1, 0.01, 10) * (0.6 + 0.4 * np.sin(2 * np.pi * 30 * T(0.7))),
 }
+def ting(f, d, amp, r):  # small metallic ping (inharmonic partials)
+    t = T(d); return amp * sum(a * np.sin(2 * np.pi * f * m * t) for m, a in ((1, 1), (2.76, .5), (5.4, .25))) * env(len(t), 0.0005, r)
+def hp(sig): return sig - lp(sig, 0.15)
+def ratchet():  # handcuffs closing: fast ratchet clicks, final clack + chain jingle
+    parts = [(k * 0.035, 0.5 * hp(noise(0.012)) * env(int(SR * 0.012), 0.0003, 0.003)) for k in range(7)] + [(k * 0.035, ting(3100 + 200 * k, 0.03, 0.12, 0.008)) for k in range(7)]
+    parts += [(0.26, 0.8 * hp(noise(0.03)) * env(int(SR * 0.03), 0.0003, 0.008)), (0.26, ting(1900, 0.5, 0.35, 0.09)), (0.26, ting(2650, 0.4, 0.2, 0.06))]
+    parts += [(0.3 + rng.uniform(0, 0.35), ting(rng.uniform(3000, 6000), 0.08, rng.uniform(.05, .12), 0.02)) for _ in range(12)]
+    return cat(*parts)
+FX.update({
+ 'cuffs': ratchet,
+ 'chain': lambda: cat(*[(rng.uniform(0, 0.6), ting(rng.uniform(2500, 6000), 0.08, rng.uniform(.04, .1), 0.02)) for _ in range(16)]),
+ 'glass': lambda: cat((0, 0.7 * hp(noise(0.08)) * env(int(SR * 0.08), 0.0003, 0.02)), *[(rng.uniform(0, 0.9) ** 1.6, ting(rng.uniform(3000, 8000), 0.12, rng.uniform(.06, .2), 0.03)) for _ in range(45)]),
+ 'flicker': lambda: cat(*[(k * 0.07, 0.12 * np.sign(np.sin(2 * np.pi * 100 * T(0.04))) * lp(np.ones(int(SR * 0.04)), 0.5)) for k in range(5) if k % 2 == 0], (0.38, 0.5 * hp(noise(0.05)) * env(int(SR * 0.05), 0.0003, 0.01)), (0.38, chirp(0.3, lambda t: 120 * np.exp(-t * 10) + 50, 0.3, 0.001, 0.08))),
+ 'page': lambda: cat((0, 0.3 * hp(noise(0.25)) * np.sin(np.pi * T(0.25) / 0.25) ** 2), (0.18, 0.25 * hp(noise(0.2)) * np.sin(np.pi * T(0.2) / 0.2) ** 2)),
+ 'crickets': lambda: 0.05 * np.sin(2 * np.pi * 4300 * T(4.0)) * ((T(4.0) * 18 % 1) < 0.5) * ((T(4.0) % 0.9) < 0.35) * np.sin(np.pi * T(4.0) / 4.0),
+ 'ticktock': lambda: cat(*[(k * 0.5, ting(1500 if k % 2 else 1100, 0.04, 0.25, 0.006)) for k in range(9)]),
+ 'run': lambda: cat(*[(k * 0.2, 0.35 * lp(noise(0.08), 0.4) * env(int(SR * 0.08), 0.002, 0.03)) for k in range(8)]),
+})
 cache = {}
 sfx = np.zeros(N)
 def add(kind, at):
     if kind not in cache: cache[kind] = FX[kind]()
     s = cache[kind]; i = max(0, int(at * SR)); j = min(N, i + len(s)); sfx[i:j] += s[:j - i]
 for b in TL['beats'][1:]: add('whoosh', b['start'] - 0.18)
-for e in json.load(open(os.path.join(D, 'events.json'))): add(e['kind'] if e['kind'] in FX else 'pop', e['t'])
+SKIP = ns.get('SKIP_EV', [])
+for e in json.load(open(os.path.join(D, 'events.json'))):
+    if e['kind'] in SKIP: continue
+    add(e['kind'] if e['kind'] in FX else 'pop', e['t'])
 for bid, where, kind in CUES:
     b = BEATS[bid]
     if where.startswith('+'): t = b['start'] + float(where[1:])

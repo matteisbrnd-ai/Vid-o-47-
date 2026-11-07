@@ -10,5 +10,7 @@ BEATS = [
   ('s5',    "L'inspecteur sort les menottes : menteur.", "L'inspecteur sort les menottes : menteur.", 0.3),
   ('q',     "Comment il a su ? Réponds en un mot en commentaire.", "Comment il a su ? Réponds en un mot en commentaire.", 1.8),
 ]
-CUES = [('ff', '+0', 'clink'), ('ff', '+0.05', 'bam'), ('s1', 'panne', 'click'), ('s1', 'noir', 'wind'), ('s2', 'dévaliser', 'bam'), ('s3', 'interroge', 'steps'),
-        ('s4', 'livre', 'paper'), ('s5', 'menottes', 'clink'), ('s5', 'menteur', 'stamp'), ('q', '+0', 'ding')]
+SKIP_EV = ['bam']   # CLIC/CLAC/CRAC drawn on screen get real sounds below instead of a generic boom
+CUES = [('ff', '+0.04', 'cuffs'), ('ff', '+0.3', 'bam'), ('s1', '+0', 'ticktock'), ('s1', 'panne', 'flicker'), ('s1', 'noir', 'crickets'), ('s2', '+0.1', 'run'),
+        ('s2', 'dévaliser', 'glass'), ('s3', '+0', 'ticktock'), ('s4', 'livre', 'page'), ('s5', 'menottes', 'chain'), ('s5', 'menottes', 'cuffs'),
+        ('s5', 'menteur', 'stamp'), ('q', '+0', 'chain'), ('q', '+0', 'ding')]
