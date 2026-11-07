@@ -191,7 +191,7 @@ function lockBox(cx, cy, side) { rrc(cx, cy, 86, 130, 14, metal(cy - 65, cy + 65
   ell(cx, cy - 12, 12, 12, OL, 0); x.fillStyle = OL; x.fillRect(cx - 5, cy - 8, 10, 30); ell(cx + side * 30, cy + 48, 8, 8, '#6b7482', 3); }
 function chainLink(cx, cy, w, h) { x.lineWidth = 26; x.strokeStyle = OL; x.beginPath(); x.ellipse(cx, cy, w, h, 0, 0, 7); x.stroke(); x.lineWidth = 15; x.strokeStyle = metal(cy - h, cy + h); x.beginPath(); x.ellipse(cx, cy, w, h, 0, 0, 7); x.stroke(); }
 // full-screen insert: 47's two wrists in close-up, the cuffs snapping shut (close 0 → 1). Unmistakable handcuffs.
-function cuffsInsert(t, close, zoom = 1, shake = 0) {
+function cuffsInsert(t, close, zoom = 1, shake = 0, sleeve = '#33384a', band = C.orange) {
   resetCam(); const g = x.createRadialGradient(540, 700, 80, 540, 900, 1300); g.addColorStop(0, '#ffe2a6'); g.addColorStop(0.45, '#c08a52'); g.addColorStop(1, '#4a2e1c'); x.fillStyle = g; x.fillRect(0, 0, W, H);
   x.fillStyle = '#6b4226'; x.fillRect(0, 1380, W, 600); x.fillStyle = 'rgba(0,0,0,.18)'; for (let i = 0; i < 6; i++) x.fillRect(0, 1420 + i * 90, W, 6);
   x.save(); x.translate(540 + Math.sin(t * 60) * shake, 960 + Math.cos(t * 51) * shake); x.scale(zoom, zoom); x.translate(-540, -960);
@@ -199,7 +199,7 @@ function cuffsInsert(t, close, zoom = 1, shake = 0) {
   [L, R].forEach(px => cuffArc(px, wy, rx, ry, Math.PI, 2 * Math.PI));                     // back halves
   [L, R].forEach((px, i) => { const sd = i ? 1 : -1;                                        // arms + fists
     x.save(); x.translate(px, wy); x.rotate(sd * 0.08);
-    rbox(-105, 120, 210, 900, 40, '#33384a', 8); rbox(-105, 120, 210, 46, 20, C.orange, 7);   // sleeve with orange cuff
+    rbox(-105, 120, 210, 900, 40, sleeve, 8); rbox(-105, 120, 210, 46, 20, band, 7);   // sleeve with orange cuff
     rbox(-72, -60, 144, 240, 40, SKIN, 8);                                                  // wrist
     rbox(-98, -300, 196, 250, 70, SKIN, 8);                                                 // fist
     x.strokeStyle = SKIN2; x.lineWidth = 7; for (let k = -1; k <= 1; k++) { x.beginPath(); x.moveTo(-90, -230 + (k + 1) * 55); x.lineTo(-20, -230 + (k + 1) * 55); x.stroke(); }

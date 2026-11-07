@@ -77,7 +77,7 @@ baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · p
 deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
 3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
 alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
-clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde)
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille)
 
 ## Stats log
 
