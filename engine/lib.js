@@ -172,3 +172,60 @@ function frame(t) { _T = t; resetCam(); x.fillStyle = '#000'; x.fillRect(0, 0, W
 window.DURATION = 0;
 window.ready = new Promise(r => window.addEventListener('load', r)).then(() => Promise.all([document.fonts.load('100px Bebas'), document.fonts.load('800 60px Mont')]))
   .then(() => { initTL(); window.DURATION = TL.total; frame(0); return true; });
+
+// ---------- inserts (big close-up props, one per clue) & transitions — inspired by the « Monsieur Énigme » style ----------
+// banner: tilted blue label like « LUNDI MATIN » (time / place), at most one per shot
+function banner(s, px, py, p, col = '#2f5fb3') { if (p <= 0) return; ev('pop', 'bn' + s); x.save(); resetCam(); x.translate(px, py); x.rotate(-0.05); const k = eBack(clamp(p)); x.scale(k, k);
+  font(66); const w = x.measureText(s).width + 70; x.fillStyle = 'rgba(0,0,0,.25)'; x.beginPath(); x.roundRect(-w / 2 + 8, -44, w, 96, 18); x.fill(); rrc(0, 0, w, 92, 18, col, 7); txt(s, 0, 4, 66, '#fff', { stroke: false }); x.restore(); }
+// white flash + whoosh at a cut (call with the cut time)
+function flashCut(t, tc) { const k = t - tc; if (k < 0 || k > 0.18) return; ev('whoosh', 'cut' + tc.toFixed(2)); resetCam(); x.fillStyle = `rgba(255,255,255,${0.75 * (1 - k / 0.18)})`; x.fillRect(0, 0, W, H); }
+// vibration lines around a point (ringing, impact)
+function shakeLines(px, py, r, t, col = OL) { x.save(); x.strokeStyle = col; x.lineWidth = 10; x.lineCap = 'round'; const j = Math.sin(t * 40) * 6;
+  [[-1, -0.6], [-1, 0], [-1, 0.6], [1, -0.6], [1, 0], [1, 0.6]].forEach(([sx, a]) => { x.beginPath(); x.arc(px, py, r + 30 + Math.abs(a) * 10 + j, (sx < 0 ? Math.PI : 0) + a * 0.5 - 0.15, (sx < 0 ? Math.PI : 0) + a * 0.5 + 0.15); x.stroke(); }); x.restore(); }
+function metal(y0, y1) { const g = x.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, '#ffffff'); g.addColorStop(0.35, '#c9d0da'); g.addColorStop(0.6, '#8b95a5'); g.addColorStop(1, '#dfe4ea'); return g; }
+// one handcuff ring around a vertical wrist, seen from the front: back arc, (wrist drawn by caller), front arc
+function cuffArc(cx, cy, rx, ry, a0, a1) { x.lineCap = 'round'; x.strokeStyle = OL; x.lineWidth = 46; x.beginPath(); x.ellipse(cx, cy, rx, ry, 0, a0, a1); x.stroke();
+  x.strokeStyle = metal(cy - ry - 20, cy + ry + 20); x.lineWidth = 32; x.beginPath(); x.ellipse(cx, cy, rx, ry, 0, a0, a1); x.stroke();
+  x.strokeStyle = 'rgba(255,255,255,.8)'; x.lineWidth = 6; x.beginPath(); x.ellipse(cx, cy - 6, rx, ry, 0, a0 + 0.2, a1 - 0.2); x.stroke(); }
+function lockBox(cx, cy, side) { rrc(cx, cy, 86, 130, 14, metal(cy - 65, cy + 65), 7); rrc(cx, cy, 50, 90, 8, 'rgba(0,0,0,.12)', 0);
+  ell(cx, cy - 12, 12, 12, OL, 0); x.fillStyle = OL; x.fillRect(cx - 5, cy - 8, 10, 30); ell(cx + side * 30, cy + 48, 8, 8, '#6b7482', 3); }
+function chainLink(cx, cy, w, h) { x.lineWidth = 26; x.strokeStyle = OL; x.beginPath(); x.ellipse(cx, cy, w, h, 0, 0, 7); x.stroke(); x.lineWidth = 15; x.strokeStyle = metal(cy - h, cy + h); x.beginPath(); x.ellipse(cx, cy, w, h, 0, 0, 7); x.stroke(); }
+// full-screen insert: 47's two wrists in close-up, the cuffs snapping shut (close 0 → 1). Unmistakable handcuffs.
+function cuffsInsert(t, close, zoom = 1, shake = 0) {
+  resetCam(); const g = x.createRadialGradient(540, 700, 80, 540, 900, 1300); g.addColorStop(0, '#ffe2a6'); g.addColorStop(0.45, '#c08a52'); g.addColorStop(1, '#4a2e1c'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+  x.fillStyle = '#6b4226'; x.fillRect(0, 1380, W, 600); x.fillStyle = 'rgba(0,0,0,.18)'; for (let i = 0; i < 6; i++) x.fillRect(0, 1420 + i * 90, W, 6);
+  x.save(); x.translate(540 + Math.sin(t * 60) * shake, 960 + Math.cos(t * 51) * shake); x.scale(zoom, zoom); x.translate(-540, -960);
+  const wy = 980, L = 330, R = 750, rx = 120, ry = 46;
+  [L, R].forEach(px => cuffArc(px, wy, rx, ry, Math.PI, 2 * Math.PI));                     // back halves
+  [L, R].forEach((px, i) => { const sd = i ? 1 : -1;                                        // arms + fists
+    x.save(); x.translate(px, wy); x.rotate(sd * 0.08);
+    rbox(-105, 120, 210, 900, 40, '#33384a', 8); rbox(-105, 120, 210, 46, 20, C.orange, 7);   // sleeve with orange cuff
+    rbox(-72, -60, 144, 240, 40, SKIN, 8);                                                  // wrist
+    rbox(-98, -300, 196, 250, 70, SKIN, 8);                                                 // fist
+    x.strokeStyle = SKIN2; x.lineWidth = 7; for (let k = -1; k <= 1; k++) { x.beginPath(); x.moveTo(-90, -230 + (k + 1) * 55); x.lineTo(-20, -230 + (k + 1) * 55); x.stroke(); }
+    rbox(-sd * 95 - 32, -250, 64, 140, 32, SKIN, 7); x.restore(); });                       // thumb
+  const sw = (1 - clamp(close)) * 1.1;                                                     // front halves: swing arm rotates shut
+  [L, R].forEach((px, i) => { const sd = i ? -1 : 1; x.save(); x.translate(px + sd * rx, wy); x.rotate(sd * -sw); x.translate(-(px + sd * rx), -wy);
+    cuffArc(px, wy, rx, ry, 0, Math.PI); x.restore(); lockBox(px + sd * (rx - 6), wy + 10, sd); });
+  const a = L + rx + 40, b = R - rx - 40; chainLink(a + 10, wy + 10, 34, 20); chainLink((a + b) / 2, wy + 10, 22, 34); chainLink(b - 10, wy + 10, 34, 20);
+  if (close >= 1) { x.save(); x.globalCompositeOperation = 'lighter'; x.fillStyle = 'rgba(255,255,255,.35)'; [L, R].forEach(px => { x.beginPath(); x.ellipse(px - 50, wy + 30, 26, 8, -0.3, 0, 7); x.fill(); }); x.restore(); }
+  x.restore(); }
+// big ceiling bulb, on or off
+function bulbInsert(t, on) { resetCam(); x.fillStyle = on ? '#3b3a5c' : '#07070d'; x.fillRect(0, 0, W, H);
+  if (on) { x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createRadialGradient(540, 900, 40, 540, 900, 800); g.addColorStop(0, 'rgba(255,230,140,.9)'); g.addColorStop(1, 'rgba(255,230,140,0)'); x.fillStyle = g; x.fillRect(0, 0, W, H); x.restore(); }
+  x.strokeStyle = OL; x.lineWidth = 12; x.beginPath(); x.moveTo(540, -10); x.lineTo(540, 520); x.stroke(); rrc(540, 580, 130, 140, 16, '#5a5f6b', 8);
+  x.beginPath(); x.arc(540, 860, 230, 0, 7); fs(on ? '#fff3b8' : '#2a2c36', 9); x.strokeStyle = on ? '#e0a020' : '#5a5f6b'; x.lineWidth = 9; x.beginPath(); x.moveTo(480, 860); x.lineTo(510, 800); x.lineTo(540, 860); x.lineTo(570, 800); x.lineTo(600, 860); x.stroke();
+  if (on) { x.save(); x.globalAlpha = .6; ell(470, 770, 40, 60, '#fff', 0); x.restore(); } }
+// open book in a cosy armchair, lit by a reading lamp (his version of the evening)
+function bookInsert(t) { resetCam(); x.fillStyle = '#e9c9a0'; x.fillRect(0, 0, W, H); x.fillStyle = '#8a5a3a'; x.fillRect(0, 1450, W, 500);
+  rbox(80, 700, 920, 900, 120, '#8a2f3a', 9); rbox(160, 1000, 760, 500, 60, '#a33a48', 8);
+  x.strokeStyle = OL; x.lineWidth = 10; x.beginPath(); x.moveTo(930, 1450); x.lineTo(930, 380); x.stroke(); poly([[820, 400], [1040, 400], [1000, 250], [860, 250]], '#ffe08a', 8);
+  x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createRadialGradient(900, 420, 20, 700, 1100, 900); g.addColorStop(0, 'rgba(255,230,150,.55)'); g.addColorStop(1, 'rgba(255,230,150,0)'); x.fillStyle = g; x.fillRect(0, 0, W, H); x.restore();
+  x.save(); x.translate(540, 1050); x.rotate(-0.06); poly([[-330, -40], [0, 10], [0, 250], [-330, 200]], '#fffaf0', 8); poly([[330, -40], [0, 10], [0, 250], [330, 200]], '#fffaf0', 8);
+  x.strokeStyle = '#b9b2a2'; x.lineWidth = 6; for (let i = 0; i < 6; i++) { x.beginPath(); x.moveTo(-290, 20 + i * 30); x.lineTo(-40, 50 + i * 30); x.stroke(); x.beginPath(); x.moveTo(40, 50 + i * 30); x.lineTo(290, 20 + i * 30); x.stroke(); } x.restore(); }
+// shop window with a cracking pane
+function vitrineInsert(t, crack) { resetCam(); x.fillStyle = '#1b2142'; x.fillRect(0, 0, W, H); rbox(60, 300, 960, 1300, 10, '#7a3a8a', 9); rbox(130, 380, 820, 1000, 8, '#29355f', 8);
+  [[300, 1150], [540, 1080], [780, 1150]].forEach(([dx, dy]) => { rrc(dx, dy + 90, 170, 60, 10, '#efe3f2', 6); poly([[dx - 40, dy], [dx + 40, dy], [dx + 60, dy - 30], [dx, dy - 80], [dx - 60, dy - 30]], '#bfe8ff', 6); x.fillStyle = 'rgba(255,255,255,.8)'; x.fillRect(dx - 10, dy - 55, 12, 30); });
+  x.save(); x.globalAlpha = .18; x.fillStyle = '#fff'; poly([[200, 400], [420, 400], [200, 900]], '#fff', 0); x.restore();
+  if (crack > 0) { x.strokeStyle = '#ffffff'; x.lineWidth = 7; const cx0 = 600, cy0 = 760; for (let i = 0; i < 11; i++) { const a = i / 11 * 6.283 + 0.3, r = 520 * clamp(crack); x.beginPath(); x.moveTo(cx0, cy0); x.lineTo(cx0 + Math.cos(a) * r * 0.5 + 20 * Math.sin(i), cy0 + Math.sin(a) * r * 0.5); x.lineTo(cx0 + Math.cos(a + 0.1) * r, cy0 + Math.sin(a + 0.1) * r); x.stroke(); }
+    [100, 200].forEach(r => { x.beginPath(); x.arc(cx0, cy0, r * clamp(crack), 0, 7); x.stroke(); }); } }

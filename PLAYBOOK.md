@@ -41,6 +41,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
     - **Silences**: ~1 s after the question to the viewer, ~0.8 s before the verdict (« … Non. »).
     - **Ending loops** to the opening image, with the question on top; no long cards after the twist (people leave there).
     - Expressive faces: big eyes, strong brows, one clear emotion per line (lib.js toon moods).
+14. **Inserts (reference « Monsieur Énigme », 2026-11-07)**: each clue gets a full-screen close-up of the key object (handcuffs `cuffsInsert`, bulb `bulbInsert`, book `bookInsert`, shop window `vitrineInsert` in lib.js — add new ones the same way), drawn big and detailed so it is recognisable at a glance; cut to it on the clue word with `flashCut`; time/place as a tilted blue `banner` (« HIER SOIR · 21 H »); onomatopoeia on impacts. The creator said the tiny handcuffs were unrecognisable.
 13. **Emotion & mix**: give every beat an emotion with `EMO = {id: 'mystere'|'menace'|'tension'|'neutre'|'complice'|'question'|'excite'|'choc'|'amuse'}` (see voice.py). Sound effects stay under the voice (`SFX` ≈ 0.3, auto-ducked); the creator complained when effects covered the voice.
 12. Voice: Henri in natural mode (engine/voice.py splits sentences, varies intonation, adds breaths and a warm room tone).
     Write spoken text like speech (« t'es », « on prend que les malins »), short sentences, « … » where suspense is wanted.

@@ -1,5 +1,5 @@
-// La panne — scenes.
-const TGT = { ff: [560, 1100, 1.05], hook: [560, 1100, 1.0], s1: [540, 1000, 0.95], s2: [540, 1050, 1.05], s3: [560, 1100, 1.0], s4: [430, 1050, 1.25], s5: [700, 1080, 1.2], q: [560, 1100, 1.0], share: [560, 1100, 1.0] };
+// La panne — scenes. One close-up insert per clue, flash cuts, ending loops to the handcuffs.
+const TGT = { ff: [540, 960, 1], s1: [540, 1000, 1.0], s2: [540, 1050, 1.1], s3: [700, 1150, 1.55], s4: [420, 1150, 1.55], s5: [700, 1150, 1.6], q: [540, 960, 1] };
 function street(t, lightsOn) {
   sky('#141c38', '#2c2a4f', 1500); if (!lightsOn) { x.fillStyle = 'rgba(255,255,255,.7)'; for (let i = 0; i < 50; i++) x.fillRect((i * 173) % 1500 - 200, (i * 97) % 700 - 200, 4, 4); }
   [[-60, 520, 380, '#5a4a6a'], [340, 380, 400, '#4a3e5a'], [760, 460, 420, '#5a4a6a']].forEach(([bx, by, bw, col], i) => { rbox(bx, by, bw, 1500 - by, 6, col, 7);
@@ -14,27 +14,28 @@ function office(t) { room('#c9b48e', '#a9946e', '#6b5444'); rbox(140, 520, 300, 
   x.strokeStyle = OL; x.lineWidth = 6; x.beginPath(); x.moveTo(560, -300); x.lineTo(560, 300); x.stroke(); poly([[480, 300], [640, 300], [680, 380], [440, 380]], '#2b2e35', 6);
   x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createLinearGradient(0, 380, 0, 1400); g.addColorStop(0, 'rgba(255,230,150,.35)'); g.addColorStop(1, 'rgba(255,230,150,0)'); x.fillStyle = g; x.beginPath(); x.moveTo(440, 380); x.lineTo(680, 380); x.lineTo(1000, 1400); x.lineTo(120, 1400); x.closePath(); x.fill(); x.restore();
   rbox(160, 1240, 800, 50, 8, '#7a5232', 7); [200, 880].forEach(lx => rbox(lx, 1290, 30, 210, 6, '#5a3a22', 6)); }
-function livingRoom(w, h) { x.fillStyle = '#e9c9a0'; x.fillRect(0, 0, w, h); x.fillStyle = '#8a5a3a'; x.fillRect(0, h * 0.78, w, h); rbox(w * 0.15, h * 0.45, w * 0.55, h * 0.36, 30, '#8a2f3a', 6);
-  rrc(w * 0.82, h * 0.3, 70, 50, 10, '#ffe08a', 5); rrc(w * 0.82, h * 0.55, 14, h * 0.45, 4, '#555', 4);
-  x.save(); x.translate(w * 0.4, h * 0.82); x.scale(0.5, 0.5); toon(0, 0, 1, { mood: 'smile', look: 0.6 }); x.restore(); rbox(w * 0.3, h * 0.43, 90, 60, 6, '#2c4fa8', 5); }
+function duo(t, m47, mIns) { office(t); p47(380, 1640, 0.82, t, { mood: m47, look: 1, sweat: m47 === 'worried' }); cast('inspector', 760, 1640, 0.82, t, { mood: mIns, look: -1 }); }
 function draw(t) {
-  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, id === 's2' ? Math.max(0, 1 - (t - WF('s2', /dévaliser/i)) * 3) * 14 : 0, t);
-  function cuffed(tt, zoom) { cam(560, 1250, zoom, Math.max(0, 1 - tt * 4) * 14, t); office(t); p47(380, 1640, 0.82, t, { mood: 'shock', sweat: true, look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'smug', look: -1 }); x.strokeStyle = '#c9ced6'; x.lineWidth = 12; [-40, 40].forEach(d => { x.beginPath(); x.arc(520 + d, 1300, 32, 0, 7); x.stroke(); }); }
-  if (id === 'ff' || id === 'q') { cuffed(id === 'ff' ? t : 9, id === 'ff' ? lerp(2.4, 1.6, eOut(seg(t, 0, 1.2))) : 1.3); }
-  if (id === 's5') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'ff' ? 'shock' : 'worried', sweat: true, look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'smug', look: -1 });
-    if (id === 's5' && t > WF('s5', /menottes/i)) { x.strokeStyle = '#c9ced6'; x.lineWidth = 10; [-40, 40].forEach(d => { x.beginPath(); x.arc(620 + d, 1290, 30, 0, 7); x.stroke(); }); } }
-  if (id === 's3') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'q' ? 'worried' : 'smug', look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'neutral', look: -1 }); }
-  if (id === 's1' || id === 's2') { const off = t > WF('s1', /panne/i); street(t, !off);
-    if (id === 's2') { const k = seg(t, t0 + 0.3, B.s2.end); x.save(); x.globalAlpha = 0.85; toon(lerp(-100, 1100, k), 1640, 0.7, { walk: t * 3, body: '#111', body2: '#0b0b0d', hatCol: '#111', hatCol2: '#0b0b0d', num: false, mood: 'smug' }); x.restore(); } }
-  if (id === 's4') { office(t); p47(380, 1640, 0.82, t, { mood: 'smug', look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'neutral', look: -1 }); }
-  if (id === 's1' || id === 's2') night(id === 's1' && t < WF('s1', /panne/i) ? 0.1 : 0.4);
+  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT);
+  const tPanne = WF('s1', /panne/i), tNoir = WF('s1', /noir/i), tCrac = WF('s2', /dévaliser/i), tLivre = WF('s4', /livre/i), tMen = WF('s5', /menottes/i);
+  if (id === 'ff') { const c = seg(t, 0.05, 0.3); cuffsInsert(t, c, lerp(1.45, 1.05, eOut(seg(t, 0, 1.6))), c >= 1 ? Math.max(0, 1 - (t - 0.3) * 4) * 16 : 0); }
+  else if (id === 'q') cuffsInsert(t, 1, 1.05 + (t - t0) * 0.02);
+  else if (id === 's1') { if (t < tPanne) { cam(fx, fy, z); street(t, true); night(0.1); }
+    else if (t < tNoir) bulbInsert(t, t - tPanne < 0.35 && Math.floor((t - tPanne) * 14) % 2 === 0);
+    else { cam(fx, fy, z * 1.05); street(t, false); night(0.45); } }
+  else if (id === 's2') { if (t < tCrac) { cam(fx, fy, z); street(t, false); const k = seg(t, t0 + 0.2, tCrac); x.save(); x.globalAlpha = 0.9; toon(lerp(-100, 700, k), 1640, 0.7, { walk: t * 3, body: '#111', body2: '#0b0b0d', hatCol: '#111', hatCol2: '#0b0b0d', num: false, mood: 'smug' }); x.restore(); night(0.4); }
+    else vitrineInsert(t, eOut(seg(t, tCrac, tCrac + 0.25))); }
+  else if (id === 's3') { cam(fx, fy, z); duo(t, 'smug', 'angry'); }
+  else if (id === 's4') { if (t < tLivre) { cam(fx, fy, z); duo(t, 'smug', 'neutral'); } else bookInsert(t); }
+  else if (id === 's5') { if (t < tMen) { cam(fx, fy, z, 0, t); duo(t, 'worried', 'smug'); } else cuffsInsert(t, seg(t, tMen + 0.05, tMen + 0.3), 1.2, 0); }
   resetCam();
-  if (id === 'ff') { onoma('CLIC !', 760, 900, P(t, 0, 0.2), 160); rewindFx(t, B.ff.next); }
-  if (id === 'hook') paperCard([['OÙ 47 S\'EST', 64], ['TRAHI ?', 100, C.red]], 540, 430, P(t, t0), { w: 520 });
-  if (id === 's1') { pill('21:00', 540, 330, P(t, t0 + 0.1), C.red); if (t > WF('s1', /noir/i)) bigWord('NOIR COMPLET', P(t, WF('s1', /noir/i)), 520); }
-  if (id === 's2' && t > WF('s2', /dévaliser/i)) onoma('CRAC !', 700, 600, P(t, WF('s2', /dévaliser/i), 0.2));
-  if (id === 's3') speech('« 21 H – 22 H, VOUS FAISIEZ QUOI ? »', 600, 560, pop(t, WF('s3', /faisiez/i)), 46);
-  if (id === 's4') { speech('« J\'AI LU MON LIVRE. »', 420, 520, pop(t, WF('s4', /lu$/i) - 0.1), 56); if (t > WF('s4', /tranquille/i)) polaroid(760, 820, 380, 330, P(t, WF('s4', /tranquille/i)), livingRoom, 'SA VERSION', 0.04); }
-  if (id === 's5' && t > WF('s5', /menteur/i)) stamp('MENTEUR', pop(t, WF('s5', /menteur/i)), 420);
+  [tPanne, tNoir, tCrac, tLivre, tMen].forEach(tc => flashCut(t, tc)); flashCut(t, S('q'));
+  if (id === 'ff') { onoma('CLIC !', 760, 620, P(t, 0.3, 0.2), 160); rewindFx(t, B.ff.next); }
+  if (id === 's1' && t < tPanne) banner('HIER SOIR · 21 H', 540, 330, P(t, t0 + 0.1));
+  if (id === 's1' && t >= tPanne && t < tNoir) onoma('CLAC', 760, 420, P(t, tPanne, 0.15), 140);
+  if (id === 's2' && t >= tCrac) onoma('CRAC !', 700, 520, P(t, tCrac, 0.2));
+  if (id === 's3') banner('LE LENDEMAIN', 540, 330, P(t, t0 + 0.1));
+  if (id === 's4' && t >= tLivre) banner('SA VERSION', 540, 330, P(t, tLivre + 0.05), C.orange);
+  if (id === 's5' && t >= tMen) { onoma('CLIC !', 760, 620, P(t, tMen + 0.3, 0.2), 160); if (t > WF('s5', /menteur/i)) stamp('MENTEUR', pop(t, WF('s5', /menteur/i)), 420); }
   endCards(t, [['COMMENT IL A SU ?', 86, C.red], ['TA RÉPONSE EN 1 MOT', 52]]);
 }
