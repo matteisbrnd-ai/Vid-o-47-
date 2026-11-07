@@ -5,7 +5,7 @@ SFX_COMP = 3
 SFX_DUCK = 0.55
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Elle a accusé 47 de vol… mais une seule phrase l'a grillée. Tu la vois ?", "Elle a accusé Quarante-sept de vol... mais une seule phrase l'a grillée. Tu la vois ?", 0.25),
+  ('ff', "9 personnes sur 10 la croient… Pas toi ?", "Neuf personnes sur dix la croient... Pas toi ?", 0.25),
   ('s1', "Samedi, Mme Duval invite 47 à prendre le thé.", "Samedi, Madame Duval invite Quarante-sept à prendre le thé.", 0.15),
   ('s2', "Le lendemain, elle appelle la police : mon billet de 500 € a disparu !", "Le lendemain, elle appelle la police : mon billet de cinq cents euros a disparu !", 0.15),
   ('s3', "Je l'avais caché dans mon livre, entre la page 47 et la page 48.", "Je l'avais caché dans mon livre, entre la page quarante-sept et la page quarante-huit.", 0.2),
@@ -13,5 +13,5 @@ BEATS = [
   ('s5', "Le policier réfléchit deux secondes… et c'est elle qu'il embarque.", "Le policier réfléchit deux secondes... et c'est elle qu'il embarque.", 0.3),
   ('q', "Pourquoi elle ment ? Réponds en commentaire.", "Pourquoi elle ment ? Réponds en commentaire.", 1.8),
 ]
-CUES = [('ff', '+0', 'page'), ('ff', '+0.25', 'bam'), ('s1', 'thé', 'clink'), ('s1', '+0', 'ticktock'), ('s2', 'appelle', 'ring'), ('s2', 'disparu', 'sting'),
+CUES = [('ff', '+0', 'page'), ('ff', '+0.25', 'bam'), ('s1', 'thé', 'clink'), ('s5', 'elle', 'sting'), ('s1', '+0', 'ticktock'), ('s2', 'appelle', 'ring'), ('s2', 'disparu', 'sting'),
         ('s3', 'livre', 'page'), ('s4', 'lui', 'stamp'), ('s5', 'réfléchit', 'ticktock'), ('s5', 'embarque', 'cuffs'), ('s5', 'embarque', 'chain'), ('q', '+0', 'page'), ('q', '+0', 'ding')]
