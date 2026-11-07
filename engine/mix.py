@@ -112,6 +112,8 @@ sduck = 1 - ns.get('SFX_DUCK', 0.75) * np.clip(e * 9, 0, 1)            # effects
 sfx = sfx / (np.max(np.abs(sfx)) + 1e-9); CMP = ns.get('SFX_COMP', 1)
 if CMP > 1: sfx = np.tanh(sfx * CMP) / np.tanh(CMP)   # lifts the quiet effects (clicks, chain, pages) without making the booms louder
 sfx = sfx * SFX * sduck
+for bid, k in ns.get('SFX_BEAT', {}).items():  # per-beat effect level, e.g. {'ff': 0.4} keeps the hook voice clear
+    b = BEATS[bid]; sfx[int(b['start'] * SR):int(b['next'] * SR)] *= k
 mix = voN + MUS * mus * duck + sfx; fade = int(SR * 1.2); mix[-fade:] *= np.linspace(1, 0, fade)
 mix = np.tanh(mix * 1.1) / np.tanh(1.1)               # soft limiter instead of peak-normalising on the loudest effect
 with wave.open(os.path.join(D, 'mix.wav'), 'wb') as o: o.setnchannels(1); o.setsampwidth(2); o.setframerate(SR); o.writeframes((mix * 32767).astype(np.int16).tobytes())

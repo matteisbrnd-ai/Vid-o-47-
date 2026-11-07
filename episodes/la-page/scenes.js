@@ -22,7 +22,7 @@ function cupClose(t) { resetCam(); x.fillStyle = vg(0, H, '#f4dcb8', '#d9b48a');
   ell(540, 900, 210, 40, '#b5703a', 8); x.lineWidth = 34; x.strokeStyle = OL; x.beginPath(); x.arc(780, 1000, 70, -1.2, 1.2); x.stroke(); x.lineWidth = 20; x.strokeStyle = '#f6ecd6'; x.beginPath(); x.arc(780, 1000, 70, -1.2, 1.2); x.stroke();
   x.strokeStyle = 'rgba(255,255,255,.8)'; x.lineWidth = 14; x.lineCap = 'round'; [-80, 0, 80].forEach((d, i) => { x.beginPath(); for (let k = 0; k < 20; k++) { const yy = 840 - k * 18; x.lineTo(540 + d + Math.sin(k * 0.5 + t * 4 + i) * 22, yy); } x.stroke(); }); }
 function draw(t) {
-  const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT);
+  const id = curId(t), t0 = S(id), [fx, fy, z0] = camAt(t, TGT), z = z0 * (1 + 0.04 * (t - t0));  // slow push-in on every shot
   const tThe = WF('s1', /thé/i), tFace = 1.1, tElle = WF('s5', /elle/i), tTel = WF('s2', /appelle/i), tBil = WF('s2', /billet/i), tLivre = WF('s3', /livre/i), tLui = WF('s4', /lui/i), tEmb = WF('s5', /embarque/i);
   if (id === 'ff') { if (t < tFace) bookClose(t, 1, false, eOut(seg(t, 0.05, 0.6))); else { cam(760, 1180, lerp(3.4, 3.0, seg(t, tFace, B.ff.end)), 0, t); salon(t); cast('woman', 760, 1640, 0.8, t, { ...DUVAL, mood: 'smug', look: -0.5 }); } }
   else if (id === 'q') bookClose(t, 1, false, 1);

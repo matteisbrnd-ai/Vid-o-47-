@@ -7,7 +7,7 @@ import base64, hashlib, json, os, re, subprocess, sys, urllib.request, wave
 import numpy as np
 D = sys.argv[1]; ns = {'os': os, 'HERE': D}; exec(open(os.path.join(D, 'beats.py')).read(), ns)
 BEATS, EMO = ns['BEATS'], ns.get('EMO', {})
-VOICE = ns.get('ELEVEN_VOICE', 'aQROLel5sQbj1vuIVi6B'); MODEL = ns.get('ELEVEN_MODEL', 'eleven_v4'); SPEED = ns.get('ELEVEN_SPEED', 1.08)
+VOICE = ns.get('ELEVEN_VOICE', 'aQROLel5sQbj1vuIVi6B'); MODEL = ns.get('ELEVEN_MODEL', 'eleven_v4'); SPEED = ns.get('ELEVEN_SPEED', 1.08); TEMPO = ns.get('TEMPO', 1.12)  # TEMPO: free local speed-up (pitch kept) for a punchier delivery
 KEY = os.environ.get('ELEVEN_KEY') or open(os.path.expanduser('~/.elevenlabs_key')).read().strip()
 TAG = {'mystere': '[mysterious]', 'menace': '[serious]', 'tension': '[tense]', 'neutre': '', 'complice': '[playful]', 'question': '[curious]',
        'excite': '[excited]', 'choc': '[surprised]', 'amuse': '[amused]'}
@@ -20,7 +20,7 @@ def tts(text):
                                      data=json.dumps(body).encode(), headers={'xi-api-key': KEY, 'Content-Type': 'application/json'})
         open(f, 'w').write(urllib.request.urlopen(req, timeout=120).read().decode())
     r = json.load(open(f)); mp3 = f[:-5] + '.mp3'; open(mp3, 'wb').write(base64.b64decode(r['audio_base64']))
-    a = np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', mp3, '-ac', '1', '-ar', str(SR), '-f', 's16le', '-'], capture_output=True).stdout, np.int16).astype(np.float32) / 32768
+    a = np.frombuffer(subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', mp3, '-af', f'atempo={TEMPO}', '-ac', '1', '-ar', str(SR), '-f', 's16le', '-'], capture_output=True).stdout, np.int16).astype(np.float32) / 32768
     al = r.get('normalized_alignment') or r['alignment']; ch, st, en = al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']
     words, cur, depth = [], None, 0
     for c, s, e in zip(ch, st, en):
@@ -30,6 +30,7 @@ def tts(text):
         if c.isspace():
             if cur: words.append(cur); cur = None
             continue
+        s, e = s / TEMPO, e / TEMPO
         if cur is None: cur = {'w': '', 't0': s, 't1': e}
         cur['w'] += c; cur['t1'] = e
     if cur: words.append(cur)
