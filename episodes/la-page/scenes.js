@@ -29,7 +29,10 @@ function draw(t) {
   else if (id === 's1' && t >= tThe) cupClose(t);
   else if (id === 's1') { cam(fx, fy, z); salon(t); cast('woman', 760, 1640, 0.8, t, { ...DUVAL, mood: 'smile', look: -1 }); p47(330, 1640, 0.8, t, { mood: 'smile', look: 1 }); }
   else if (id === 's2') { if (t < tBil) phoneClose(t, 1); else bookClose(t, 1, false, 0.0001 + eOut(seg(t, tBil, tBil + 0.5)) * 0.99); }
-  else if (id === 's3') bookClose(t, eOut(seg(t, tLivre, tLivre + 0.4)) * 0 + (t < tLivre ? 0 : eOut(seg(t, tLivre, tLivre + 0.4))), true, 0);
+  else if (id === 's3') { resetCam(); x.fillStyle = vg(0, H, '#8a5a3a', '#4a2e1c'); x.fillRect(0, 0, W, H); x.save(); x.translate(540, 900); x.rotate(-0.05); const k = 1 + 0.04 * (t - t0); x.scale(k, k);
+    rbox(-330, -440, 660, 880, 24, '#f6ecd6', 9); rbox(-360, -460, 660, 900, 24, '#2f5fb3', 9); txt('MON LIVRE', -30, -300, 64, '#fff', { stroke: false });
+    if (t >= tLivre) { const p = eOut(seg(t, tLivre, tLivre + 0.4)); x.save(); x.translate(300 + 60 * p, -60); x.rotate(0.12); rrc(0, 0, 220, 130, 12, '#c9a0d8', 6); txt('500 €', 20, 4, 54, '#5a2a6a', { stroke: false }); x.restore(); rbox(-360, -460, 660, 900, 24, 'rgba(0,0,0,0)', 0); }
+    x.restore(); }
   else if (id === 's4') { cam(fx, fy, z, t < tLui + 0.3 && t > tLui ? 12 : 0, t); salon(t); cast('woman', 760, 1640, 0.8, t, { ...DUVAL, mood: 'angry', look: -1, armUp: true }); p47(330, 1640, 0.8, t, { mood: 'shock', look: 1, sweat: true }); }
   else if (id === 's5') { if (t < tEmb) { const her = t >= tElle; cam(her ? 800 : 440, 1180, 3.0, 0, t); salon(t); cast('guard', 440, 1640, 0.8, t, { mood: 'neutral', look: Math.sin(t * 3) }); cast('woman', 800, 1640, 0.8, t, { ...DUVAL, mood: her ? 'shock' : 'smug', look: -1, sweat: her }); }
     else cuffsInsert(t, seg(t, tEmb + 0.05, tEmb + 0.3), 1.2, 0, '#b5486a', '#d4d4d8'); }

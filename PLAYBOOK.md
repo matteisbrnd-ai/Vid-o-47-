@@ -30,6 +30,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
    the next day as a pinned comment. (Videos with the solution got fewer comments and no better completion.)
 6. **One clear line**: 3–4 clues max, all pointing to the same answer. When a script tried to be « harder » by
    adding side stories, the creator said « ça part dans tous les sens ». Harder = subtler clue, not more noise.
+7a. **Never draw the liar's version as if it were true** (La page showed pages 47|48 side by side = physically impossible, it confused even the creator). Show neutral images; the clue lives in the words.
 7. **Rules must be crystal clear** in the setup (a viewer complained « c'est mal expliqué » on the switches riddle).
 8. **Never reuse** a riddle already listed below. **Famous riddles are welcome** (people who know the answer comment it, which feeds the algorithm) but always change the setting and details and make 47 the hero. Leave ≥ 2 weeks between two versions of the same riddle on this account (e.g. « Le recrutement » repeats « Le test »: post it from 2026-11-14).
 11. **Lessons from the 3 review agents (2026-11-06) — apply to every video:**
