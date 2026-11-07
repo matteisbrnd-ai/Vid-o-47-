@@ -19,15 +19,17 @@ function livingRoom(w, h) { x.fillStyle = '#e9c9a0'; x.fillRect(0, 0, w, h); x.f
   x.save(); x.translate(w * 0.4, h * 0.82); x.scale(0.5, 0.5); toon(0, 0, 1, { mood: 'smile', look: 0.6 }); x.restore(); rbox(w * 0.3, h * 0.43, 90, 60, 6, '#2c4fa8', 5); }
 function draw(t) {
   const id = curId(t), t0 = S(id), [fx, fy, z] = camAt(t, TGT); cam(fx, fy, z, id === 's2' ? Math.max(0, 1 - (t - WF('s2', /dévaliser/i)) * 3) * 14 : 0, t);
-  if (id === 'ff' || id === 's5') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'ff' ? 'shock' : 'worried', sweat: true, look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'smug', look: -1 });
+  function cuffed(tt, zoom) { cam(560, 1250, zoom, Math.max(0, 1 - tt * 4) * 14, t); office(t); p47(380, 1640, 0.82, t, { mood: 'shock', sweat: true, look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'smug', look: -1 }); x.strokeStyle = '#c9ced6'; x.lineWidth = 12; [-40, 40].forEach(d => { x.beginPath(); x.arc(520 + d, 1300, 32, 0, 7); x.stroke(); }); }
+  if (id === 'ff' || id === 'q') { cuffed(id === 'ff' ? t : 9, id === 'ff' ? lerp(2.4, 1.6, eOut(seg(t, 0, 1.2))) : 1.3); }
+  if (id === 's5') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'ff' ? 'shock' : 'worried', sweat: true, look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'smug', look: -1 });
     if (id === 's5' && t > WF('s5', /menottes/i)) { x.strokeStyle = '#c9ced6'; x.lineWidth = 10; [-40, 40].forEach(d => { x.beginPath(); x.arc(620 + d, 1290, 30, 0, 7); x.stroke(); }); } }
-  if (id === 'hook' || id === 's3' || id === 'q' || id === 'share') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'q' ? 'worried' : 'smug', look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'neutral', look: -1 }); }
+  if (id === 's3') { office(t); p47(380, 1640, 0.82, t, { mood: id === 'q' ? 'worried' : 'smug', look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'neutral', look: -1 }); }
   if (id === 's1' || id === 's2') { const off = t > WF('s1', /panne/i); street(t, !off);
     if (id === 's2') { const k = seg(t, t0 + 0.3, B.s2.end); x.save(); x.globalAlpha = 0.85; toon(lerp(-100, 1100, k), 1640, 0.7, { walk: t * 3, body: '#111', body2: '#0b0b0d', hatCol: '#111', hatCol2: '#0b0b0d', num: false, mood: 'smug' }); x.restore(); } }
   if (id === 's4') { office(t); p47(380, 1640, 0.82, t, { mood: 'smug', look: 1 }); cast('inspector', 760, 1640, 0.82, t, { mood: 'neutral', look: -1 }); }
   if (id === 's1' || id === 's2') night(id === 's1' && t < WF('s1', /panne/i) ? 0.1 : 0.4);
   resetCam();
-  if (id === 'ff') { stamp('DÉMASQUÉ', 1, 380); paperCard([['UN ALIBI PARFAIT…', 62]], 540, 600, 1, { w: 560 }); rewindFx(t, B.ff.next); }
+  if (id === 'ff') { onoma('CLIC !', 760, 900, P(t, 0, 0.2), 160); rewindFx(t, B.ff.next); }
   if (id === 'hook') paperCard([['OÙ 47 S\'EST', 64], ['TRAHI ?', 100, C.red]], 540, 430, P(t, t0), { w: 520 });
   if (id === 's1') { pill('21:00', 540, 330, P(t, t0 + 0.1), C.red); if (t > WF('s1', /noir/i)) bigWord('NOIR COMPLET', P(t, WF('s1', /noir/i)), 520); }
   if (id === 's2' && t > WF('s2', /dévaliser/i)) onoma('CRAC !', 700, 600, P(t, WF('s2', /dévaliser/i), 0.2));
