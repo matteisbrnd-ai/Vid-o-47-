@@ -31,7 +31,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 6. **One clear line**: 3–4 clues max, all pointing to the same answer. When a script tried to be « harder » by
    adding side stories, the creator said « ça part dans tous les sens ». Harder = subtler clue, not more noise.
 7. **Rules must be crystal clear** in the setup (a viewer complained « c'est mal expliqué » on the switches riddle).
-8. **Never reuse** a riddle already listed below. Rewrite classic riddles with new details and 47 as hero.
+8. **Never reuse** a riddle already listed below. **Famous riddles are welcome** (people who know the answer comment it, which feeds the algorithm) but always change the setting and details and make 47 the hero. Leave ≥ 2 weeks between two versions of the same riddle on this account (e.g. « Le recrutement » repeats « Le test »: post it from 2026-11-14).
 11. **Lessons from the 3 review agents (2026-11-06) — apply to every video:**
     - **Action at frame 1, in close-up**: something is happening (thrown into a cell, door slams, BAM), never a static line-up with a sign.
       Hook stakes judge the viewer (« t'es trop bête pour… », like « tu risques l'asile »), not just 47.
