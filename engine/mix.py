@@ -108,8 +108,10 @@ mus /= np.max(np.abs(mus)) + 1e-9
 voN = np.zeros(N); voN[:len(vo)] = vo
 e = np.convolve(np.abs(voN), np.ones(int(SR * 0.15)) / int(SR * 0.15), 'same'); duck = 1 - 0.5 * np.clip(e * 7, 0, 1)
 voN = voN / (np.max(np.abs(voN)) + 1e-9) * 0.9
-sduck = 1 - 0.75 * np.clip(e * 9, 0, 1)            # effects drop by up to -12 dB while the voice speaks
-sfx = sfx / (np.max(np.abs(sfx)) + 1e-9) * SFX * sduck
+sduck = 1 - ns.get('SFX_DUCK', 0.75) * np.clip(e * 9, 0, 1)            # effects drop by up to -12 dB while the voice speaks
+sfx = sfx / (np.max(np.abs(sfx)) + 1e-9); CMP = ns.get('SFX_COMP', 1)
+if CMP > 1: sfx = np.tanh(sfx * CMP) / np.tanh(CMP)   # lifts the quiet effects (clicks, chain, pages) without making the booms louder
+sfx = sfx * SFX * sduck
 mix = voN + MUS * mus * duck + sfx; fade = int(SR * 1.2); mix[-fade:] *= np.linspace(1, 0, fade)
 mix = np.tanh(mix * 1.1) / np.tanh(1.1)               # soft limiter instead of peak-normalising on the loudest effect
 with wave.open(os.path.join(D, 'mix.wav'), 'wb') as o: o.setnchannels(1); o.setsampwidth(2); o.setframerate(SR); o.writeframes((mix * 32767).astype(np.int16).tobytes())

@@ -1,6 +1,8 @@
 # La panne — 47's alibi: he read his book during a total blackout. Answer (not given): impossible to read in the dark.
 EMO = {'ff': 'mystere', 'hook': 'complice', 's1': 'tension', 's2': 'neutre', 's3': 'question', 's4': 'amuse', 's5': 'menace', 'q': 'complice'}
-SFX = 0.3
+SFX = 0.45
+SFX_COMP = 3
+SFX_DUCK = 0.55
 BEATS = [
   ('ff',    "Une seule phrase l'a trahi. Toi, tu l'aurais vue ?", "Une seule phrase l'a trahi... Toi, tu l'aurais vue ?", 0.25),
   ('s1',    "Hier soir, 21 h : panne de courant dans tout le quartier. Pendant une heure, noir complet.", "Hier soir, vingt-et-une heures : panne de courant dans tout le quartier. Pendant une heure, noir complet.", 0.15),
