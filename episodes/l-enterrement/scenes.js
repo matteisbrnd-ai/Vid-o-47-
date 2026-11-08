@@ -22,20 +22,22 @@ function asylum(t) { x.fillStyle = '#f7f4ec'; x.fillRect(0, 0, 2160, 1920); x.st
 function draw(t) {
   const id = curId(t);
   const tS = WF('ff', /sourit/i), tFil = WF('s1', /fille/i), tPart = WF('s2', /part/i), tCan = WF('s2', /canette/i), tMeurt = WF('s4', /meurt/i), tSour = WF('s4', /sourit/i), tRien = WF('s3b', /rien/i);
-  const K = [[0, 0, 540, 1150, 1.45], [tS - 0.15, 0.35, 540, 1060, 2.8], [B.ff.end - 0.2, 1.3, 1380, 1250, 1.5],
-    [tFil - 0.1, 0.7, 2700, 1150, 2.3], [S('s2'), 0.6, 1380, 1080, 2.6], [tPart, 0.8, 2160, 1150, 0.55], [tCan - 0.1, 0.6, 3040, 1080, 2.8],
-    [S('s3') - 0.2, 1.1, 540, 2900, 1.2], [S('s3b'), 3, 540, 2900, 1.35], [S('s4') - 0.2, 1.1, 540, 1150, 1.4], [tMeurt, 0.4, 540, 1060, 2.6], [tSour, 2, 540, 1060, 3.0],
-    [S('q'), 1.2, 540, 1150, 1.6]];
+  // story reads left → right on one strip: cemetery · girl & can · phone · game room (= hook image, so the end loops)
+  const R = 3240, K = [[0, 0, R + 540, 1150, 1.45], [tS - 0.15, 0.35, R + 540, 1060, 2.6], [B.ff.end - 0.1, 1.2, 560, 1180, 1.4],
+    [tFil - 0.2, 0.9, 1300, 1150, 1.7], [S('s2'), 0.7, 1040, 1180, 1.3], [tPart, 1.2, 1500, 1180, 1.3], [tCan - 0.1, 0.6, 1900, 1050, 2.3],
+    [S('s3') - 0.2, 1.0, 2700, 980, 1.2], [S('s3b'), 3, 2700, 980, 1.35], [S('s4') - 0.2, 1.0, R + 540, 1150, 1.4], [tMeurt, 0.4, R + 540, 1060, 2.4], [tSour, 2, R + 540, 1060, 2.8],
+    [S('q'), 1.2, R + 540, 1150, 1.45]];
   camPath(t, K, (t > tMeurt && t < tMeurt + 0.3) || (t > tS && t < tS + 0.25) ? 10 : 0);
-  x.fillStyle = '#20222a'; x.fillRect(-3000, -3000, 9000, 9000);
+  x.fillStyle = '#20222a'; x.fillRect(-3000, -3000, 12000, 9000);
   const inS4 = id === 's4' || id === 'q', maxMood = id === 'ff' ? (t >= tS ? 'smug' : 'neutral') : !inS4 ? 'neutral' : t < tMeurt ? 'neutral' : t < tSour ? 'shock' : 'smug';
-  panel(0, 0, 1080, 1920, () => { gameRoom(t); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: maxMood, look: 0, blink: t > 0.6 }); rbox(440, 1330, 200, 80, 30, '#1b1b1f', 6); });
-  panel(1080, 0, 1080, 1920, () => { cemetery(t); rbox(360, 1360, 360, 140, 20, '#8a5a3a', 8); [420, 520, 620].forEach((fx, i) => ell(fx, 1350, 30, 30, ['#e04a5a', '#f4f2ec', '#f5d76e'][i], 5));
-    const love = id === 's2' && t < tPart, sad = id === 's2' && t >= tPart; cast('old', 760, 1720, 0.8, t, { mood: 'worried', look: -1 });
-    cast('inspector', 300, 1720, 0.8, t, { ...MAX, mood: love ? 'smile' : 'worried', look: 1, armUp: sad }); if (love) [[-120, 0], [110, 0.7]].forEach(([d, o]) => heart(300 + d, 640 - ((t * 120 + o * 200) % 260), 0.8)); });
-  panel(2160, 0, 1080, 1920, () => { cemetery(t); can(880, 1000, 0.9); const gx = t < tPart ? 540 : lerp(540, 1400, seg(t, tPart, tPart + 2.2)); cast('woman', gx, 1720, 0.8, t, { ...GIRL, mood: 'neutral', look: t < tPart ? -1 : 1, walk: t >= tPart ? t * 3 : 0 }); });
-  panel(0, 1920, 1080, 1920, () => phoneRoom(t, id === 's3b', t >= tRien));
-  panel(1080, 1920, 2160, 1920, () => asylum(t));
+  const love = id === 's2' && t < tPart, sad = id === 's2' && t >= tPart;
+  panel(0, 0, 2160, 1920, () => { cemetery(t); x.save(); x.translate(1080, 0); cemetery(t); x.restore();
+    rbox(160, 1360, 360, 140, 20, '#8a5a3a', 8); [220, 320, 420].forEach((fx, i) => ell(fx, 1350, 30, 30, ['#e04a5a', '#f4f2ec', '#f5d76e'][i], 5));
+    cast('old', 300, 1720, 0.8, t, { mood: 'worried', look: 1 }); cast('inspector', 780, 1720, 0.8, t, { ...MAX, mood: love ? 'smile' : 'worried', look: 1, armUp: sad });
+    if (love) [[-120, 0], [110, 0.7]].forEach(([d, o]) => heart(780 + d, 640 - ((t * 120 + o * 200) % 260), 0.8));
+    can(1900, 1000, 0.9); const gx = t < tPart ? 1300 : lerp(1300, 2400, seg(t, tPart, tPart + 2.2)); cast('woman', gx, 1720, 0.8, t, { ...GIRL, mood: 'neutral', look: t < tPart ? -1 : 1, walk: t >= tPart ? t * 3 : 0 }); });
+  panel(2160, 0, 1080, 1920, () => phoneRoom(t, id === 's3b', t >= tRien));
+  panel(R, 0, 1080, 1920, () => { gameRoom(t); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: maxMood, look: 0, blink: t > 0.6 }); rbox(440, 1330, 200, 80, 30, '#1b1b1f', 6); });
   resetCam();
   hookCard(t, [['EN PLEINE PARTIE DE GTA 6,', 58], ['SON FRÈRE EST MORT…', 80], ['ET IL SOURIT', 110, C.red]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
