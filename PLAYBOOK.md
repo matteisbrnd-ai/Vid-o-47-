@@ -60,6 +60,9 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
     - CTA: « Réponds en un mot 👇 » + `window.CTA = 'TAGUE CELUI QUI…'` (shares are 0–2 on every video; tags = comments + new viewers).
     - Ask the creator for « % still watching at 0:03 » to measure hooks.
 
+16. **Trending references (creator, 2026-11-08)**: put 1–2 things the 13–25 audience talks about right now into every story, as natural details (what 47 drinks, plays, eats, watches), e.g. Ciao Energy (drink), GTA 6 (game), Tasty Crousty (fried chicken), a Twitch/YouTube stream, a viral TikTok trend. Say the name in the voice + captions; draw the object generically (plain can, console, food box with the name written in our font) — **never copy a real logo or packaging**. Keep the reference out of the answer unless it makes the riddle clearer. Refresh this list every Monday (ask the creator what he sees on his For You page).
+    Current list: Ciao Energy · GTA 6 · Tasty Crousty · Squid Game style games · « c'est carré » type slang sparingly.
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
