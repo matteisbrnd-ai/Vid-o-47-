@@ -234,3 +234,14 @@ function vitrineInsert(t, crack) { resetCam(); x.fillStyle = '#1b2142'; x.fillRe
 // Fully visible from frame 0 (no pop-in), word-by-word captions are muted while it shows.
 function hookCard(t, lines, until = 2.5) { window.NOCAP_UNTIL = until; if (t >= until) return; resetCam(); const a = t > until - 0.2 ? (until - t) / 0.2 : 1;
   x.save(); x.globalAlpha = a; paperCard(lines, 540, 330, 1, { w: 920 }); x.restore(); }
+
+// ---------- « grande toile » mode (outside feedback 2026-11-08: too many separate shots, too dark) ----------
+// The whole story lives on ONE big bright canvas (panels side by side); the camera glides, zooms and de-zooms
+// between them instead of cutting. keys = [[tStart, dur, x, y, z], ...] (world coords; z = zoom). Long moves de-zoom automatically.
+function camPath(t, keys, shake = 0) { let cx = keys[0][2], cy = keys[0][3], cz = keys[0][4];
+  for (const [ts, d, kx, ky, kz] of keys) { if (t <= ts) break; const k = d > 0 ? eIO(clamp((t - ts) / d)) : 1, dist = Math.hypot(kx - cx, ky - cy), dip = clamp(dist / 3200, 0, 0.65);
+    const nz = Math.exp(lerp(Math.log(cz), Math.log(kz), k)) * (1 - dip * Math.sin(Math.PI * k)); cx = lerp(cx, kx, k); cy = lerp(cy, ky, k); cz = k >= 1 ? kz : nz; }
+  cam(cx, cy, cz, shake, t); return [cx, cy, cz]; }
+// draw one panel of the canvas: clipped to its rectangle, local coords 0..w x 0..h (a 1080x1920 panel = one phone screen)
+function panel(zx, zy, w, h, fn) { x.save(); x.beginPath(); x.rect(zx, zy, w, h); x.clip(); x.translate(zx, zy); fn(); x.restore();
+  x.strokeStyle = OL; x.lineWidth = 16; x.strokeRect(zx, zy, w, h); }

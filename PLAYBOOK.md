@@ -63,6 +63,8 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 16. **Trending references (creator, 2026-11-08)**: put 1–2 things the 13–25 audience talks about right now into every story, as natural details (what 47 drinks, plays, eats, watches), e.g. Ciao Energy (drink), GTA 6 (game), Tasty Crousty (fried chicken), a Twitch/YouTube stream, a viral TikTok trend. Say the name in the voice + captions; draw the object generically (plain can, console, food box with the name written in our font) — **never copy a real logo or packaging**. Keep the reference out of the answer unless it makes the riddle clearer. Refresh this list every Monday (ask the creator what he sees on his For You page).
     Current list: Ciao Energy · GTA 6 · Tasty Crousty · Squid Game style games · « c'est carré » type slang sparingly.
 
+17. **« Grande toile » (outside feedback 2026-11-08, overrides the « new shot every 2–3 s / flashCut » parts of 11 and 14)**: « trop de plans différents, c'est pour ça que les gens partent, et c'est trop sombre ». Build each video as ONE big bright canvas of 1080×1920 panels side by side (`panel(x, y, w, h, fn)` in lib.js) and move the camera with `camPath(t, [[tStart, dur, x, y, zoom], …])`: zoom in on faces/props for each clue, de-zoom to reveal the next place, glide (long moves de-zoom automatically) — no hard cuts, no white flashes. Bright daylight palettes, light walls, no `night()` filters. Reference implementation: `episodes/l-enterrement/scenes.js`.
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
