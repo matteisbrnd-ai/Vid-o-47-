@@ -5,6 +5,7 @@ SFX_COMP = 3
 SFX_DUCK = 0.7
 SFX_BEAT = {'ff': 0.35}
 MUSIC = 0.15
+TEMPO_BEAT = {'ff': 1.3}   # hook said fast
 SKIP_EV = ['bam']
 BEATS = [
   ('ff', "47 a poussé sa voiture jusqu'à l'hôtel… et il a tout perdu.", "Quarante-sept a poussé sa voiture jusqu'à l'hôtel... et il a tout perdu.", 0.2),

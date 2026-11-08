@@ -55,7 +55,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
     - On every video most viewers leave at 0:01. Only « Le gardien » passed the test batch (2 201 views, 51 % watched, 18.5 s avg): frame 0 = character + **readable paradox** « Il a sauvé le musée… et il a été viré ».
     - **Hook = paradox about a character**: « 47 a fait X… et Y lui est arrivé » (rendu le diamant… pris dix ans; n'a rien volé… la police l'a félicité). Not quiz framing (« Toi, tu l'aurais vue ? », « 9 sur 10 », « Lequel… ? ») — that reads as homework.
     - **Frame 0**: 47 (or the key character) in close-up ≈ 60 % of the height, bright background, holding the key prop, one strong emotion; **`hookCard(t, lines)`** = the whole hook sentence on a big white card, key word red, visible from 0.0 to ~2.5 s (captions muted meanwhile). Exception to « no permanent sign » for the hook only. Never an object-only or empty frame 0. Check frame 0 of every export.
-    - Voice says the paradox from 0.00 s, < 2.5 s, one themed hit at 0.0. Cut to a new shot at ~1.2 s.
+    - Voice says the paradox from 0.00 s, fast (`TEMPO_BEAT = {'ff': 1.3}`), < 2.5 s, one themed hit at 0.0. Cut to a new shot at ~1.2 s.
     - Length 30–37 s with new info every 2–3 s: aim for absolute avg watch ≥ 15 s (23 s videos got a high % but only ~10 s).
     - CTA: « Réponds en un mot 👇 » + `window.CTA = 'TAGUE CELUI QUI…'` (shares are 0–2 on every video; tags = comments + new viewers).
     - Ask the creator for « % still watching at 0:03 » to measure hooks.

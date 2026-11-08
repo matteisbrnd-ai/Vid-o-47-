@@ -20,7 +20,7 @@ function billsClose(t, k) { resetCam(); x.fillStyle = vg(0, H, '#f2e3c4', '#d9c4
   rbox(250, 1280, 580, 700, 140, SKIN, 8); rbox(220, 1500, 640, 500, 60, '#33384a', 8); rbox(220, 1500, 640, 50, 20, C.orange, 7); }
 function draw(t) {
   const id = curId(t), t0 = S(id);
-  const tCut = 1.25, tMot = WF('s1', /toute/i), tHot = WF('s2', /hôtel/i), tEur = WF('s3', /deux/i), tBil = WF('s4', /billets/i), tPot = WF('s5', /potes/i);
+  const tCut = 1.0, tMot = WF('s1', /toute/i), tHot = WF('s2', /hôtel/i), tEur = WF('s3', /deux/i), tBil = WF('s4', /billets/i), tPot = WF('s5', /potes/i);
   if (id === 'ff') { if (t < tCut) pushShot(t, 1.45, false, 600, 1180); else { cam(560, 1180, 3.0, Math.max(0, 1 - (t - tCut) * 4) * 12, t); street(t, 0); p47(560, 1640, 0.8, t, { mood: 'shock', sweat: true }); } }
   else if (id === 'q') pushShot(t, 1.45 + (t - t0) * 0.03, false, 600, 1180);
   else if (id === 's1') { if (t < tMot) pushShot(t, 1.25 + (t - t0) * 0.05, false); else pushShot(t, 2.6, true, 740, 1200); }
@@ -30,8 +30,8 @@ function draw(t) {
   else if (id === 's5') { if (t < tPot) { cam(560, 1180, 3.1, Math.max(0, 1 - (t - t0) * 3) * 16, t); hotel(t); p47(560, 1720, 0.8, t, { mood: 'shock', sweat: true }); }
     else { cam(540, 1250, 1.9, Math.sin(t * 30) * 4, t); hotel(t); [['rico', 220], ['gardener', 540], ['maid', 860]].forEach(([k, px], i) => cast(k, px, 1720, 0.8, t, { mood: 'smile', look: i - 1, armUp: i !== 1 })); } }
   resetCam(); [tCut, tMot, tHot, tEur, tBil, tPot].forEach(tc => flashCut(t, tc)); flashCut(t, S('q'));
-  hookCard(t, [['IL A POUSSÉ SA VOITURE', 76], ["JUSQU'À L'HÔTEL…", 76], ['ET IL A TOUT PERDU', 100, C.red]], 2.5);
-  if (id === 'ff' && t >= 2.5) rewindFx(t, B.ff.next);
+  hookCard(t, [['IL A POUSSÉ SA VOITURE', 76], ["JUSQU'À L'HÔTEL…", 76], ['ET IL A TOUT PERDU', 100, C.red]], B.ff.end + 0.1);
+  if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1' && t < tMot) banner('DIMANCHE · 15 H', 540, 330, P(t, t0 + 0.1));
   if (id === 's2' && t >= tHot) banner('RUE DE LA PAIX', 540, 330, P(t, tHot + 0.1));
   if (id === 's3' && t >= tEur) onoma('2 000 € !', 560, 520, P(t, tEur, 0.2), 150);

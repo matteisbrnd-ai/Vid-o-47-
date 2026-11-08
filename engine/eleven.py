@@ -12,7 +12,7 @@ KEY = os.environ.get('ELEVEN_KEY') or open(os.path.expanduser('~/.elevenlabs_key
 TAG = {'mystere': '[mysterious]', 'menace': '[serious]', 'tension': '[tense]', 'neutre': '', 'complice': '[playful]', 'question': '[curious]',
        'excite': '[excited]', 'choc': '[surprised]', 'amuse': '[amused]'}
 SR = 44100; LEAD = 0.02; os.makedirs(os.path.join(D, 'vo'), exist_ok=True)
-def tts(text):
+def tts(text, TEMPO=TEMPO):
     body = {'text': text, 'model_id': MODEL, 'voice_settings': {'speed': SPEED, 'stability': 0.4, 'similarity_boost': 0.8, 'style': 0.4}}
     h = hashlib.md5(json.dumps([VOICE, body], sort_keys=True).encode()).hexdigest()[:12]; f = os.path.join(D, 'vo', f'el_{h}.json')
     if not os.path.exists(f):
@@ -43,7 +43,7 @@ def trim(a):  # cut leading/trailing silence, keep a little air
 parts, beats, t = [np.zeros(int(SR * LEAD), np.float32)], [], LEAD
 for b in BEATS:
     bid, show, spoken, pause = b[0], b[1], b[2], b[3]; emo = b[4] if len(b) > 4 else EMO.get(bid)
-    a, words = tts((TAG.get(emo, '') + ' ' + spoken).strip()); a, off = trim(a)
+    a, words = tts((TAG.get(emo, '') + ' ' + spoken).strip(), ns.get('TEMPO_BEAT', {}).get(bid, TEMPO)); a, off = trim(a)
     ws = [{'w': w['w'], 't0': round(t + max(0, w['t0'] - off), 3), 't1': round(t + max(0, w['t1'] - off), 3)} for w in words]
     beats.append({'id': bid, 'show': show, 'spoken': spoken, 'start': round(t, 3), 'end': round(t + len(a) / SR, 3), 'words': ws})
     parts.append(a); t += len(a) / SR; parts.append(np.zeros(int(SR * pause), np.float32)); t += pause
