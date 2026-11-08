@@ -97,6 +97,14 @@ clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons
 | 2026-11 | Le chalet | 43 s | 786 | | | | | | | people found « neige » |
 | 2026-11-06 | L'alibi | 30 s | 771 | | | | | | | first hours only |
 | 2026-11-06 | Les coffres | 30 s | 680 | | | | | | | big debate in comments |
+| 2026-11-04 | Démasqué (alibi dimanche) | 41 s | 790 | 55 | 6 | 1 | 7 | 11.5 s | 9.3 % | 28 % avg watched (stats 2026-11-08) |
+| 2026-11-05 | Le gardien de nuit (update) | 37 s | 2 201 | 145 | 17 | 1 | 5 | 18.5 s | 24.0 % | 51 % avg watched — only video past the test batch |
+| 2026-11-05 | 3 suspects | 30 s | 787 | 68 | 9 | 2 | 7 | 9.3 s | 9.6 % | 31 % |
+| 2026-11-06 | Les coffres (update) | 30 s | 743 | 39 | 6 | 0 | 2 | 9.8 s | 11.2 % | 32 % |
+| 2026-11-06 | Les ramoneurs | 31 s | 753 | 58 | 4 | 1 | 1 | 10.3 s | 10.6 % | 33 % |
+| 2026-11-07 | La panne (new style: cuffs insert, Henri) | 28 s | 796 | 81 | 7 | 2 | 2 | 11.9 s | 18.5 % | posted 10:18 |
+| 2026-11-07 | La page (new style, ElevenLabs Nicolas) | 23 s | 770 | 44 | 2 | 0 | 4 | 10.5 s | 20.5 % | 45 % avg watched, posted 19:03 |
 
+All videos: TikTok says « most viewers stopped at 0:01 »; views come in the first 3–4 h then stop.
 Account on 2026-11-06: 40 followers, 1 273 likes. Plateau 650–1 100 views = TikTok's first test batch;
 the lever is the first 3 s (hook) + shares.
