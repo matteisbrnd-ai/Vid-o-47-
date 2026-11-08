@@ -67,6 +67,8 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 
 18. **Shot style = Galagade (@galagade.studio, 70 K followers, riddles, creator's reference 2026-11-08)**: one rich, busy, warm set per place (many background characters, props, architecture), the camera stays IN that set: start close on faces + key object, slow de-zoom to reveal the whole set, slow zoom toward whoever speaks. Clues appear as **polaroid cards** over the scene (`polaroid(...)` with a label: « LA VRAIE / LA COPIE », « SES CONTACTS »), not as full-screen cuts. Change set only when the story changes place (max 2–3 sets). End: paper card « …? EN COMMENTAIRE ». Graphics: set `window.LOOK = 'gala'` (smaller heads = grown-up proportions, warm storybook grade, paper grain, soft vignette) and texture walls with `bricks()`. Reference: `episodes/l-enterrement/scenes.js` (cemetery set + game-room set).
 
+19. **Riddle type (creator, 2026-11-08): « réflexion », like Galagade** — not gag riddles (« le verre d'eau » = hiccups was judged too much of a joke). Galagade's titles: 100 prisonniers + 1 ampoule, l'homme du portrait (neveu/fils/cousin), l'île et le feu, le crocodile, le dragon et le chevalier, le témoin derrière la baie vitrée, 2 boules (or/laiton) sans les ouvrir. Pattern: high stakes (« s'il se trompe : pendu / perpétuité ») + clear rules shown on a polaroid (« LES RÈGLES ») + a diagram polaroid when positions matter (« QUI VOIT QUI ») + « Comment il a su ? » Classic logic riddles are fine if re-skinned with 47 (don't copy one Galagade posted the same week).
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
@@ -94,7 +96,7 @@ baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · p
 deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
 3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
 alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
-clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet)
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet) · les bonnets (4 prisonniers, 2 rouges 2 bleus, le silence du dernier)
 
 ## Stats log
 
