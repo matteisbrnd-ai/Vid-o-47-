@@ -14,7 +14,7 @@ BEATS = [
   ('s2', "Coup de foudre. Mais elle part avant qu'il puisse lui parler… en laissant juste sa canette de Ciao Energy.", "Coup de foudre. Mais elle part avant qu'il puisse lui parler... en laissant juste sa canette de Tchao Énergie.", 0.1),
   ('s3', "Pas de nom, pas de numéro. Personne ne la connaît.", "Pas de nom, pas de numéro. Personne ne la connaît.", 0.2),
   ('s3b', "Il la cherche partout, sur Insta, dans tout le quartier… rien.", "Il la cherche partout, sur Insta, dans tout le quartier... rien.", 0.2),
-  ('s4', "Une semaine plus tard, en pleine partie de GTA 6, Max apprend que son frère est mort… et il sourit.", "Une semaine plus tard, en pleine partie de GTA 6, Max apprend que son frère est mort... et il sourit.", 0.4),
+  ('s4', "Une semaine plus tard, en pleine partie de GTA 6, Max apprend que son frère est mort… et il sourit.", "Une semaine plus tard, en pleine partie de Gé, Té, A six, Max apprend que son frère est mort... et il sourit.", 0.4),
   ('q', "Pourquoi il sourit ? Réponds en commentaire.", "Pourquoi il sourit ? Réponds en commentaire.", 1.8),
 ]
 CUES = [('ff', '+0', 'chain'), ('s1', '+0', 'wind'), ('s1', 'fille', 'bubble'), ('s2', 'foudre', 'dingdong'), ('s2', 'part', 'steps'),
