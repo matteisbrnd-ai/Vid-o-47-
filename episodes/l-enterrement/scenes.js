@@ -21,8 +21,9 @@ function gameRoom(t) { room('#3a3550', '#2c2840', '#4a3a2a'); rbox(140, 520, 800
   txt('GTA 6', 540, 880, 110, '#fff', { stroke: true }); }
 function draw(t) {
   const id = curId(t), t0 = S(id);
-  const tCut = 1.0, tFil = WF('s1', /fille/i), tPart = WF('s2', /part/i), tNum = WF('s3', /numéro/i), tMeurt = WF('s4', /mort/i), tCan = WF('s2', /canette/i), tSour = WF('s4', /sourit/i);
-  if (id === 'ff' || id === 'q') { const z = id === 'q' ? 1.5 + (t - t0) * 0.03 : (t < tCut ? 1.5 : 2.8); cam(540, t < tCut || id === 'q' ? 1150 : 1080, z, id === 'ff' && t >= tCut ? Math.max(0, 1 - (t - tCut) * 4) * 12 : 0, t); cell(t); jacket47(540, 1720, 0.85, t, t < tCut || id === 'q' ? 'shock' : 'smug'); }
+  const tCut = WF('ff', /sourit/i), tFil = WF('s1', /fille/i), tPart = WF('s2', /part/i), tNum = WF('s3', /numéro/i), tMeurt = WF('s4', /meurt/i), tCan = WF('s2', /canette/i), tSour = WF('s4', /sourit/i);
+  if (id === 'ff' || id === 'q') { const tS = WF('ff', /sourit/i), smile = id === 'q' || t >= tS; cam(540, 1150, id === 'q' ? 2.0 + (t - t0) * 0.03 : (smile ? 2.9 : 1.9), id === 'ff' && smile ? Math.max(0, 1 - (t - tS) * 4) * 10 : 0, t); gameRoom(t);
+    cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: smile ? 'smug' : 'neutral', look: 0, blink: t > 0.6 }); rbox(440, 1330, 200, 80, 30, '#1b1b1f', 6); if (smile) night(0.2); }
   else if (id === 's1') { if (t < tFil) { cam(540, 1250, 1.25 + (t - t0) * 0.04); cemetery(t, true); umbrella(300, 980, 0.7); cast('inspector', 300, 1720, 0.8, t, { ...MAX, mood: 'worried', look: 1 }); umbrella(760, 1000, 0.7); cast('old', 760, 1720, 0.8, t, { mood: 'worried', look: -1 }); }
     else { cam(760, 1150, 2.6, 0, t); cemetery(t, true); cast('woman', 760, 1720, 0.8, t, { ...GIRL, mood: 'neutral', look: -1 }); } }
   else if (id === 's2') { if (t < tPart) { cam(330, 1150, 2.7, 0, t); cemetery(t, true); cast('inspector', 330, 1720, 0.8, t, { ...MAX, mood: 'smile', look: 1 }); [[-120, 0], [110, 0.7]].forEach(([d, o]) => heart(330 + d, 640 - ((t * 120 + o * 200) % 260), 0.8)); }
@@ -34,7 +35,7 @@ function draw(t) {
   else if (id === 's4') { if (t < tMeurt) { cam(540, 1200, 1.35 + (t - t0) * 0.05, 0, t); gameRoom(t); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: 'smug', look: 0 }); rbox(440, 1330, 200, 80, 30, '#1b1b1f', 6); } else if (t < tSour) wreath(t);
     else { cam(540, 1080, 3.2 + (t - tSour) * 0.15, 0, t); gameRoom(t); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: 'smug', look: 0.5 }); night(0.25); } }
   resetCam(); [tCut, tFil, tPart, tCan, S('s3'), S('s3b'), tMeurt, tSour].forEach(tc => flashCut(t, tc)); flashCut(t, S('q'));
-  hookCard(t, [['TA PLACE EST', 80], ["À L'ASILE…", 110, C.red], ['SI TU TROUVES', 80]], B.ff.end + 0.1);
+  hookCard(t, [['EN PLEINE PARTIE DE GTA 6,', 58], ['SON FRÈRE EST MORT…', 80], ['ET IL SOURIT', 110, C.red]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1' && t < tFil) banner('ENTERREMENT DE MAMIE', 540, 330, P(t, t0 + 0.1));
   if (id === 's2' && t < tPart) onoma('COUP DE FOUDRE', 540, 480, P(t, t0 + 0.1, 0.2), 110);
