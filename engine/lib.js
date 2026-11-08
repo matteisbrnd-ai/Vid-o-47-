@@ -61,7 +61,8 @@ function toon(px, py, s, o = {}) {
   if (o.num !== false) { txt(o.num || '47', 0, -375, 118, o.numCol || C.orange, { sw: 10 }); }
   if (o.collar) { x.beginPath(); x.moveTo(-40, -515); x.lineTo(0, -470); x.lineTo(40, -515); x.lineWidth = 7; x.strokeStyle = OL; x.stroke(); }
   rrc(0, -530, 64, 50, 14, SKIN2, 6);
-  const HY = -690, HR = 150;
+  const GALA = window.LOOK === 'gala', HY = -690, HR = 150;   // 'gala' look: head drawn 25 % smaller (more grown-up proportions)
+  if (GALA) { x.save(); x.translate(0, -520); x.scale(0.76, 0.76); x.translate(0, 545); }
   ell(-HR + 6, HY + 10, 26, 36, SKIN, 6); ell(HR - 6, HY + 10, 26, 36, SKIN, 6);
   const head = () => { x.beginPath(); x.ellipse(0, HY, HR, HR * 1.02, 0, 0, 7); };
   head(); fs(SKIN, 8); shadeClip(head, 'rgba(160,90,40,.08)', 90);
@@ -90,6 +91,7 @@ function toon(px, py, s, o = {}) {
   else if (o.mood === 'worried') { x.beginPath(); x.moveTo(-36, MY + 10); x.quadraticCurveTo(-18, MY - 6, 0, MY + 8); x.quadraticCurveTo(18, MY - 6, 36, MY + 8); x.stroke(); }
   else { x.beginPath(); x.moveTo(-30, MY + 2); x.quadraticCurveTo(0, MY + 12, 30, MY + 2); x.stroke(); }
   if (o.sweat) ell(HR - 20, HY - 40 + ((t * 40) % 30), 12, 18, '#8fd0ff', 4);
+  if (GALA) x.restore();
   x.restore();
 }
 // 47 himself (scale 0.8 ≈ 1 m 70 on a 1500 px floor)
@@ -168,7 +170,13 @@ function captions(t) { if (t < (window.NOCAP_UNTIL || 0)) return; resetCam(); co
     font(64, 'Mont'); x.textAlign = 'center'; x.textBaseline = 'middle'; x.lineWidth = 9; x.strokeStyle = '#000'; x.strokeText(w.w, cx + ww / 2, y + 2); x.fillStyle = act ? C.orange : '#fff'; x.fillText(w.w, cx + ww / 2, y + 2); cx += ww + 24; }); }
 
 // ---------- frame driver ----------
-function frame(t) { _T = t; resetCam(); x.fillStyle = '#000'; x.fillRect(0, 0, W, H); draw(t); vignette(); captions(t); }
+function grade() { if (window.LOOK !== 'gala') return; resetCam();                 // warm storybook grade + paper grain + soft vignette (Galagade-like)
+  x.save(); x.globalCompositeOperation = 'soft-light'; x.fillStyle = 'rgba(255,190,120,.35)'; x.fillRect(0, 0, W, H); x.restore();
+  x.save(); x.globalCompositeOperation = 'multiply'; const g = x.createRadialGradient(540, 900, 500, 540, 960, 1250); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(120,90,70,1)'); x.fillStyle = g; x.fillRect(0, 0, W, H); x.restore();
+  if (!window._grain) { const c = document.createElement('canvas'); c.width = c.height = 256; const g2 = c.getContext('2d'), d = g2.createImageData(256, 256); for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 14; } g2.putImageData(d, 0, 0); window._grain = x.createPattern(c, 'repeat'); }
+  x.save(); x.fillStyle = window._grain;   // static grain: moving grain made a 30 s video weigh 150 MB
+  x.fillRect(-256, -256, W + 512, H + 512); x.restore(); }
+function frame(t) { _T = t; resetCam(); x.fillStyle = '#000'; x.fillRect(0, 0, W, H); draw(t); grade(); vignette(); captions(t); }
 window.DURATION = 0;
 window.ready = new Promise(r => window.addEventListener('load', r)).then(() => Promise.all([document.fonts.load('100px Bebas'), document.fonts.load('800 60px Mont')]))
   .then(() => { initTL(); window.DURATION = TL.total; frame(0); return true; });
@@ -245,3 +253,7 @@ function camPath(t, keys, shake = 0) { let cx = keys[0][2], cy = keys[0][3], cz 
 // draw one panel of the canvas: clipped to its rectangle, local coords 0..w x 0..h (a 1080x1920 panel = one phone screen)
 function panel(zx, zy, w, h, fn) { x.save(); x.beginPath(); x.rect(zx, zy, w, h); x.clip(); x.translate(zx, zy); fn(); x.restore();
   x.strokeStyle = OL; x.lineWidth = 16; x.strokeRect(zx, zy, w, h); }
+
+// stone / brick texture for walls (Galagade-like detailed sets)
+function bricks(x0, y0, w, h, col = '#b9ad98', line = 'rgba(80,60,40,.35)', bw = 90, bh = 44) { x.fillStyle = col; x.fillRect(x0, y0, w, h); x.save(); x.beginPath(); x.rect(x0, y0, w, h); x.clip(); x.strokeStyle = line; x.lineWidth = 4;
+  for (let r = 0; r * bh < h; r++) for (let c = -1; c * bw < w; c++) { const bx = x0 + c * bw + (r % 2) * bw / 2, by = y0 + r * bh; x.strokeRect(bx, by, bw, bh); if ((r * 7 + c * 3) % 5 === 0) { x.fillStyle = 'rgba(0,0,0,.06)'; x.fillRect(bx + 3, by + 3, bw - 6, bh - 6); } } x.restore(); }

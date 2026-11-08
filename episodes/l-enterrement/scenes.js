@@ -1,6 +1,6 @@
 // L'enterrement — « Galagade » style: ONE rich, busy set per place (cemetery, game room), slow zoom in / de-zoom inside it,
 // clues shown as polaroid cards over the scene instead of cuts. Sets: cemetery 0..2160 · game room 2160..3240 (y 0..2800, ground ≈ 2000).
-window.CTA = 'TAGUE LE PLUS PSYCHO DE TES POTES';
+window.CTA = 'TAGUE LE PLUS PSYCHO DE TES POTES'; window.LOOK = 'gala';
 const MAX = { hairCol: '#2a1d14', body: '#26272d', body2: '#1c1d22', pants: '#1c1d22' }, GIRL = { hairCol: '#1f1a18', body: '#7a4aa8', body2: '#5c3a80' };
 const MOURN = { body: '#34353c', body2: '#26272d', pants: '#26272d' }, GY = 2000;
 function heart(px, py, s, c = '#e04a5a') { x.save(); x.translate(px, py); x.scale(s, s); x.beginPath(); x.moveTo(0, 30); x.bezierCurveTo(-90, -40, -40, -110, 0, -60); x.bezierCurveTo(40, -110, 90, -40, 0, 30); fs(c, 6); x.restore(); }
@@ -9,9 +9,9 @@ function tree(px, py, s) { x.save(); x.translate(px, py); x.scale(s, s); rbox(-3
 function cemeterySet(t, tPart, love, sad, girlGone) {
   x.fillStyle = vg(-1500, 1600, '#6fc0ff', '#e3f4ff'); x.fillRect(0, -1500, 2160, 3200); ell(1800, 380, 110, 110, '#fff3a0', 0);
   [[200, 1500, 420, '#cfd9c8'], [1500, 1450, 520, '#c6d2bf']].forEach(([hx, hy, r, c]) => ell(hx, hy + 200, r * 1.6, r * 0.6, c, 0));
-  rbox(820, 980, 520, 640, 10, '#e8dcc4', 8); poly([[800, 990], [1080, 760], [1360, 990]], '#b05a4a', 8); rbox(1040, 560, 80, 260, 6, '#e8dcc4', 7); x.fillStyle = OL; x.fillRect(1074, 470, 12, 110); x.fillRect(1050, 500, 60, 12);   // chapel
+  rbox(820, 980, 520, 640, 10, '#e8dcc4', 8); bricks(828, 988, 504, 624, '#e3d6bc', 'rgba(120,95,70,.3)'); poly([[800, 990], [1080, 760], [1360, 990]], '#b05a4a', 8); rbox(1040, 560, 80, 260, 6, '#e8dcc4', 7); x.fillStyle = OL; x.fillRect(1074, 470, 12, 110); x.fillRect(1050, 500, 60, 12);   // chapel
   rbox(1020, 1420, 120, 200, 50, '#7a5232', 6); [[900, 1150], [1180, 1150]].forEach(([wx, wy]) => rbox(wx, wy, 80, 120, 40, '#bfe3ff', 5));
-  x.fillStyle = '#b9b2a2'; x.fillRect(0, 1640, 2160, 70); x.strokeStyle = '#9a9384'; x.lineWidth = 4; for (let i = 0; i < 40; i++) { x.strokeRect(i * 60, 1640, 60, 35); x.strokeRect(i * 60 + 30, 1675, 60, 35); }      // stone wall
+  bricks(0, 1640, 2160, 72, '#b9b2a2', 'rgba(70,60,50,.4)', 60, 36);      // stone wall
   tree(160, 1700, 1.1); tree(1950, 1700, 1.25);
   x.fillStyle = '#7cc46a'; x.fillRect(0, 1710, 2160, 3000); x.fillStyle = '#6ab45a'; for (let i = 0; i < 60; i++) x.fillRect((i * 97) % 2160, 1740 + (i * 53) % 1000, 40, 10);
   [[120, 1830], [420, 1800], [1700, 1810], [2040, 1840]].forEach(([gx, gy]) => { rbox(gx - 60, gy - 170, 120, 190, 55, '#c3c7cf', 7); x.fillStyle = '#9a9ea6'; x.fillRect(gx - 7, gy - 145, 14, 80); x.fillRect(gx - 30, gy - 125, 60, 14); });
