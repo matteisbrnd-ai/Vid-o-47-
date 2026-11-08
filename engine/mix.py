@@ -69,6 +69,9 @@ FX.update({
  'page': lambda: cat((0, 0.3 * hp(noise(0.25)) * np.sin(np.pi * T(0.25) / 0.25) ** 2), (0.18, 0.25 * hp(noise(0.2)) * np.sin(np.pi * T(0.2) / 0.2) ** 2)),
  'crickets': lambda: 0.05 * np.sin(2 * np.pi * 4300 * T(4.0)) * ((T(4.0) * 18 % 1) < 0.5) * ((T(4.0) % 0.9) < 0.35) * np.sin(np.pi * T(4.0) / 4.0),
  'ticktock': lambda: cat(*[(k * 0.5, ting(1500 if k % 2 else 1100, 0.04, 0.25, 0.006)) for k in range(9)]),
+ 'cash': lambda: cat((0, chirp(0.06, lambda t: 1800 + 0 * t, 0.2, 0.001, 0.02)), (0.12, 0.2 * (np.sin(2 * np.pi * 2093 * T(1.0)) + 0.4 * np.sin(2 * np.pi * 3136 * T(1.0))) * env(int(SR * 1.0), 0.002, 0.35)), *[(0.1 + rng.uniform(0, 0.4), ting(rng.uniform(3500, 6500), 0.06, 0.08, 0.015)) for _ in range(10)]),
+ 'laugh': lambda: cat(*[(k * 0.16, chirp(0.12, lambda t, f=f: f * (1 - t * 1.5), 0.18, 0.01, 0.06) + 0.06 * lp(noise(0.12), 0.3) * env(int(SR * 0.12), 0.01, 0.05)) for k, f in enumerate([420, 380, 440, 400, 360, 410])]),
+ 'engine': lambda: 0.25 * lp(np.sign(np.sin(2 * np.pi * 38 * T(0.9))) + 0.3 * noise(0.9), 0.08) * env(int(SR * 0.9), 0.01, 0.3),
  'run': lambda: cat(*[(k * 0.2, 0.35 * lp(noise(0.08), 0.4) * env(int(SR * 0.08), 0.002, 0.03)) for k in range(8)]),
 })
 cache = {}

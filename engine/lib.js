@@ -152,12 +152,12 @@ function followTap(t, t0) { const p = eBack(seg(t, t0, t0 + 0.3)), on = t > t0 +
 
 // standard ending: question card, then the share call (beat ids 'q' and 'share' in beats.py)
 function endCards(t, qLines) { const id = curId(t);
-  if (id === 'q') { paperCard(qLines, 540, 400, P(t, S('q') + 0.1), { w: 760 }); if (t > S('q') + 1.2) pill("ENVOIE-LA À UN POTE MALIN", 540, 680, P(t, S('q') + 1.2), C.red); }
+  if (id === 'q') { paperCard(qLines, 540, 400, P(t, S('q') + 0.1), { w: 760 }); if (t > S('q') + 1.2) pill(window.CTA || "ENVOIE-LA À UN POTE MALIN", 540, 680, P(t, S('q') + 1.2), C.red); }
   if (id === 'share') { resetCam(); x.fillStyle = `rgba(10,8,20,${0.55 * P(t, S('share'))})`; x.fillRect(0, 0, W, H);
     paperCard([['ENVOIE-LA À', 70], ["QUELQU'UN QUI PENSE", 62], ['ÊTRE MALIN', 92, C.red]], 540, 800, P(t, S('share')), { w: 860 }); } }
 
 // ---------- captions: 1–3 upper-case words, current word in orange, dark pill, above TikTok's UI ----------
-function captions(t) { resetCam(); const b = TL.beats.find(b => t >= b.start && t < b.next - 0.07); if (!b || !b.words.length) return;
+function captions(t) { if (t < (window.NOCAP_UNTIL || 0)) return; resetCam(); const b = TL.beats.find(b => t >= b.start && t < b.next - 0.07); if (!b || !b.words.length) return;
   const toks = b.show.replace(/\s+([?!:;»])/g, ' $1').split(/[ \t\n]+/).filter(Boolean), m = b.words.length;
   const tt = toks.map((w, i) => ({ w: w.toUpperCase(), t0: b.words[Math.min(m - 1, Math.floor(i * m / toks.length))].t0 }));
   const chunks = []; let cur = []; font(64, 'Mont'); const width = ws => ws.reduce((a, w) => a + x.measureText(w.w).width + 24, 0);
@@ -229,3 +229,8 @@ function vitrineInsert(t, crack) { resetCam(); x.fillStyle = '#1b2142'; x.fillRe
   x.save(); x.globalAlpha = .18; x.fillStyle = '#fff'; poly([[200, 400], [420, 400], [200, 900]], '#fff', 0); x.restore();
   if (crack > 0) { x.strokeStyle = '#ffffff'; x.lineWidth = 7; const cx0 = 600, cy0 = 760; for (let i = 0; i < 11; i++) { const a = i / 11 * 6.283 + 0.3, r = 520 * clamp(crack); x.beginPath(); x.moveTo(cx0, cy0); x.lineTo(cx0 + Math.cos(a) * r * 0.5 + 20 * Math.sin(i), cy0 + Math.sin(a) * r * 0.5); x.lineTo(cx0 + Math.cos(a + 0.1) * r, cy0 + Math.sin(a + 0.1) * r); x.stroke(); }
     [100, 200].forEach(r => { x.beginPath(); x.arc(cx0, cy0, r * clamp(crack), 0, 7); x.stroke(); }); } }
+
+// hook card (stats 2026-11-08: the only video past the test batch had its paradox READABLE at frame 0).
+// Fully visible from frame 0 (no pop-in), word-by-word captions are muted while it shows.
+function hookCard(t, lines, until = 2.5) { window.NOCAP_UNTIL = until; if (t >= until) return; resetCam(); const a = t > until - 0.2 ? (until - t) / 0.2 : 1;
+  x.save(); x.globalAlpha = a; paperCard(lines, 540, 330, 1, { w: 920 }); x.restore(); }

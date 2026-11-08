@@ -51,6 +51,15 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 9. Description template: `<hook phrase> <emoji> Es-tu capable de … ? Envoie-la à quelqu'un qui pense être malin 😏 #enigme #reflexion #devinette #cassetete #pourtoi`
 10. TikTok AI label: always `isAigc: true` (synthetic voice).
 
+15. **Lessons from the 2026-11-08 stats + 2 agents (apply first, they override 2 and 11 where they conflict):**
+    - On every video most viewers leave at 0:01. Only « Le gardien » passed the test batch (2 201 views, 51 % watched, 18.5 s avg): frame 0 = character + **readable paradox** « Il a sauvé le musée… et il a été viré ».
+    - **Hook = paradox about a character**: « 47 a fait X… et Y lui est arrivé » (rendu le diamant… pris dix ans; n'a rien volé… la police l'a félicité). Not quiz framing (« Toi, tu l'aurais vue ? », « 9 sur 10 », « Lequel… ? ») — that reads as homework.
+    - **Frame 0**: 47 (or the key character) in close-up ≈ 60 % of the height, bright background, holding the key prop, one strong emotion; **`hookCard(t, lines)`** = the whole hook sentence on a big white card, key word red, visible from 0.0 to ~2.5 s (captions muted meanwhile). Exception to « no permanent sign » for the hook only. Never an object-only or empty frame 0. Check frame 0 of every export.
+    - Voice says the paradox from 0.00 s, < 2.5 s, one themed hit at 0.0. Cut to a new shot at ~1.2 s.
+    - Length 30–37 s with new info every 2–3 s: aim for absolute avg watch ≥ 15 s (23 s videos got a high % but only ~10 s).
+    - CTA: « Réponds en un mot 👇 » + `window.CTA = 'TAGUE CELUI QUI…'` (shares are 0–2 on every video; tags = comments + new viewers).
+    - Ask the creator for « % still watching at 0:03 » to measure hooks.
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
@@ -78,7 +87,7 @@ baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · p
 deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
 3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
 alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
-clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille)
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly)
 
 ## Stats log
 
