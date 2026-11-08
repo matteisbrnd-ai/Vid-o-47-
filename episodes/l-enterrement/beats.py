@@ -9,7 +9,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.4}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "En pleine partie de GTA 6, il apprend que son frère est mort… et il sourit. Si tu comprends pourquoi, t'es un psychopathe.", "En pleine partie de Gé, Té, A six, il apprend que son frère est mort... et il sourit. Si tu comprends pourquoi, t'es un psychopathe.", 0.2),
+  ('ff', "En pleine partie de GTA 6, il apprend que son frère est mort… et il sourit. Si tu comprends pourquoi, t'es un psychopathe.", "En pleine partie de Gé-Té-A six, il apprend que son frère est mort... et il sourit. Si tu comprends pourquoi, t'es un psychopathe.", 0.2),
   ('s1', "À l'enterrement de sa grand-mère, Max croise une fille qu'il n'a jamais vue.", "À l'enterrement de sa grand-mère, Max croise une fille qu'il n'a jamais vue.", 0.1),
   ('s2', "Coup de foudre. Mais elle part avant qu'il puisse lui parler… en laissant juste sa canette de Ciao Energy.", "Coup de foudre. Mais elle part avant qu'il puisse lui parler... en laissant juste sa canette de Tchao Énergie.", 0.1),
   ('s3', "Pas de nom, pas de numéro. Personne ne la connaît.", "Pas de nom, pas de numéro. Personne ne la connaît.", 0.2),

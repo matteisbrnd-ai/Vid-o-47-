@@ -13,7 +13,7 @@ episodes/<slug>/scenes.js   # drawing: function draw(t) using engine/lib.js
 ./engine/build.sh episodes/<slug>                        # final -> videos/<slug>.mp4 + .jpg (≈1 min of compute)
 ```
 `episodes/la-panne/` is the reference example: copy it and change the content.
-Voice: Microsoft « Henri » (edge-tts), default `+25% / +12Hz`. Spoken text spells acronyms the French way (« Gé, Té, A six » for GTA 6) and writes numbers in words
+Voice: Microsoft « Henri » (edge-tts), default `+25% / +12Hz`. Spoken text spells acronyms the French way (« Gé-Té-A six » for GTA 6 — hyphens, not commas, or the voice pauses) and writes numbers in words
 (« Quarante-sept », « vingt-et-une heures ») so the voice reads them right; shown text keeps « 47 », « 21 h ».
 Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être malin. ») end every video; call
 `endCards(t, [...])` at the end of `draw`.
