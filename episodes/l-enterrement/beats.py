@@ -9,7 +9,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Selon les psychiatres… si tu trouves, ta place est à l'asile.", "Selon les psychiatres... si tu trouves, ta place est à l'asile.", 0.2),
+  ('ff', "Ta place est à l'asile… si tu trouves la réponse.", "Ta place est à l'asile... si tu trouves la réponse.", 0.2),
   ('s1', "À l'enterrement de sa grand-mère, Max croise une fille qu'il n'a jamais vue.", "À l'enterrement de sa grand-mère, Max croise une fille qu'il n'a jamais vue.", 0.1),
   ('s2', "Coup de foudre. Mais elle part avant qu'il puisse lui parler.", "Coup de foudre. Mais elle part avant qu'il puisse lui parler.", 0.1),
   ('s3', "Pas de nom, pas de numéro. Personne ne la connaît.", "Pas de nom, pas de numéro. Personne ne la connaît.", 0.2),

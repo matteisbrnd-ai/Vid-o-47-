@@ -29,7 +29,7 @@ function draw(t) {
   else if (id === 's4') { if (t < tMeurt) { cam(540, 1250, 1.3, 0, t); cemetery(t, false); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: 'neutral' }); } else if (t < tSour) wreath(t);
     else { cam(540, 1080, 3.2 + (t - tSour) * 0.15, 0, t); cemetery(t, false); cast('inspector', 540, 1720, 0.8, t, { ...MAX, mood: 'smug', look: 0.5 }); night(0.25); } }
   resetCam(); [tCut, tFil, tPart, S('s3'), S('s3b'), tMeurt, tSour].forEach(tc => flashCut(t, tc)); flashCut(t, S('q'));
-  hookCard(t, [['SI TU TROUVES…', 80], ['TA PLACE EST', 80], ["À L'ASILE", 110, C.red]], B.ff.end + 0.1);
+  hookCard(t, [['TA PLACE EST', 80], ["À L'ASILE…", 110, C.red], ['SI TU TROUVES', 80]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1' && t < tFil) banner('ENTERREMENT DE MAMIE', 540, 330, P(t, t0 + 0.1));
   if (id === 's2' && t < tPart) onoma('COUP DE FOUDRE', 540, 480, P(t, t0 + 0.1, 0.2), 110);
