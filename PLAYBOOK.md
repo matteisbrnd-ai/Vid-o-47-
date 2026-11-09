@@ -96,7 +96,7 @@ baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · p
 deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
 3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
 alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
-clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet) · les bonnets (4 prisonniers, 2 rouges 2 bleus, le silence du dernier)
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet) · les bonnets (4 prisonniers, 2 rouges 2 bleus, le silence du dernier) · les scooters (le plus lent gagne → échanger les scooters) · le drapeau (yacht, drapeau japonais « à l'envers ») · les traces (neige, sorti à reculons) · les diamants (« jamais touché à ses diamants » alors que personne ne l'avait dit) · le sauna (assommé avec un bloc de glace) · les lingots (17 lingots ½ ⅓ 1/9 → en ajouter un) · la chambre (hôtel, il a frappé à « sa » chambre)
 
 ## Stats log
 
@@ -122,6 +122,16 @@ clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons
 | 2026-11-06 | Les ramoneurs | 31 s | 753 | 58 | 4 | 1 | 1 | 10.3 s | 10.6 % | 33 % |
 | 2026-11-07 | La panne (new style: cuffs insert, Henri) | 28 s | 796 | 81 | 7 | 2 | 2 | 11.9 s | 18.5 % | posted 10:18 |
 | 2026-11-07 | La page (new style, ElevenLabs Nicolas) | 23 s | 770 | 44 | 2 | 0 | 4 | 10.5 s | 20.5 % | 45 % avg watched, posted 19:03 |
+| 2026-11-08 | L'hôtel (paradox hook + hookCard) | 29 s | 735 | 65 | 3 | 0 | – | – | – | Metricool 2026-11-09, posted 06:49 (early morning) |
+| 2026-11-07 | La page (update) | 23 s | 778 | 44 | 2 | 0 | – | – | – | Metricool 2026-11-09 |
+| 2026-11-07 | La panne (update) | 27 s | 797 | 81 | 7 | 2 | – | – | – | Metricool 2026-11-09 |
+
+**Week 2026-11-02 → 11-08 (Metricool, 14 videos):** median ≈ 785 views, only « Le gardien » (2 203) left the test batch.
+Metricool returns no watch time / completion for these posts any more (null): ask the creator for TikTok Studio screenshots.
+Lessons:
+- The paradox hook alone did not unlock distribution (L'hôtel 735, posted 06:49): keep it, but post at 18:00 and judge hooks on « % still watching at 0:03 », not on views.
+- The toon/Galagade style earns more likes per view (La panne 10.2 %, L'hôtel 8.8 % vs 5–7 % for the old style): keep investing in the look.
+- Comments come from « who lied / why » stories with a one-word answer (gardien 17, 3 suspects 9, panne 7); quiz framing (« 9 sur 10… pas toi ? », La page) got 2. This week: 4 « liar spotted » stories out of 7.
 
 All videos: TikTok says « most viewers stopped at 0:01 »; views come in the first 3–4 h then stop.
 Account on 2026-11-06: 40 followers, 1 273 likes. Plateau 650–1 100 views = TikTok's first test batch;
