@@ -56,8 +56,14 @@ function garden(t, id) {
   rbox(3290, 1600, 380, 60, 10, '#7a5232', 7);
   cast('inspector', XI, GY + 60, 0.82, t, { mood: 'angry', look: 1, blink: t > 0.6 });
   { const sx = XI + 100, sy = GY + 60 - 0.82 * 470; x.save(); x.translate(sx, sy); x.rotate(-0.25); rrc(85, 0, 190, 50, 24, '#a8875c', 7); ell(195, 0, 30, 28, SKIN, 6); rrc(235, -6, 50, 18, 9, SKIN, 5); x.restore(); }
-  p47(X47, GY + 60, 0.82, t, { mood: id === 'ff' || id === 'q' || id === 's4b' ? 'worried' : 'neutral', sweat: true, look: -1, blink: t > 0.6 });
-  cuffs(X47, GY + 60 - 300 * 0.82, 0.82); }
+  p47(X47, GY + 60, 0.82, t, { mood: id === 'ff' || id === 'q' || id === 's4b' ? 'worried' : 'neutral', sweat: true, look: -1, blink: t > 0.6, noArms: true });
+  frontArms(X47, GY + 60 + Math.sin(t * 2) * 3 * 0.82, 0.82); }
+// 47's arms brought together in front, wrists handcuffed (hands joined below the « 47 »)
+function frontArms(px, py, s) { x.save(); x.translate(px, py); x.scale(s, s);
+  [-1, 1].forEach(sd => { x.save(); x.translate(sd * 122, -480); x.rotate(sd * 0.43); rrc(0, 100, 58, 210, 28, '#272b38'); x.restore(); });
+  ell(-30, -262, 40, 36, SKIN, 6); ell(30, -262, 40, 36, SKIN, 6);
+  [-42, 42].forEach(hx => { x.lineWidth = 24; x.strokeStyle = OL; x.beginPath(); x.ellipse(hx, -300, 40, 17, 0, 0, 7); x.stroke(); x.lineWidth = 14; x.strokeStyle = metal(-318, -282); x.stroke(); });
+  x.lineWidth = 9; x.strokeStyle = '#8b95a5'; x.beginPath(); x.moveTo(-6, -300); x.quadraticCurveTo(0, -280, 6, -300); x.stroke(); x.restore(); }
 function timer(t, n, px, py, s = 1) { if (n < 0) return; ev('tick', 'tm' + n); x.save(); resetCam(); x.translate(px, py); const k = s * (1 + 0.18 * Math.pow(1 - (t % 1), 4)); x.scale(k, k);
   ell(0, 0, 118, 118, '#fff', 10); x.strokeStyle = C.red; x.lineWidth = 18; x.beginPath(); x.arc(0, 0, 92, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (n / 10)); x.stroke();
   txt(String(n), 0, 10, 120, C.red, { stroke: false }); rrc(0, -132, 50, 26, 8, OL, 0); x.restore(); }
@@ -65,18 +71,21 @@ function safeCard(w, h) { x.fillStyle = '#e9e4da'; x.fillRect(0, 0, w, h); rbox(
 function dogCard(sleep) { return (w, h) => { x.fillStyle = sleep ? '#2c3a66' : '#bfe3ff'; x.fillRect(0, 0, w, h); if (sleep) { ell(w * 0.8, h * 0.18, 40, 40, '#fff3a0', 0); [[60, 60], [200, 120], [330, 50]].forEach(([sx, sy]) => ell(sx, sy, 5, 5, '#fff', 0)); }
   x.fillStyle = sleep ? '#3f6b3a' : '#7cc46a'; x.fillRect(0, h * 0.72, w, h); dog(w * 0.55, h * 0.85, 0.85, _T, { sleep });
   if (sleep) txt('Z z z', w * 0.3, h * 0.35, 70, '#fff', { stroke: false }); }; }
+function suspectCard(n, t) { return (w, h) => { x.fillStyle = '#bfe3ff'; x.fillRect(0, 0, w, h); x.save(); x.translate(w / 2 + 25, h + 300); const sc = 0.62;
+  if (n === 1) { toon(0, 0, sc, { t, ...LIV, mood: 'worried', blink: false }); } else if (n === 2) cast('woman', 0, 0, sc, t, { ...VOIS, mood: 'worried', blink: false }); else cast('gardener', 0, 0, sc, t, { mood: 'worried', blink: false });
+  x.restore(); x.save(); x.translate(38, 38); x.scale(0.6, 0.6); badge(n, 0, 0); x.restore(); }; }
 function draw(t) {
   const id = curId(t), tVide = WF('s1b', /vide/i), tFen = WF('s1b', /fenêtre/i), tTr = WF('s1b', /traces/i), tAb = WF('s2', /aboie/i), tNuit = WF('s4', /nuit/i), tAboy = WF('s4', /aboyé/i);
-  const K = [[0, 0, X47 - 110, 1330, 1.9], [B.ff.end - 0.1, 1.3, 520, 1450, 0.8], [tVide - 0.3, 1.0, 680, 1280, 1.45], [tTr - 0.2, 1.2, 1000, 1700, 1.15],
-    [S('s2') - 0.1, 1.4, XD - 60, 1640, 1.35], [WF('s3', /suspects/i) - 0.3, 1.6, X2, 1560, 1.12], [S('s4') + 0.2, 3, X2 + 60, 1540, 1.2],
-    [S('s4b') - 0.1, 1.3, (XI + X47) / 2, 1500, 1.15], [S('q') - 0.1, 1.2, X47 - 110, 1330, 1.9]];
+  const K = [[0, 0, X47, 1560, 2.35], [B.ff.end - 0.1, 1.3, 520, 1450, 0.8], [tVide - 0.3, 1.0, 680, 1280, 1.45], [tTr - 0.2, 1.2, 1000, 1700, 1.15],
+    [S('s2') - 0.1, 1.4, XD - 60, 1640, 1.35], [WF('s3', /suspects/i) - 0.3, 1.6, X2, 1560, 1.12], [S('s4') + 0.2, 1.5, X2 + 60, 1440, 1.2],
+    [S('s4b') - 0.1, 1.3, (XI + X47) / 2, 1500, 1.15], [S('q') - 0.1, 1.2, X47, 1470, 2.35]];
   camPath(t, K);
   garden(t, id);
   resetCam();
   // countdown: 10 → 8 during the hook, then the real 10 s before the end
   const end = TL.total, nEnd = Math.ceil(end - t);
   if (id === 'ff') timer(t, 10 - Math.floor(t), 930, 640, 0.9);
-  if ((id === 's4b' && t > WF('s4b', /secondes/i)) || id === 'q') timer(t, Math.min(10, nEnd), id === 'q' ? 890 : 870, id === 'q' ? 1600 : 760, id === 'q' ? 1.05 : 1.15);
+  if ((id === 's4b' && t > WF('s4b', /secondes/i)) || id === 'q') timer(t, Math.min(10, nEnd), id === 'q' ? 960 : 870, id === 'q' ? 880 : 760, id === 'q' ? 0.8 : 1.15);
   hookCard(t, [['10 SECONDES…', 100, C.red], ['SINON 47 PREND 20 ANS', 80]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('VILLA DU BARON · 3 H', 540, 330, P(t, S('s1') + 0.3));
@@ -84,7 +93,8 @@ function draw(t) {
   if (id === 's2') polaroid(560, 600, 460, 460, P(t, S('s2') + 0.6, 0.3), dogCard(false), 'BRUTUS', 0.04);
   if (id === 's2' && t >= tAb) onoma('WOUF ! WOUF !', 560, 1050, P(t, tAb, 0.2), 140);
   if (id === 's3') banner('3 SUSPECTS', 540, 330, P(t, S('s3') + 0.2));
-  if (id === 's4' && t >= tNuit) polaroid(560, 560, 420, 400, P(t, tNuit, 0.3), dogCard(true), 'CETTE NUIT', -0.04);
+  if (id === 's4' && t >= tNuit) polaroid(540, 290, 440, 280, P(t, tNuit, 0.3), dogCard(true), 'CETTE NUIT', -0.04);
   if (id === 's4' && t >= tAboy) onoma('… SILENCE', 560, 1080, P(t, tAboy, 0.2), 120);
+  if (id === 'q') [[1, 210, -0.05], [2, 540, 0.02], [3, 870, -0.03]].forEach(([n, px, r], i) => polaroid(px, 1610, 270, 250, P(t, S('q') + 0.3 + i * 0.15, 0.3), suspectCard(n, t), '', r));
   endCards(t, [['QUI EST LE VOLEUR ?', 84, C.red], ['1, 2 OU 3 EN COMMENTAIRE', 50]]);
 }

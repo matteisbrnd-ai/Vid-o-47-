@@ -1,4 +1,5 @@
 // Les lingots — Galagade style: ONE warm library set (bookshelves + notary desk at left → table with the 17 bars → window + door at right).
+// New style (2026-11-09): danger intro — the angry nephews grab 47, red countdown from frame 0; 3-2-1 in s4; ends on the hook image (loop).
 // 47 is only in the room for the hook, s4, s5 and q. Never show an 18th bar on the table nor the split (= the answer).
 window.CTA = 'TAGUE LE MATHEUX DE TA BANDE'; window.LOOK = 'gala';
 const GY = 1900, TX0 = 930, TX1 = 1820, TY = 1580;
@@ -37,41 +38,55 @@ function desk(t, id) { cast('director', 420, GY - 120, 0.72, t, { mood: id === '
 function rules(w, h) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); [['1/2 → L\'AÎNÉ', 54, OL], ['1/3 → LE 2E', 54, OL], ['1/9 → LE PETIT', 54, OL], ['INTERDIT', 60, C.red], ['DE COUPER', 60, C.red]].forEach(([s, sz, c], i) => txt(s, w / 2, 58 + i * 74, sz, c, { stroke: false })); }
 function divs(t) { return (w, h) => { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); [['17 ÷ 2 = 8,5', /deux/i], ['17 ÷ 3 = 5,66…', /trois/i], ['17 ÷ 9 = 1,88…', /neuf/i]].forEach(([s, re], i) => { const tw = WF('s3', re);
   txt(s, w / 2, 80 + i * 110, 60, OL, { stroke: false }); const k = P(t, tw + 0.1, 0.25); x.strokeStyle = C.red; x.lineWidth = 10; x.lineCap = 'round'; x.beginPath(); x.moveTo(w * 0.12, 80 + i * 110); x.lineTo(w * 0.12 + (w * 0.76) * k, 80 + i * 110); x.stroke(); }); }; }
+function timer(n, px, py, p, pulse = 0) { if (p <= 0) return; x.save(); resetCam(); x.translate(px, py); const s = (0.85 + 0.15 * p) * (1 + 0.18 * pulse); x.scale(s, s);
+  ell(0, 0, 125, 125, '#fbf3e4', 10); x.strokeStyle = C.red; x.lineWidth = 16; x.beginPath(); x.arc(0, 0, 100, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (n / 10)); x.stroke();
+  txt(String(n), 0, 10, 140, C.red, { stroke: false }); rbox(-26, -150, 52, 30, 8, OL, 0); x.restore(); }
+// nephews: at the table during the story (s1–s3), around 47 in the « fight » spots for ff / s4 / s5 / q
+const TABLE = [[1110, GY - 130, 0.74], [1390, GY - 130, 0.7], [1660, GY - 150, 0.6]], FIGHT = [[1700, GY - 110, 0.76], [1540, GY - 170, 0.66], [2190, GY - 120, 0.64]];
+const P47 = 1960;
+function grabArm(t) { const sx = FIGHT[0][0] + 95, sy = FIGHT[0][1] - 360, ex = P47 - 55, ey = GY + 60 - 425, j = Math.sin(t * 25) * 6;   // N1's arm grabbing 47's collar
+  x.lineCap = 'round'; x.strokeStyle = OL; x.lineWidth = 58; x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex + j, ey); x.stroke(); x.strokeStyle = N1.body2; x.lineWidth = 44; x.stroke();
+  ell(ex + j + 8, ey + 4, 36, 32, SKIN, 6); }
 function draw(t) {
-  const id = curId(t), tDix = WF('s1', /dix/i), tNev = WF('s1', /neveux/i), tBat = WF('s3', /battre/i), tRef = WF('s4', /réfléchit/i), tCh = WF('s4', /chacun/i);
-  const K = [[0, 0, 1800, 1440, 1.6], [B.ff.end - 0.1, 1.2, 470, 1440, 1.15], [S('s1') + 0.5, 2.2, 1150, 1350, 0.6], [tDix - 0.1, 1.2, 1375, 1450, 1.15], [tNev, 1.4, 1375, 1420, 0.95],
-    [S('s2'), 1.0, 1300, 1430, 1.05], [S('s2b'), 1.2, 1250, 1500, 1.3], [S('s3'), 2.5, 1375, 1440, 1.05], [tBat - 0.2, 0.9, 1375, 1380, 1.55],
-    [S('s4') - 0.1, 1.3, 1800, 1440, 1.0], [tCh - 0.2, 1.4, 1500, 1420, 0.8], [S('s5'), 1.6, 2250, 1440, 1.1], [S('q'), 1.3, 1800, 1440, 1.6]];
-  camPath(t, K, id === 's3' && t > tBat && t < tBat + 0.3 ? 8 : 0);
+  const id = curId(t), tDix = WF('s1', /dix/i), tNev = WF('s1', /neveux/i), tMoi = WF('s2', /moitié/i), tTie = WF('s2', /tiers/i), tNeu = WF('s2', /neuvième/i), tBat = WF('s3', /battre/i),
+    t3 = WF('s4', /trois/i), t2 = WF('s4', /deux/i), t1 = WF('s4', /^un/i), tCh = WF('s4', /chacun/i);
+  const HX = 1900, HY = 1430, HZ = 1.45;   // the hook shot (also the last shot = loop)
+  const K = [[0, 0, HX, HY, HZ], [B.ff.end - 0.1, 1.0, 470, 1300, 1.4], [S('s1') + 1.0, 1.6, 1200, 1350, 0.62], [tDix - 0.1, 1.2, 1375, 1380, 1.2],
+    [S('s2') - 0.1, 0.8, 1110, 1330, 1.5], [tTie - 0.15, 0.7, 1390, 1330, 1.5], [tNeu - 0.15, 0.7, 1660, 1330, 1.5], [S('s2b'), 1.0, 1375, 1300, 1.25],
+    [S('s3'), 1.4, 1400, 1300, 1.15], [tBat - 0.2, 0.9, 1400, 1360, 1.5], [S('s4') - 0.1, 1.3, HX, HY, HZ], [tCh, 1.2, 1880, 1420, 1.15], [S('s5'), 1.6, 2050, 1420, 1.25], [S('q'), 1.0, HX, HY, HZ]];
+  camPath(t, K, (id === 's3' && t > tBat && t < tBat + 0.3) || (id === 'ff' && t < 0.3) ? 8 : 0);
   room(t); desk(t, id);
-  const fight = id === 's3' && t >= tBat, happy = (id === 's4' && t >= tCh) || id === 's5' || id === 'q';
-  const nm = happy ? 'smile' : fight ? 'angry' : id === 's3' ? 'worried' : id === 'ff' ? 'shock' : id === 's1' ? 'smile' : 'neutral';
-  const jig = fight ? Math.sin(t * 30) * 8 : 0;
-  cast('inspector', 1110 + jig, GY - 130, 0.74, t, { ...N1, mood: nm, blink: t > 0.6, look: 1, armUp: fight });
-  cast('inspector', 1390 - jig, GY - 130, 0.7, t, { ...N2, mood: nm, blink: t > 0.6, look: fight ? -1 : 0, armUp: fight });
-  cast('inspector', 1660 + jig, GY - 150, 0.6, t, { ...N3, mood: nm, blink: t > 0.6, look: -1, armsUp: happy && id === 's4' });
+  const fightPose = id === 'ff' || id === 'q' || id === 's4' || id === 's5', grab = id === 'ff' || id === 'q' || (id === 's4' && t < tCh);
+  const fight = id === 's3' && t >= tBat, happy = (id === 's4' && t >= tCh) || id === 's5';
+  const nm = happy ? 'smile' : fight || grab ? 'angry' : id === 's3' ? 'worried' : id === 's1' ? 'smile' : 'neutral';
+  const jig = fight || grab ? Math.sin(t * 30) * 7 : 0, kWalk = id === 's4' ? seg(t, S('s4') - 0.1, S('s4') + 1.0) : 1;
+  const pos = i => { if (!fightPose) return TABLE[i]; if (id !== 's4') return FIGHT[i]; const k = eIO(kWalk); return [lerp(TABLE[i][0], FIGHT[i][0], k), lerp(TABLE[i][1], FIGHT[i][1], k), lerp(TABLE[i][2], FIGHT[i][2], k)]; };
+  const walking = id === 's4' && kWalk < 1 ? t * 3 : 0, N = [N1, N2, N3];
+  const look = i => fightPose ? (i === 2 ? -1 : 1) : [1, fight ? -1 : 0, -1][i];
+  [1, 0].forEach(i => { const [px, py, sc] = pos(i); cast('inspector', px + (i ? -jig : jig), py, sc, t, { ...N[i], mood: nm, blink: t > 0.6, look: look(i), walk: walking, armUp: (fight && i === 0) || (grab && i === 1), armsUp: happy && i === 1 }); });
+  if (!fightPose) { const [px, py, sc] = pos(2); cast('inspector', px + jig, py, sc, t, { ...N3, mood: nm, blink: t > 0.6, look: -1 }); }
   if (id === 's3' || id === 's2' || id === 's2b') can(1760, GY - 470, 0.32);
   rbox(TX0, TY, TX1 - TX0, 70, 12, '#8a5a3a', 8); [TX0 + 60, TX1 - 100].forEach(lx => rbox(lx, TY + 70, 40, GY - TY - 70, 8, '#7a4a2a', 7));     // table
   pile(1375, TY + 4, t);
-  // 47: hook, then arrives (s4), leaves with his sack (s5), loops back for q
-  let p4 = null, walk = 0, m4 = 'smug', look4 = -1, holdBar = false, hasSack = false;
-  if (id === 'ff') { p4 = 1900; holdBar = true; }
-  else if (id === 's4') { const k = seg(t, S('s4'), S('s4') + 1.6); p4 = lerp(2650, 1950, eIO(k)); walk = k < 1 ? t * 3 : 0; m4 = t < tCh ? (t >= tRef ? 'neutral' : 'smile') : 'smug'; look4 = -1; }
-  else if (id === 's5') { const k = seg(t, S('s5') + 0.3, B.s5.next); p4 = lerp(1950, 2450, eIO(k)); walk = k > 0 && k < 1 ? t * 3 : 0; m4 = 'smile'; look4 = 1; hasSack = true; }
-  else if (id === 'q') { p4 = 1900; m4 = 'smug'; hasSack = true; }
-  if (p4 !== null) { p47(p4, GY + 60, 0.82, t, { mood: m4, look: look4, walk, blink: t > 0.6, armUp: holdBar });
-    if (holdBar) bar(p4 + 175, GY + 60 - 520, 1.3);
-    if (hasSack) sack(p4 + 130, GY - 20, 0.85); }
+  if (fightPose) { const [px, py, sc] = pos(2); cast('inspector', px - jig, py, sc, t, { ...N3, mood: nm, blink: t > 0.6, look: -1, walk: walking, armsUp: grab || happy }); if (grab) can(px + 120, py - 520, 0.28); }
+  // 47: hook (grabbed), s4 (grabbed, thinking → smug), s5 leaves right with his sack, q = hook image
+  if (fightPose) { let px = P47, walk = 0, m = grab ? (id === 's4' && t >= t3 ? 'neutral' : 'worried') : 'smug', lk = -1, sack1 = false;
+    if (id === 's5') { const k = seg(t, S('s5') + 0.3, B.s5.next); px = lerp(P47, 2420, eIO(k)); walk = k > 0 && k < 1 ? t * 3 : 0; m = 'smile'; lk = 1; sack1 = true; }
+    p47(px, GY + 60, 0.84, t, { mood: m, look: lk, walk, blink: t > 0.6, sweat: grab && id !== 's4' });
+    if (sack1) sack(px + 130, GY - 20, 0.85);
+    if (grab) grabArm(t); }
   resetCam();
-  hookCard(t, [['17 LINGOTS IMPOSSIBLES…', 84], ['47 A RÉUSSI', 104, C.red]], B.ff.end + 0.1);
-  if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
+  hookCard(t, [['17 LINGOTS · 10 SECONDES', 84, C.red], ['SINON IL EST JETÉ DEHORS', 74]], B.ff.end + 0.1);
+  if (id === 'ff') { const k = Math.floor(t / 0.8); timer(Math.max(6, 10 - k), 900, 640, 1, Math.pow(1 - (t % 0.8) / 0.8, 4)); if (t >= B.ff.end) rewindFx(t, B.ff.next); }
   if (id === 's1') banner('LE TESTAMENT', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's1' && t >= tDix) numBadge(17, P(t, tDix, 0.3), 880, 560);
-  if (id === 's2') { [[/moitié/i, '1/2', 'L\'AÎNÉ'], [/tiers/i, '1/3', 'LE 2E'], [/neuvième/i, '1/9', 'LE PETIT']].forEach(([re, f, n], i) => { const tw = WF('s2', re); if (t >= tw) pill(f + ' · ' + n, 540, 330 + i * 130, P(t, tw, 0.25), [C.green, '#b5486a', C.blue][i]); }); }
-  if (id === 's2b') polaroid(560, 640, 540, 440, P(t, S('s2b') + 0.1, 0.3), rules, 'LES RÈGLES', 0.03);
-  if (id === 's3' && t < tBat) polaroid(560, 620, 600, 380, P(t, S('s3') + 0.1, 0.3), divs(t), 'IMPOSSIBLE ?', -0.03);
-  if (fight) onoma('BAGARRE !', 560, 480, P(t, tBat, 0.2), 150);
-  if (id === 's4' && t >= tRef && t < tCh) { speech('🤔 …', 760, 520, P(t, tRef, 0.25), 80); countdown(t, tRef + 0.2, 3, 360); }
-  if (id === 's4' && t >= tCh) stamp('PARTAGE PARFAIT', P(t, tCh, 0.3), 430, C.green);
-  endCards(t, [['COMMENT IL A FAIT ?', 84, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]]);
+  if (id === 's2') { [[tMoi, '1/2', "L'AÎNÉ"], [tTie, '1/3', 'LE 2E'], [tNeu, '1/9', 'LE PETIT']].forEach(([tw, f, n], i) => { if (t >= tw) pill(f + ' · ' + n, 540, 300 + i * 120, P(t, tw, 0.25), [C.green, '#b5486a', C.blue][i]); }); }
+  if (id === 's2b') polaroid(560, 520, 480, 380, P(t, S('s2b') + 0.1, 0.3), rules, 'LES RÈGLES', 0.03);
+  if (id === 's3' && t < tBat) polaroid(560, 480, 560, 390, P(t, S('s3') + 0.1, 0.3), divs(t), 'IMPOSSIBLE ?', -0.03);
+  if (fight) onoma('BAGARRE !', 560, 420, P(t, tBat, 0.2), 150);
+  if (id === 's4' && t < t3) speech('🤔 …', 360, 560, P(t, S('s4') + 0.6, 0.25), 80);
+  if (id === 's4' && t >= t3 && t < tCh) { const n = t >= t1 ? 1 : t >= t2 ? 2 : 3, tn = n === 1 ? t1 : n === 2 ? t2 : t3; timer(n, 900, 640, 1, Math.pow(1 - clamp((t - tn) / 0.5), 3)); }
+  if (id === 's4' && t >= tCh) stamp('PARTAGE PARFAIT', P(t, tCh, 0.3), 330, C.green);
+  if (id === 'q') { paperCard([['COMMENT IL A FAIT ?', 84, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]], 540, 250, P(t, S('q') + 0.1), { w: 760 }); timer(10, 900, 640, P(t, S('q')), 0);
+    if (t > S('q') + 1.2) pill(window.CTA, 540, 1620, P(t, S('q') + 1.2), C.red); }
 }

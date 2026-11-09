@@ -1,5 +1,6 @@
 // Les diamants — Galagade style: ONE warm, busy police office (evidence board + Baron at left → inspector → desk → 47 → Lola at right).
-// The camera reads it left → right; the ending (inspector beside Lola with the cuffs) is the hook image = loop. Never show what was in the safe.
+// v2: « danger immédiat » intro — the inspector between suspect 1 (47) and suspect 2 (Lola), open cuffs in his hand, red countdown from 0.0.
+// The camera reads the set left → right; the ending is the hook image = loop. Never show what was in the safe.
 window.CTA = 'TAGUE CELUI QUI PARLE TROP'; window.LOOK = 'gala';
 const GY = 2000, LOLA = { hairCol: '#5a2a1a', body: '#c0506e', body2: '#9a3c56' }, INSP = { hairCol: '#4a3426', body: '#8a6a4a', body2: '#70553a', pants: '#3a3530' };
 const XB = 250, XI = 560, X47 = 1250, XL = 1640, XE = 1880;
@@ -33,8 +34,21 @@ function desk(t) { // desk between the inspector and the suspects
   [[935, 1545, '#fbf8f1'], [945, 1530, '#f4ecd8'], [930, 1515, '#e8dcc4']].forEach(([a, b, c]) => rbox(a, b, 120, 16, 3, c, 4));                                                          // files
   rbox(1000, 1500, 46, 60, 8, '#fbf8f1', 5); x.strokeStyle = 'rgba(120,90,60,.5)'; x.lineWidth = 4; x.beginPath(); x.moveTo(1012, 1490 - (t * 20 % 20)); x.quadraticCurveTo(1030, 1470, 1015, 1450); x.stroke();   // coffee
   can(700, 1510, 0.28); }
-function cuffs(px, py) { x.lineWidth = 16; x.strokeStyle = OL; [[-36, 0], [36, 0]].forEach(([d]) => { x.beginPath(); x.ellipse(px + d, py, 34, 40, 0, 0, 7); x.stroke(); });
-  x.lineWidth = 9; x.strokeStyle = metal(py - 40, py + 40); [[-36, 0], [36, 0]].forEach(([d]) => { x.beginPath(); x.ellipse(px + d, py, 34, 40, 0, 0, 7); x.stroke(); }); }
+// open handcuffs hanging from a hand at (hx, hy): one ring in the fist, short chain, the other ring dangling open
+function heldCuffs(hx, hy, s, t) { x.save(); x.translate(hx, hy); x.scale(s, s); x.rotate(Math.sin(t * 3) * 0.08);
+  const ring = (cx, cy, open) => { x.lineCap = 'round'; x.lineWidth = 22; x.strokeStyle = OL; x.beginPath(); x.ellipse(cx, cy, 40, 44, 0, open ? 0.9 : 0, open ? 5.8 : 7); x.stroke(); x.lineWidth = 12; x.strokeStyle = metal(cy - 44, cy + 44); x.stroke(); };
+  ring(0, 10, false); [[0, 70], [0, 100], [0, 130]].forEach(([a, b], k) => { x.lineWidth = 10; x.strokeStyle = OL; x.beginPath(); x.ellipse(a, b, k % 2 ? 9 : 12, k % 2 ? 14 : 9, 0, 0, 7); x.stroke(); });
+  ring(0, 200, true); x.restore(); }
+// the inspector holds the open cuffs in front of his chest with both hands (ff / end image)
+function presentCuffs(px, py, s, t) { x.save(); x.translate(px, py); x.scale(s, s);
+  [-1, 1].forEach(sd => { x.save(); x.translate(sd * 122, -480); x.rotate(sd * 0.62); rrc(0, 95, 58, 200, 28, INSP.body2); x.restore(); });
+  const hy = -330 + Math.sin(t * 4) * 6, ring = (cx, open) => { x.lineCap = 'round'; x.lineWidth = 26; x.strokeStyle = OL; x.beginPath(); x.ellipse(cx, hy - 50, 50, 54, 0, open ? 1.2 : 0, open ? 5.6 : 7); x.stroke(); x.lineWidth = 15; x.strokeStyle = metal(hy - 104, hy + 4); x.stroke(); };
+  ring(-95, false); ring(95, true); x.lineWidth = 12; x.strokeStyle = OL; [-30, 0, 30].forEach((cx, k) => { x.beginPath(); x.ellipse(cx, hy - 10, k % 2 ? 10 : 15, k % 2 ? 15 : 10, 0, 0, 7); x.stroke(); });
+  ell(-80, hy, 40, 36, SKIN, 6); ell(80, hy, 40, 36, SKIN, 6); x.restore(); }
+function badge(n, px, py, p) { if (p <= 0) return; x.save(); x.translate(px, py); const k = eBack(clamp(p)); x.scale(k, k); ell(0, 0, 58, 58, C.red, 7); txt(String(n), 0, 6, 86, '#fff', { stroke: false }); x.restore(); }
+function timer(t, n, px, py, s = 1) { if (n < 0) return; ev('tick', 'tm' + n); x.save(); resetCam(); x.translate(px, py); const k = s * (1 + 0.18 * Math.pow(1 - (t % 1), 4)); x.scale(k, k);
+  ell(0, 0, 118, 118, '#fff', 10); x.strokeStyle = C.red; x.lineWidth = 18; x.beginPath(); x.arc(0, 0, 92, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (n / 10)); x.stroke();
+  txt(String(n), 0, 10, 120, C.red, { stroke: false }); rrc(0, -132, 50, 26, 8, OL, 0); x.restore(); }
 function safe(w, h) { x.fillStyle = '#e8dcc4'; x.fillRect(0, 0, w, h); const cx = w / 2 - 30, cy = h / 2 + 10;
   rbox(cx - 150, cy - 150, 300, 300, 14, '#6b7482', 8); rbox(cx - 115, cy - 115, 230, 230, 6, '#1d2027', 6); x.fillStyle = 'rgba(255,255,255,.06)'; x.fillRect(cx - 115, cy - 10, 230, 8);   // empty inside
   poly([[cx + 150, cy - 150], [cx + 240, cy - 120], [cx + 240, cy + 175], [cx + 150, cy + 150]], '#8b95a5', 7); ell(cx + 200, cy + 10, 26, 30, '#c9ced6', 5); x.strokeStyle = OL; x.lineWidth = 5; x.beginPath(); x.moveTo(cx + 200, cy + 10); x.lineTo(cx + 200, cy - 14); x.stroke();
@@ -42,35 +56,45 @@ function safe(w, h) { x.fillStyle = '#e8dcc4'; x.fillRect(0, 0, w, h); const cx 
 function console6(w, h) { x.fillStyle = '#ffd9a8'; x.fillRect(0, 0, w, h); rbox(30, 40, w - 60, h - 150, 12, '#111', 7); const g = x.createLinearGradient(0, 55, 0, h - 125); g.addColorStop(0, '#ff9a4c'); g.addColorStop(1, '#c04cc8'); x.fillStyle = g; x.fillRect(45, 55, w - 90, h - 180);
   [[70, 50, 140], [140, 40, 180], [w - 160, 50, 160], [w - 100, 40, 120]].forEach(([bx, bw, bh]) => { x.fillStyle = '#4a2a5a'; x.fillRect(bx, h - 125 - bh, bw, bh); });
   txt('GTA 6', w / 2, h / 2 - 50, 90, '#fff', { stroke: true }); rbox(w / 2 - 90, h - 90, 180, 70, 30, '#2b2f38', 6); ell(w / 2 - 45, h - 55, 12, 12, '#e04a5a', 3); ell(w / 2 + 45, h - 55, 12, 12, '#2fd0c0', 3); }
+const XM = 1445;   // the inspector's « verdict » spot, between the two suspects (ff / end)
 function draw(t) {
   const id = curId(t), end = id === 'ff' || id === 'q';
-  const tSusp = WF('s1', /suspects/i), tDiam = WF('s4', /diamants/i), tSil = WF('s5', /silence/i), tMen = WF('s5', /menottes/i), tPour = WF('s5', /^pour$/i);
-  const K = [[0, 0, 1700, 1600, 1.6], [0.1, B.ff.end, 1700, 1590, 1.72], [B.ff.end - 0.1, 1.2, 1050, 1450, 0.6], [tSusp, 1.4, 1350, 1520, 0.85],
-    [S('s1b') - 0.1, 1.3, 420, 1560, 1.3], [S('s2') - 0.1, 1.3, 760, 1560, 1.35], [S('s3') - 0.1, 1.4, 1450, 1580, 1.4], [S('s4') - 0.1, 1.2, 1640, 1580, 1.5],
-    [tDiam - 0.1, 0.5, 1640, 1560, 1.75], [S('s5'), 1.6, 1700, 1560, 1.05], [tMen, 1.2, 1740, 1590, 1.45], [S('q'), 1.2, 1700, 1600, 1.6]];
+  const tSusp = WF('s1', /suspects/i), tDiam = WF('s4', /diamants/i), tComp = WF('s5', /compris/i), tToi = WF('s5', /toi/i), tTrois = WF('s5', /trois/i), tDeux = WF('s5', /deux/i);
+  const HOOK = [XM, 1700, 1.55], END = [XM, 1500, 1.45];
+  const K = [[0, 0, ...HOOK], [0.1, B.ff.end, XM, 1700, 1.65], [B.ff.end - 0.1, 1.2, 1050, 1450, 0.6],
+    [S('s1b') - 0.1, 1.3, XB + 200, 1400, 1.35], [S('s2') - 0.1, 1.3, XI + 230, 1400, 1.4], [S('s3') - 0.1, 1.4, X47 - 230, 1400, 1.4], [S('s4') - 0.1, 1.2, XL, 1400, 1.4],
+    [tDiam - 0.1, 0.5, XL, 1390, 1.6], [S('s5') + 0.1, 1.6, XM, 1420, 1.15], [tToi, 1.4, ...END]];
   camPath(t, K, t > tDiam && t < tDiam + 0.2 ? 6 : 0);
   office(t); desk(t);
-  // inspector: home by his desk, walks to Lola during s5; ff/q = final position (loop)
-  const walkK = id === 's5' ? seg(t, tSil + 0.3, tMen) : 0, ix = end ? XE : id === 's5' ? lerp(XI, XE, eIO(walkK)) : XI, walking = id === 's5' && walkK > 0 && walkK < 1;
-  const iMood = end || (id === 's5' && t >= tMen) ? 'angry' : id === 's4' && t >= tDiam ? 'smug' : id === 's5' ? 'smug' : 'neutral';
+  // inspector: at his desk during the story, walks to the verdict spot during s5; ff/q = verdict spot holding the open cuffs (loop)
+  const walkK = id === 's5' ? seg(t, S('s5') + 0.2, tToi) : 0, ix = end ? XM : id === 's5' ? lerp(XI, XM, eIO(walkK)) : XI, walking = id === 's5' && walkK > 0 && walkK < 1;
+  const iMood = end ? 'angry' : id === 's4' && t >= tDiam ? 'smug' : id === 's5' ? 'smug' : 'neutral';
   cast('boss', XB, GY + 40, 0.8, t, { mood: 'angry', look: 1, armUp: id === 's1b' });
-  if (!walking && ix === XI) cast('inspector', XI, GY + 40, 0.85, t, { ...INSP, mood: iMood, look: 1, blink: t > 0.6 });
+  const insp = () => { const s = 0.88, lk = walking ? 1 : ix === XI ? 1 : 0; const up = ix !== XI && !walking;
+    cast('inspector', ix, GY + 60, s, t, { ...INSP, mood: iMood, look: lk, walk: walking ? t * 1.6 : 0, noArms: up, blink: t > 0.6 });
+    if (up) presentCuffs(ix, GY + 60, s, t); else if (walking) heldCuffs(ix + 77 * s, GY + 60 - 280 * s, 0.9, t); };
+  if (ix === XI && !walking) insp();
   chair(X47); chair(XL);
-  const m47 = id === 's3' ? 'smile' : (id === 's5' && t >= tPour) || id === 'q' ? 'smug' : id === 's4' && t >= tDiam ? 'shock' : 'neutral';
-  p47(X47, GY + 40, 0.82, t, { mood: m47, look: id === 's4' || id === 's5' || end ? 1 : -1, blink: t > 0.6 });
-  const mL = id === 'ff' || id === 'q' ? 'shock' : id === 's4' ? 'angry' : id === 's5' ? (t >= tPour ? 'shock' : 'worried') : id === 's3' ? 'neutral' : 'worried';
-  cast('woman', XL, GY + 40, 0.85, t, { ...LOLA, mood: mL, look: id === 's5' || end ? 1 : -1, armUp: id === 's4', sweat: id === 's5' && t >= tSil || end, blink: t > 0.6 });
-  if (ix !== XI || walking) { cast('inspector', ix, GY + 40, 0.85, t, { ...INSP, mood: iMood, look: walking ? 1 : -1, walk: walking ? t * 1.6 : 0, blink: t > 0.6 });
-    if (end || t >= tMen) { x.save(); x.translate(ix - 150, GY - 240 + Math.sin(t * 5) * 6); x.scale(1.5, 1.5); cuffs(0, 0); x.restore(); } }
+  const m47 = id === 's3' ? 'smile' : end ? 'worried' : id === 's4' && t >= tDiam ? 'shock' : id === 's5' ? 'worried' : 'neutral';
+  p47(X47, GY + 40, 0.82, t, { mood: m47, look: id === 's4' ? 1 : end || id === 's5' ? 1 : -1, sweat: end, blink: t > 0.6 });
+  const mL = end ? 'worried' : id === 's4' ? 'angry' : id === 's5' ? 'worried' : id === 's3' ? 'neutral' : 'worried';
+  cast('woman', XL, GY + 40, 0.85, t, { ...LOLA, mood: mL, look: end || id === 's5' ? -1 : -1, armUp: id === 's4', sweat: end, blink: t > 0.6 });
+  if (ix !== XI || walking) insp();
+  // suspect numbers (Monsieur Énigme style), next to the heads
+  const pb = id === 's1' ? P(t, tSusp, 0.3) : id === 's1b' || id === 's2' ? 0 : 1;
+  badge(1, X47 - 105, GY - 330, pb); badge(2, XL + 105, GY - 330, pb);
   resetCam();
-  hookCard(t, [["ELLE N'A RIEN TOUCHÉ…", 90], ["ET ÇA L'A TRAHIE", 100, C.red]], B.ff.end + 0.1);
+  // countdown: 10 → 8 during the hook; in s5 it follows the voice (… 3 on « trois », 2 on « deux »), 1 during the question
+  if (id === 'ff') timer(t, 10 - Math.floor(t), 905, 1560, 0.9);
+  if (id === 's5' && t >= tComp) timer(t, t >= tDeux ? 2 : t >= tTrois ? 3 : Math.max(4, 6 - Math.floor(t - tComp)), 905, 1560, 0.9);
+  if (id === 'q') timer(t, 1, 905, 1560, 0.9);
+  hookCard(t, [['10 SECONDES…', 100, C.red], ['SINON LES DEUX EN PRISON', 78]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('COMMISSARIAT · 9 H', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's1b') onoma('UN COUPABLE !', 600, 420, P(t, WF('s1b', /furieux/i), 0.2), 120);
-  if (id === 's2') polaroid(770, 640, 460, 440, P(t, WF('s2', /dirai/i), 0.3), safe, 'LE COFFRE', 0.04);
-  if (id === 's3') polaroid(770, 620, 460, 420, P(t, S('s3') + 0.4, 0.3), console6, 'SON ALIBI', -0.04);
-  if (id === 's4') paperCard([["J'AI JAMAIS TOUCHÉ", 72], ['À SES DIAMANTS !', 84, C.red]], 540, 420, P(t, S('s4') + 0.5, 0.25), { w: 760, rot: 0.03 });
-  if (id === 's5' && t >= tSil && t < tMen) onoma('…', 540, 480, P(t, tSil, 0.2), 170);
-  if (id === 's5' && t >= tMen) onoma('CLIC !', 560, 460, P(t, tMen, 0.15), 160);
-  endCards(t, [['COMMENT IL A SU ?', 86, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]]);
+  if (id === 's2') polaroid(790, 560, 420, 400, P(t, WF('s2', /dirai/i), 0.3), safe, 'LE COFFRE', 0.04);
+  if (id === 's3') polaroid(300, 560, 420, 380, P(t, S('s3') + 0.4, 0.3), console6, 'SON ALIBI', -0.04);
+  if (id === 's4') paperCard([["J'AI JAMAIS TOUCHÉ", 72], ['À SES DIAMANTS !', 84, C.red]], 540, 380, P(t, S('s4') + 0.5, 0.25), { w: 760, rot: 0.03 });
+  if (id === 's5' && t >= tToi) onoma('ET TOI ?', 400, 460, P(t, tToi, 0.2), 130);
+  endCards(t, [['QUI MENT ?', 100, C.red], ['1 OU 2 EN COMMENTAIRE', 50]]);
 }

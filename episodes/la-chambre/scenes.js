@@ -1,7 +1,7 @@
 // La chambre — Galagade style: ONE warm hotel room (window + minibar + TV at left, door to the corridor in the middle,
 // bed with 47, the loot and his Tasty Crousty at right). The corridor is seen through the open door. Floor y ≈ 1900.
 window.CTA = 'TAGUE CELUI QUI FRAPPE JAMAIS'; window.LOOK = 'gala';
-const GY = 1900, DX = 1300, P47 = 1770, SUIT = { body: '#2c3550', body2: '#222a40', pants: '#222a40' };
+const GY = 1900, DX = 3200, P47 = 2700, SUIT = { body: '#2c3550', body2: '#222a40', pants: '#222a40' };
 function tasty(px, py, s) { x.save(); x.translate(px, py); x.scale(s, s);
   [[-60, -150, -0.3], [10, -170, 0.05], [70, -145, 0.35]].forEach(([a, b, r]) => { x.save(); x.translate(a, b); x.rotate(r); ell(0, 0, 46, 62, '#c8782e', 6); rbox(-12, 40, 24, 70, 10, '#f4ead8', 5); x.restore(); });
   poly([[-140, -110], [140, -110], [115, 120], [-115, 120]], '#d6332b', 8);
@@ -20,9 +20,9 @@ function corridor(t) { // seen through the door: warm wallpaper, door 48 opposit
   rbox(DX - 60, 1080, 220, 580, 8, '#8a5a3a', 6); rbox(DX + 10, 1130, 80, 46, 8, '#e2b649', 5); txt('48', DX + 50, 1155, 40, OL, { stroke: false }); ell(DX + 130, 1400, 12, 12, '#e2b649', 4);
   lamp(DX - 170, 1150); x.fillStyle = '#a8323a'; x.fillRect(DX - 260, 1660, 520, 240); x.fillStyle = '#e2b649'; for (let i = 0; i < 6; i++) x.fillRect(DX - 260 + i * 95, 1760, 50, 10); }
 function room(t, open) {
-  x.fillStyle = '#f3d7a6'; x.fillRect(-1200, -600, 4600, 2600); x.fillStyle = 'rgba(200,140,80,.16)'; for (let i = 0; i < 70; i++) x.fillRect(-1200 + i * 66, -600, 24, 2100);  // striped wallpaper
-  x.fillStyle = '#c98f5a'; x.fillRect(-1200, 1480, 4600, 30); x.fillStyle = '#e8bf8a'; x.fillRect(-1200, 1510, 4600, 390); x.strokeStyle = 'rgba(120,70,30,.3)'; x.lineWidth = 5; for (let i = 0; i < 40; i++) x.strokeRect(-1180 + i * 120, 1540, 90, 320); // wainscot
-  x.fillStyle = '#b8323e'; x.fillRect(-1200, GY - 10, 4600, 1200); x.fillStyle = 'rgba(255,210,120,.35)'; for (let i = 0; i < 50; i++) ell(-1100 + (i * 173) % 4500, GY + 60 + (i * 97) % 700, 34, 12, 'rgba(255,210,120,.35)', 0); // carpet
+  x.fillStyle = '#f3d7a6'; x.fillRect(-1200, -600, 6000, 2600); x.fillStyle = 'rgba(200,140,80,.16)'; for (let i = 0; i < 95; i++) x.fillRect(-1200 + i * 66, -600, 24, 2100);  // striped wallpaper
+  x.fillStyle = '#c98f5a'; x.fillRect(-1200, 1480, 6000, 30); x.fillStyle = '#e8bf8a'; x.fillRect(-1200, 1510, 6000, 390); x.strokeStyle = 'rgba(120,70,30,.3)'; x.lineWidth = 5; for (let i = 0; i < 52; i++) x.strokeRect(-1180 + i * 120, 1540, 90, 320); // wainscot
+  x.fillStyle = '#b8323e'; x.fillRect(-1200, GY - 10, 6000, 1200); x.fillStyle = 'rgba(255,210,120,.35)'; for (let i = 0; i < 70; i++) ell(-1100 + (i * 173) % 5800, GY + 60 + (i * 97) % 700, 34, 12, 'rgba(255,210,120,.35)', 0); // carpet
   // window with the city at dusk
   rbox(-20, 800, 560, 620, 10, '#3a3f6a', 9); const g = x.createLinearGradient(0, 810, 0, 1410); g.addColorStop(0, '#5d6fb8'); g.addColorStop(1, '#f2a46a'); x.fillStyle = g; x.fillRect(-10, 810, 540, 600);
   [[20, 1100, 90], [130, 1000, 80], [230, 1150, 100], [350, 960, 70], [440, 1080, 90]].forEach(([bx, by, bw]) => { x.fillStyle = '#2e3358'; x.fillRect(bx, by, bw, 420); x.fillStyle = '#ffe08a'; for (let k = 0; k < 8; k++) if ((bx + k) % 3) x.fillRect(bx + 14 + (k % 2) * 36, by + 30 + Math.floor(k / 2) * 60, 20, 26); });
@@ -40,36 +40,45 @@ function room(t, open) {
   rbox(1720, 980, 460, 320, 10, '#e2b649', 9); rbox(1750, 1010, 400, 260, 4, '#8fc7e8', 0); poly([[1750, 1270], [1900, 1100], [2020, 1200], [2150, 1060], [2150, 1270]], '#5fa24e', 0);
   rbox(1580, 1380, 1100, 300, 40, '#6b3a2a', 9); rbox(1560, 1640, 1140, 220, 30, '#f4f2ec', 8); rbox(1560, 1720, 1140, 200, 20, '#c94a4a', 8); ell(1760, 1640, 140, 60, '#ffffff', 7); ell(2480, 1640, 140, 60, '#ffffff', 7);
   rbox(2720, 1640, 200, 260, 10, '#8a5a3a', 8); lamp(2820, 1560); rbox(2805, 1560, 30, 80, 6, '#8a5a3a', 5); }
+function timer(t, n, px, py, s = 1) { if (n < 0) return; ev('tick', 'tm' + n); x.save(); resetCam(); x.translate(px, py); const k = s * (1 + 0.18 * Math.pow(1 - (t % 1), 4)); x.scale(k, k);
+  ell(0, 0, 118, 118, '#fff', 10); x.strokeStyle = C.red; x.lineWidth = 18; x.beginPath(); x.arc(0, 0, 92, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * (n / 10)); x.stroke();
+  txt(String(n), 0, 10, 120, C.red, { stroke: false }); rrc(0, -132, 50, 26, 8, OL, 0); x.restore(); }
 function draw(t) {
   const id = curId(t), tTasty = WF('s1', /Tasty/i), tCh = WF('s1', /Chambre/i), tToc = WF('s2', /toc/i), tPorte = WF('s2', /porte/i), tPard = WF('s3', /pardon/i),
-    tRef = WF('s4', /referme/i), tPose = WF('s5', /pose/i), tTel = WF('s5', /téléphone/i);
-  const K = [[0, 0, 1550, 1330, 1.4], [0.2, 2.6, 1560, 1330, 1.48], [B.ff.end - 0.1, 1.2, 1250, 1350, 0.62], [tTasty - 0.6, 1.6, 2050, 1450, 1.15],
-    [tCh, 1.4, 2000, 1400, 1.0], [S('s2'), 1.2, 1650, 1350, 1.05], [tPorte, 1.5, 1450, 1280, 1.3], [S('s3') + 0.6, 1.4, 1380, 1180, 1.7],
-    [S('s4'), 1.4, 1550, 1350, 0.95], [S('s5'), 1.6, 1750, 1250, 1.55], [tTel - 0.3, 1.2, 1740, 1220, 1.75], [S('q'), 1.4, 1550, 1330, 1.4]];
+    tRef = WF('s4', /referme/i), tAsc = WF('s4', /ascenseur/i), tCl = WF('s5', /cloche/i), tTrois = WF('s5', /trois/i), tDeux = WF('s5', /deux/i);
+  const TWO = [2960, 1330, 1.28];                       // two-shot: 47 (left) + the doorway (right) — hook and ending
+  const K = [[0, 0, ...TWO], [0.2, 3, 2965, 1320, 1.34], [B.ff.end - 0.1, 0.9, 520, 1330, 1.0], [S('s1') + 0.9, 1.4, 700, 1320, 0.92],
+    [tTasty - 0.5, 1.8, 2330, 1420, 1.2], [tCh, 1.2, 2600, 1330, 1.3], [S('s2'), 1.4, 2950, 1380, 1.05], [tPorte, 1.3, 3240, 1300, 1.35],
+    [S('s3') + 0.1, 1.2, 3230, 1230, 1.62], [S('s4') + 0.2, 1.4, 3230, 1340, 1.15], [S('s5') - 0.1, 1.4, 2700, 1250, 1.6], [S('q') - 0.1, 1.2, ...TWO]];
   camPath(t, K, 0);
   const inFF = id === 'ff', inQ = id === 'q';
-  const open = inFF ? 1 : id === 's2' ? eIO(seg(t, tPorte - 0.2, tPorte + 0.4)) : id === 's3' ? 1 : id === 's4' ? 1 - eIO(seg(t, tRef, tRef + 0.6)) : 0;
+  const open = inFF || inQ ? 1 : id === 's2' ? eIO(seg(t, tPorte - 0.2, tPorte + 0.4)) : id === 's3' ? 1 : id === 's4' ? 1 - eIO(seg(t, tRef, tRef + 0.6)) : 0;
   room(t, open);
-  const strangerIn = inFF || (id === 's2' && t > tPorte) || id === 's3' || (id === 's4' && t < tRef + 0.3);
-  if (strangerIn) { cast('director', DX - 10, GY - 30, 0.78, t, { ...SUIT, mood: id === 's3' && t >= tPard ? 'smile' : inFF ? 'smile' : 'neutral', look: 1, blink: t > 0.6 }); valise(DX - 150, GY - 60, 0.9); }
-  // 47 by the bed: Tasty in hand until « pose », phone at the ear after « téléphone » (and in the hook / ending)
-  const onPhone = inFF || inQ || (id === 's5' && t >= tTel);
-  const m47 = onPhone ? 'angry' : id === 's1' ? 'smile' : id === 's2' ? 'shock' : id === 's3' ? 'worried' : id === 's4' ? 'neutral' : id === 's5' ? 'angry' : 'neutral';
-  lootBag(2330, 1700, 0.9);
-  const tastyOnBed = (id === 's5' && t >= tPose) || inQ || inFF;
-  if (tastyOnBed) tasty(2120, 1700, 0.7);
-  p47(P47, GY + 40, 0.95, t, { mood: m47, look: id === 's1' && t < tCh ? 1 : -1, armUp: onPhone, blink: t > 0.6 });
+  const strangerIn = inFF || inQ || (id === 's2' && t > tPorte) || id === 's3' || (id === 's4' && t < tRef + 0.3);
+  if (strangerIn) { const menace = inFF || inQ; cast('director', DX + 20, GY - 30, 0.8, t, { ...SUIT, mood: menace ? 'angry' : id === 's3' && t >= tPard ? 'smile' : 'neutral', look: -1, blink: !menace && t > 0.6 });
+    valise(DX + 170, GY - 50, menace ? 1.15 : 0.9); }
+  const onPhone = inFF || inQ;
+  const m47 = inFF || inQ ? 'shock' : id === 's1' ? 'smile' : id === 's2' ? 'shock' : id === 's3' ? 'worried' : id === 's4' ? 'neutral' : 'angry';
+  lootBag(2280, 1700, 0.9);
+  if (inFF || inQ || id === 's5') tasty(2070, 1700, 0.7);
+  p47(P47, GY + 40, 0.95, t, { mood: m47, look: id === 's1' ? -1 : 1, armUp: onPhone, sweat: inFF || inQ || id === 's5', blink: t > 0.6 });
   if (onPhone) phone(P47 + 108, GY + 40 - 620, 1.2, true);
-  if (!tastyOnBed) tasty(P47 - 150, GY + 40 - 330, 0.55);
+  if (!(inFF || inQ || id === 's5')) tasty(P47 + 150, GY + 40 - 330, 0.55);
   resetCam();
-  hookCard(t, [['TROMPÉ DE CHAMBRE…', 90], ['47 APPELLE LA POLICE', 96, C.red]], B.ff.end + 0.1);
+  // countdown: 10 → … during the hook; back in s5 (« trois, deux… ») and on the end card, so the ending loops to the opening
+  if (inFF) timer(t, Math.max(10 - Math.floor(t), 6), 900, 700, 0.85);
+  if (id === 's5' && t >= tTrois) timer(t, t < tDeux ? 3 : 2, 900, 640, 1.0);
+  if (inQ) timer(t, 1, 900, 700, 0.85);
+  hookCard(t, [['UN INCONNU À SA PORTE…', 86], ['10 SECONDES POUR COMPRENDRE', 72, C.red]], B.ff.end + 0.1);
   if (inFF && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1' && t < tTasty) banner('HÔTEL · 23 H', 540, 330, P(t, S('s1') + 0.3));
-  if (id === 's1' && t >= tTasty && t < tCh) polaroid(560, 640, 480, 440, P(t, tTasty, 0.3), (w, h) => { x.fillStyle = '#ffe9c4'; x.fillRect(0, 0, w, h); tasty(w / 2, h / 2 + 70, 1.0); }, 'SON DÎNER', -0.04);
-  if (id === 's1' && t >= tCh) pill('CHAMBRE 47', 540, 360, P(t, tCh, 0.3), C.red);
-  if (id === 's2' && t >= tToc && t < tPorte) onoma('TOC TOC TOC', 540, 520, P(t, tToc, 0.2), 140);
+  if (id === 's1' && t >= tTasty && t < tCh) polaroid(560, 520, 420, 380, P(t, tTasty, 0.3), (w, h) => { x.fillStyle = '#ffe9c4'; x.fillRect(0, 0, w, h); tasty(w / 2, h / 2 + 70, 0.9); }, 'SON DÎNER', -0.04);
+  if (id === 's1' && t >= tCh) pill('CHAMBRE 47', 540, 330, P(t, tCh, 0.3), C.red);
+  if (id === 's2' && t >= tToc && t < tPorte) onoma('TOC TOC TOC', 540, 420, P(t, tToc, 0.2), 140);
   const tCroy = WF('s3', /croyais/i);
-  if (id === 's3' && t >= tPard && t < tCroy) speech('OH PARDON !', 540, 470, P(t, tPard, 0.25), 80);
-  if (id === 's3' && t >= tCroy) speech('JE CROYAIS QUE C\'ÉTAIT MA CHAMBRE', 540, 470, P(t, tCroy, 0.25), 58);
-  endCards(t, [['POURQUOI IL SE MÉFIE ?', 80, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]]);
+  if (id === 's3' && t >= tPard && t < tCroy) speech('OH PARDON !', 540, 330, P(t, tPard, 0.25), 80);
+  if (id === 's3' && t >= tCroy) speech("JE CROYAIS QUE C'ÉTAIT MA CHAMBRE", 540, 330, P(t, tCroy, 0.25), 58);
+  if (id === 's5' && t >= tCl && t < tTrois) onoma('?!', 760, 520, P(t, tCl, 0.2), 170);
+  if (inQ) { paperCard([["QU'EST-CE QUI CLOCHE ?", 80, C.red], ['TA RÉPONSE EN COMMENTAIRE', 46]], 540, 250, P(t, S('q') + 0.1), { w: 800 });
+    if (t > S('q') + 1.2) pill(window.CTA, 540, 1620, P(t, S('q') + 1.2), C.red); }
 }

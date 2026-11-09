@@ -54,7 +54,7 @@ function toon(px, py, s, o = {}) {
   x.fillStyle = 'rgba(0,0,0,.22)'; x.beginPath(); x.ellipse(0, 4, 120, 20, 0, 0, 7); x.fill();
   [[-40, sw], [40, -sw]].forEach(([lx, a]) => { x.save(); x.translate(lx, -230); x.rotate(a * 0.6); rrc(0, 105, 62, 210, 22, PANTS); rrc(10, 215, 92, 46, 22, '#3a2a22'); x.restore(); });
   x.translate(0, bob);
-  const arm = (side, up) => { x.save(); x.translate(side * 122, -480); x.rotate(up ? side * -2.7 : side * (0.22 + (o.walk ? sw * 0.8 * side : 0))); rrc(0, 95, 58, 200, 28, B2); ell(0, 205, 34, 32, SKIN); x.restore(); };
+  const arm = (side, up) => { if (o.noArms) return; x.save(); x.translate(side * 122, -480); x.rotate(up ? side * -2.7 : side * (0.22 + (o.walk ? sw * 0.8 * side : 0))); rrc(0, 95, 58, 200, 28, B2); ell(0, 205, 34, 32, SKIN); x.restore(); };
   const torso = () => { x.beginPath(); x.moveTo(-115, -500); x.quadraticCurveTo(-130, -360, -112, -235); x.lineTo(112, -235); x.quadraticCurveTo(130, -360, 115, -500); x.quadraticCurveTo(0, -540, -115, -500); x.closePath(); };
   torso(); fs(B1, 8); shadeClip(torso); arm(-1, o.armsUp); arm(1, o.armsUp || o.armUp);
   x.strokeStyle = 'rgba(0,0,0,.25)'; x.lineWidth = 5; x.beginPath(); x.moveTo(-108, -262); x.lineTo(108, -262); x.stroke();
