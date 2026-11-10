@@ -257,3 +257,10 @@ function panel(zx, zy, w, h, fn) { x.save(); x.beginPath(); x.rect(zx, zy, w, h)
 // stone / brick texture for walls (Galagade-like detailed sets)
 function bricks(x0, y0, w, h, col = '#b9ad98', line = 'rgba(80,60,40,.35)', bw = 90, bh = 44) { x.fillStyle = col; x.fillRect(x0, y0, w, h); x.save(); x.beginPath(); x.rect(x0, y0, w, h); x.clip(); x.strokeStyle = line; x.lineWidth = 4;
   for (let r = 0; r * bh < h; r++) for (let c = -1; c * bw < w; c++) { const bx = x0 + c * bw + (r % 2) * bw / 2, by = y0 + r * bh; x.strokeRect(bx, by, bw, bh); if ((r * 7 + c * 3) % 5 === 0) { x.fillStyle = 'rgba(0,0,0,.06)'; x.fillRect(bx + 3, by + 3, bw - 6, bh - 6); } } x.restore(); }
+
+// « format allemand » cards (question → comment card → follow CTA → solution → « T'avais trouvé ? »). Beat ids: q c1 c2 … end.
+function germanCards(t, qLines) { const id = curId(t); resetCam();
+  if (id === 'q') paperCard(qLines, 540, 420, P(t, S('q')), { w: 860 });
+  if (id === 'c1') paperCard([['ÉCRIS TA RÉPONSE', 70], ['EN COMMENTAIRE 💬', 80, C.red], ['AVANT LA SOLUTION', 46]], 540, 520, P(t, S('c1')), { w: 860 });
+  if (id === 'c2') paperCard([['1 ÉNIGME PAR JOUR', 70], ["SI C'EST PAS POUR TOI…", 54], ['LAISSE LA PLACE 😏', 76, C.red]], 540, 520, P(t, S('c2')), { w: 860 });
+  if (id === 'end') paperCard([["T'AVAIS TROUVÉ ?", 96, C.red]], 540, 460, P(t, S('end')), { w: 820 }); }
