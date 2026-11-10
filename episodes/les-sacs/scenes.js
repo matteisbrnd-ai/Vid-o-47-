@@ -1,5 +1,5 @@
 // Les sacs — Galagade style: the Baron's vault (one rich set), slow zooms, polaroid rules, triple-hook card with « ÉNIGME » tag.
-window.CTA = 'TAGUE LE PLUS MALIN DE TES POTES'; window.LOOK = 'gala'; window.HOOK_TAG = 'ÉNIGME';
+window.CTA = 'TAGUE LE PLUS MALIN DE TES POTES'; window.LOOK = 'gala';
 const GY = 1950, SACKS = [...Array(10)].map((_, i) => [860 + (i % 5) * 170, i < 5 ? GY - 110 : GY + 50, i + 1]);
 function coin(px, py, r) { ell(px, py, r, r * 0.8, '#f5c542', 4); ell(px, py, r * 0.6, r * 0.45, '#e0a92e', 0); }
 function sack(px, py, n, open) { x.save(); x.translate(px, py); x.beginPath(); x.moveTo(-70, 0); x.quadraticCurveTo(-90, -110, -40, -140); x.lineTo(40, -140); x.quadraticCurveTo(90, -110, 70, 0); x.closePath(); fs('#c9a06a', 6);
