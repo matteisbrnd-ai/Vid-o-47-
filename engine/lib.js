@@ -240,8 +240,8 @@ function vitrineInsert(t, crack) { resetCam(); x.fillStyle = '#1b2142'; x.fillRe
 
 // hook card (stats 2026-11-08: the only video past the test batch had its paradox READABLE at frame 0).
 // Fully visible from frame 0 (no pop-in), word-by-word captions are muted while it shows.
-function hookCard(t, lines, until = 2.5) { window.NOCAP_UNTIL = until; if (t >= until) return; resetCam(); const a = t > until - 0.2 ? (until - t) / 0.2 : 1;
-  x.save(); x.globalAlpha = a; paperCard(lines, 540, 330, 1, { w: 920 }); x.restore(); }
+function hookCard(t, lines, until = 2.5, tag = window.HOOK_TAG) { window.NOCAP_UNTIL = until; if (t >= until) return; resetCam(); const a = t > until - 0.2 ? (until - t) / 0.2 : 1;
+  x.save(); x.globalAlpha = a; paperCard(lines, 540, 330, 1, { w: 920 }); if (tag) { rrc(540, 175, 40 + tag.length * 34, 76, 38, C.red, 6); txt(tag, 540, 179, 50, '#fff', { stroke: false }); } x.restore(); }   // tag = context (« ÉNIGME », « TEST PSYCHO »)
 
 // ---------- « grande toile » mode (outside feedback 2026-11-08: too many separate shots, too dark) ----------
 // The whole story lives on ONE big bright canvas (panels side by side); the camera glides, zooms and de-zooms
