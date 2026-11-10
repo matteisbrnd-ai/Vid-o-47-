@@ -77,6 +77,8 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
     3. **Contrepied**: the last part flips the expected direction (« …et c'est celui qui ne voit presque rien qui trouve », « …et il a dit merci »).
     Template: « <stakes/situation>… et <contrepied>. » under 3 s, e.g. « Quatre prisonniers, quatre bonnets… et c'est celui qui voit le moins qui trouve. »
 
+21. **« Format allemand » ≤ 1 min (creator, 2026-11-10, test)**: hook = a person doing something strange, said as a fact (« Ce voleur a trouvé le seul faux sac… en une seule pesée ! »), story + rules (polaroids), « Comment il fait ? », paper card « ÉCRIS TA RÉPONSE EN COMMENTAIRE AVANT LA SOLUTION », follow CTA in our own words (« Une énigme par jour ici. Si c'est pas pour toi, abonne-toi pas : laisse la place aux autres »), then the **solution explained with diagrams** (polaroid + pills + big equation card), end card « T'AVAIS TROUVÉ ? ». Beat ids: ff s1… q c1 c2 sol1 sol2 sol3 end (don't call endCards). Reference: `episodes/les-sacs-solution/`. Compare its stats with the no-solution videos before choosing.
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
