@@ -13,6 +13,6 @@ BEATS = [
   ('s2', "En face : le Baron. Il tient déjà la banque, le port et le casino.", "En face : le Baron. Il tient déjà la banque, le port et le casino.", 0.15),
   ('s3', "Notre caisse est vide. Chaque commentaire sous cette vidéo, c'est dix euros pour la bande.", "Notre caisse est vide. Chaque commentaire sous cette vidéo, c'est dix euros pour la bande.", 0.15),
   ('s4', "Et c'est toi qui choisis notre premier achat.", "Et c'est toi qui choisis notre premier achat.", 0.15),
-  ('q', "A : des pistolets à eau géants. B : des fumigènes. C : un grappin et un drone. Vote en commentaire !", "A : des pistolets à eau géants. B : des fumigènes. C : un grappin et un drone. Vote en commentaire !", 1.8),
+  ('q', "A : pistolets à eau géants, 300 €. B : fumigènes, 200 €. C : grappin et drone, 500 €. Vote en commentaire !", "A : pistolets à eau géants, trois cents euros. B : fumigènes, deux cents euros. C : grappin et drone, cinq cents euros. Vote en commentaire !", 1.8),
 ]
 CUES = [('ff', '+0', 'sting'), ('s1', 'Rico', 'bam'), ('s1', 'Lola', 'beep'), ('s1', 'cerveau', 'ding'), ('s2', 'Baron', 'sting'), ('s3', 'vide', 'buzz'), ('s3', 'euros', 'cash'), ('q', 'A', 'pop'), ('q', 'B', 'pop'), ('q', 'C', 'pop')]
