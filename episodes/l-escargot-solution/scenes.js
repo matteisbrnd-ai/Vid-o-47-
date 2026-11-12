@@ -12,6 +12,17 @@ function well(t, night) { x.fillStyle = vg(-1500, TOPY, night ? '#1b2142' : '#6f
   rbox(WX - 280, TOPY - 140, 560, 90, 14, '#b9b2a2', 8); [WX - 230, WX + 230].forEach(px => rbox(px - 16, TOPY - 420, 32, 300, 6, '#7a5232', 6)); rbox(WX - 250, TOPY - 440, 500, 40, 10, '#7a5232', 6);
   x.fillStyle = '#4a8ad0'; x.fillRect(WX - 200, TOPY + 10 * M, 400, 50);
   for (let m = 0; m <= 10; m++) { const y = TOPY + 10 * M - m * M; x.fillStyle = '#f5c542'; x.fillRect(WX + 210, y - 3, m % 5 ? 30 : 50, 6); if (m % 2 === 0) txt(m + ' m', WX + 300, y + 2, 40, '#f5c542', { stroke: true }); } }
+// own intro: 47's point of view looking DOWN into the well (red-brick rings, Gaston tiny on a stone at the bottom), the camera dives in
+function wellPOV(t) { resetCam(); const k = eIO(seg(t, 0, B.ff.end)), z = lerp(1, 7, k * k); x.save(); x.translate(540, 1080); x.scale(z, z);
+  x.fillStyle = '#7cc46a'; x.fillRect(-1200, -1600, 2400, 3200);
+  for (let i = 0; i < 14; i++) { const r = 520 * Math.pow(0.82, i), sh = 1 - i / 16; x.beginPath(); x.arc(0, 0, r, 0, 7); x.fillStyle = `rgb(${Math.round(185 * sh)},${Math.round(80 * sh)},${Math.round(60 * sh)})`; x.fill();
+    x.strokeStyle = `rgba(40,20,10,${0.25 + i * 0.03})`; x.lineWidth = Math.max(2, 10 * Math.pow(0.82, i)); x.stroke();
+    for (let b = 0; b < 18; b++) { const a = b / 18 * 6.283 + (i % 2) * 0.17; x.beginPath(); x.moveTo(Math.cos(a) * r, Math.sin(a) * r); x.lineTo(Math.cos(a) * r * 0.82, Math.sin(a) * r * 0.82); x.stroke(); } }
+  const rb = 520 * Math.pow(0.82, 14); x.beginPath(); x.arc(0, 0, rb, 0, 7); fs('#3a6fb0', 3); ell(-rb * 0.2, rb * 0.1, rb * 0.55, rb * 0.35, '#8a8f99', 2);
+  snail(-rb * 0.15, rb * 0.25, 0.13, t, false);
+  rbox(-560, 470, 1120, 140, 30, '#b9b2a2', 8);                                  // the rim, close to the camera
+  [-1, 1].forEach(d => { rbox(d * 330 - 90, 430, 180, 220, 60, SKIN, 8); rbox(d * 330 - 110, 560, 220, 400, 40, '#33384a', 8); rbox(d * 330 - 110, 560, 220, 40, 16, C.orange, 6); });   // 47's hands on the rim
+  x.restore(); x.fillStyle = 'rgba(0,0,0,.25)'; x.fillRect(0, 0, W, H * 0.04); }
 function draw(t) {
   const id = curId(t), tGr = WF('s2', /grimpe/i), tGl = WF('s3', /glisse/i), tEnd = WF('s3', /endort/i);
   const night = (id === 's3' && t >= tEnd) || id === 'ff';
@@ -20,9 +31,10 @@ function draw(t) {
   const K = [[0, 0, WX, TOPY + 300, 1.5], [B.ff.end - 0.1, 1.2, WX, 1700, 0.62], [S('s1') + 1.6, 1.2, WX, TOPY + 900, 1.2], [S('s2'), 1.0, WX, TOPY + 800, 1.2], [S('s4'), 1.2, WX, 1900, 0.75], [S('q'), 1.0, WX, TOPY + 300, 1.5]];
   K.push([S('c1'), 1.2, WX, 1700, 0.62], [S('sol1'), 1.2, WX, TOPY + 700, 1.0], [S('sol3'), 1.2, WX, TOPY + 300, 1.2], [S('end'), 1.2, WX, 1700, 0.62]);
   camPath(t, K);
+  if (id === 'ff') { wellPOV(t); } else {
   well(t, night);
   p47(WX + 380, TOPY - 40, 0.7, t, { mood: id === 's1' ? 'shock' : id === 's3' ? 'worried' : 'neutral', look: -1, blink: t > 0.6, sweat: id === 's1' });
-  snail(WX - 130, sy, 1.0, t, id === 's3' && t >= tEnd);
+  snail(WX - 130, sy, 1.0, t, id === 's3' && t >= tEnd); }
   resetCam();
   hookCard(t, [['TOUT LE MONDE DIT 10 JOURS…', 64], ["ET C'EST FAUX", 100, C.red]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
