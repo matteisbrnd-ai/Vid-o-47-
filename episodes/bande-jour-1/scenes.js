@@ -45,6 +45,6 @@ function draw(t) {
   if (id === 's1' && t >= tRico) pill(t >= tCer ? '47 · LE CERVEAU' : t >= tLola ? 'LOLA · LA HACKEUSE' : 'RICO · LES MUSCLES', 540, 1180, 1, C.orange);
   if (id === 's3' && t >= tEur) paperCard([['❤️ 1 LIKE = 1 €', 76, '#2a8a3a'], ...(t >= tAbo ? [['➕ 1 ABONNÉ = 5 €', 76, '#2a8a3a'], ['+ 1 MEMBRE 👥', 60]] : [])], 540, 600, P(t, tEur), { w: 820 });
   if (id === 's4') paperCard([['💬 COMMENTE', 76], ['= TIRÉ AU SORT', 70], ['POUR REJOINDRE LA BANDE', 46, C.red]], 540, 600, P(t, S('s4') + 0.3), { w: 860 });
-  if (id === 'q') [['A', 'PISTOLETS À EAU', 0], ['B', 'FUMIGÈNES', 1], ['C', 'GRAPPIN + DRONE', 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, 760, 300, 360, P(t, WF('q', new RegExp('^' + k + '$')) || S('q') + i, 0.25), (w, h) => { gadget(w, h, k, t); price(w, h, ['40 €', '25 €', '60 €'][i]); }, k + ' · ' + lab, (i - 1) * 0.05));
+  if (id === 'q') [['A', 'PISTOLETS À EAU', 0], ['B', 'FUMIGÈNES', 1], ['C', 'GRAPPIN + DRONE', 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, 760, 300, 360, P(t, WF('q', [/pistolet/i, /fumig/i, /grappin/i][i]), 0.25), (w, h) => { gadget(w, h, k, t); price(w, h, ['40 €', '25 €', '60 €'][i]); }, k + ' · ' + lab, (i - 1) * 0.05));
   if (id === 'q') paperCard([['VOTE A, B OU C 👇', 74, C.red]], 540, 1180, P(t, B.q.end - 0.5), { w: 760 });
 }
