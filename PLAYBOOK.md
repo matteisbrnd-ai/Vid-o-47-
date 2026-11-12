@@ -85,7 +85,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 - Video must be a public URL: push the mp4 to this repo, then use
   `https://raw.githubusercontent.com/matteisbrnd-ai/Vid-o-47-/main/videos/<slug>.mp4`.
 - `createScheduledPost` with `autoPublish: true`, `draft: false`, `tiktokData.title` (required), `privacyOption: PUBLIC_TO_EVERYONE`, `isAigc: true`.
-- **Free plan: max 20 published posts per calendar month.** Schedule Monday→Friday at **18:00** via Metricool
+- **Free plan: max 20 published posts per calendar month.** Schedule Monday→Friday at **12:00** via Metricool (since 2026-11-12: the creator posts the « bande de 47 » series himself at 18:00)
   (best slot measured: 12 h and 18 h); the 2 weekend videos are sent to the creator to post himself.
   Before scheduling, count what is already scheduled/published this month (`getScheduledPosts`) and never exceed 20.
 - **Always get the creator's OK** on the week's videos before scheduling (he chose « avec ma validation »).
@@ -97,7 +97,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 2. Append the numbers to the table below and write 2–3 lines of **lessons** (what beat the median, why).
 3. Write 7 new riddles applying the format + lessons, build them, look at every `sheet.jpg`, fix, build finals.
 4. Push videos, send the creator: the 7 videos, descriptions, solutions (for next-day pinned comment), the planning.
-5. After his OK: schedule Mon–Fri 18:00 in Metricool (within the 20/month limit), weekend ones go to him.
+5. After his OK: schedule Mon–Fri 12:00 in Metricool (within the 20/month limit), weekend ones go to him.
 6. Commit everything (episodes, videos, this file).
 
 ## Riddles already used (do not repeat)
