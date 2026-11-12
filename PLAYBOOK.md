@@ -79,6 +79,9 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
 
 21. **« Format allemand » ≤ 1 min (creator, 2026-11-10, test)**: hook = a person doing something strange, said as a fact (« Ce voleur a trouvé le seul faux sac… en une seule pesée ! »), story + rules (polaroids), « Comment il fait ? », paper card « ÉCRIS TA RÉPONSE EN COMMENTAIRE AVANT LA SOLUTION », follow CTA in our own words (« Une énigme par jour ici. Si c'est pas pour toi, abonne-toi pas : laisse la place aux autres »), then the **solution explained with diagrams** (polaroid + pills + big equation card), end card « T'AVAIS TROUVÉ ? ». Beat ids: ff s1… q c1 c2 sol1 sol2 sol3 end (don't call endCards). Reference: `episodes/les-sacs-solution/`. Compare its stats with the no-solution videos before choosing.
 
+22. **Série « La bande de 47 »** (posted by the creator at 18:00, not by the Monday task). Economy: ❤️ 1 like = 1 €, ➕ 1 abonné = 5 € + 1 membre, 💬 commenters drawn by lot to join; each episode ends on an A/B/C vote. Description starts with « Saison X · Jour N : <titre> ».
+    Plan: Saison 1 (Jours 1–10) « La création de la bande » → Jour 10 = attaque finale contre le Baron · Saison 2 (from Jour 11) « La reprise du territoire » · Saison 3 « L'inspecteur contre-attaque » (cat-and-mouse escapes with the inspector, no fighting the police). Each episode opens with the countdown (« J-8 avant l'attaque finale »).
+
 ## Publishing (Metricool → TikTok)
 
 - Metricool brand **blogId 7916684**, timezone Europe/Paris, network `tiktok`.
