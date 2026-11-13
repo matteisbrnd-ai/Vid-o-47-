@@ -14,6 +14,6 @@ if [ "$2" = "--stills" ]; then node "$ROOT/engine/render.cjs" "$EP" --stills "$3
 node "$ROOT/engine/render.cjs" "$EP"
 python3 "$ROOT/engine/mix.py" "$EP"
 mkdir -p "$ROOT/videos"
-ffmpeg -y -loglevel error -i "$EP/silent.mp4" -i "$EP/mix.wav" -c:v copy -af loudnorm=I=-14:TP=-1 -c:a aac -b:a 192k -shortest "$ROOT/videos/$SLUG.mp4"
+ffmpeg -y -loglevel error -i "$EP/silent.mp4" -i "$EP/mix.wav" -c:v copy -af loudnorm=I=-14:TP=-1.5,alimiter=limit=0.85:level=false -c:a aac -b:a 192k -shortest "$ROOT/videos/$SLUG.mp4"
 ffmpeg -y -loglevel error -ss 0.6 -i "$ROOT/videos/$SLUG.mp4" -frames:v 1 "$ROOT/videos/$SLUG.jpg"
 echo "OK videos/$SLUG.mp4 $(ffprobe -v error -show_entries format=duration -of csv=p=0 "$ROOT/videos/$SLUG.mp4")s"
