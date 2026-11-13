@@ -46,9 +46,9 @@ function draw(t) {
   if (id === 'ff') { for (let i = 0; i < 14; i++) { const k = ((t * 0.6 + i * 0.13) % 1); ell(100 + (i * 83) % 600, 900 + k * 900, 30, 18, '#7ccf6a', 4); txt('€', 100 + (i * 83) % 600, 904 + k * 900, 26, '#2a6a2a', { stroke: false }); } }
   cast('boss', 1500, GY, 0.85, t, { mood: 'smug', look: -1 }); cast('guard', 1300, GY, 0.75, t, { mood: 'neutral', look: -1 }); cast('guard', 1720, GY, 0.75, t, { mood: 'neutral', look: -1 });
   hud(t, id === 'ff' || id === 's1' || (id === 's2' && t < tEur) ? 0 : 114, id, tAbo);
-  hookCard(t, [['114 € EN CAISSE…', 84, '#2a8a3a'], ['ET ON PEUT', 74], ['RIEN ACHETER !', 100, C.red]], B.ff.end + 0.1);
+  hookCard(t, [['J-8', 130, C.red], ['114 € DANS LA CAISSE', 62, '#2a8a3a'], ['… ET RIEN À ACHETER !', 64]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
-  if (id === 's1') { banner('SAISON 1 · JOUR 2', 540, 330, P(t, S('s1') + 0.2)); paperCard([['J-8', 150, C.red], ['AVANT L\'ATTAQUE FINALE', 50]], 540, 640, P(t, WF('s1', /huit/i)), { w: 760 }); }
+  if (id === 's1') { paperCard([['J-8', 150, C.red], ['AVANT L\'ATTAQUE FINALE', 50]], 540, 640, P(t, WF('s1', /huit/i)), { w: 760 }); }
   
   if (id === 's2' && t >= tEur) paperCard([['❤️ 49 + ➕ 13 × 5', 62], ['= 114 € 💰', 110, '#2a8a3a'], ['0 € DÉPENSÉ', 48]], 540, 600, P(t, tEur), { w: 820 });
   if (id === 's3' && t >= WF('s3', /Ryzen/i)) polaroid(560, 700, 460, 560, P(t, WF('s3', /Ryzen/i), 0.3), (w, h) => recruitCard(w, h, 'R', t), '@RYZEN · L\'INVENTEUR', -0.04);
@@ -56,5 +56,5 @@ function draw(t) {
   if (id === 's5') paperCard([['@BACHIRA · @EVKOS', 60], ['PAS CETTE FOIS…', 70, C.red], ['RECOMMENTEZ POUR LE JOUR 3 !', 44]], 540, 600, P(t, S('s5') + 0.1), { w: 860 });
   if (id === 's6') paperCard([['🔧 FABRIQUÉ PAR RYZEN', 62], ['= MOINS CHER', 84, '#2a8a3a'], ...(t >= WF('s6', /manque/i) ? [['MAIS PAS ASSEZ 😬', 60, C.red]] : [])], 540, 600, P(t, S('s6') + 0.2), { w: 820 });
   if (id === 'q') [['A', 'DRONE ESPION', 0], ['B', 'FUMIGÈNES MAISON', 1], ['C', 'GRAPPIN', 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, 760, 300, 360, P(t, WF('q', [/drone/i, /fumig/i, /grappin/i][i]), 0.25), (w, h) => { gadget(w, h, ['D', 'B', 'G'][i], t); price(w, h, ['280 €', '160 €', '220 €'][i]); x.save(); x.translate(w * 0.2, h * 0.12); x.rotate(-0.12); txt(['400 €', '250 €', '320 €'][i], 0, 0, 30, '#8a8f99', { stroke: false }); x.strokeStyle = C.red; x.lineWidth = 5; x.beginPath(); x.moveTo(-50, 0); x.lineTo(50, 0); x.stroke(); x.restore(); rrc(w / 2, h * 0.78, w * 0.9, 40, 10, '#fbf3e4', 0); txt(['ESPIONNER LE BARON', 'DISPARAÎTRE', 'GRIMPER SUR LES TOITS'][i], w / 2, h * 0.78 + 2, 26, '#2457a8', { stroke: false }); rrc(w / 2, h * 0.9, w * 0.86, 44, 12, '#1b1b1f', 0); txt('IL MANQUE ' + ([280, 160, 220][i] - 114) + ' €', w / 2, h * 0.9 + 3, 30, '#ff6a5a', { stroke: false }); }, k + ' · ' + lab, (i - 1) * 0.05));
-  if (id === 'q') paperCard([['VOTE A, B OU C 👇', 74, C.red], ['❤️ LIKE + ➕ ABONNE-TOI', 48], ['POUR REMPLIR LA CAISSE', 44]], 540, 1180, P(t, B.q.end - 0.5), { w: 760 });
+  if (id === 'q') paperCard([['VOTE A, B OU C 👇', 74, C.red], ['❤️ 1 LIKE = 1 €', 50, '#2a8a3a'], ['➕ 1 ABONNÉ = 5 €', 50, '#2a8a3a']], 540, 1180, P(t, B.q.end - 0.5), { w: 760 });
 }
