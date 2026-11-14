@@ -9,3 +9,5 @@ episodes/*/sheet.jpg
 episodes/*/voix.*
 episodes/*/user_clean.wav
 episodes/*/asr.json
+episodes/*/qa.jpg
+episodes/*/qa_f0.jpg
