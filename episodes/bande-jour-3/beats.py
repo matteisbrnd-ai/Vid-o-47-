@@ -15,7 +15,7 @@ BEATS = [
   ('s2', "BoBtheGoD veut être notre espion : accordé !", "Bob the God veut être notre espion : accordé !", 0.1),
   ('s3', "Sa.lah veut être le combattant : bienvenue !", "Salah veut être le combattant : bienvenue !", 0.1),
   ('s4', "Et EVKOS, archer d'élite : tu es dans la bande !", "Et Évkos, archer d'élite : tu es dans la bande !", 0.15),
-  ('s5', "On est 76. Le Baron a 100 hommes. Abonne-toi pour rejoindre la bande… et on le dépasse !", "On est soixante-seize. Le Baron a cent hommes. Abonne-toi pour rejoindre la bande... et on le dépasse !", 0.15),
+  ('s5', "On est 76. Le Baron a 1000 hommes. L'attaque, c'est dans 7 jours : il faut être 1000 ! Abonne-toi pour rejoindre la bande !", "On est soixante-seize. Le Baron a mille hommes. L'attaque, c'est dans sept jours : il faut être mille ! Abonne-toi pour rejoindre la bande !", 0.15),
   ('q', "Demain, on reprend le port. Par où on passe ? A, par la mer. B, par les égouts. C, par l'entrepôt. Écris ta lettre… et ton rôle !", "Demain, on reprend le port. Par où on passe ? A, par la mer. B, par les égouts. C, par l'entrepôt. Écris ta lettre... et ton rôle !", 1.6),
 ]
 CUES = [('ff', '+0', 'sting'), ('ff', 'PORT', 'bam'), ('s1', 'caisse', 'cash'), ('s1', 'fabrique', 'rattle'), ('s2', 'accordé', 'dingdong'), ('s3', 'bienvenue', 'dingdong'), ('s4', 'bande', 'dingdong'),

@@ -65,7 +65,7 @@ function draw(t) {
   if (false) { for (let i = 0; i < 14; i++) { const k = ((t * 0.6 + i * 0.13) % 1); ell(100 + (i * 83) % 600, 900 + k * 900, 30, 18, '#7ccf6a', 4); txt('€', 100 + (i * 83) % 600, 904 + k * 900, 26, '#2a6a2a', { stroke: false }); } }
   cast('boss', 1500, GY, 0.85, t, { mood: 'smug', look: -1, blink: t > 0.6 }); cast('guard', 1300, GY, 0.75, t, { mood: 'neutral', look: -1, blink: t > 0.6 }); cast('guard', 1720, GY, 0.75, t, { mood: 'neutral', look: -1, blink: t > 0.6 });
   
-  scoreboard(t, 76, 100);
+  scoreboard(t, 76, 1000);
   hookCard(t, [['HIER : LES FUMIGÈNES ✓', 56, '#2a8a3a'], ['CETTE NUIT, LE BARON', 60], ['A VOLÉ LE PORT !', 92, C.red]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') { paperCard([['114 + ❤️ 66 + ➕ 13 × 5', 50], ['= 245 € 💰', 100, '#2a8a3a']], 540, 520, P(t, S('s1')), { w: 860 });
@@ -73,7 +73,7 @@ function draw(t) {
   if (id === 's2') { bubble(540, 560, 'BoBtheGoD', "A j'aimerais bien être un espion", P(t, S('s2'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s2', /accordé/i), 0.3), (w, h) => memberCard(w, h, SPY, t), '@BOBTHEGOD · L\'ESPION', 0.04); }
   if (id === 's3') { bubble(540, 560, 'sa.lah.7', 'A et je veut être le combattant', P(t, S('s3'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s3', /bienvenue/i), 0.3), (w, h) => memberCard(w, h, FIGHTER, t), '@SA.LAH.7 · LE COMBATTANT', -0.04); }
   if (id === 's4') { bubble(540, 560, 'EVKOS', "Combattant bon au tir à l'arc", P(t, S('s4'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s4', /archer/i), 0.3), (w, h) => memberCard(w, h, ARCHER, t, (w2, h2) => { x.strokeStyle = '#7a5232'; x.lineWidth = 8; x.beginPath(); x.arc(w2 * 0.82, h2 * 0.5, 70, -1.2, 1.2); x.stroke(); x.strokeStyle = OL; x.lineWidth = 3; x.beginPath(); x.moveTo(w2 * 0.82 + 25, h2 * 0.5 - 65); x.lineTo(w2 * 0.82 + 25, h2 * 0.5 + 65); x.stroke(); }), "@EVKOS · L'ARCHER", 0.04); }
-  if (id === 's5') { paperCard([['76 / 100', 120, C.red], ['IL MANQUE 24 MEMBRES', 56], ['➕ ABONNE-TOI = TU REJOINS LA BANDE', 38, '#2a8a3a']], 540, 620, P(t, S('s5') + 0.2), { w: 900 }); }
+  if (id === 's5') { paperCard([['76 / 1000', 120, C.red], ['OBJECTIF : 1000 EN 7 JOURS ⏳', 50], ['➕ ABONNE-TOI = TU REJOINS LA BANDE', 38, '#2a8a3a']], 540, 620, P(t, S('s5') + 0.2), { w: 900 }); }
   if (id === 'q') { const act = t >= WF('q', /entrepôt/i) ? 2 : t >= WF('q', /égouts/i) ? 1 : t >= WF('q', /mer/i) ? 0 : -1;
     [['A', 'PAR LA MER', 0], ['B', 'PAR LES ÉGOUTS', 1], ['C', "PAR L'ENTREPÔT", 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, act === i ? 720 : 760, act === i ? 340 : 290, act === i ? 400 : 340, P(t, WF('q', [/mer/i, /égouts/i, /entrepôt/i][i]), 0.25), (w, h) => routeCard(w, h, k), k + ' · ' + lab, (i - 1) * 0.05));
     if (t > WF('q', /lettre/i)) paperCard([['A, B OU C 👇', 80, C.red], ['+ TON RÔLE DANS LA BANDE', 46]], 540, 1180, P(t, WF('q', /lettre/i)), { w: 820 }); }
