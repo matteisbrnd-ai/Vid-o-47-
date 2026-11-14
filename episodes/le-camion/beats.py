@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Ce camion est coincé sous un pont… et 47 le décoince SANS AUCUN outil !", "Ce camion est coincé sous un pont... et Quarante-sept le décoince SANS AUCUN outil !", 0.2),
+  ('ff', "Le camion de GTA 6 est coincé sous le pont… et 47 le décoince SANS AUCUN outil !", "Le camion de Gé-Té-A six est coincé sous le pont... et Quarante-sept le décoince SANS AUCUN outil !", 0.2),
   ('s1', "Ce soir à minuit, c'est la sortie de GTA 6. Et ce camion livre tous les jeux du magasin.", "Ce soir à minuit, c'est la sortie de Gé-Té-A six. Et ce camion livre tous les jeux du magasin.", 0.15),
   ('s2', "Problème : le pont fait 3 mètres 50. Le camion, 3 mètres 52. Il est bloqué.", "Problème : le pont fait trois mètres cinquante. Le camion, trois mètres cinquante-deux. Il est bloqué.", 0.15),
   ('s3', "Reculer ? Impossible, il y a des voitures derrière. Et minuit approche.", "Reculer ? Impossible, il y a des voitures derrière. Et minuit approche.", 0.2),
