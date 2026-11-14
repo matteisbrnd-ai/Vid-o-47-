@@ -54,7 +54,7 @@ function routeCard(w, h, k) { const sky2 = x.createLinearGradient(0, 0, 0, h); s
 function draw(t) {
   const id = curId(t), tRico = 9e9, tLola = 9e9, tCer = 9e9, tEur = S('s2'), tAbo = S('s2');
   const K = [[0, 0, 1540, 1300, 1.0], [0.2, 2.6, 1540, 1350, 1.35], [S('s0'), 1.0, 1000, 1350, 0.62], [S('s1'), 1.0, 300, 1500, 1.35], [S('s2'), 0.8, 450, 1450, 1.15],
-    [S('s6'), 1.0, 1540, 1400, 0.9], [S('q'), 1.0, 1000, 1350, 0.62], [S('cta') + 1.5, 1.4, 1540, 1450, 1.6]];
+    [S('s6'), 1.0, 1540, 1400, 0.9], [S('q'), 1.0, 1000, 1350, 0.62], [S('cta') + 1.5, 1.4, 1540, 1390, 1.6]];
   camPath(t, K);
   city(t);
   cast('rico', 60, GY, 0.75, t, { mood: 'smug', look: 1, blink: t > 0.6, armUp: id === 's1' && t >= tRico && t < tLola });
@@ -69,8 +69,8 @@ function draw(t) {
   if (id !== 'ff') scoreboard(t, 76, 1000);
   hookCard(t, [['LE BARON A VOLÉ', 70], ['LE PORT ⚓', 110, C.red], ["C'EST TOI QUI DÉCIDES 👇", 52]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
-  if (id === 's0') paperCard([['1 ABONNÉ = 1 SOLDAT', 70, '#2a8a3a'], ['OBJECTIF : 1000', 90, C.red]], 540, 600, P(t, S('s0') + 0.2), { w: 860 });
-  if (id === 's1') { paperCard([['HIER : 58 % B ✓', 70, '#2a8a3a'], ['💰 RESTE 85 €', 96]], 540, 520, P(t, S('s1')), { w: 820 });
+  if (id === 's0') paperCard([['1 ABONNÉ = 1 SOLDAT', 66, '#2a8a3a'], ['OBJECTIF : 1000', 90, C.red], ['AVANT LE JOUR 10 · J-7 ⏳', 50]], 540, 600, P(t, S('s0') + 0.2), { w: 860 });
+  if (id === 's1') { paperCard([['HIER : 58 % B ✓', 66, '#2a8a3a'], ['💰 RESTE 85 €', 92], ['❤️ 1 LIKE = 1 € DANS LA CAISSE', 40]], 540, 520, P(t, S('s1')), { w: 820 });
     polaroid(560, 900, 380, 340, P(t, WF('s1', /fumigènes/i), 0.3), (w, h) => { gadget(w, h, 'B', t); x.save(); x.translate(w * 0.8, h * 0.14); x.rotate(0.18); rrc(0, 0, 150, 56, 14, '#2a8a3a', 5); txt('ACHETÉ ✓', 0, 3, 32, '#fff', { stroke: false }); x.restore(); }, 'FUMIGÈNES', -0.04); }
   if (id === 's2') { bubble(540, 560, 'BoBtheGoD', "A j'aimerais bien être un espion", P(t, S('s2'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s2', /espion/i), 0.3), (w, h) => memberCard(w, h, SPY, t), '@BOBTHEGOD · L\'ESPION', 0.04); }
   if (id === 's3') { bubble(540, 560, 'sa.lah.7', 'A et je veut être le combattant', P(t, S('s3'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s3', /combattant/i), 0.3), (w, h) => memberCard(w, h, FIGHTER, t), '@SA.LAH.7 · LE COMBATTANT', -0.04); }
