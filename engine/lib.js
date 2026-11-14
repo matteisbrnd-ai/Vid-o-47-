@@ -163,7 +163,7 @@ function captions(t) { if (t < (window.NOCAP_UNTIL || 0)) return; resetCam(); co
   const toks = b.show.replace(/\s+([?!:;»])/g, ' $1').split(/[ \t\n]+/).filter(Boolean), m = b.words.length;
   const tt = toks.map((w, i) => ({ w: w.toUpperCase(), t0: b.words[Math.min(m - 1, Math.floor(i * m / toks.length))].t0 }));
   const chunks = []; let cur = []; font(64, 'Mont'); const width = ws => ws.reduce((a, w) => a + x.measureText(w.w).width + 24, 0);
-  tt.forEach(w => { if (cur.length && (cur.length >= 3 || width([...cur, w]) > 640 || /[.!?…,]$/.test(cur[cur.length - 1].w))) { chunks.push(cur); cur = []; } cur.push(w); }); if (cur.length) chunks.push(cur);
+  tt.forEach(w => { if (cur.length && (cur.length >= 5 || width([...cur, w]) > 900 || /[.!?…]$/.test(cur[cur.length - 1].w))) { chunks.push(cur); cur = []; } cur.push(w); }); if (cur.length) chunks.push(cur);
   let ch = chunks[0]; chunks.forEach(c => { if (t >= c[0].t0 - 0.05) ch = c; }); const y = 1300, sz = 64, tw = width(ch);
   x.fillStyle = 'rgba(14,15,18,.62)'; x.beginPath(); x.roundRect(540 - tw / 2 - 26, y - sz * 0.8, tw + 40, sz * 1.55, 22); x.fill();
   let cx = 540 - tw / 2 + 8; ch.forEach((w, i) => { const ww = x.measureText(w.w).width, act = t >= w.t0 && (i === ch.length - 1 || t < ch[i + 1].t0);

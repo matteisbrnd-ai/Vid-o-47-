@@ -38,10 +38,10 @@ function recruitCard(w, h, who, t) { const g2 = x.createLinearGradient(0, 0, 0, 
 function bubble(px, py, user, msg, p) { if (p <= 0) return; x.save(); x.translate(px, py); const k = eBack(clamp(p)) * 1.7; x.scale(k, k);
   font(38); const w = Math.max(x.measureText(msg).width, 300) + 150; rbox(-w / 2, -70, w, 140, 30, '#ffffff', 5); ell(-w / 2 + 60, 0, 36, 36, '#c9ced6', 3); txt(user[0].toUpperCase(), -w / 2 + 60, 4, 34, OL, { stroke: false });
   x.textAlign = 'left'; font(30); x.fillStyle = '#8a8f99'; x.fillText('@' + user, -w / 2 + 112, -18); font(38); x.fillStyle = OL; x.fillText(msg, -w / 2 + 112, 28); x.textAlign = 'center'; x.restore(); }
-function scoreboard(t, us, them) { resetCam(); rrc(540, 175, 980, 120, 30, 'rgba(20,20,28,.85)', 5);
+function scoreboard(t, us, them) { resetCam(); x.save(); x.translate(540, 175); x.scale(1.15, 1.15); x.translate(-540, -175); rrc(540, 175, 980, 120, 30, 'rgba(20,20,28,.85)', 5);
   txt('BANDE DE 47', 270, 150, 34, C.orange, { stroke: false }); txt(us + ' MEMBRES', 270, 198, 50, '#fff', { stroke: false });
   ell(540, 175, 52, 52, C.red, 5); txt('VS', 540, 180, 40, '#fff', { stroke: false });
-  txt('LE BARON', 810, 150, 34, '#f5c542', { stroke: false }); txt(them + ' HOMMES', 810, 198, 50, '#fff', { stroke: false }); }
+  txt('LE BARON', 810, 150, 34, '#f5c542', { stroke: false }); txt(them + ' HOMMES', 810, 198, 50, '#fff', { stroke: false }); x.restore(); }
 const SPY = { hat: 'cap', hatCol: '#3a3f4a', hatCol2: '#2a2d36', body: '#5a4a3a', body2: '#3a2f25', pants: '#2a2d36', num: false, glasses: true };
 const FIGHTER = { hat: 'hair', hairCol: '#1b1b1f', body: '#c0392b', body2: '#962d22', pants: '#2a2d36', num: false };
 const ARCHER = { hat: 'beanie', hatCol: '#2a8a3a', hatCol2: '#1f6a2c', body: '#3c6b3a', body2: '#2c5a2c', pants: '#5a3a22', num: false };
@@ -53,30 +53,31 @@ function routeCard(w, h, k) { const sky2 = x.createLinearGradient(0, 0, 0, h); s
   if (k === 'C') { rbox(w * 0.12, h * 0.3, w * 0.76, h * 0.5, 8, '#c96a4a', 6); poly([[w * 0.08, h * 0.32], [w / 2, h * 0.12], [w * 0.92, h * 0.32]], '#7a3a2a', 6); rbox(w * 0.35, h * 0.5, w * 0.3, h * 0.3, 4, '#5a3a22', 5); [0.25, 0.75].forEach(px => rbox(w * px - 20, h * 0.4, 40, 30, 4, '#bfe3ff', 3)); } }
 function draw(t) {
   const id = curId(t), tRico = 9e9, tLola = 9e9, tCer = 9e9, tEur = S('s2'), tAbo = S('s2');
-  const K = [[0, 0, 1540, 1250, 1.25], [WF('ff', /nuit/i) - 0.1, 1.2, 1500, 1300, 0.62], [S('s1'), 1.0, 300, 1500, 1.35], [S('s2'), 0.8, 450, 1450, 1.15],
-    [S('s5'), 1.2, 1000, 1350, 0.6], [S('s6'), 1.0, 1540, 1350, 0.8], [S('q'), 1.0, 1000, 1350, 0.62]];
+  const K = [[0, 0, 1540, 1300, 1.0], [0.2, 2.6, 1540, 1350, 1.35], [S('s0'), 1.0, 1000, 1350, 0.62], [S('s1'), 1.0, 300, 1500, 1.35], [S('s2'), 0.8, 450, 1450, 1.15],
+    [S('s6'), 1.0, 1540, 1400, 0.9], [S('q'), 1.0, 1000, 1350, 0.62], [S('cta') + 1.5, 1.4, 1540, 1450, 1.6]];
   camPath(t, K);
   city(t);
   cast('rico', 60, GY, 0.75, t, { mood: 'smug', look: 1, blink: t > 0.6, armUp: id === 's1' && t >= tRico && t < tLola });
   cast('woman', 260, GY, 0.75, t, { ...LOLA, mood: 'smile', look: 1, blink: t > 0.6 });
   p47(460, GY, 0.78, t, { mood: id === 'ff' || id === 's2' ? 'smile' : 'smug', look: 1, blink: t > 0.6 });
   cast('inspector', 660, GY, 0.75, t, { ...RYZEN, mood: 'smile', look: 1, blink: t > 0.6 }); cast('inspector', 860, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: t > 0.6 });
-  const ord = ['ff', 's1', 's2', 's3', 's4', 's5', 's6', 'q', 'cta'], oi = ord.indexOf(id); if (oi >= 2) cast('inspector', 1060, GY, 0.75, t, { ...SPY, mood: 'smug', look: -1 }); if (oi >= 3) cast('inspector', -140, GY, 0.75, t, { ...FIGHTER, mood: 'angry', look: 1 }); if (oi >= 4) cast('inspector', -340, GY, 0.75, t, { ...ARCHER, mood: 'smug', look: 1 });
+  const ord = ['ff', 's0', 's1', 's2', 's3', 's4', 's6', 'q', 'cta'], oi = ord.indexOf(id); if (oi >= 3) cast('inspector', 1060, GY, 0.75, t, { ...SPY, mood: 'smug', look: -1 }); if (oi >= 4) cast('inspector', -140, GY, 0.75, t, { ...FIGHTER, mood: 'angry', look: 1 }); if (oi >= 5) cast('inspector', -340, GY, 0.75, t, { ...ARCHER, mood: 'smug', look: 1 });
   if (false) { for (let i = 0; i < 14; i++) { const k = ((t * 0.6 + i * 0.13) % 1); ell(100 + (i * 83) % 600, 900 + k * 900, 30, 18, '#7ccf6a', 4); txt('€', 100 + (i * 83) % 600, 904 + k * 900, 26, '#2a6a2a', { stroke: false }); } }
   cast('boss', 1500, GY, 0.85, t, { mood: 'smug', look: -1, blink: t > 0.6 }); cast('guard', 1300, GY, 0.75, t, { mood: 'neutral', look: -1, blink: t > 0.6 }); cast('guard', 1720, GY, 0.75, t, { mood: 'neutral', look: -1, blink: t > 0.6 });
   
+  if (id === 'ff') { const k = seg(t, 0.2, 1.4); x.save(); cam(1540, 1300, 1.0 + 0.35 * eIO(seg(t, 0.2, 2.8)), 0, t); x.fillStyle = OL; x.fillRect(1700, 820 - 230 * k, 10, 230 * k + 10); poly([[1710, 820 - 230 * k], [1830, 850 - 230 * k], [1710, 880 - 230 * k]], '#1b1b1f', 5); txt('B', 1755, 852 - 230 * k, 34, '#f5c542', { stroke: false }); x.restore(); resetCam(); }
   if (id !== 'ff') scoreboard(t, 76, 1000);
-  hookCard(t, [['HIER : LES FUMIGÈNES ✓', 56, '#2a8a3a'], ['CETTE NUIT, LE BARON', 60], ['A VOLÉ LE PORT !', 92, C.red]], B.ff.end + 0.1);
+  hookCard(t, [['LE BARON A VOLÉ', 70], ['LE PORT ⚓', 110, C.red], ["C'EST TOI QUI DÉCIDES 👇", 52]], B.ff.end + 0.1);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
-  if (id === 's1') { paperCard([['114 + ❤️ 66 + ➕ 13 × 5 = 245 €', 46], ...(t >= WF('s1', /reste/i) ? [['− 160 € (FUMIGÈNES)', 50, C.red], ['= 85 € RESTANTS', 76, '#2a8a3a']] : [['💰 245 €', 100, '#2a8a3a']])], 540, 520, P(t, S('s1')), { w: 900 });
-    if (t >= WF('s1', /fabrique/i)) polaroid(560, 900, 380, 340, P(t, WF('s1', /fabrique/i), 0.3), (w, h) => { gadget(w, h, 'B', t); x.save(); x.translate(w * 0.8, h * 0.14); x.rotate(0.18); rrc(0, 0, 150, 56, 14, '#2a8a3a', 5); txt('ACHETÉ ✓', 0, 3, 32, '#fff', { stroke: false }); x.restore(); }, 'FUMIGÈNES · −160 €', -0.04); }
+  if (id === 's0') paperCard([['1 ABONNÉ = 1 SOLDAT', 70, '#2a8a3a'], ['OBJECTIF : 1000', 90, C.red]], 540, 600, P(t, S('s0') + 0.2), { w: 860 });
+  if (id === 's1') { paperCard([['HIER : 58 % B ✓', 70, '#2a8a3a'], ['💰 RESTE 85 €', 96]], 540, 520, P(t, S('s1')), { w: 820 });
+    polaroid(560, 900, 380, 340, P(t, WF('s1', /fumigènes/i), 0.3), (w, h) => { gadget(w, h, 'B', t); x.save(); x.translate(w * 0.8, h * 0.14); x.rotate(0.18); rrc(0, 0, 150, 56, 14, '#2a8a3a', 5); txt('ACHETÉ ✓', 0, 3, 32, '#fff', { stroke: false }); x.restore(); }, 'FUMIGÈNES', -0.04); }
   if (id === 's2') { bubble(540, 560, 'BoBtheGoD', "A j'aimerais bien être un espion", P(t, S('s2'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s2', /espion/i), 0.3), (w, h) => memberCard(w, h, SPY, t), '@BOBTHEGOD · L\'ESPION', 0.04); }
   if (id === 's3') { bubble(540, 560, 'sa.lah.7', 'A et je veut être le combattant', P(t, S('s3'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s3', /combattant/i), 0.3), (w, h) => memberCard(w, h, FIGHTER, t), '@SA.LAH.7 · LE COMBATTANT', -0.04); }
   if (id === 's4') { bubble(540, 560, 'EVKOS', "Combattant bon au tir à l'arc", P(t, S('s4'), 0.2)); polaroid(560, 860, 380, 440, P(t, WF('s4', /archer/i), 0.3), (w, h) => memberCard(w, h, ARCHER, t, (w2, h2) => { x.strokeStyle = '#7a5232'; x.lineWidth = 8; x.beginPath(); x.arc(w2 * 0.82, h2 * 0.5, 70, -1.2, 1.2); x.stroke(); x.strokeStyle = OL; x.lineWidth = 3; x.beginPath(); x.moveTo(w2 * 0.82 + 25, h2 * 0.5 - 65); x.lineTo(w2 * 0.82 + 25, h2 * 0.5 + 65); x.stroke(); }), "@EVKOS · L'ARCHER", 0.04); }
-  if (id === 's5') { paperCard([['76 / 1000', 120, C.red], ['ATTAQUE FINALE : JOUR 10 ⏳', 50], ['➕ 1 ABONNÉ = 1 SOLDAT DE PLUS', 40, '#2a8a3a']], 540, 620, P(t, S('s5') + 0.2), { w: 900 }); }
-  if (id === 's6') paperCard([['DEMAIN : LE PORT', 64], ['120 GARDES', 80, C.red], ['NOUS : 76 + 💨 50 = 126 💪', 52, '#2a8a3a']], 540, 620, P(t, S('s6') + 0.2), { w: 900 });
+  if (id === 's6') { paperCard([['PORT : 120 GARDES', 74, C.red], ['NOUS : 76 + 💨 = 126 💪', 60, '#2a8a3a']], 540, 520, P(t, S('s6') + 0.2), { w: 880 }); if (t > WF('s6', /fumigènes/i)) { cam(1540, 1400, 0.9, 0, t); [0, 1, 2, 3].forEach(i => puff(1280 + i * 170, 1560 - Math.sin(i) * 60, 170 + 90 * seg(t, WF('s6', /fumigènes/i) + i * 0.15, B.s6.end), clamp((t - WF('s6', /fumigènes/i) - i * 0.15) * 3) * 0.9)); resetCam(); } }
   if (id === 'q') { const act = t >= WF('q', /entrepôt/i) ? 2 : t >= WF('q', /égouts/i) ? 1 : t >= WF('q', /mer/i) ? 0 : -1;
     [['A', 'PAR LA MER', 0], ['B', 'PAR LES ÉGOUTS', 1], ['C', "PAR L'ENTREPÔT", 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, act === i ? 640 : 670, act === i ? 330 : 280, act === i ? 380 : 320, P(t, WF('q', [/mer/i, /égouts/i, /entrepôt/i][i]), 0.25), (w, h) => routeCard(w, h, k), k + ' · ' + lab, (i - 1) * 0.05));
     if (t > WF('q', /lettre/i)) paperCard([['A, B OU C 👇', 80, C.red], ['+ TON RÔLE DANS LA BANDE', 46]], 540, 1030, P(t, WF('q', /lettre/i)), { w: 820 }); }
-  if (id === 'cta') paperCard([['VOTE A, B OU C 👇', 66, C.red], ['❤️ 1 LIKE = 1 €', 60, '#2a8a3a'], ['➕ 1 ABONNÉ = 1 SOLDAT', 54], ['🔖 ENREGISTRE POUR SUIVRE', 44]], 540, 640, P(t, S('cta')), { w: 880 });
+  if (id === 'cta') { const tB = WF('cta', /attention/i); if (t < tB) paperCard([['👥 TAGUE UN POTE', 74], ['= VOUS ENTREZ EN DUO', 60, '#2a8a3a'], ['VOTE A, B OU C 👇', 56, C.red]], 540, 640, P(t, S('cta')), { w: 880 }); else paperCard([['ATTENTION…', 64], ['LE BARON PRÉPARE', 70, C.red], ['QUELQUE CHOSE 😈', 58], ['👇 VOTE A, B OU C', 44, '#2457a8']], 540, 540, P(t, tB + 0.2), { w: 820 }); }
 }
