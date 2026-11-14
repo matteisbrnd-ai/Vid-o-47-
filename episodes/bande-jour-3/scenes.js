@@ -78,5 +78,5 @@ function draw(t) {
   if (id === 'q') { const act = t >= WF('q', /entrepôt/i) ? 2 : t >= WF('q', /égouts/i) ? 1 : t >= WF('q', /mer/i) ? 0 : -1;
     [['A', 'PAR LA MER', 0], ['B', 'PAR LES ÉGOUTS', 1], ['C', "PAR L'ENTREPÔT", 2]].forEach(([k, lab, i]) => polaroid(200 + i * 340, act === i ? 640 : 670, act === i ? 330 : 280, act === i ? 380 : 320, P(t, WF('q', [/mer/i, /égouts/i, /entrepôt/i][i]), 0.25), (w, h) => routeCard(w, h, k), k + ' · ' + lab, (i - 1) * 0.05));
     if (t > WF('q', /lettre/i)) paperCard([['A, B OU C 👇', 80, C.red], ['+ TON RÔLE DANS LA BANDE', 46]], 540, 1030, P(t, WF('q', /lettre/i)), { w: 820 }); }
-  if (id === 'cta') paperCard([['❤️ 1 LIKE = 1 €', 70, '#2a8a3a'], ['➕ 1 ABONNÉ = 1 SOLDAT', 60], ['🔖 ENREGISTRE POUR SUIVRE', 48]], 540, 640, P(t, S('cta')), { w: 880 });
+  if (id === 'cta') paperCard([['VOTE A, B OU C 👇', 66, C.red], ['❤️ 1 LIKE = 1 €', 60, '#2a8a3a'], ['➕ 1 ABONNÉ = 1 SOLDAT', 54], ['🔖 ENREGISTRE POUR SUIVRE', 44]], 540, 640, P(t, S('cta')), { w: 880 });
 }
