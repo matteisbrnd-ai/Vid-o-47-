@@ -16,7 +16,7 @@ BEATS = [
   ('ff', "Le Baron a capturé Salah !", "Le Baron a capturé Sala !", 0.15),
   ('s0', "Sa vengeance. Parce qu'hier, grâce à vous, on lui a volé son port.", "Sa vengeance. Parce qu'hier, grâce à vous, on lui a volé son port.", 0.1),
   ('s1', "Nous : 198 euros et 89 soldats. Lui ? 1000.", "Nous : cent quatre-vingt-dix-huit euros et quatre-vingt-neuf soldats. Lui ? Mille.", 0.35),
-  ('q', "A : on attaque… on risque des soldats. B : on négocie… il veut 150 euros. C : Bob s'infiltre… gratuit, mais s'il est pris, on perd Bob.", "A : on attaque... on risque des soldats. B : on négocie... il veut cent cinquante euros. C : Bob s'infiltre... gratuit, mais s'il est pris, on perd Bob.", 0.3),
+  ('q', "A : on attaque… on risque des soldats. B : on négocie… il veut 300 euros, il nous en manque 102 ! C : Bob s'infiltre… gratuit, mais s'il est pris, on perd Bob.", "A : on attaque... on risque des soldats. B : on négocie... il veut trois cents euros, il nous en manque cent deux ! C : Bob s'infiltre... gratuit, mais s'il est pris, on perd Bob.", 0.3),
   ('s2', "Ici, ton like, c'est 1 euro dans la caisse. Ton abonnement, un soldat. Ton rôle en commentaire, et tu rejoins la bande. Sans toi, Salah reste en cage.", "Ici, ton like, c'est un euro dans la caisse. Ton abonnement, un soldat. Ton rôle en commentaire, et tu rejoins la bande. Sans toi, Sala reste en cage.", 0.2),
   ('cta', "Écris A, B ou C… et le rôle que TU veux !", "Écris A, B ou C... et le rôle que TOI tu veux !", 0.2),
   ('end', "T'as 24 heures. Sinon, Salah…", "T'as vingt-quatre heures. Sinon, Sala...", 0.25),

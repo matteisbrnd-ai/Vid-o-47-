@@ -75,7 +75,7 @@ function draw(t) {
   window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = id !== 'ff';
   const shotA = id === 'q' && t >= tA - 0.15 && t < tB - 0.15, shotB = id === 'q' && t >= tB - 0.15 && t < tC - 0.15, shotC = id === 'q' && t >= tC - 0.15;
   camPath(t, [[0, 0, 2160, 1400, 1.75], [S('s0'), 0.3, 1600, 1300, 1.0], [WF('s0', /volé/i) + 0.5, 0.3, 2200, 1420, 1.35], [S('s1'), 0.3, 2200, 1420, 1.35], [S('s2'), 0.3, 2100, 1400, 1.55]]);
-  if (shotA) cam(150 + 120 * seg(t, tA, tB), 1400, 1.0 + 0.4 * seg(t, tA, tB), 0, t); if (shotB) cam(2380, 1460, 1.75 + 0.15 * seg(t, tB, tC), 0, t); if (shotC) cam(1900 + 150 * seg(t, tC, B.q.end), 1450, 1.6, 0, t);
+  if (shotA) cam(150 + 120 * seg(t, tA, tB), 1400, 1.0 + 0.4 * seg(t, tA, tB), 0, t); if (shotB) cam(2380, 1420, 1.3 + 0.1 * seg(t, tB, tC), 0, t); if (shotC) cam(1900 + 150 * seg(t, tC, B.q.end), 1450, 1.6, 0, t);
   if (id === 's2') cam(2100, 1400, 1.55 + 0.25 * seg(t, S('s2'), B.s2.end), 0, t);
   if (id === 'cta') cam(lerp(1300, -300, eIO(seg(t, S('cta'), B.cta.end))), 1450, lerp(0.8, 1.05, eIO(seg(t, S('cta'), B.cta.end))), 0, t);
   if (id === 'end') cam(2050, 1360, 2.1 + 0.25 * seg(t, S('end'), B.end.end), 0, t);
@@ -106,8 +106,8 @@ function draw(t) {
     txt(t >= t89 ? String(Math.round(89 * clamp((t - t89) / 0.5))) : '?', -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('LE BARON', 270, -62, 54, '#f5c542', { stroke: false }); txt(t >= t1000 ? '1000' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore();
     if (t >= tEur) pill('💰 CAISSE : 198 €', 540, 560, P(t, tEur), '#2b2b30'); }
   if (id === 'q') { const hiK = shotC ? 'C' : shotB ? 'B' : shotA ? 'A' : ''; [['A', 'ATTAQUER', tA], ['B', 'NÉGOCIER', tB], ['C', 'ESPION', tC]].forEach(([k, lab, tt]) => { if (t >= tt - 0.15) btn(k, lab, clamp((t - tt + 0.15) / 0.25), hiK === k); });
-    card(shotC ? 'C : BOB S\'INFILTRE 🕵️' : shotB ? 'B : ON NÉGOCIE 🤝' : 'A : ON ATTAQUE ⚔️', shotC ? 'GRATUIT… MAIS RISQUÉ' : shotB ? 'IL VEUT 150 € 💰' : 'ON PEUT PERDRE DES SOLDATS', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1);
-    pill(shotC ? '⚠️ S\'IL EST PRIS : ON PERD BOB' : shotB ? '💰 IL NE RESTERAIT QUE 48 €' : '⚠️ RISQUE : − SOLDATS', 540, 560, 1, shotC ? '#2457a8' : shotB ? '#c9952a' : C.red); }
+    card(shotC ? 'C : BOB S\'INFILTRE 🕵️' : shotB ? 'B : ON NÉGOCIE 🤝' : 'A : ON ATTAQUE ⚔️', shotC ? 'GRATUIT… MAIS RISQUÉ' : shotB ? 'IL VEUT 300 € 💰' : 'ON PEUT PERDRE DES SOLDATS', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1);
+    pill(shotC ? '⚠️ S\'IL EST PRIS : ON PERD BOB' : shotB ? '💰 IL MANQUE 102 €' : '⚠️ RISQUE : − SOLDATS', 540, 560, 1, shotC ? '#2457a8' : shotB ? '#c9952a' : C.red); if (shotB) pill('= 102 LIKES ❤️', 540, 680, P(t, tB + 1.2), C.red); }
   if (id === 's2') { const step = t >= tSans ? 3 : t >= tRole ? 2 : t >= tAbo ? 1 : 0;
     x.save(); x.translate(900, 120); rrc(0, 0, 300, 80, 20, 'rgba(20,20,28,.9)', 4); txt((step >= 1 ? 90 : 89) + ' VS 1000', 0, 6, 40, '#fff', { stroke: false }); x.restore();
     x.save(); x.translate(180, 120); rrc(0, 0, 300, 80, 20, C.red, 4); const lf = 86399 - (t - S('s2')); txt('⏳ ' + [Math.floor(lf / 3600), Math.floor(lf % 3600 / 60), Math.floor(lf % 60)].map(n => String(n).padStart(2, '0')).join(':'), 0, 6, 34, '#fff', { stroke: false }); x.restore();
