@@ -68,8 +68,8 @@ function comment2(user, l1, l2, p, y = 560) { if (p <= 0) return; resetCam(); x.
 function card(l1, l2, c2, p, y = 300) { if (p <= 0) return; resetCam(); x.save(); x.translate(540, y); const k = eBack(clamp(p)); x.scale(k, k); rrc(0, 0, 1000, 230, 34, 'rgba(255,255,255,.97)', 9); txt(l1, 0, -45, 82, OL, { stroke: false }); txt(l2, 0, 58, 82, c2, { stroke: false }); x.restore(); }
 function flag47(px, py, k) { if (k <= 0) return; x.save(); x.translate(px, py); x.fillStyle = OL; x.fillRect(-5, -240 * k, 10, 240 * k); poly([[5, -240 * k], [130, -210 * k], [5, -180 * k]], C.orange, 5); txt('47', 55, -207 * k, 34, '#fff', { stroke: false }); x.restore(); }
 function draw(t) {
-  const id = curId(t), tPort = WF('ff', /port/i), A = WF('ff', /capturé/i), t89 = WF('s1', /89|quatre/i), t880 = WF('s1', /880|huit/i), tA = WF('q', /attaque/i), tB = WF('q', /négocie/i), tC = WF('q', /infiltre/i),
-    tAbo = WF('cta', /Abonne/i), tEcr = WF('cta', /écris/i), tSin = WF('end', /Sinon/i);
+  const id = curId(t), tPort = WF('ff', /port/i), A = WF('ff', /capturé/i), t89 = WF('s1', /89|quatre/i), t880 = WF('s1', /1000|mille/i), tA = WF('q', /attaque/i), tB = WF('q', /négocie/i), tC = WF('q', /infiltre/i),
+    tAbo = WF('cta', /Abonne/i), tEcr = WF('cta', /commentaire/i), tRole = WF('cta', /rôle/i), tSin = WF('end', /Sinon/i);
   window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = t >= 0.3;
   const shotA = id === 'q' && t >= tA - 0.15 && t < tB - 0.15, shotB = id === 'q' && t >= tB - 0.15 && t < tC - 0.15, shotC = id === 'q' && t >= tC - 0.15;
   const K = [[0, 0, 1600, 1300, 1.0], [A - 0.35, 0.25, 2050, 1380, 1.9], [S('s1'), 0.5, 2200, 1420, 1.35]];
@@ -101,13 +101,14 @@ function draw(t) {
   // --- text, one layer at a time ---
   if (id === 'ff') { if (t < A - 0.2) card('HIER, GRÂCE À VOUS', 'ON A PRIS LE PORT ⚓', '#2a8a3a', P(t, 0, 0.1) || 1); else card('SA VENGEANCE :', 'IL A CAPTURÉ SALAH 😱', C.red, P(t, A - 0.2, 0.2)); }
   if (id === 's1') { const p = eBack(P(t, S('s1'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('NOS SOLDATS', -270, -60, 42, C.orange, { stroke: false });
-    txt(String(Math.round(89 * clamp((t - S('s1')) / 0.6))), -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('SES HOMMES', 270, -60, 42, '#f5c542', { stroke: false }); txt(t >= t880 ? '880' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore(); }
+    txt(String(Math.round(89 * clamp((t - S('s1')) / 0.6))), -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('SES HOMMES', 270, -60, 42, '#f5c542', { stroke: false }); txt(t >= t880 ? '1000' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore(); }
   const btnY = 1200, btn = (k, lab, p, hi) => { x.save(); x.translate(190 + 'ABC'.indexOf(k) * 350, btnY + 260 * (1 - eOut(p))); const sc = 1.12 * (hi ? 1.1 : 1); x.scale(sc, sc); rrc(0, 0, 310, 150, 26, hi ? '#ffe9a8' : C.cream, hi ? 9 : 6); txt(k, 0, -24, 70, C.red, { stroke: false }); txt(lab, 0, 38, 40, OL, { stroke: false }); x.restore(); };
   if (id === 'q') { const hiK = shotC ? 'C' : shotB ? 'B' : shotA ? 'A' : ''; [['A', 'ATTAQUER', tA], ['B', 'NÉGOCIER', tB], ['C', 'ESPION', tC]].forEach(([k, lab, tt]) => { if (t >= tt - 0.15) btn(k, lab, clamp((t - tt + 0.15) / 0.25), hiK === k); });
     card(shotC ? 'C : BOB, NOTRE ESPION,' : shotB ? 'B : ON NÉGOCIE' : 'A : ON ATTAQUE', shotC ? "S'INFILTRE 🕵️" : shotB ? 'AVEC LE BARON 💰' : 'LA PRISON ⚔️', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1); }
   if (id === 'cta') { [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'ESPION']].forEach(([k, lab]) => btn(k, lab, 1, false));
     const n = t >= tAbo + 0.6 ? 90 : 89, p = eBack(P(t, S('cta'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('ABONNE-TOI =', 0, -60, 46, C.orange, { stroke: false }); txt('SOLDAT N°' + n + ' 💪', 0, 40, 100, n === 90 ? '#7cff8a' : '#fff', { stroke: false }); x.restore();
-    if (t >= tEcr) pill('… ET ÉCRIS A, B OU C 👇', 540, 560, P(t, tEcr), '#2457a8'); }
+    if (t >= tEcr && t < tRole) pill('ÉCRIS A, B OU C 👇', 540, 560, P(t, tEcr), '#2457a8');
+    if (t >= tRole) { pill('+ TON RÔLE 👇', 540, 560, P(t, tRole), '#2457a8'); pill('🕵️ ESPION · 🩺 MÉDECIN · 🏹 ARCHER…', 540, 690, P(t, tRole + 0.3), C.orange); } }
   if (id === 'end') { const left = 86399 - Math.max(0, t - S('end')); x.save(); x.translate(540, 560); rrc(0, 0, 520, 130, 34, C.red, 7); txt('⏳ ' + [Math.floor(left / 3600), Math.floor(left % 3600 / 60), Math.floor(left % 60)].map(n => String(n).padStart(2, '0')).join(':'), 0, 8, 80, '#fff', { stroke: false }); x.restore();
     card(t < tSin ? 'TU AS 24 H…' : 'SINON, SALAH…', t < tSin ? 'POUR LE SAUVER' : '😱', C.red, 1); }
 }
