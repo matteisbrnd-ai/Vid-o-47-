@@ -93,6 +93,12 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
       - voice ≤ 2.5 s: event + « TOI » (« Le Baron a capturé un abonné… sauve-le, TOI ! »);
       - then (never before ~3 s) the proof + rule: « Lui, il a juste écrit un commentaire hier. Ici, chaque abonné est un soldat : X contre 1000 » with the scoreboard as an overlay, camera stays on the scene (no cut to wide); captions moved under the hook card (`window.CAP_Y = 600`).
       - The event changes each day (capture, robbery, betrayal, sabotage…) but must hit a REAL commenter and be decided by the vote. Reference: episodes/intro-lab/intro-F.
+    **Intro v2 (2026-11-15, rounds 3–7, 3 independent evaluators per round, goal 60–65 % 3-s hold):** F scored ~36 % avg in round 3; the final **J** scored 47 / 48 / 60 % in round 7 (avg ≈ 52 %, before the last staggering fixes) — the two analysts cap small cartoon accounts around 50 %, so 60–65 % has to be confirmed with REAL TikTok stats (« % encore là à 0:03 »). Template J (reference episodes/intro-lab/intro-J), on top of the F rules:
+      - frame 0: tight close-up of the member's TERRIFIED FACE (camera z ≈ 2.3) with the threat visibly in motion (cage in the air + speed lines), slam at ~0.18 s, light red flash, shake;
+      - ONE text layer at a time: 0–1.1 s one-line hook = the stake (« 1 MIN POUR LE SAUVER ⏳ ») + big timer in tenths (1:00.0 → 0:59.9, never « 00:60 »); 0.3–1.1 s white box « TOI, TU LE SAUVES ? »; 1.1–2.4 s white label « IL A JUSTE COMMENTÉ ÇA 👇 » + big native-style comment (60 px text);
+      - a new visual beat every ~0.5–0.7 s (slam, rattle bars, label, cut); hold the close-up until ~2 s, then cut to a medium two-shot (captive still big + villain fully in frame with the key);
+      - 2.4 s « SINON IL DISPARAÎT 😱 » alone; ~3.2 s « ÉCRIS A, B OU C 👇 » + plain A/B/C buttons with one-word labels (never fake vote counts);
+      - voice ≤ 3 s says what the screen says (« Une minute pour le sauver ! Il a juste commenté… et le Baron l'a capturé. »); no « PAF »-type kid words; captions only after ~5 s (`window.NOCAP_UNTIL`, set AFTER hookCard); « 1 abonné = 1 soldat » + scoreboard only after ~5 s.
     Plan: Saison 1 (Jours 1–10) « La création de la bande » → Jour 10 = attaque finale contre le Baron · Saison 2 (from Jour 11) « La reprise du territoire » · Saison 3 « L'inspecteur contre-attaque » (cat-and-mouse escapes with the inspector, no fighting the police). Each episode opens with the countdown (« J-8 avant l'attaque finale »).
 
 ## Publishing (Metricool → TikTok)
