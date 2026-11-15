@@ -68,47 +68,48 @@ function comment2(user, l1, l2, p, y = 560) { if (p <= 0) return; resetCam(); x.
 function card(l1, l2, c2, p, y = 300) { if (p <= 0) return; resetCam(); x.save(); x.translate(540, y); const k = eBack(clamp(p)); x.scale(k, k); rrc(0, 0, 1000, 230, 34, 'rgba(255,255,255,.97)', 9); txt(l1, 0, -45, 82, OL, { stroke: false }); txt(l2, 0, 58, 82, c2, { stroke: false }); x.restore(); }
 function flag47(px, py, k) { if (k <= 0) return; x.save(); x.translate(px, py); x.fillStyle = OL; x.fillRect(-5, -240 * k, 10, 240 * k); poly([[5, -240 * k], [130, -210 * k], [5, -180 * k]], C.orange, 5); txt('47', 55, -207 * k, 34, '#fff', { stroke: false }); x.restore(); }
 function draw(t) {
-  const id = curId(t), tPort = WF('ff', /port/i), A = WF('ff', /capturé/i), t89 = WF('s1', /89|quatre/i), t880 = WF('s1', /1000|mille/i), tA = WF('q', /attaque/i), tB = WF('q', /négocie/i), tC = WF('q', /infiltre/i),
-    tAbo = WF('cta', /Abonne/i), tEcr = WF('cta', /commentaire/i), tRole = WF('cta', /rôle/i), tSin = WF('end', /Sinon/i);
-  window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = t >= 0.3;
+  const id = curId(t), A = 0.05, tPort = WF('s0', /port/i), tEur = WF('s1', /euros/i), t89 = WF('s1', /89|quatre-vingt-neuf/i), t1000 = Math.min(WF('s1', /Lui/i) + 0.45, B.s1.end - 0.5),
+    tA = WF('q', /attaque/i), tB = WF('q', /négocie/i), tC = WF('q', /infiltre/i), tLike = WF('s2', /like/i), tAbo = WF('s2', /abonné/i), tRole = WF('s2', /rôle/i), tSans = WF('s2', /Sans/i),
+    tEcr = WF('cta', /écris/i), tRole2 = WF('cta', /rôle/i), tSin = WF('end', /Sinon/i);
+  window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = id !== 'ff';
   const shotA = id === 'q' && t >= tA - 0.15 && t < tB - 0.15, shotB = id === 'q' && t >= tB - 0.15 && t < tC - 0.15, shotC = id === 'q' && t >= tC - 0.15;
-  const K = [[0, 0, 1600, 1300, 1.0], [A - 0.35, 0.25, 2050, 1380, 1.9], [S('s1'), 0.5, 2200, 1420, 1.35]];
-  camPath(t, K);
+  camPath(t, [[0, 0, 2050, 1380, 1.9], [S('s0'), 0.3, 1600, 1300, 1.0], [S('s1'), 0.3, 2200, 1420, 1.35], [S('s2'), 0.3, 2100, 1400, 1.55]]);
   if (shotA) cam(150 + 120 * seg(t, tA, tB), 1400, 1.15, 0, t); if (shotB) cam(2380, 1460, 1.75 + 0.15 * seg(t, tB, tC), 0, t); if (shotC) cam(1900 + 150 * seg(t, tC, B.q.end), 1450, 1.6, 0, t);
+  if (id === 's2') cam(2100, 1400, 1.55 + 0.25 * seg(t, S('s2'), B.s2.end), 0, t);
   if (id === 'cta') cam(lerp(1300, -600, eIO(seg(t, S('cta'), B.cta.end))), 1450, lerp(0.8, 1.05, eIO(seg(t, S('cta'), B.cta.end))), 0, t);
   if (id === 'end') cam(2050, 1360, 2.1 + 0.25 * seg(t, S('end'), B.end.end), 0, t);
-  const slam = eOut(seg(t, A - 0.15, A + 0.05)), shake = t > A + 0.05 && t < A + 0.3 ? Math.sin(t * 90) * 14 : 0; x.translate(shake, 0);
-  city(t); flag47(1700, 980, id === 'ff' ? clamp((t - 0.3) / 0.6) : 1);
-  const charge = shotA ? seg(t, tA, tB) * 160 : 0;
-  cast('rico', 60 + charge, GY, 0.75, t, { mood: shotA ? 'angry' : 'smug', look: 1, blink: t > 0.6, walk: shotA ? t * 3 : 0 }); cast('woman', 260 + charge, GY, 0.75, t, { ...LOLA, mood: shotA ? 'angry' : 'smile', look: 1, blink: t > 0.6, walk: shotA ? t * 3 : 0 });
-  p47(460 + charge, GY, 0.78, t, { mood: shotA ? 'angry' : 'smug', look: 1, blink: t > 0.6, armUp: shotA, walk: shotA ? t * 3 : 0 }); cast('inspector', 660 + charge, GY, 0.75, t, { ...RYZEN, mood: 'smile', look: 1, blink: t > 0.6, walk: shotA ? t * 3 : 0 }); cast('inspector', 860 + charge, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: t > 0.6, walk: shotA ? t * 3 : 0 });
+  const slam = eOut(seg(t, -0.15, 0.2)), shake = t > 0.2 && t < 0.45 ? Math.sin(t * 90) * 14 : 0; x.translate(shake, 0);
+  city(t); flag47(1700, 980, id === 's0' ? clamp((t - S('s0') - 0.3) / 0.6) : id === 'ff' ? 0 : 1);
+  const charge = shotA ? seg(t, tA, tB) * 160 : 0, wk = shotA ? t * 3 : 0;
+  cast('rico', 60 + charge, GY, 0.75, t, { mood: shotA ? 'angry' : 'smug', look: 1, blink: t > 0.6, walk: wk }); cast('woman', 260 + charge, GY, 0.75, t, { ...LOLA, mood: shotA ? 'angry' : 'smile', look: 1, blink: t > 0.6, walk: wk });
+  p47(460 + charge, GY, 0.78, t, { mood: shotA ? 'angry' : 'smug', look: 1, blink: t > 0.6, armUp: shotA, walk: wk }); cast('inspector', 660 + charge, GY, 0.75, t, { ...RYZEN, mood: 'smile', look: 1, blink: t > 0.6, walk: wk }); cast('inspector', 860 + charge, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: t > 0.6, walk: wk });
   cast('inspector', -340, GY, 0.75, t, { ...ARCHER, mood: 'smug', look: 1, blink: t > 0.6 });
   const NEW = [[MEDIC, 'LE MEC'], [ELITE, 'REDARK'], [ARCH2, 'RAYAN'], [BRAIN, 'VRK83K5'], [SUB, 'DYDYLAN']];
   NEW.forEach(([look], i) => cast('inspector', -540 - i * 200, GY, 0.75, t, { ...look, mood: 'smug', look: 1, blink: t > 0.6 }));
-  const nine = id === 'cta' && t >= tAbo + 0.6; if (nine) { x.save(); x.globalAlpha = clamp((t - tAbo - 0.6) / 0.3); cast('inspector', -1560, GY, 0.75, t, { hat: 'hair', hairCol: '#888', body: '#bbb', body2: '#999', pants: '#777', num: false, mood: 'smile', look: 1 }); x.restore(); }
-  // Bob (SPY): with the gang, or sneaking behind the cage in shot C
+  if (id === 'cta' && t >= tRole2) { x.save(); x.globalAlpha = clamp((t - tRole2) / 0.3); cast('inspector', -1560, GY, 0.75, t, { hat: 'hair', hairCol: '#888', body: '#bbb', body2: '#999', pants: '#777', num: false, mood: 'smile', look: 1 }); x.restore(); x.save(); x.translate(-1560, GY - 720); rrc(0, 0, 150, 70, 16, '#fff', 4); txt('TOI ?', 0, 6, 40, C.red, { stroke: false }); x.restore(); }
   const bobX = shotC ? lerp(1700, 1880, seg(t, tC, B.q.end)) : -140; cast('inspector', bobX, GY, 0.75, t, { ...SPY, mood: 'smug', look: 1, blink: t > 0.6, walk: shotC ? t * 2 : 0 });
   cast('guard', 2650, GY, 0.75, t, { mood: 'neutral', look: -1, blink: t > 0.6 });
-  cast('boss', 2380, GY + 40, 0.9, t, { mood: shotB ? 'smug' : t > A ? 'smile' : 'angry', look: -1, blink: t > 0.6, armUp: t > A + 0.3 });
-  if (t > A + 0.3) { x.save(); x.translate(2490, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); x.restore(); }
-  if (shotB) { x.save(); x.translate(2230, GY - 380); ell(0, 0, 70, 80, '#c9a06a', 6); txt('€', 0, 10, 70, '#7a5a2a', { stroke: false }); x.restore(); }
-  const rattle = (id === 's1' || id === 'end') && Math.floor(t * 2) % 3 === 0 ? Math.sin(t * 60) * 8 : 0;
+  cast('boss', 2380, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'angry', look: -1, blink: t > 0.6, armUp: t > 0.4 });
+  if (t > 0.4) { x.save(); x.translate(2490, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); x.restore(); }
+  const rattle = (id === 's1' || id === 's2' || id === 'end') && Math.floor(t * 2) % 3 === 0 ? Math.sin(t * 60) * 8 : 0;
   x.save(); x.translate(rattle, 0); cast('inspector', 2050, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: rattle !== 0 }); x.restore();
-  if (t >= A - 0.2) { x.save(); x.translate(rattle * 0.6, -820 * (1 - slam)); cage(2050, GY + 20, 0.95, t); x.restore(); }
+  x.save(); x.translate(rattle * 0.6, -820 * (1 - slam)); cage(2050, GY + 20, 0.95, t); x.restore();
   if (id === 'cta') NEW.forEach(([, n], i) => { x.save(); x.translate(-540 - i * 200, GY - 720); rrc(0, 0, 190, 54, 14, 'rgba(255,255,255,.92)', 3); txt(n, 0, 4, 28, OL, { stroke: false }); x.restore(); });
-  resetCam(); if (t > A - 0.15 && t < A + 0.05) speedLines(t, 0.8);
-  if (t > A + 0.05 && t < A + 0.25) { x.fillStyle = 'rgba(230,40,40,.18)'; x.fillRect(0, 0, W, H); }
-  // --- text, one layer at a time ---
-  if (id === 'ff') { if (t < A - 0.2) card('HIER, GRÂCE À VOUS', 'ON A PRIS LE PORT ⚓', '#2a8a3a', P(t, 0, 0.1) || 1); else card('SA VENGEANCE :', 'IL A CAPTURÉ SALAH 😱', C.red, P(t, A - 0.2, 0.2)); }
-  if (id === 's1') { const p = eBack(P(t, S('s1'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('NOS SOLDATS', -270, -60, 42, C.orange, { stroke: false });
-    txt(String(Math.round(89 * clamp((t - S('s1')) / 0.6))), -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('SES HOMMES', 270, -60, 42, '#f5c542', { stroke: false }); txt(t >= t880 ? '1000' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore(); }
+  resetCam(); if (t < 0.2) speedLines(t, 0.8);
+  if (t > 0.2 && t < 0.4) { x.fillStyle = 'rgba(230,40,40,.18)'; x.fillRect(0, 0, W, H); }
   const btnY = 1200, btn = (k, lab, p, hi) => { x.save(); x.translate(190 + 'ABC'.indexOf(k) * 350, btnY + 260 * (1 - eOut(p))); const sc = 1.12 * (hi ? 1.1 : 1); x.scale(sc, sc); rrc(0, 0, 310, 150, 26, hi ? '#ffe9a8' : C.cream, hi ? 9 : 6); txt(k, 0, -24, 70, C.red, { stroke: false }); txt(lab, 0, 38, 40, OL, { stroke: false }); x.restore(); };
+  const BTN = [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'ESPION']];
+  if (id === 'ff') card('LE BARON A CAPTURÉ', 'SALAH 😱', C.red, 1);
+  if (id === 's0') card("SA VENGEANCE : HIER, ON", 'LUI A PRIS SON PORT ⚓', '#2a8a3a', P(t, S('s0'), 0.2));
+  if (id === 's1') { const p = eBack(P(t, S('s1'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('NOS SOLDATS', -270, -60, 42, C.orange, { stroke: false });
+    txt(t >= t89 ? String(Math.round(89 * clamp((t - t89) / 0.5))) : '?', -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('SES SOLDATS', 270, -60, 42, '#f5c542', { stroke: false }); txt(t >= t1000 ? '1000' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore();
+    if (t >= tEur) pill('💰 CAISSE : 198 €', 540, 560, P(t, tEur), '#2b2b30'); }
   if (id === 'q') { const hiK = shotC ? 'C' : shotB ? 'B' : shotA ? 'A' : ''; [['A', 'ATTAQUER', tA], ['B', 'NÉGOCIER', tB], ['C', 'ESPION', tC]].forEach(([k, lab, tt]) => { if (t >= tt - 0.15) btn(k, lab, clamp((t - tt + 0.15) / 0.25), hiK === k); });
-    card(shotC ? 'C : BOB, NOTRE ESPION,' : shotB ? 'B : ON NÉGOCIE' : 'A : ON ATTAQUE', shotC ? "S'INFILTRE 🕵️" : shotB ? 'AVEC LE BARON 💰' : 'LA PRISON ⚔️', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1); }
-  if (id === 'cta') { [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'ESPION']].forEach(([k, lab]) => btn(k, lab, 1, false));
-    const n = t >= tAbo + 0.6 ? 90 : 89, p = eBack(P(t, S('cta'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('ABONNE-TOI =', 0, -60, 46, C.orange, { stroke: false }); txt('SOLDAT N°' + n + ' 💪', 0, 40, 100, n === 90 ? '#7cff8a' : '#fff', { stroke: false }); x.restore();
-    if (t >= tEcr && t < tRole) pill('ÉCRIS A, B OU C 👇', 540, 560, P(t, tEcr), '#2457a8');
-    if (t >= tRole) { pill('+ TON RÔLE 👇', 540, 560, P(t, tRole), '#2457a8'); pill('🕵️ ESPION · 🩺 MÉDECIN · 🏹 ARCHER…', 540, 690, P(t, tRole + 0.3), C.orange); } }
+    card(shotC ? 'C : BOB S\'INFILTRE 🕵️' : shotB ? 'B : ON NÉGOCIE 🤝' : 'A : ON ATTAQUE ⚔️', shotC ? 'GRATUIT… MAIS RISQUÉ' : shotB ? 'IL VEUT 150 € 💰' : 'ON PEUT PERDRE DES SOLDATS', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1);
+    pill(shotC ? '⚠️ S\'IL EST PRIS : ON PERD BOB' : shotB ? '💰 198 € → 48 €' : '⚠️ RISQUE : − SOLDATS', 540, 560, 1, shotC ? '#2457a8' : shotB ? '#c9952a' : C.red); }
+  if (id === 's2') { card('SANS VOUS,', 'ON NE LE SAUVERA PAS', C.red, t >= tSans ? P(t, tSans, 0.2) : 0);
+    [[tLike, '❤️ 1 LIKE = 1 € DANS LA CAISSE', C.red], [tAbo, '➕ 1 ABONNÉ = 1 SOLDAT', '#2a8a3a'], [tRole, '💬 TON RÔLE = TU REJOINS LA BANDE', '#2457a8']].forEach(([tt, s, c], i) => { if (t >= tt) pill(s, 540, t >= tSans ? 560 + i * 115 : 330 + i * 120, P(t, tt), c); }); }
+  if (id === 'cta') { BTN.forEach(([k, lab]) => btn(k, lab, 1, false)); card('ÉCRIS A, B OU C 👇', t >= tRole2 ? '+ LE RÔLE QUE TU VEUX' : '', '#2457a8', P(t, S('cta'), 0.2)); }
   if (id === 'end') { const left = 86399 - Math.max(0, t - S('end')); x.save(); x.translate(540, 560); rrc(0, 0, 520, 130, 34, C.red, 7); txt('⏳ ' + [Math.floor(left / 3600), Math.floor(left % 3600 / 60), Math.floor(left % 60)].map(n => String(n).padStart(2, '0')).join(':'), 0, 8, 80, '#fff', { stroke: false }); x.restore();
     card(t < tSin ? 'TU AS 24 H…' : 'SINON, SALAH…', t < tSin ? 'POUR LE SAUVER' : '😱', C.red, 1); }
 }
