@@ -1,0 +1,6 @@
+# Intro test round 11 — CLARITY test (« La bande de 47 », French TikTok cartoon series)
+The creator watched intro N and said « on comprend rien » (« we don't understand anything »). Context the viewer does NOT have: a cartoon series where 1 follower = 1 gang member, commenters join the gang, votes A/B/C decide what happens; the villain is « le Baron ».
+
+Image /home/claude/vid-o-47-/episodes/intro-lab/round11.jpg: 2 blocks. Top = N, frames at 0, 0.3, 0.6, 0.9, 1.2, 1.6, 2.0, 2.6, 3.2, 4.0, 5.5 s. Bottom = O, frames at 0, 0.8, 1.6, 2.4, 3.0, 3.6, 4.4, 5.2, 6.0, 7.0, 8.5 s (rows wrap).
+- N voice: 0–3.5 s « Il a juste commenté… le Baron l'a effacé. Et maintenant, c'est LUI qu'il veut effacer ! » then « Une minute : A, B ou C en commentaire, sinon il disparaît. Ici, chaque abonné est un soldat : 76 contre 1000. »
+- O voice: 0–3.8 s « Hier, Salah a commenté pour rejoindre la bande… mais le Baron l'a capturé ! » then « T'as une minute pour le sauver. Écris A, B ou C en commentaire. Ici, chaque abonné est un soldat : 76 contre 1000. » O shows ONE idea at a time: (1) « HIER, IL A COMMENTÉ / POUR REJOINDRE LA BANDE » + his big comment « je veux être le combattant », (2) cage falls « MAIS LE BARON L'A CAPTURÉ 😱 », (3) « TU AS 1 MINUTE POUR LE SAUVER ⏳ » + timer, (4) « ÉCRIS A, B OU C EN COMMENTAIRE 👇 » + buttons A ATTAQUER / B NÉGOCIER / C INFILTRER.
