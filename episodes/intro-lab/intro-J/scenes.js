@@ -72,7 +72,7 @@ function introG(t, mode) { const id = curId(t), slam = eOut(seg(t, -0.12, 0.3)),
   window.CAP_Y = 640;
   camPath(t, [[0, 0, 1260, 1455, 1.4], [0.35, 1.6, 1270, 1460, 1.3], [tRev - 0.2, 0.9, 1300, 1480, 1.15]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
   cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6 }); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false });
-  x.save(); x.translate(0, -560 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.3) speedLines(t, 1 - t / 0.3);
+  x.save(); x.translate(0, -560 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.15) speedLines(t, 1 - t / 0.15);
   if (t > 0.28 && t < 0.5) { x.fillStyle = 'rgba(230,40,40,' + (0.4 * (1 - (t - 0.28) / 0.22)) + ')'; x.fillRect(0, 0, W, H); }
   const hook = mode === 'G' ? [['IL A JUSTE COMMENTÉ… 😳', 76]] : mode === 'H' ? [['ÇA AURAIT PU ÊTRE TOI 😳', 76]] : [['IL LUI RESTE 60 SECONDES', 70]];
   hookCard(t, hook.map(([a, b]) => [a, b + 18]), 2.0);
@@ -86,24 +86,28 @@ function introG(t, mode) { const id = curId(t), slam = eOut(seg(t, -0.12, 0.3)),
     rrc(0, 0, 310, 130, 26, C.cream, 6); txt(k, 0, -18, 60, C.red, { stroke: false }); txt(lab, 0, 38, 38, OL, { stroke: false }); x.restore(); });
   if (id === 's0') { scoreboard(t, 76, 1000); if (t >= WF('s0', /soldat/i)) pill('1 ABONNÉ = 1 SOLDAT 💪', 540, 440, P(t, WF('s0', /soldat/i)), '#2a8a3a'); } }
 
-function bigTimer(t, py) { const left = Math.max(0, 60 - Math.floor(t)), pu = 1 + 0.08 * Math.pow(1 - (t % 1), 3); x.save(); resetCam(); x.translate(540, py); x.scale(pu, pu);
-  rrc(0, 0, 400, 140, 36, C.red, 7); txt('⏳ ' + (left === 60 ? '01:00' : '00:' + String(left).padStart(2, '0')), 0, 8, 96, '#fff', { stroke: false }); x.restore(); }
-function introJ(t) { const id = curId(t), slam = eOut(seg(t, -0.12, 0.3)), shake = t > 0.28 && t < 0.55 ? Math.sin(t * 90) * 18 * (1 - (t - 0.28) / 0.27) : 0;
-  const rattle = t > 0.7 && t < 1.4 ? Math.sin(t * 60) * 10 : 0;
-  window.CAP_Y = 1180;
-  camPath(t, [[0, 0, 1150, 1330, 2.4], [0.7, 0.5, 1150, 1340, 2.6], [1.4, 0.7, 1300, 1420, 1.5], [S('s0') + 1.5, 1.2, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > 1.4 });
-  if (t > 1.4) { x.save(); x.translate(1590, GY - 690 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); rbox(8, 90, 24, 14, 3, '#f5c542', 4); rbox(8, 110, 18, 12, 3, '#f5c542', 4); x.restore(); }
-  x.save(); x.translate(rattle, 0); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: t > 0.7 && t < 1.4 }); x.restore();
-  x.save(); x.translate(rattle * 0.6, -560 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.3) speedLines(t, 1 - t / 0.3);
-  if (t > 0.28 && t < 0.45) { x.fillStyle = 'rgba(230,40,40,' + (0.3 * (1 - (t - 0.28) / 0.17)) + ')'; x.fillRect(0, 0, W, H); }
-  hookCard(t, [['IL A JUSTE COMMENTÉ…', 84], ['1 MIN POUR LE SAUVER ⏳', 84, C.red]], B.ff.end);
-  if (id === 'ff') { x.save(); x.translate(540, 550); x.scale(1.18, 1.18); x.translate(-540, -550); nativeComment(540, 550, 1.0, 'sa.lah.7', 'je veux être le combattant', 1); x.restore(); }
-  bigTimer(t, id === 'ff' ? 790 : 400);
+function bigComment(px, py, user, msg) { x.save(); resetCam(); x.translate(px, py); rbox(-500, -110, 1000, 220, 30, '#ffffff', 0); x.strokeStyle = 'rgba(0,0,0,.15)'; x.lineWidth = 3; x.strokeRect(-500, -110, 1000, 220);
+  ell(-420, -10, 52, 52, '#e8794a', 0); txt(user[0].toUpperCase(), -420, -4, 50, '#fff', { stroke: false }); x.textAlign = 'left'; font(34); x.fillStyle = '#8a8f99'; x.fillText(user + ' · il y a 1 j', -350, -50);
+  font(60); x.fillStyle = '#161823'; x.fillText(msg, -350, 22); x.textAlign = 'center'; txt('♡ 12', 440, 70, 30, '#8a8f99', { stroke: false }); x.restore(); }
+function bigTimer(t, py) { const left = Math.max(0, 60 - t), pu = 1 + 0.08 * Math.pow(1 - (t % 1), 3); x.save(); resetCam(); x.translate(540, py); x.scale(pu, pu);
+  rrc(0, 0, 440, 140, 36, C.red, 7); txt('⏳ 0:' + left.toFixed(1).padStart(4, '0'), 0, 8, 96, '#fff', { stroke: false }); x.restore(); }
+function introJ(t) { const id = curId(t), slam = eOut(seg(t, -0.12, 0.15)), shake = t > 0.15 && t < 0.42 ? Math.sin(t * 90) * 18 * (1 - (t - 0.15) / 0.27) : 0;
+  const rattle = t > 0.55 && t < 1.1 ? Math.sin(t * 60) * 10 : 0;
+  window.CAP_Y = 1180; window.NOCAP_UNTIL = S('s0') + 1.6;
+  camPath(t, [[0, 0, 1150, 1330, 2.4], [0.55, 0.5, 1150, 1340, 2.6], [1.1, 0.6, 1290, 1420, 1.4], [S('s0') + 1.5, 1.2, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
+  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > 1.1 });
+  if (t > 1.1) { x.save(); x.translate(1590, GY - 690 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); rbox(8, 90, 24, 14, 3, '#f5c542', 4); rbox(8, 110, 18, 12, 3, '#f5c542', 4); x.restore(); }
+  x.save(); x.translate(rattle, 0); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: t > 0.55 && t < 1.1 }); x.restore();
+  x.save(); x.translate(rattle * 0.6, -560 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.15) speedLines(t, 1 - t / 0.15);
+  if (t > 0.15 && t < 0.32) { x.fillStyle = 'rgba(230,40,40,' + (0.3 * (1 - (t - 0.15) / 0.17)) + ')'; x.fillRect(0, 0, W, H); }
+  hookCard(t, [['IL A JUSTE COMMENTÉ…', 84], ['1 MIN POUR LE SAUVER ⏳', 84, C.red]], S('s0') + 1.6);
+  const keep = S('s0') + 1.6; if (t < keep) bigComment(540, 560, 'sa.lah.7', 'je veux être le combattant');
+  if (t > 0.4 && t < 2.2) { const p = P(t, 0.4, 0.2); x.save(); resetCam(); x.translate(540, 1560); x.scale(eBack(p), eBack(p)); txt('TOI, TU LE SAUVES ?', 0, 0, 92, '#ffe14a', { sw: 16 }); x.restore(); }
+  bigTimer(t, t < S('s0') + 1.6 ? 790 : 400);
   if (t > 2.1) { const votes = [12, 8, 15].map((v, i) => v + Math.floor(Math.max(0, t - 2.1) * (3 + i))); pill('TU DÉCIDES 👇', 540, 1290, P(t, 2.1), C.red);
-    [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'INFILTRER']].forEach(([k, lab], i) => { const p = clamp((t - 2.1 - i * 0.1) / 0.25); if (p <= 0) return; x.save(); x.translate(200 + i * 340, 1420 + 260 * (1 - eOut(p)));
-      rrc(0, 0, 310, 150, 26, C.cream, 6); txt(k, 0, -34, 56, C.red, { stroke: false }); txt(lab, 0, 14, 36, OL, { stroke: false }); txt(votes[i] + ' votes', 0, 52, 30, '#2a8a3a', { stroke: false }); x.restore(); }); }
-  if (t > 2.8 && t < S('s0') + 2.5) pill('SINON IL DISPARAÎT 😱', 540, id === 'ff' ? 930 : 560, P(t, 2.8), '#2b2b30');
+    [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'INFILTRER']].forEach(([k, lab], i) => { const p = clamp((t - 2.1 - i * 0.1) / 0.25); if (p <= 0) return; x.save(); x.translate(190 + i * 350, 1420 + 260 * (1 - eOut(p))); x.scale(1.12, 1.12);
+      rrc(0, 0, 310, 170, 26, C.cream, 6); txt(k, 0, -44, 56, C.red, { stroke: false }); txt(lab, 0, 6, 38, OL, { stroke: false }); txt(votes[i] + ' VOTES', 0, 56, 42, '#2a8a3a', { stroke: false }); x.restore(); }); }
+  if (t > 2.8 && t < S('s0') + 2.5) pill('SINON IL DISPARAÎT 😱', t < S('s0') + 1.6 ? 330 : 540, t < S('s0') + 1.6 ? 870 : 560, P(t, 2.8), '#2b2b30');
   if (id === 's0' && t >= WF('s0', /abonné/i)) { scoreboard(t, 76, 1000); pill('1 ABONNÉ = 1 SOLDAT 💪', 540, 560, P(t, WF('s0', /abonné/i)), '#2a8a3a'); } }
 function draw(t) {
   if (V === 'J') return introJ(t);
