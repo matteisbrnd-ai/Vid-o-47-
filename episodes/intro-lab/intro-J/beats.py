@@ -9,7 +9,7 @@ TEMPO_BEAT = {'ff': 1.32}
 TEMPO = 1.15
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Il a juste commenté… et PAF, capturé ! Toi, tu le sauves ?", "Il a juste commenté... et PAF, capturé ! Toi, tu le sauves ?", 0.1),
+  ('ff', "Il a juste commenté… et le Baron l'a capturé ! Toi, tu le sauves ?", "Il a juste commenté... et le Baron l'a capturé ! Toi, tu le sauves ?", 0.1),
   ('s0', "T'as une minute : A, B ou C en commentaire, sinon il disparaît. Ici, chaque abonné est un soldat : 76 contre 1000.", "T'as une minute : A, B ou C en commentaire, sinon il disparaît. Ici, chaque abonné est un soldat : soixante-seize contre mille.", 0.6),
 ]
-CUES = [('ff', '+0', 'clink'), ('ff', 'PAF', 'sting'), ('s0', '+0', 'pop')]
+CUES = [('ff', '+0', 'clink'), ('ff', 'capturé', 'sting'), ('s0', '+0', 'pop')]
