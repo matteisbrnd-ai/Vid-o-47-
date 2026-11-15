@@ -120,9 +120,9 @@ function cageRest(t, t0, o = {}) { const id = curId(t), slam = eOut(seg(t, t0 - 
   cast('boss', 1480, GY + 40, 0.9, t, { mood: t > t0 + 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > tRev });
   if (t > tRev) { x.save(); x.translate(1590, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); x.restore(); }
   x.save(); x.translate(rattle, 0); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: rattle !== 0 }); x.restore();
-  x.save(); x.translate(rattle * 0.6, -620 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t >= t0 - 0.05 && t < t0 + 0.18) speedLines(t, 1);
+  x.save(); x.translate(rattle * 0.6, -820 * (1 - slam)); cage(1130, GY + 20, V === 'N' ? 0.95 : 0.62, t); x.restore(); resetCam(); if (t < t0 + 0.18) speedLines(t, 1);
   if (t > t0 + 0.18 && t < t0 + 0.42) { x.fillStyle = 'rgba(230,40,40,' + (0.2 * (1 - (t - t0 - 0.18) / 0.24)) + ')'; x.fillRect(0, 0, W, H); }
-  if (t >= 0 && !o.noTimer) { const left = Math.max(0, 60 - Math.max(0, t - t0)), lab = t >= tEnd, pu = 1 + 0.08 * Math.pow(1 - ((t - t0) % 1), 3); x.save(); x.translate(540, lab ? 330 : 300); x.scale(pu, pu); rrc(0, 0, lab ? 700 : 440, 140, 36, C.red, 7);
+  if (t >= 0 && !o.noTimer) { const left = Math.max(0, 59.9 - Math.max(0, t - t0)), lab = t >= tEnd, pu = 1 + 0.08 * Math.pow(1 - ((t - t0) % 1), 3); x.save(); x.translate(540, lab ? 330 : 300); x.scale(pu, pu); rrc(0, 0, lab ? 700 : 440, 140, 36, C.red, 7);
     txt((lab ? 'SAUVE-LE · ' : '') + '⏳ ' + (left >= 59.95 ? '1:00.0' : '0:' + left.toFixed(1).padStart(4, '0')), 0, 8, 96, '#fff', { stroke: false }); x.restore(); }
   if (t >= t0 + 0.5 && t < tEnd + 0.4 && window.SHOWCOM) { x.save(); const p = eBack(P(t, t0 + 0.5, 0.2)); x.translate(540, 700); x.scale(p, p); x.translate(-540, -700); rrc(540, 585, 760, 100, 24, '#ffffff', 8); txt('IL A JUSTE COMMENTÉ ÇA 👇', 540, 590, 62, OL, { stroke: false }); bigComment(540, 760, 'sa.lah.7', 'je veux être le combattant'); x.restore(); }
   if (t > tEnd + 0.4 && t < S('s0') + 1.6) { const p = eBack(P(t, tEnd + 0.4, 0.25)); x.save(); x.translate(540, o.sinonY || 520); x.scale(p, p); rrc(0, 0, 900, 130, 30, '#2b2b30', 8); txt('SINON IL DISPARAÎT 😱', 0, 8, 84, '#fff', { stroke: false }); x.restore(); }
@@ -148,12 +148,12 @@ function introX(t, mode) { window.CAP_Y = 1180; window.SHOWCOM = true; let t0;
 var notifPersist = false;
 
 function introN(t) { window.CAP_Y = 1180; window.SHOWCOM = false;
-  cageRest(t, 0.05, { pre: 0.3, rev: 1.05, end: 1.4, btn: 2.0 });
+  cageRest(t, 0.12, { pre: 0.12, rev: 1.05, end: 1.4, btn: 2.0 });
   const ts = t < 1.05 ? Math.sin(t * 40) * 4 : 0;
-  if (t < 0.45) { x.save(); x.translate(540 + ts, 660); rrc(0, 0, 1000, 250, 34, 'rgba(255,255,255,.96)', 9); txt('IL A JUSTE COMMENTÉ…', 0, -48, 92, OL, { stroke: false }); txt('1 MIN POUR LE SAUVER ⏳', 0, 62, 84, C.red, { stroke: false }); x.restore(); }
-  else if (t < 1.45) { const del = t > 0.75; x.save(); x.translate(del && t < 0.95 ? Math.sin(t * 150) * 14 : 0, 0); bigComment(540, 660, 'sa.lah.7', del ? 'Commentaire supprimé 🚫' : 'je veux être le combattant'); x.restore();
-    if (del) { x.strokeStyle = C.red; x.lineWidth = 14; x.beginPath(); x.moveTo(190, 688); x.lineTo(190 + 760 * eOut(seg(t, 0.75, 0.95)), 670); x.stroke(); }
-    if (t > 0.95) { x.save(); const p = eBack(P(t, 0.95, 0.2)); x.translate(540, 480); x.scale(p, p); rrc(0, 0, 900, 120, 30, '#2b2b30', 8); txt("SUPPRIMÉ PAR LE BARON 😈", 0, 8, 70, '#fff', { stroke: false }); x.restore(); } }
+  if (t < 0.45) { x.save(); x.translate(540 + ts, 600); rrc(0, 0, 1000, 250, 34, 'rgba(255,255,255,.96)', 9); txt('IL A JUSTE COMMENTÉ…', 0, -48, 92, OL, { stroke: false }); txt('1 MIN POUR LE SAUVER ⏳', 0, 62, 84, C.red, { stroke: false }); x.restore(); }
+  else if (t < 1.45) { const del = t > 0.7; x.save(); x.translate(del && t < 0.95 ? Math.sin(t * 150) * 14 : 0, 0); x.save(); resetCam(); x.translate(540, 640); rbox(-520, -170, 1040, 340, 34, '#ffffff', 0); ell(-430, -80, 56, 56, '#e8794a', 0); txt('S', -430, -74, 54, '#fff', { stroke: false }); x.textAlign = 'left'; font(40); x.fillStyle = '#8a8f99'; x.fillText('sa.lah.7 · il y a 1 j', -350, -80); font(del ? 76 : 80); x.fillStyle = del ? '#9a9fa8' : '#161823'; x.fillText(del ? 'Commentaire supprimé 🚫' : 'je veux être le', -470, 30); if (!del) x.fillText('combattant', -470, 120); x.textAlign = 'center'; x.restore(); x.restore();
+    if (del) { x.strokeStyle = C.red; x.lineWidth = 14; x.beginPath(); x.moveTo(70, 650); x.lineTo(70 + 900 * eOut(seg(t, 0.7, 0.85)), 640); x.stroke(); }
+    if (t > 0.95) { x.save(); const p = eBack(P(t, 0.95, 0.2)); x.translate(540, 900); x.scale(p, p); rrc(0, 0, 900, 120, 30, '#2b2b30', 8); txt("SUPPRIMÉ PAR LE BARON 😈", 0, 8, 70, '#fff', { stroke: false }); x.restore(); } }
   window.NOCAP_UNTIL = S('s0') + 1.6; }
 function draw(t) {
   if (V === 'N') return introN(t);
