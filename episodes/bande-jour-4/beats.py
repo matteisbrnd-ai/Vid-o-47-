@@ -1,8 +1,8 @@
-# La bande de 47 — Saison 1 · Jour 4 (J-6) — V2 after the 10-persona test (v1 lost people at the port recap 3 s and the roll call 16 s). Intro v4 « clarity first » (episodes/intro-lab/intro-O): real member in danger + why + you decide.
+# La bande de 47 — Saison 1 · Jour 4 (J-6) — V3 after the creator's 3-agent analysis (recap as cause of the capture, 3 shots for A/B/C, one CTA, loop ending on the cage); V2 after the 10-persona test (v1 lost people at the port recap 3 s and the roll call 16 s). Intro v4 « clarity first » (episodes/intro-lab/intro-O): real member in danger + why + you decide.
 # Facts: Jour 3 vote C entrepôt 59 % (A 18, B 23, 22 votes) → port taken: 89 members + fumigènes 50 = 139 > 120 guards → Baron 1000 − 120 = 880.
 # Followers 76 → 89. Caisse 85 + 48 likes + 13 × 5 € = 198 € (on screen only). New commenters: Le mec (médecin), ReDaRk1459 (combat d'élite),
 # rayan (tirer → archer like EVKOS), Dydylan86 = remplaçant (creator's choice), Vrk83k5 (cerveau). Cliffhanger from Jour 3 (« le Baron prépare quelque chose ») = Salah captured.
-EMO = {'ff': 'excite', 'q': 'tension', 's2': 'complice', 'cta': 'complice'}
+EMO = {'ff': 'excite', 's1': 'tension', 'q': 'complice', 'cta': 'excite', 'end': 'menace'}
 SFX = 0.42
 SFX_COMP = 3
 SFX_DUCK = 0.7
@@ -13,9 +13,10 @@ TEMPO_BEAT = {'ff': 1.25}
 TEMPO = 1.15
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Le Baron a capturé Salah, un abonné de la bande… et c'est TOI qui décides comment le sauver !", "Le Baron a capturé Salah, un abonné de la bande... et c'est TOI qui décides comment le sauver !", 0.15),
-  ('q', "A : on attaque la prison. B : on négocie avec le Baron. C : Bob, notre espion, s'infiltre. Écris A, B ou C, t'as 24 heures !", "A : on attaque la prison. B : on négocie avec le Baron. C : Bob, notre espion, s'infiltre. Écris A, B ou C, t'as vingt-quatre heures !", 0.2),
-  ('s2', "Ici, chaque abonné devient un soldat : cinq nouveaux sont déjà là pour l'aider !", "Ici, chaque abonné devient un soldat : cinq nouveaux sont déjà là pour l'aider !", 0.15),
-  ('cta', "Et grâce à votre vote C, on lui a pris son port : 89 contre 880 ! Abonne-toi, et c'est peut-être TOI qui le libères demain.", "Et grâce à votre vote C, on lui a pris son port : quatre-vingt-neuf contre huit cent quatre-vingts ! Abonne-toi, et c'est peut-être TOI qui le libères demain.", 1.3),
+  ('ff', "Hier, grâce à vous, on a pris le port au Baron. Sa vengeance : il a capturé Salah, notre combattant !", "Hier, grâce à vous, on a pris le port au Baron. Sa vengeance : il a capturé Sala, notre combattant !", 0.15),
+  ('s1', "On n'est que 89 soldats. Lui, 880.", "On n'est que quatre-vingt-neuf soldats. Lui, huit cent quatre-vingts.", 0.15),
+  ('q', "A : on attaque la prison. B : on négocie avec le Baron. C : Bob, notre espion, s'infiltre.", "A : on attaque la prison. B : on négocie avec le Baron. C : Bob, notre espion, s'infiltre.", 0.6),
+  ('cta', "Abonne-toi pour devenir le 90e soldat… et écris A, B ou C !", "Abonne-toi pour devenir le quatre-vingt-dixième soldat... et écris A, B ou C !", 0.3),
+  ('end', "T'as 24 heures. Sinon, Salah…", "T'as vingt-quatre heures. Sinon, Sala...", 0.25),
 ]
-CUES = [('ff', 'capturé', 'sting'), ('ff', 'TOI', 'pop'), ('q', 'attaque', 'pop'), ('q', 'négocie', 'pop'), ('q', 'infiltre', 'pop'), ('q', 'heures', 'ticktock'), ('s2', 'soldat', 'pop'), ('s2', 'cinq', 'dingdong'), ('cta', 'abonne', 'pop'), ('cta', 'demain', 'ding')]
+CUES = [('ff', 'port', 'dingdong'), ('ff', 'capturé', 'sting'), ('s1', '89|quatre', 'pop'), ('s1', '880|huit', 'bam'), ('q', 'attaque', 'whoosh'), ('q', 'négocie', 'cash'), ('q', 'infiltre', 'whoosh'), ('cta', 'Abonne', 'pop'), ('cta', 'écris', 'ding'), ('end', 'heures', 'ticktock'), ('end', 'Sinon', 'sting')]
