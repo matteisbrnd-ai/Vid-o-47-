@@ -104,6 +104,14 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
       - 0.45 s the card becomes his real comment (big, 80 px); 0.7 s red stamp « SUPPRIMÉ 🚫 » + red « Commentaire supprimé » crossed out (the twist must read muted); 1.05 s comment card disappears, cut to the grinning Baron with the key + « SUPPRIMÉ PAR LE BARON 😈 »; 1.8 s « SAUVE-LE · timer » + « SINON IL DISPARAÎT 😱 »; 2.4 s « ÉCRIS A, B OU C 👇 » + all three buttons at once;
       - voice « Il a juste commenté… le Baron l'a effacé. Et maintenant, c'est LUI qu'il veut effacer ! »; no « TOI, TU LE SAUVES ? » box (judged cringe/ad-like).
       - The « deleted comment » twist only works once or twice; next episodes keep the structure (real commenter + threat in motion + timer + twist that reads muted) and change the twist (stolen pseudo, betrayed by a member, banned from the garage…).
+    **Intro v4 = O — CLARITY FIRST (2026-11-15, creator: « on comprend rien » about N):** a comprehension test (sound off + sound on + analyst) gave N 4/10 comprehension (« effacé » ≠ the cage on screen, « LUI » = who?, 5 texts in 2 s) vs **O 7.5–8/10**; N hooks a bit more at 3 s (~60 %) but loses people at 3–8 s (~30 % at 8 s vs ~40 % for O) and gets fewer comments. RULE: every intro must pass « can a newcomer say who / what happened / what to do in one sentence? » before any hold optimisation. Template O (reference episodes/intro-lab/intro-O), ONE idea per card, in story order:
+      1. « IL A COMMENTÉ ÇA / POUR REJOINDRE LA BANDE » + his big real comment; the Baron slides in at the edge by 0.4 s (motion + threat without a new idea);
+      2. on « capturé »: cage slams, cut to the two-shot, « MAIS LE BARON / L'A CAPTURÉ 😱 »;
+      3. « TU AS 1 MINUTE / POUR LE SAUVER ⏳ » + timer (« 1:00 », never « 0:60 »);
+      4. « ÉCRIS A, B OU C / EN COMMENTAIRE 👇 » + A ATTAQUER / B NÉGOCIER / C INFILTRER;
+      5. its own beat: big « NOUS 76 VS LE BARON 1000 » + « ABONNE-TOI = +1 SOLDAT 💪 », voice « On est 76, le Baron en a 1000 : abonne-toi, et t'es un soldat de plus. »
+      Voice names the person (« Salah a commenté pour rejoindre la bande… et le Baron l'a capturé ! »). Never use two different verbs for one event (effacé vs capturé).
+    Audio: AAC encoding overshot the limiter on loud shouted words (peak +0.7 dBFS) → build.sh now adds lowpass=f=15000 after the limiter (peak back to −1.2 dBFS).
     Plan: Saison 1 (Jours 1–10) « La création de la bande » → Jour 10 = attaque finale contre le Baron · Saison 2 (from Jour 11) « La reprise du territoire » · Saison 3 « L'inspecteur contre-attaque » (cat-and-mouse escapes with the inspector, no fighting the police). Each episode opens with the countdown (« J-8 avant l'attaque finale »).
 
 ## Publishing (Metricool → TikTok)

@@ -71,7 +71,7 @@ function speedLines(t, a) { if (a <= 0) return; x.save(); x.globalAlpha = a; x.s
 function introG(t, mode) { const id = curId(t), slam = eOut(seg(t, -0.12, 0.3)), shake = t > 0.28 && t < 0.6 ? Math.sin(t * 90) * 18 * (1 - (t - 0.28) / 0.32) : 0, tRev = S('s0');
   window.CAP_Y = 640;
   camPath(t, [[0, 0, 1260, 1455, 1.4], [0.35, 1.6, 1270, 1460, 1.3], [tRev - 0.2, 0.9, 1300, 1480, 1.15]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6 }); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false });
+  cast('boss', t < A ? lerp(1900, 1500, eOut(seg(t, 0, 0.45))) : 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6 }); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false });
   x.save(); x.translate(0, -560 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.15) speedLines(t, 1 - t / 0.15);
   if (t > 0.28 && t < 0.5) { x.fillStyle = 'rgba(230,40,40,' + (0.4 * (1 - (t - 0.28) / 0.22)) + ')'; x.fillRect(0, 0, W, H); }
   const hook = mode === 'G' ? [['IL A JUSTE COMMENTÉ… 😳', 76]] : mode === 'H' ? [['ÇA AURAIT PU ÊTRE TOI 😳', 76]] : [['IL LUI RESTE 60 SECONDES', 70]];
@@ -95,7 +95,7 @@ function introJ(t) { const id = curId(t), slam = eOut(seg(t, 0, 0.18)), shake = 
   const rattle = t > 0.55 && t < 1.2 ? Math.sin(t * 60) * 10 : 0, tEnd = 2.4, tRev = 2.0;
   window.CAP_Y = 1180; window.NOCAP_UNTIL = S('s0') + 1.6;
   camPath(t, [[0, 0, 1150, 1360, 2.3], [0.55, 0.5, 1150, 1370, 2.5], [2.0, 0.15, 1290, 1430, 1.6], [S('s0') + 1.5, 1.2, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > tRev });
+  cast('boss', t < A ? lerp(1900, 1500, eOut(seg(t, 0, 0.45))) : 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > tRev });
   if (t > tRev) { x.save(); x.translate(1590, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); rbox(8, 90, 24, 14, 3, '#f5c542', 4); rbox(8, 110, 18, 12, 3, '#f5c542', 4); x.restore(); }
   x.save(); x.translate(rattle, 0); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: t > 0.55 && t < 1.2 }); x.restore();
   x.save(); x.translate(rattle * 0.6, -620 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam(); if (t < 0.18) speedLines(t, 1);
@@ -117,7 +117,7 @@ function notif(t, p, y = 380) { if (p <= 0) return; x.save(); resetCam(); x.tran
 function cageRest(t, t0, o = {}) { const id = curId(t), slam = eOut(seg(t, t0 - (o.pre || 0), t0 + 0.18)), shake = t > t0 + 0.18 && t < t0 + 0.45 ? Math.sin(t * 90) * 18 * (1 - (t - t0 - 0.18) / 0.27) : 0;
   const rattle = t > t0 + 0.5 && t < t0 + 1.0 ? Math.sin(t * 60) * 10 : 0, tRev = o.rev != null ? o.rev : t0 + 1.5, tEnd = o.end != null ? o.end : t0 + 1.7, tBtn = o.btn != null ? o.btn : t0 + 2.4;
   camPath(t, [[0, 0, 1150, 1360, 2.3], [tRev, 0.15, 1290, 1430, 1.6], [S('s0') + 1.5, 1.2, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > t0 + 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > tRev });
+  cast('boss', t < A ? lerp(1900, 1500, eOut(seg(t, 0, 0.45))) : 1480, GY + 40, 0.9, t, { mood: t > t0 + 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6, armUp: t > tRev });
   if (t > tRev) { x.save(); x.translate(1590, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); x.restore(); }
   x.save(); x.translate(rattle, 0); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false, armsUp: rattle !== 0 }); x.restore();
   x.save(); x.translate(rattle * 0.6, -820 * (1 - slam)); cage(1130, GY + 20, V === 'N' ? 0.95 : 0.62, t); x.restore(); resetCam(); if (t < t0 + 0.18) speedLines(t, 1);
@@ -156,24 +156,26 @@ function introN(t) { window.CAP_Y = 1180; window.SHOWCOM = false;
     } if (t > 1.05 && t < 1.8) { { x.save(); const p = eBack(P(t, 1.05, 0.2)); x.translate(540, 640); x.scale(p, p); rrc(0, 0, 900, 120, 30, '#2b2b30', 8); txt("SUPPRIMÉ PAR LE BARON 😈", 0, 8, 70, '#fff', { stroke: false }); x.restore(); } }
   window.NOCAP_UNTIL = S('s0') + 1.6; }
 
-function introO(t) { const id = curId(t), A = WF('ff', /capturé/i), T1 = S('s0'), T2 = WF('s0', /écris/i);
+function introO(t) { const id = curId(t), A = WF('ff', /capturé/i), T1 = S('s0'), T2 = WF('s0', /écris/i), T3 = WF('s0', /On est/i);
   window.CAP_Y = 1200; window.NOCAP_UNTIL = 99;
   const slam = eOut(seg(t, A - 0.15, A + 0.05)), shake = t > A + 0.05 && t < A + 0.3 ? Math.sin(t * 90) * 16 : 0;
-  camPath(t, [[0, 0, 1150, 1380, 2.0], [A - 0.3, 0.3, 1290, 1430, 1.5], [WF('s0', /abonné/i), 1.2, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-  cast('boss', 1480, GY + 40, 0.9, t, { mood: t > A ? 'smile' : 'angry', look: -1, blink: t > 0.6, armUp: t > A + 0.3 });
+  camPath(t, [[0, 0, 1180, 1330, 1.9], [A - 0.3, 0.3, 1290, 1430, 1.5], [T3, 1.0, 1100, 1450, 0.85]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
+  cast('boss', t < A ? lerp(1900, 1500, eOut(seg(t, 0, 0.45))) : 1480, GY + 40, 0.9, t, { mood: t > A ? 'smile' : 'angry', look: -1, blink: t > 0.6, armUp: t > A + 0.3 });
   if (t > A + 0.3) { x.save(); x.translate(1590, GY - 600 + Math.sin(t * 6) * 12); x.rotate(0.3 * Math.sin(t * 5)); ell(0, 0, 34, 34, '#f5c542', 7); ell(0, 0, 12, 12, '#a07a1a', 0); rbox(-8, 30, 16, 90, 4, '#f5c542', 6); x.restore(); }
   cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: t > A ? 'shock' : 'smile', look: 1, blink: t > 0.6 && t < A });
-  x.save(); x.translate(0, -820 * (1 - slam)); cage(1130, GY + 20, 0.95, t); x.restore(); resetCam();
+  const sway = t < A - 0.15 ? Math.sin(t * 3) * 0.05 : 0; x.save(); x.translate(1130, 0); x.rotate(sway); x.translate(-1130, 0); x.translate(0, -820 * (1 - slam)); if (t < A) { x.strokeStyle = OL; x.lineWidth = 8; x.beginPath(); x.moveTo(1130, GY + 20 - 760 * 0.95); x.lineTo(1130, -400); x.stroke(); } cage(1130, GY + 20, 0.95, t); x.restore(); resetCam();
   if (t > A + 0.05 && t < A + 0.25) { x.fillStyle = 'rgba(230,40,40,.18)'; x.fillRect(0, 0, W, H); }
   const card = (l1, l2, c2, p) => { if (p <= 0) return; x.save(); x.translate(540, 300); const k = eBack(clamp(p)); x.scale(k, k); rrc(0, 0, 1000, 230, 34, 'rgba(255,255,255,.97)', 9); txt(l1, 0, -45, 84, OL, { stroke: false }); txt(l2, 0, 58, 84, c2, { stroke: false }); x.restore(); };
-  if (t < A - 0.1) { card('HIER, IL A COMMENTÉ', 'POUR REJOINDRE LA BANDE', '#2a8a3a', P(t, 0, 0.15) || 1);
+  if (t < A - 0.1) { card('IL A COMMENTÉ ÇA', 'POUR REJOINDRE LA BANDE', '#2a8a3a', P(t, 0, 0.15) || 1);
     x.save(); x.translate(540, 640); rbox(-520, -150, 1040, 300, 34, '#ffffff', 0); ell(-430, -60, 56, 56, '#e8794a', 0); txt('S', -430, -54, 54, '#fff', { stroke: false }); x.textAlign = 'left'; font(40); x.fillStyle = '#8a8f99'; x.fillText('sa.lah.7', -350, -60); font(80); x.fillStyle = '#161823'; x.fillText('« je veux être', -470, 40); x.fillText('le combattant »', -470, 125); x.textAlign = 'center'; x.restore(); }
   else if (t < T1) card('MAIS LE BARON', "L'A CAPTURÉ 😱", C.red, P(t, A - 0.1, 0.2));
   else if (t < T2) { card('TU AS 1 MINUTE', 'POUR LE SAUVER ⏳', C.red, P(t, T1, 0.2)); }
-  if (t >= T1) { const left = Math.max(0, 60 - (t - T1)); x.save(); x.translate(540, 560); rrc(0, 0, 440, 140, 36, C.red, 7); txt('⏳ ' + (left >= 59.5 ? '1:00' : '0:' + String(Math.ceil(left)).padStart(2, '0')), 0, 8, 96, '#fff', { stroke: false }); x.restore(); }
-  if (t >= T2) { card('ÉCRIS A, B OU C', 'EN COMMENTAIRE 👇', '#2457a8', P(t, T2, 0.2));
+  if (t >= T1 && t < T3) { const left = Math.max(0, 60 - (t - T1)); x.save(); x.translate(540, 560); rrc(0, 0, 440, 140, 36, C.red, 7); txt('⏳ ' + (left >= 59.5 ? '1:00' : '0:' + String(Math.ceil(left)).padStart(2, '0')), 0, 8, 96, '#fff', { stroke: false }); x.restore(); }
+  if (t >= T2 && t < T3) card('ÉCRIS A, B OU C', 'EN COMMENTAIRE 👇', '#2457a8', P(t, T2, 0.2));
+  if (t >= T2) {
     [['A', 'ATTAQUER'], ['B', 'NÉGOCIER'], ['C', 'INFILTRER']].forEach(([k, lab], i) => { const p = clamp((t - T2) / 0.25); x.save(); x.translate(190 + i * 350, 1420 + 260 * (1 - eOut(p))); x.scale(1.12, 1.12); rrc(0, 0, 310, 150, 26, C.cream, 6); txt(k, 0, -24, 70, C.red, { stroke: false }); txt(lab, 0, 38, 40, OL, { stroke: false }); x.restore(); }); }
-  if (t >= WF('s0', /abonné/i)) { scoreboard(t, 76, 1000); pill('1 ABONNÉ = 1 SOLDAT 💪', 540, 760, P(t, WF('s0', /abonné/i)), '#2a8a3a'); } }
+  if (t >= T3) { const p = eBack(P(t, T3, 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('NOUS', -300, -60, 46, C.orange, { stroke: false }); txt('76', -300, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('LE BARON', 300, -60, 46, '#f5c542', { stroke: false }); txt('1000', 300, 40, 120, '#fff', { stroke: false }); x.restore();
+    if (t >= WF('s0', /abonne-toi/i)) pill('ABONNE-TOI = +1 SOLDAT 💪', 540, 560, P(t, WF('s0', /abonne-toi/i)), '#2a8a3a'); } }
 function draw(t) {
   if (V === 'O') return introO(t);
   if (V === 'N') return introN(t);
@@ -205,7 +207,7 @@ function draw(t) {
     if (id === 's0') { scoreboard(t, 76, 1000); paperCard([['ABONNE-TOI + ÉCRIS TON RÔLE', 54], ['= TU REJOINS LA BANDE', 68, '#2a8a3a']], 540, 600, P(t, t1 + 0.2), { w: 900 }); } }
   if (V === 'F') { window.CAP_Y = 600; const slam = eOut(seg(t, 0, 0.3)), shake = t > 0.28 && t < 0.6 ? Math.sin(t * 90) * 16 * (1 - (t - 0.28) / 0.32) : 0;
     camPath(t, [[0, 0, 1300, 1500, 1.5], [S('s0'), 1.2, 1300, 1480, 1.3]]); x.translate(shake, 0); city(t); gang(t, 'nofighter');
-    cast('boss', 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6 }); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false });
+    cast('boss', t < A ? lerp(1900, 1500, eOut(seg(t, 0, 0.45))) : 1480, GY + 40, 0.9, t, { mood: t > 0.3 ? 'smile' : 'neutral', look: -1, blink: t > 0.6 }); cast('inspector', 1130, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: 1, blink: false });
     x.save(); x.translate(0, -700 * (1 - slam)); cage(1130, GY + 20, 0.62, t); x.restore(); resetCam();
     if (t > 0.28 && t < 0.5) { x.fillStyle = 'rgba(230,40,40,' + (0.35 * (1 - (t - 0.28) / 0.22)) + ')'; x.fillRect(0, 0, W, H); }
     if (id === 'ff') { x.save(); x.translate(540, 650); x.scale(1.12, 1.12); x.translate(-540, -650); bubble(540, 650, 'sa.lah.7', 'je veux être le combattant', 1); x.restore(); }
