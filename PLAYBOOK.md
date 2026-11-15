@@ -112,6 +112,7 @@ Beat ids `q` (question) and `share` (« Envoie-la à quelqu'un qui pense être m
       5. its own beat: big « NOUS 76 VS LE BARON 1000 » + « ABONNE-TOI = +1 SOLDAT 💪 », voice « On est 76, le Baron en a 1000 : abonne-toi, et t'es un soldat de plus. »
       Voice names the person (« Salah a commenté pour rejoindre la bande… et le Baron l'a capturé ! »). Never use two different verbs for one event (effacé vs capturé).
     Audio: AAC encoding overshot the limiter on loud shouted words (peak +0.7 dBFS) → build.sh now adds lowpass=f=15000 after the limiter (peak back to −1.2 dBFS).
+    **Real stats Jour 3 (2026-11-15):** 714 views (93 % For You), 48 likes, 11 comments, 1 share, 2 saves, 11 new followers; avg watch 9.2 s on 40 s (23 %), 5 % watched to the end, MOST VIEWERS LEFT AT 0:01 (wide Baron shot + card). Audience: 95 % non-followers; 18–24 34 %, 25–34 34 %, 35–44 10 %, 45–54 11 %, 55+ 11 %; 52 % men / 48 % women → persona tests must use THIS split (not 12–17-year-olds). Poll: C entrepôt 59 % (22 votes).
     Plan: Saison 1 (Jours 1–10) « La création de la bande » → Jour 10 = attaque finale contre le Baron · Saison 2 (from Jour 11) « La reprise du territoire » · Saison 3 « L'inspecteur contre-attaque » (cat-and-mouse escapes with the inspector, no fighting the police). Each episode opens with the countdown (« J-8 avant l'attaque finale »).
 
 ## Publishing (Metricool → TikTok)
