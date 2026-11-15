@@ -104,7 +104,7 @@ function draw(t) {
   if (id === 's0') card('SA VENGEANCE : HIER, ON', 'LUI A VOLÉ SON PORT ⚓', '#2a8a3a', P(t, S('s0'), 0.2));
   if (id === 's1') { const p = eBack(P(t, S('s1'), 0.25)); x.save(); x.translate(540, 330); x.scale(p, p); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('NOUS', -270, -62, 54, C.orange, { stroke: false });
     txt(t >= t89 ? String(Math.round(89 * clamp((t - t89) / 0.5))) : '?', -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('LE BARON', 270, -62, 54, '#f5c542', { stroke: false }); txt(t >= t1000 ? '1000' : '?', 270, 40, 120, '#fff', { stroke: false }); x.restore();
-    if (t >= tEur) pill('💰 CAISSE : 198 €', 540, 560, P(t, tEur), '#2b2b30'); }
+    if (t >= tEur) pill('💰 CAISSE : 198 €', 540, 560, P(t, tEur), '#2b2b30'); if (t >= S('s1') + 1.0) pill('➕ 1 ABONNÉ = 1 SOLDAT EN PLUS', 540, 680, P(t, S('s1') + 1.0), '#2a8a3a'); }
   if (id === 'q') { const hiK = shotC ? 'C' : shotB ? 'B' : shotA ? 'A' : ''; [['A', 'ATTAQUER', tA], ['B', 'NÉGOCIER', tB], ['C', 'ESPION', tC]].forEach(([k, lab, tt]) => { if (t >= tt - 0.15) btn(k, lab, clamp((t - tt + 0.15) / 0.25), hiK === k); });
     card(shotC ? 'C : BOB S\'INFILTRE 🕵️' : shotB ? 'B : ON NÉGOCIE 🤝' : 'A : ON ATTAQUE ⚔️', shotC ? 'GRATUIT… MAIS RISQUÉ' : shotB ? 'IL VEUT 300 € 💰' : 'ON PEUT PERDRE DES SOLDATS', shotC ? '#2457a8' : shotB ? '#c9952a' : C.red, 1);
     pill(shotC ? '⚠️ S\'IL EST PRIS : ON PERD BOB' : shotB ? '💰 IL MANQUE 102 €' : '⚠️ RISQUE : − SOLDATS', 540, 560, 1, shotC ? '#2457a8' : shotB ? '#c9952a' : C.red); if (shotB) pill('= 102 LIKES ❤️', 540, 680, P(t, tB + 1.2), C.red); }
