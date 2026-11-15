@@ -14,11 +14,11 @@ TEMPO = 1.15
 SKIP_EV = ['bam']
 BEATS = [
   ('ff', "Le Baron a capturé Salah !", "Le Baron a capturé Sala !", 0.15),
-  ('s0', "Sa vengeance… parce qu'hier, grâce à vous, on lui a pris son port.", "Sa vengeance... parce qu'hier, grâce à vous, on lui a pris son port.", 0.1),
-  ('s1', "On a 198 euros dans la caisse et 89 soldats. Lui ? 1000.", "On a cent quatre-vingt-dix-huit euros dans la caisse et quatre-vingt-neuf soldats. Lui ? Mille.", 0.15),
-  ('q', "A : on attaque la prison… mais on peut perdre des soldats. B : on négocie… mais le Baron veut 150 euros. C : Bob, notre espion, s'infiltre… c'est gratuit, mais s'il se fait prendre, on le perd.", "A : on attaque la prison... mais on peut perdre des soldats. B : on négocie... mais le Baron veut cent cinquante euros. C : Bob, notre espion, s'infiltre... c'est gratuit, mais s'il se fait prendre, on le perd.", 0.3),
-  ('s2', "Et rappelle-toi : chaque like, c'est 1 euro dans la caisse. Chaque abonné, un soldat de plus. Et si tu écris ton rôle, tu rejoins la bande. Sans vous, on ne le sauvera pas.", "Et rappelle-toi : chaque like, c'est un euro dans la caisse. Chaque abonné, un soldat de plus. Et si tu écris ton rôle, tu rejoins la bande. Sans vous, on ne le sauvera pas.", 0.2),
-  ('cta', "Alors écris A, B ou C… et le rôle que TU veux dans la bande !", "Alors écris A, B ou C... et le rôle que TOI tu veux dans la bande !", 0.2),
+  ('s0', "Sa vengeance. Parce qu'hier, grâce à vous, on lui a volé son port.", "Sa vengeance. Parce qu'hier, grâce à vous, on lui a volé son port.", 0.1),
+  ('s1', "Nous : 198 euros et 89 soldats. Lui ? 1000.", "Nous : cent quatre-vingt-dix-huit euros et quatre-vingt-neuf soldats. Lui ? Mille.", 0.35),
+  ('q', "A : on attaque… on risque des soldats. B : on négocie… il veut 150 euros. C : Bob s'infiltre… gratuit, mais s'il est pris, on perd Bob.", "A : on attaque... on risque des soldats. B : on négocie... il veut cent cinquante euros. C : Bob s'infiltre... gratuit, mais s'il est pris, on perd Bob.", 0.3),
+  ('s2', "Ici, ton like, c'est 1 euro dans la caisse. Ton abonnement, un soldat. Ton rôle en commentaire, et tu rejoins la bande. Sans toi, Salah reste en cage.", "Ici, ton like, c'est un euro dans la caisse. Ton abonnement, un soldat. Ton rôle en commentaire, et tu rejoins la bande. Sans toi, Sala reste en cage.", 0.2),
+  ('cta', "Écris A, B ou C… et le rôle que TU veux !", "Écris A, B ou C... et le rôle que TOI tu veux !", 0.2),
   ('end', "T'as 24 heures. Sinon, Salah…", "T'as vingt-quatre heures. Sinon, Sala...", 0.25),
 ]
-CUES = [('ff', 'capturé', 'sting'), ('s0', 'port', 'dingdong'), ('s1', 'euros', 'cash'), ('s1', '89|quatre-vingt-neuf', 'pop'), ('s1', '1000|Mille', 'bam'), ('q', 'attaque', 'whoosh'), ('q', 'négocie', 'cash'), ('q', 'infiltre', 'whoosh'), ('s2', 'like', 'cash'), ('s2', 'abonné', 'pop'), ('s2', 'rôle', 'pop'), ('s2', 'Sans', 'sting'), ('cta', 'écris', 'ding'), ('end', 'heures', 'ticktock'), ('end', 'Sinon', 'sting')]
+CUES = [('ff', 'capturé', 'sting'), ('s0', 'volé', 'dingdong'), ('s1', 'euros', 'cash'), ('s1', 'Lui', 'bam'), ('q', 'attaque', 'whoosh'), ('q', 'négocie', 'cash'), ('q', 'infiltre', 'whoosh'), ('s2', 'like', 'cash'), ('s2', 'abonnement', 'pop'), ('s2', 'rôle', 'pop'), ('s2', 'Sans', 'sting'), ('cta', 'écris', 'ding'), ('end', 'heures', 'ticktock'), ('end', 'Sinon', 'sting')]
