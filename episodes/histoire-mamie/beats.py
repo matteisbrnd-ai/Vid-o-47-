@@ -1,6 +1,7 @@
-# « Les histoires de 47 » #2 — « La soupe de Mamie Jeanne ». Structure du viral « papi Léon » (mort au hook + manie du perso + exemples drôles + 3 héritiers + moquerie + retournements + trésor + mot final + boucle). Histoire originale.
-EMO = {'ff': 'tension', 's1': 'complice', 's2': 'complice', 's3': 'complice', 's4': 'complice', 's5': 'tension', 's6': 'complice', 's7': 'complice',
-       's8': 'complice', 's9': 'complice', 's10': 'choc', 's11': 'tension', 's12': 'choc', 's13': 'complice', 'end': 'question'}
+# « Les histoires de 47 » #2 v3 — « Les 3 enveloppes de Mamie Jeanne ». Ressorts du viral « papi Léon » (perso qui ne ment jamais mais joue sur les mots,
+# 2 exemples drôles, 3 enveloppes piégées, moquerie du petit dernier, trésor, mot final, boucle) — texte, pièges et objets 100 % originaux.
+EMO = {'ff': 'tension', 's1': 'complice', 's2': 'complice', 's3': 'complice', 's4': 'tension', 's5': 'complice', 's6': 'complice', 's7': 'complice',
+       's8': 'complice', 's9': 'choc', 's10': 'complice', 's11': 'tension', 's12': 'tension', 's13': 'choc', 's14': 'complice', 's15': 'complice', 's16': 'complice', 'end': 'question'}
 SFX = 0.4
 SFX_COMP = 3
 SFX_DUCK = 0.7
@@ -9,23 +10,27 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.1}
 SKIP_EV = []
 BEATS = [
-  ('ff', "Quand Mamie Jeanne est morte, toute la famille a retourné sa maison.", "Quand Mamie Jeanne est morte, toute la famille a retourné sa maison.", 0.15),
-  ('s1', "Parce que Mamie avait deux manies : elle avait de l'argent… et elle cachait TOUT.", "Parce que Mamie avait deux manies : elle avait de l'argent... et elle cachait TOUT.", 0.15),
-  ('s2', "Ses billets ? Dans le congélateur, entre les petits pois. Son alliance ? Dans le pot de cornichons.", "Ses billets ? Dans le congélateur, entre les petits pois. Son alliance ? Dans le pot de cornichons.", 0.2),
-  ('s3', "Un soir, un voleur est entré chez elle. Il a tout fouillé pendant une heure… et il n'a rien trouvé. Alors elle lui a servi une soupe.", "Un soir, un voleur est entré chez elle. Il a tout fouillé pendant une heure... et il n'a rien trouvé. Alors elle lui a servi une soupe.", 0.15),
-  ('s4', "Ce voleur, c'était 47. Et depuis, il revenait chaque dimanche.", "Ce voleur, c'était Quarante-sept. Et depuis, il revenait chaque dimanche.", 0.2),
-  ('s5', "Le testament était simple : chaque petit-enfant prend UN seul objet de la maison.", "Le testament était simple : chaque petit-enfant prend UN seul objet de la maison.", 0.15),
-  ('s6', "Kevin, qui ne venait que pour emprunter de l'argent, a pris la boîte à bijoux.", "Kévine, qui ne venait que pour emprunter de l'argent, a pris la boîte à bijoux.", 0.1),
-  ('s7', "Inès, qui appelait une fois par an, a pris le grand écran plat.", "Inès, qui appelait une fois par an, a pris le grand écran plat.", 0.1),
-  ('s8', 'Et Tom, le seul qui venait manger la soupe chaque dimanche, a juste pris… le vieux cahier de recettes. « Pour refaire sa soupe. »', 'Et Tom, le seul qui venait manger la soupe chaque dimanche, a juste pris... le vieux cahier de recettes. Pour refaire sa soupe.', 0.15),
-  ('s9', 'Kevin a éclaté de rire : « Tom repart avec trois carottes et un poireau ! »', 'Kévine a éclaté de rire : Tom repart avec trois carottes et un poireau !', 0.2),
-  ('s10', "Les bijoux ? Du toc. Mamie avait vendu les vrais pour payer les dettes de Kevin. L'écran ? Loué. Le magasin est venu le reprendre le lendemain.", "Les bijoux ? Du toc. Mamie avait vendu les vrais pour payer les dettes de Kévine. L'écran ? Loué. Le magasin est venu le reprendre le lendemain.", 0.2),
-  ('s11', "Le dimanche d'après, Tom a fait la soupe de Mamie, avec 47. Page 12 : trois carottes, deux poireaux… et une ligne en plus : « le sel est sous la 3e marche de la cave ».", "Le dimanche d'après, Tom a fait la soupe de Mamie, avec Quarante-sept. Page douze : trois carottes, deux poireaux... et une ligne en plus : le sel est sous la troisième marche de la cave.", 0.2),
-  ('s12', "Sous la marche : une boîte. 90 000 euros. Et un petit mot : « Ils ont tous fouillé ma maison. Toi, tu t'asseyais à ma table. »", "Sous la marche : une boîte. Quatre-vingt-dix mille euros. Et un petit mot : Ils ont tous fouillé ma maison. Toi, tu t'asseyais à ma table.", 0.3),
-  ('s13', "Mamie cachait tout… sauf à ceux qui venaient la voir.", "Mamie cachait tout... sauf à ceux qui venaient la voir.", 0.3),
-  ('end', "Et toi, c'est quand la dernière fois que t'as mangé chez ta grand-mère ?", "Et toi, c'est quand la dernière fois que t'as mangé chez ta grand-mère ?", 1.2),
+  ('ff', "Quand Mamie Jeanne est morte, toute la famille a foncé chez le notaire.", "Quand Mamie Jeanne est morte, toute la famille a foncé chez le notaire.", 0.15),
+  ('s1', "Parce que Mamie avait de l'argent… et qu'elle tenait TOUJOURS parole. À la lettre près.", "Parce que Mamie avait de l'argent... et qu'elle tenait TOUJOURS parole. À la lettre près.", 0.15),
+  ('s2', "Elle avait juré à son médecin d'arrêter les gâteaux… elle était passée aux tartes.", "Elle avait juré à son médecin d'arrêter les gâteaux... elle était passée aux tartes.", 0.15),
+  ('s3', "Elle avait promis à sa voisine de lui rendre son plat dès qu'il serait vide… elle le remplissait chaque dimanche.", "Elle avait promis à sa voisine de lui rendre son plat dès qu'il serait vide... elle le remplissait chaque dimanche.", 0.2),
+  ('s4', "Chez le notaire, il y avait trois enveloppes.", "Chez le notaire, il y avait trois enveloppes.", 0.15),
+  ('s5', "La première pour Kevin, qui ne passait que pour emprunter de l'argent. « À Kevin, je laisse tous mes comptes. » Kevin regardait déjà des voitures sur son téléphone.", "La première pour Kévine, qui ne passait que pour emprunter de l'argent. À Kévine, je laisse tous mes comptes. Kévine regardait déjà des voitures sur son téléphone.", 0.15),
+  ('s6', "La deuxième pour Inès, qui appelait une fois par an. « À Inès, je laisse ma plus belle pièce. » Inès s'imaginait déjà un salon immense.", "La deuxième pour Inès, qui appelait une fois par an. À Inès, je laisse ma plus belle pièce. Inès s'imaginait déjà un salon immense.", 0.15),
+  ('s7', "La troisième pour Tom, le petit dernier, qui venait chaque dimanche juste pour faire les mots croisés avec elle. « À Tom, je laisse mon vieux fauteuil… et mon chat. »", "La troisième pour Tom, le petit dernier, qui venait chaque dimanche juste pour faire les mots croisés avec elle. À Tom, je laisse mon vieux fauteuil... et mon chat.", 0.15),
+  ('s8', "Kevin et Inès se sont écroulés de rire : « Un fauteuil qui grince et un chat qui griffe ! Bonne chance, Tom ! »", "Kévine et Inès se sont écroulés de rire : Un fauteuil qui grince et un chat qui griffe ! Bonne chance, Tom !", 0.2),
+  ('s9', "Les comptes de Kevin ? Un petit carnet. Tout l'argent qu'elle lui avait prêté en dix ans : vingt-trois mille euros. À rembourser.", "Les comptes de Kévine ? Un petit carnet. Tout l'argent qu'elle lui avait prêté en dix ans : vingt-trois mille euros. À rembourser.", 0.2),
+  ('s10', "La plus belle pièce d'Inès ? Une pièce de deux euros. Avec un mot : « Pour m'appeler plus souvent. »", "La plus belle pièce d'Inès ? Une pièce de deux euros. Avec un mot : Pour m'appeler plus souvent.", 0.25),
+  ('s11', "Puis Kevin a compris : Mamie jouait avec les mots. Ce fauteuil cachait forcément quelque chose. Il a payé un voleur pour le récupérer. Ce voleur, c'était 47.", "Puis Kévine a compris : Mamie jouait avec les mots. Ce fauteuil cachait forcément quelque chose. Il a payé un voleur pour le récupérer. Ce voleur, c'était Quarante-sept.", 0.2),
+  ('s12', "Cette nuit-là, chez Tom, le chat griffait le fauteuil comme un fou. Le tissu a craqué…", "Cette nuit-là, chez Tom, le chat griffait le fauteuil comme un fou. Le tissu a craqué...", 0.1),
+  ('s13', "Et des pièces d'or ont roulé par terre. Des centaines.", "Et des pièces d'or ont roulé par terre. Des centaines.", 0.2),
+  ('s14', "Cousu dedans, un mot : « Les autres comptaient mon argent. Toi, Tom, tu comptais les cases. »", "Cousu dedans, un mot : Les autres comptaient mon argent. Toi, Tom, tu comptais les cases.", 0.3),
+  ('s15', "47 a tout remis, et recousu le fauteuil. Le lendemain, il a dit à Kevin : « Dans le fauteuil ? Il n'y avait qu'un chat. »", "Quarante-sept a tout remis, et recousu le fauteuil. Le lendemain, il a dit à Kévine : Dans le fauteuil ? Il n'y avait qu'un chat.", 0.2),
+  ('s16', 'Parole tenue… à la lettre près. Mamie aurait adoré.', 'Parole tenue... à la lettre près. Mamie aurait adoré.', 0.3),
+  ('end', "Et toi… c'est quand, ton dernier dimanche chez ta grand-mère ?", "Et toi... c'est quand, ton dernier dimanche chez ta grand-mère ?", 1.2),
 ]
-CUES = [('ff', '+0', 'sting'), ('ff', 'retourné', 'bam'), ('s1', 'argent', 'cash'), ('s1', 'TOUT', 'sting'), ('s2', 'congélateur', 'pop'), ('s2', 'cornichons', 'pop'),
-        ('s3', 'voleur', 'click'), ('s3', 'rien', 'bam'), ('s3', 'soupe', 'pop'), ('s4', 'était', 'ding'), ('s4', 'dimanche', 'tick'), ('s5', 'testament', 'paper'), ('s5', 'UN', 'stamp'),
-        ('s6', 'bijoux', 'whoosh'), ('s7', 'écran', 'whoosh'), ('s8', 'cahier', 'ding'), ('s9', 'rire', 'pop'), ('s10', 'toc', 'stamp'), ('s10', 'dettes', 'bam'), ('s10', 'Loué', 'stamp'),
-        ('s11', 'Page', 'paper'), ('s11', 'sel', 'sting'), ('s12', 'boîte', 'click'), ('s12', 'euros', 'cash'), ('s12', 'mot', 'paper'), ('s13', 'voir', 'ding'), ('end', '+0', 'ding')]
+CUES = [('ff', '+0', 'sting'), ('ff', 'foncé', 'whoosh'), ('ff', 'notaire', 'bam'), ('s1', 'argent', 'cash'), ('s1', 'TOUJOURS', 'sting'), ('s2', 'gâteaux', 'pop'), ('s2', 'tartes', 'ding'),
+        ('s3', 'plat', 'pop'), ('s3', 'remplissait', 'ding'), ('s4', 'enveloppes', 'paper'), ('s5', 'comptes', 'stamp'), ('s5', 'voitures', 'cash'), ('s6', 'pièce', 'stamp'), ('s6', 'salon', 'ding'),
+        ('s7', 'fauteuil', 'stamp'), ('s7', 'chat', 'pop'), ('s8', 'rire', 'pop'), ('s9', 'carnet', 'paper'), ('s9', 'euros', 'bam'), ('s9', 'rembourser', 'stamp'), ('s10', 'deux', 'pop'), ('s10', 'souvent', 'ding'),
+        ('s11', 'compris', 'sting'), ('s11', 'payé', 'cash'), ('s11', 'était', 'ding'), ('s12', 'griffait', 'click'), ('s12', 'craqué', 'bam'), ('s13', 'or', 'cash'), ('s13', 'centaines', 'cash'), ('s14', 'mot', 'paper'),
+        ('s15', 'recousu', 'click'), ('s15', 'chat', 'pop'), ('s16', 'adoré', 'ding'), ('end', '+0', 'ding')]
