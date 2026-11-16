@@ -209,3 +209,7 @@ Account on 2026-11-06: 40 followers, 1 273 likes. Plateau 650–1 100 views = Ti
 the lever is the first 3 s (hook) + shares.
 
 **Reference accounts for riddles (2026-11-14):** Meister Knobel (@meisterknobel4, German) and Wesh, l'énigme (@leptitfaitdivers, FR, hero Kevin). Pick their top-viewed riddles we haven't done, copy only the shot plan (stakes scene → close-up of the problem → « impossible » card → hero arrives → question → diagram → payoff), never their art or text. Already taken from them: chaussure, petit, barque, bonnets, escargot, cocktail, douane/contrebandier, camion.
+
+## Les histoires de 47 (format récit, depuis 2026-11-16)
+- #1 « Le fantôme du musée » (episodes/histoire-musee, 49 s) : 47 remet les vrais tableaux, le directeur était le faussaire. CTA binaire « L'ARRÊTER / MERCI 47 » en commentaire.
+- Règles : histoire originale (format kagen0w seulement), plan nouveau toutes les 2–3 s, objets-preuves lisibles en muet (caméra REC, journal, labo, menottes + photo du coupable), ne jamais montrer des étiquettes qui contredisent la voix.
