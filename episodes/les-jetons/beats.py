@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Une seule poignée, sans regarder… et chaque jeton lui coûte CENT euros !", "Une seule poignée, sans regarder... et chaque jeton lui coûte CENT euros !", 0.2),
+  ('ff', "Dix rouges, dix bleus, sans regarder : combien tu en prends pour être SÛR d'avoir une paire ?", "Dix rouges, dix bleus, sans regarder : combien tu en prends pour être SÛR d'avoir une paire ?", 0.2),
   ('s1', "Au casino du Baron, 47 tente un jeu façon Squid Game : simple… mais piégeux.", "Au casino du Baron, Quarante-sept tente un jeu façon Squide Guéme : simple... mais piégeux.", 0.15),
   ('s2', "Dans ce sac noir : dix jetons rouges et dix jetons bleus, tous mélangés.", "Dans ce sac noir : dix jetons rouges et dix jetons bleus, tous mélangés.", 0.15),
   ('s3', "Il plonge la main UNE fois, sans regarder. S'il sort deux jetons de la même couleur, il gagne.", "Il plonge la main UNE fois, sans regarder. S'il sort deux jetons de la même couleur, il gagne.", 0.2),
@@ -23,6 +23,6 @@ BEATS = [
   ('sol3', "Mais le troisième est forcément rouge ou bleu… il fait toujours une paire. Gagné, et ça ne lui a coûté que trois cents euros !", "Mais le troisième est forcément rouge ou bleu... il fait toujours une paire. Gagné, et ça ne lui a coûté que trois cents euros !", 0.2),
   ('end', "T'avais trouvé ?", "T'avais trouvé ?", 1.2),
 ]
-CUES = [('ff', '+0', 'rattle'), ('ff', 'euros', 'cash'), ('s1', 'casino', 'cash'), ('s1', 'piégeux', 'sting'), ('s2', 'rouges', 'clink'), ('s2', 'bleus', 'clink'), ('s2', 'mélangés', 'rattle'),
+CUES = [('ff', '+0', 'rattle'), ('ff', 'paire', 'ding'), ('s1', 'casino', 'cash'), ('s1', 'piégeux', 'sting'), ('s2', 'rouges', 'clink'), ('s2', 'bleus', 'clink'), ('s2', 'mélangés', 'rattle'),
         ('s3', 'main', 'rattle'), ('s3', 'gagne', 'ding'), ('s4', 'euros', 'cash'), ('s4', 'SÛR|sûr', 'stamp'), ('q', '+0', 'ding'), ('c1', '+0', 'paper'),
         ('sol1', 'solution', 'dingdong'), ('sol2', 'rouge', 'pop'), ('sol2', 'bleu', 'pop'), ('sol3', 'troisième', 'pop'), ('sol3', 'Gagné', 'cash'), ('end', '+0', 'ding')]

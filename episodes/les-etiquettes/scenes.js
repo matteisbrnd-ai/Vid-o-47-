@@ -29,10 +29,12 @@ function caseDiag(w, h, silver) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h
   const lab = ['OR', 'ARGENT', 'MÉLANGE'], tru = silver ? ['MÉLANGE', 'OR', 'ARGENT'] : ['ARGENT', 'MÉLANGE', 'OR'];
   lab.forEach((l, i) => { const cx = w / 6 + i * w / 3; txt('« ' + l + ' »', cx, 150, 44, OL, { stroke: false }); txt('↓', cx, 220, 64, OL, { stroke: false }); txt(tru[i], cx, 300, tru[i] === 'OR' ? 70 : 50, tru[i] === 'OR' ? '#c08a12' : OL, { stroke: false });
     if (tru[i] === 'OR') { x.strokeStyle = '#2a8a3a'; x.lineWidth = 7; x.strokeRect(cx - 120, 250, 240, 100); } }); }
+function hookPic(w, h) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); ['OR', 'ARGENT', 'MÉLANGE'].forEach((l, i) => { const cx = w / 6 + i * w / 3; sack(cx, h - 60, l, null); x.strokeStyle = C.red; x.lineWidth = 7; x.beginPath(); x.moveTo(cx - 90, h - 128); x.lineTo(cx + 90, h - 162); x.stroke(); txt('FAUX', cx, h - 245, 48, C.red, { stroke: false }); });
+  coin(w / 2, 70, 44, true); txt('?', w / 2, 72, 60, OL, { stroke: false }); }
 function draw(t) {
   const id = curId(t), tSac = WF('s1', /sacs/i), tOr = WF('s2', /^or/i), tArg = WF('s2', /argent/i), tMel = WF('s2', /mélangé/i), tTout = WF('s3', /TOUTES|toutes/i),
     tUne = WF('s4', /UNE|une/i), tReg = WF('s4', /regarder/i), tTire = WF('sol2', /tire/i), tEmp = WF('sol2', /emporte/i), tArg3 = WF('sol3', /argent/i), tEti = WF('sol3', /étiquette/i);
-  const K = [[0, 0, 2170, 1420, 0.95], [B.ff.end - 0.1, 1.1, 1300, 1250, 0.62], [S('s1') + 0.3, 1.2, 600, 1150, 1.0], [tSac, 1.0, 1950, 1350, 1.05],
+  const K = [[0, 0, 2420, 1009, 1.3], [B.ff.end - 0.1, 1.1, 1300, 1250, 0.62], [S('s1') + 0.3, 1.2, 600, 1150, 1.0], [tSac, 1.0, 1950, 1350, 1.05],
     [S('s3'), 1.0, 1950, 1400, 1.25], [S('s4'), 1.0, 2170, 1420, 0.95], [tReg, 1.0, 1950, 1400, 1.0], [S('c1'), 1.0, 1300, 1250, 0.62],
     [S('sol1'), 1.0, 2250, 1350, 1.4], [S('sol2'), 0.8, 2350, 1300, 1.3], [S('sol3'), 1.0, 1950, 1400, 1.0], [S('end'), 1.0, 1300, 1250, 0.62]];
   camPath(t, K, id === 'ff' && t < 0.4 ? 5 : 0);
@@ -54,7 +56,8 @@ function draw(t) {
   if (id === 'sol2') coin(2500, GY - 40 - 0.78 * 690, 34, true);
   if (id === 'sol3') coin(2500, GY - 40 - 0.78 * 690, 34, false);
   resetCam();
-  hookCard(t, [['3 ÉTIQUETTES…', 80], ['TOUTES FAUSSES', 92, C.red], ['ET 1 SEULE PIÈCE', 66]], B.ff.end + 0.1);
+  hookCard(t, [['3 ÉTIQUETTES, TOUTES FAUSSES', 66], ["1 PIÈCE POUR TROUVER L'OR", 72, C.red]], B.ff.end + 0.1);
+  if (id === 'ff') polaroid(540, 1000, 780, 520, 1, hookPic, '', 0.02);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('LE SALON DU BARON', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's2') [[tOr, 'OR', '#c08a12'], [tArg, 'ARGENT', '#6a7380'], [tMel, '½ OR + ½ ARGENT', C.orange]].forEach(([tt, s, c], i) => { if (t >= tt) pill(s, 540, 330 + i * 120, P(t, tt), c); });

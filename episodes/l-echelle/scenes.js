@@ -26,13 +26,19 @@ function boat(t, rise) { x.save(); x.translate(0, -rise + Math.sin(t * 1.6) * 4)
 function waterFront(t, wy) { x.save(); x.globalAlpha = 0.72; const g = x.createLinearGradient(0, wy, 0, wy + 900); g.addColorStop(0, '#4fb0ee'); g.addColorStop(1, '#1d5f9e'); x.fillStyle = g; x.fillRect(200, wy, 4000, 2000); x.restore();
   x.strokeStyle = 'rgba(255,255,255,.8)'; x.lineWidth = 7; x.beginPath(); for (let px = 200; px < 4200; px += 20) { const yy = wy + Math.sin(px / 60 + t * 3) * 7; px === 200 ? x.moveTo(px, yy) : x.lineTo(px, yy); } x.stroke(); }
 function rulesPol(w, h) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); [['10 BARREAUX', OL, 54], ['1 TOUS LES 30 CM', OL, 46], ["2 SOUS L'EAU", '#1d5f9e', 54], ['MARÉE : +50 CM / H', C.red, 50], ['DANS 3 H → ?', C.red, 58]].forEach(([s, c, f], i) => txt(s, w / 2, 62 + i * 84, f, c, { stroke: false })); }
+function hookPic(w, h) { x.fillStyle = '#e8f7ff'; x.fillRect(0, 0, w, h); const lx = w * 0.38, wy = h - 120, r0 = 40, rs = (wy + 60 - r0) / 9.4;
+  x.fillStyle = '#f7f7f2'; x.fillRect(0, 0, lx - 110, h); x.strokeStyle = OL; x.lineWidth = 6; x.strokeRect(-10, -10, lx - 100, h + 20);
+  [lx - 70, lx + 70].forEach(rx => rbox(rx - 9, 0, 18, h, 6, '#c9ced6', 4)); for (let i = 0; i < 10; i++) rbox(lx - 78, r0 + i * rs - 7, 156, 14, 6, '#e2b649', 4);
+  x.save(); x.globalAlpha = 0.6; x.fillStyle = '#3fa0e0'; x.fillRect(0, wy, w, h); x.restore(); x.strokeStyle = '#fff'; x.lineWidth = 5; x.beginPath(); x.moveTo(0, wy); x.lineTo(w, wy); x.stroke();
+  [8, 9].forEach(i => { x.strokeStyle = C.red; x.lineWidth = 7; x.beginPath(); x.ellipse(lx, r0 + i * rs, 100, 24, 0, 0, 7); x.stroke(); });
+  x.strokeStyle = C.red; x.lineWidth = 18; x.beginPath(); x.moveTo(w * 0.78, wy - 10); x.lineTo(w * 0.78, 110); x.stroke(); poly([[w * 0.78 - 45, 120], [w * 0.78, 50], [w * 0.78 + 45, 120]], C.red, 4); txt('+1,50 M', w * 0.78, 30 + h / 2, 56, C.red, { sw: 8, sc: '#fff' }); }
 function draw(t) {
   const id = curId(t), tEch = WF('s1', /échelle/i), tDeux = WF('s2', /deux/i), tMar = WF('s3', /marée/i), tOuv = WF('s4', /ouvre/i), tCom = WF('s4', /combien/i), tPl = WF('s4', /plonges/i),
     tFl = WF('sol2', /flotte/i), tMon = WF('sol2', /monte/i), tSept = WF('sol3', /sept/i), tSec = WF('sol3', /sec/i);
   // tide: sol2 → water and boat rise 330 px (1.5 m) together
   const rise = id === 'sol2' ? 330 * eIO(seg(t, tMon - 0.3, tMon + 1.6)) : id === 'sol3' || id === 'end' ? 330 : 0, wy = WY0 - rise;
   const deckY = 1200 - rise;
-  const K = [[0, 0, LX, 1480, 1.75], [B.ff.end - 0.1, 1.1, 1400, 1300, 0.62], [S('s1') + 1.2, 1.2, 1500, 1350, 0.75], [tEch, 1.0, LX, 1650, 1.25], [tDeux, 0.8, LX, 1760, 1.8],
+  const K = [[0, 0, LX, 1095, 1.75], [B.ff.end - 0.1, 1.1, 1400, 1300, 0.62], [S('s1') + 1.2, 1.2, 1500, 1350, 0.75], [tEch, 1.0, LX, 1650, 1.25], [tDeux, 0.8, LX, 1760, 1.8],
     [S('s3'), 1.0, 400, 1600, 1.0], [S('s4'), 1.0, 2050, 950, 1.5], [tCom, 1.0, LX, 1550, 1.0], [S('q'), 0.8, LX, 1600, 1.1], [S('c1'), 1.0, 1400, 1300, 0.62],
     [S('sol1'), 0.8, LX, 1700, 1.3], [S('sol2'), 1.0, 1100, 1450, 0.7], [S('sol3'), 0.8, LX, 1700 - 330, 1.25], [tSec, 0.8, LX, 950 - 330, 1.9], [S('end'), 1.0, 1400, 1300 - 330, 0.62]];
   camPath(t, K, id === 'ff' && t < 0.5 ? 6 : 0);
@@ -52,7 +58,8 @@ function draw(t) {
   if (id === 's3' && t >= tMar) { const k = P(t, tMar, 0.6); x.save(); x.globalAlpha = k; x.strokeStyle = C.red; x.lineWidth = 22; x.beginPath(); x.moveTo(420, WY0 - 20); x.lineTo(420, WY0 - 20 - 260 * k); x.stroke(); poly([[370, WY0 - 260 * k - 10], [420, WY0 - 300 * k - 30], [470, WY0 - 260 * k - 10]], C.red, 5); x.restore(); }
   resetCam();
   if (id === 'ff' && t < 0.3) { x.fillStyle = 'rgba(230,40,40,.18)'; x.fillRect(0, 0, W, H); }
-  hookCard(t, [['LA MER MONTE…', 84], ['UN BARREAU DE TROP', 76], ['ET IL PLONGE', 96, C.red]], B.ff.end + 0.1);
+  hookCard(t, [["2 BARREAUX SOUS L'EAU", 74], ['LA MER MONTE DE 1,50 M', 70], ['COMBIEN APRÈS ?', 92, C.red]], B.ff.end + 0.1);
+  if (id === 'ff') polaroid(540, 900, 780, 440, 1, hookPic, '', 0.02);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('LE PORT · BATEAU DU BARON', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's2' && t >= tDeux) pill("2 BARREAUX SOUS L'EAU", 540, 360, P(t, tDeux), '#1d5f9e');

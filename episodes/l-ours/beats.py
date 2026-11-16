@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Les quatre murs de sa cabane regardent TOUS vers le sud… et un ours gratte à la porte !", "Les quatre murs de sa cabane regardent TOUS vers le sud... et un ours gratte à la porte !", 0.2),
+  ('ff', "Quatre fenêtres… et elles donnent TOUTES au sud. Un ours gratte à la porte : il est de quelle couleur ?", "Quatre fenêtres... et elles donnent TOUTES au sud. Un ours gratte à la porte : il est de quelle couleur ?", 0.2),
   ('s1', "Pour échapper au Baron, 47 se cache dans une cabane carrée, construite de ses mains.", "Pour échapper au Baron, Quarante-sept se cache dans une cabane carrée, construite de ses mains.", 0.15),
   ('s2', "Quatre murs, une fenêtre sur chaque mur. Et les QUATRE fenêtres donnent plein sud.", "Quatre murs, une fenêtre sur chaque mur. Et les QUATRE fenêtres donnent plein sud.", 0.2),
   ('s3', "Il ouvre son Tasty Crousty… et un ours, attiré par l'odeur, se met à tourner autour de la cabane.", "Il ouvre son Tasty Crousty... et un ours, attiré par l'odeur, se met à tourner autour de la cabane.", 0.2),
@@ -23,6 +23,6 @@ BEATS = [
   ('sol3', "Et au pôle Nord, un ours… c'est un ours polaire. Adieu le Tasty Crousty !", "Et au pôle Nord, un ours... c'est un ours polaire. Adieu le Tasty Crousty !", 0.2),
   ('end', "T'avais trouvé ?", "T'avais trouvé ?", 1.2),
 ]
-CUES = [('ff', '+0', 'wind'), ('ff', 'gratte', 'rattle'), ('s1', 'cabane', 'wind'), ('s2', 'fenêtre', 'pop'), ('s2', 'sud', 'stamp'), ('s3', 'ouvre', 'paper'), ('s3', 'ours', 'rattle'),
+CUES = [('ff', '+0', 'pop'), ('ff', 'gratte', 'rattle'), ('s1', 'cabane', 'wind'), ('s2', 'fenêtre', 'pop'), ('s2', 'sud', 'stamp'), ('s3', 'ouvre', 'paper'), ('s3', 'ours', 'rattle'),
         ('s3', 'tourner', 'steps'), ('s4', 'sait', 'sting'), ('q', '+0', 'ding'), ('c1', '+0', 'paper'), ('sol1', 'solution', 'dingdong'), ('sol2', 'Nord', 'wind'),
         ('sol3', 'polaire', 'whoosh'), ('sol3', 'Adieu', 'laugh'), ('end', '+0', 'ding')]

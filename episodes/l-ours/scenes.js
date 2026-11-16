@@ -38,11 +38,12 @@ function globe(w, h, k) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); const
   [-1.1, -0.45, 0.45, 1.1].forEach((a, i) => { if (k < (i + 1) / 4) return; const ang = -Math.PI / 2 + a; x.strokeStyle = C.red; x.lineWidth = 8; x.beginPath(); x.arc(cx, cy, r + 30, -Math.PI / 2 + Math.sign(a) * 0.12, ang, a < 0); x.stroke();
     ell(cx + Math.cos(ang) * (r + 30), cy + Math.sin(ang) * (r + 30), 12, 12, C.red, 0); });
   txt('↓ SUD ↓', cx, cy + 20, 50, C.red, { stroke: false }); }
+function hookPic(w, h) { topView(w, h, 1); x.save(); x.globalAlpha = 0.55; bear(w - 110, h - 110, 0.35, '#7d8590', 0); x.restore(); txt('?', w - 110, h - 120, 110, '#fff', { sw: 12 }); }
 function draw(t) {
   const id = curId(t), tOuv = WF('s3', /ouvre/i), tOurs = WF('s3', /ours/i), tTour = WF('s3', /tourner/i), tFen = WF('s2', /fenêtre/i), tSud = WF('s2', /sud/i), tSait = WF('s4', /sait/i),
     tBl = WF('sol1', /blanc/i), tNord = WF('sol2', /Nord/i), tPol = WF('sol3', /polaire/i), tAd = WF('sol3', /Adieu/i);
   const solId = id.startsWith('sol') || id === 'end', snow = solId && (id !== 'sol1' || t >= tBl);
-  const K = [[0, 0, 900, 1250, 1.45], [B.ff.end - 0.1, 1.1, 1250, 1200, 0.62], [S('s1') + 1.0, 1.2, 1300, 1250, 0.8], [S('s2'), 1.0, WIN[0], WIN[1] + 100, 1.2],
+  const K = [[0, 0, 900, 1037, 1.45], [B.ff.end - 0.1, 1.1, 1250, 1200, 0.62], [S('s1') + 1.0, 1.2, 1300, 1250, 0.8], [S('s2'), 1.0, WIN[0], WIN[1] + 100, 1.2],
     [S('s3'), 1.0, 2100, 1350, 1.3], [tOurs, 1.0, WIN[0], WIN[1] + 150, 1.15], [S('s4'), 1.0, 2300, 1300, 1.5], [S('q'), 0.8, 2300, 1300, 1.4], [S('c1'), 1.0, 1250, 1200, 0.62],
     [S('sol1'), 0.8, WIN[0], WIN[1] + 150, 1.15], [S('sol2'), 1.0, 1250, 1200, 0.75], [S('sol3'), 0.8, WIN[0], WIN[1] + 100, 1.3], [tAd, 0.6, 2100, 1350, 1.3], [S('end'), 1.0, 1250, 1200, 0.62]];
   camPath(t, K, id === 'ff' && t < 0.5 ? 7 : 0);
@@ -61,8 +62,9 @@ function draw(t) {
   if (id === 'ff') tasty(px + 170, GY - 230, 0.55, true);
   resetCam();
   if (id === 'ff' && t > 0.12 && t < 0.25) { x.fillStyle = 'rgba(255,255,255,.4)'; x.fillRect(0, 0, W, H); }
-  if (id === 'ff') onoma('SCRITCH !', 330, 1250, P(t, 0, 0.15) || 1, 120);
-  hookCard(t, [['4 MURS, TOUS AU SUD…', 78], ['ET UN OURS GRATTE', 82], ['À LA PORTE 🐻', 92, C.red]], B.ff.end + 0.1);
+  if (id === 'ff' && t > 1.2) onoma('SCRITCH !', 250, 1450, P(t, 1.2, 0.15), 110);
+  hookCard(t, [['4 FENÊTRES, TOUTES AU SUD', 76], ['L\'OURS EST DE QUELLE COULEUR ?', 70, C.red]], B.ff.end + 0.1);
+  if (id === 'ff') polaroid(540, 1000, 780, 520, 1, hookPic, '', 0.02);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('LA CACHETTE DE 47', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's2' && t >= tFen) polaroid(560, 720, 720, 600, P(t, tFen, 0.3), (w, h) => topView(w, h, t >= tSud ? 1 : seg(t, tFen, tSud)), 'VUE DE HAUT', -0.03);

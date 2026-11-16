@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Les yeux bandés… et il fait deux tas avec PILE autant de « face », sans rien voir !", "Les yeux bandés... et il fait deux tas avec PILE autant de face, sans rien voir !", 0.2),
+  ('ff', "Yeux bandés, vingt pièces, dont dix côté face. Fais deux tas avec AUTANT de « face » !", "Yeux bandés, vingt pièces, dont dix côté face. Fais deux tas avec AUTANT de face !", 0.2),
   ('s1', "Le Baron bande les yeux de 47 et renverse vingt pièces sur son bureau.", "Le Baron bande les yeux de Quarante-sept et renverse vingt pièces sur son bureau.", 0.15),
   ('s2', "Dix sont côté pile, dix côté face. Au toucher, impossible de les distinguer.", "Dix sont côté pile, dix côté face. Au toucher, impossible de les distinguer.", 0.15),
   ('s3', "La mission : faire deux tas avec autant de « face » dans chaque tas. Il peut retourner les pièces qu'il veut.", "La mission : faire deux tas avec autant de face dans chaque tas. Il peut retourner les pièces qu'il veut.", 0.2),

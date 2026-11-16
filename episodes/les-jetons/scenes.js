@@ -26,10 +26,11 @@ function pairDiag(w, h, k, id) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h)
   if (id === 'sol3') { const alt = Math.floor(k * 4) % 2; chip(w / 2 + 200, y, 70, alt ? '#2c6fd8' : C.red); txt('3', w / 2 + 200, y + 110, 44, OL, { stroke: false });
     x.strokeStyle = '#2a8a3a'; x.lineWidth = 9; x.beginPath(); x.moveTo(w / 2 + 200, y - 90); x.quadraticCurveTo(w / 2 + (alt ? 100 : 0), y - 200, alt ? w / 2 : w / 2 - 200, y - 90); x.stroke(); txt('PAIRE !', w / 2, 50, 54, '#2a8a3a', { stroke: false }); }
   else txt('PAS DE PAIRE…', w / 2, 50, 50, C.red, { stroke: false }); }
+function hookPic(w, h) { x.fillStyle = '#fbf3e4'; x.fillRect(0, 0, w, h); bag(w / 2, h - 60, 0.95, 0); for (let i = 0; i < 10; i++) { chip(50 + (i % 2) * 80, 60 + Math.floor(i / 2) * 85, 34, C.red); chip(w - 50 - (i % 2) * 80, 60 + Math.floor(i / 2) * 85, 34, '#2c6fd8'); } }
 function draw(t) {
   const id = curId(t), tCas = WF('s1', /casino/i), tPie = WF('s1', /piégeux/i), tRou = WF('s2', /rouges/i), tBle = WF('s2', /bleus/i), tMain = WF('s3', /main/i), tGag = WF('s3', /gagne/i),
     tEur = WF('s4', /euros/i), tSur = WF('s4', /SÛR|sûr/i), tTro = WF('sol1', /trois/i), tR2 = WF('sol2', /rouge/i), tT3 = WF('sol3', /troisième/i), tGg = WF('sol3', /Gagné/i);
-  const K = [[0, 0, 1720, 1350, 1.6], [B.ff.end - 0.1, 1.1, 1350, 1250, 0.62], [S('s1') + 1.0, 1.4, 1400, 1300, 0.85], [S('s2'), 1.0, TX, 1450, 1.5],
+  const K = [[0, 0, 1720, 1095, 1.6], [B.ff.end - 0.1, 1.1, 1350, 1250, 0.62], [S('s1') + 1.0, 1.4, 1400, 1300, 0.85], [S('s2'), 1.0, TX, 1450, 1.5],
     [S('s3'), 1.0, 1650, 1400, 1.3], [S('s4'), 1.0, 1000, 1300, 1.4], [tSur, 1.0, 1650, 1350, 1.5], [S('c1'), 1.0, 1350, 1250, 0.62],
     [S('sol1'), 0.8, 1650, 1450, 1.1], [S('sol3'), 1.0, 1650, 1400, 1.0], [S('end'), 1.0, 1350, 1250, 0.62]];
   camPath(t, K, id === 'ff' && t < 0.5 ? 6 : 0);
@@ -41,7 +42,8 @@ function draw(t) {
   bag(TX + 180, TY - 20, 0.85, grab ? Math.sin(t * 30) * 6 : 0);
   if (id === 'sol1' || id === 'sol3' || id === 'end') { [[C.red, -90], ['#2c6fd8', 0], [C.red, 90]].forEach(([c, dx]) => chip(TX - 250 + dx, TY - 40, 40, c)); }
   resetCam();
-  hookCard(t, [['1 POIGNÉE, SANS REGARDER…', 66], ['ET CHAQUE JETON', 84], ['COÛTE 100 € 💸', 92, C.red]], B.ff.end + 0.1);
+  hookCard(t, [['10 ROUGES + 10 BLEUS, SANS REGARDER', 56], ['COMBIEN POUR 1 PAIRE SÛRE ?', 70, C.red]], B.ff.end + 0.1);
+  if (id === 'ff') polaroid(540, 1000, 780, 520, 1, hookPic, '', 0.02);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1' && t >= tCas) banner('LE CASINO DU BARON', 540, 330, P(t, tCas));
   if (id === 's2') { if (t >= tRou) pill('🔴 × 10', 360, 340, P(t, tRou), C.red); if (t >= tBle) pill('🔵 × 10', 720, 340, P(t, tBle), '#2c6fd8'); }

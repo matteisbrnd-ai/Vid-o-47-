@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.3}
 SKIP_EV = ['bam']
 BEATS = [
-  ('ff', "Trois sacs, trois étiquettes… TOUTES fausses. Et il trouve l'or en tirant UNE seule pièce !", "Trois sacs, trois étiquettes... TOUTES fausses. Et il trouve l'or en tirant UNE SEULE pièce !", 0.2),
+  ('ff', "Les trois étiquettes sont TOUTES fausses. Une seule pièce pour trouver le sac d'or : tu pioches où ?", "Les trois étiquettes sont TOUTES fausses. Une seule pièce pour trouver le sac d'or : tu pioches où ?", 0.2),
   ('s1', "Pendant que le Baron joue à GTA 6, 47 se glisse dans son salon. Sur la table : trois sacs.", "Pendant que le Baron joue à Gé-Té-A six, Quarante-sept se glisse dans son salon. Sur la table : trois sacs.", 0.15),
   ('s2', "Un sac d'or, un sac d'argent, et un sac mélangé : moitié or, moitié argent.", "Un sac d'or, un sac d'argent, et un sac mélangé : moitié or, moitié argent.", 0.15),
   ('s3', "Mais le Baron est malin : il a mis TOUTES les étiquettes sur le mauvais sac.", "Mais le Baron est malin : il a mis TOUTES les étiquettes sur le mauvais sac.", 0.2),

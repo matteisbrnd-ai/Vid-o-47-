@@ -27,10 +27,11 @@ function piles(w, h, flipped, showRight) { x.fillStyle = '#fbf3e4'; x.fillRect(0
   L.forEach((f, i) => coinTop(w / 4 - 100 + (i % 3) * 100, 120 + Math.floor(i / 3) * 90, 36, flipped ? !f : !!f));
   if (showRight) R.forEach((f, i) => coinTop(3 * w / 4 - 100 + (i % 3) * 100, 120 + Math.floor(i / 3) * 90, 36, !!f));
   txt((flipped ? 7 : 3) + ' F', w / 4, h - 40, 60, flipped ? '#2a8a3a' : C.red, { stroke: false }); if (showRight) txt('7 F', 3 * w / 4, h - 40, 60, '#2a8a3a', { stroke: false }); }
+function hookPic(w, h) { allCoins(w, h); }
 function draw(t) {
   const id = curId(t), tBan = WF('s1', /bande/i), tRen = WF('s1', /renverse/i), tPile = WF('s2', /pile/i), tImp = WF('s2', /impossible/i), tTas = WF('s3', /tas/i), tRet = WF('s3', /retourner/i),
     tSec = WF('s4', /secondes/i), tCach = WF('s4', /cachot/i), tRet1 = WF('sol1', /retourne/i), tTrois = WF('sol2', /trois/i), tSept = WF('sol2', /sept/i), tDev = WF('sol3', /deviennent/i), tGag = WF('sol3', /gagné/i);
-  const K = [[0, 0, DX + 120, 1300, 1.75], [B.ff.end - 0.1, 1.1, 1300, 1250, 0.62], [S('s1') + 1.0, 1.2, 1400, 1300, 0.9], [tRen, 1.0, DX, DY - 150, 1.4],
+  const K = [[0, 0, DX + 120, 1133, 1.75], [B.ff.end - 0.1, 1.1, 1300, 1250, 0.62], [S('s1') + 1.0, 1.2, 1400, 1300, 0.9], [tRen, 1.0, DX, DY - 150, 1.4],
     [S('s3'), 1.0, DX + 100, 1350, 1.2], [S('s4'), 1.0, 2000, 1350, 1.3], [S('q'), 0.8, DX + 120, 1300, 1.6], [S('c1'), 1.0, 1300, 1250, 0.62],
     [S('sol1'), 0.8, DX + 120, 1350, 1.3], [S('sol3'), 1.0, DX, 1350, 1.0], [S('end'), 1.0, 1300, 1250, 0.62]];
   camPath(t, K, id === 'ff' && t < 0.4 ? 5 : 0);
@@ -44,7 +45,8 @@ function draw(t) {
   rbox(DX - 650, DY - 20, 1300, 60, 12, '#5a3a22', 9); rbox(DX - 620, DY + 40, 1240, 300, 10, '#6b4428', 8); [0, 1].forEach(k => rbox(DX - 560 + k * 700, DY + 100, 420, 180, 8, '#7d5232', 5));
   for (let i = 0; i < 20; i++) { const cx = DX - 480 + (i * 53) % 960, cy = DY - 30 - (i % 3) * 8, fl = (id === 'ff' || (id === 'sol1' && t >= tRet1)) && i < 10 ? Math.abs(Math.sin(t * 6 + i)) : 1; ell(cx, cy - (1 - fl) * 40, 30, 9 + (1 - fl) * 20, i % 2 ? '#f5c542' : '#d9dde3', 4); }
   resetCam();
-  hookCard(t, [['LES YEUX BANDÉS…', 80], ['2 TAS AVEC AUTANT', 76], ['DE « FACE » 😳', 92, C.red]], B.ff.end + 0.1);
+  hookCard(t, [['YEUX BANDÉS · 20 PIÈCES', 68], ['DONT 10 CÔTÉ FACE', 64], ['2 TAS, AUTANT DE FACE ?', 80, C.red]], B.ff.end + 0.1);
+  if (id === 'ff') polaroid(540, 1000, 780, 520, 1, hookPic, '', 0.02);
   if (id === 'ff' && t >= B.ff.end) rewindFx(t, B.ff.next);
   if (id === 's1') banner('LE BUREAU DU BARON', 540, 330, P(t, S('s1') + 0.3));
   if (id === 's2' && t >= tPile) polaroid(560, 700, 600, 520, P(t, tPile, 0.3), allCoins, '10 FACE · 10 PILE', -0.03);
