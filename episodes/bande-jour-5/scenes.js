@@ -83,17 +83,19 @@ function riddle(t, q, tLui, tNous, tA, tB, tC) { resetCam(); const z = 1 + 0.04 
   for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) { const lab = r < 3 ? String(r * 3 + k + 1) : ['✱', '0', '#'][k]; rrc(-160 + k * 160, -100 + r * 120, 130, 100, 18, '#eef0f3', 5); txt(lab, -160 + k * 160, -94 + r * 120, 56, OL, { stroke: false }); }
   const tap = !q && t < 1.5 ? Math.abs(Math.sin(t * 22)) * 46 : 0, hx = 330 + Math.sin(t * 31) * 9 + Math.sin(t * 5) * 60 - tap, hy = 60 + Math.cos(t * 27) * 9 - tap + Math.cos(t * 4) * 50; x.save(); x.translate(hx, hy); x.rotate(-0.5); rbox(-40, -200, 80, 220, 40, '#f1c9a0', 8); rbox(-90, -20, 220, 260, 60, '#f1c9a0', 8); rbox(-110, 200, 260, 400, 30, '#5a4a3a', 8); x.restore(); x.restore(); x.restore(); }
 function draw(t) {
-  const id = curId(t), tLui = WF('q', /^Mille/), tNous = WF('q', /seize/), tA = WF('q', /^A$/), tB = WF('q', /^B$/), tC = WF('q', /^C$/), tVote = WF('s0', /voté/i), tInf = WF('s0', /infiltré/i), tFaux = WF('s0', /faux/i), tAl = WF('s0', /alarme/i),
-    tAbo = WF('s3', /abonné/i), tLike = WF('s3', /like/i), tRole = WF('s3', /rôle/i), tPri = WF('s3', /Pri/i), tRole2 = WF('cta', /rôle/i), tTr = WF('end', /trompe/i);
+  const id = curId(t), tLui = WF('q', /^mille/i), tNous = WF('q', /seize/), tA = WF('q', /^A$/), tB = WF('q', /^B$/), tC = WF('q', /^C$/), tVote = WF('s0', /voté/i), tInf = WF('s0', /infiltré/i), tFaux = WF('s0', /faux/i), tAl = WF('s0', /alarme/i),
+    tAbo = WF('s3', /soldat/i), tLike = WF('s3', /Hier/i), tVide = WF('s3', /vide/i), tRole = 1e9, tPri = 1e9, tVid = WF('ff', /vidéo/i), tToi = WF('ff', /Demain/i), tRole2 = WF('cta', /rôle/i), tTr = WF('end', /trompe/i);
   window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = true;
   const btn = (i, k, lab, p, hi) => { x.save(); x.translate(180 + i * 300, 1250 + 260 * (1 - eOut(p))); const sc = 0.95 * (hi ? 1.1 : 1); x.scale(sc, sc); rrc(0, 0, 310, 170, 26, hi ? '#ffe9a8' : C.cream, hi ? 9 : 6); txt(k, 0, -34, 64, C.red, { stroke: false }); txt(lab, 0, 38, 66, OL, { stroke: false }); x.restore(); };
   const ABC = [['A', '904', tA], ['B', '1096', tB], ['C', '940', tC]];
-  if (id === 'ff' || id === 'q') { riddle(t, id === 'q', tLui, tNous, tA, tB, tC); resetCam();
-    if (id === 'ff') card('1 SEUL ESSAI 🚨', 'TROUVE LE CODE 🔐', C.red, 1); else { card('LE CODE DU BARON ?', t >= tA - 0.15 ? 'A, B OU C ? 👇' : '1 SEUL ESSAI 🚨', '#2457a8', 1); const hi = t >= tC ? 2 : t >= tB ? 1 : t >= tA ? 0 : -1; ABC.forEach(([k, lab, tt], i) => { if (t >= tt - 0.15) btn(i, k, lab, clamp((t - tt + 0.15) / 0.25), hi === i); }); }
-    return; }
+  const promise = () => { resetCam(); x.save(); x.translate(540, 1555); rrc(0, 0, 1020, 120, 30, 'rgba(20,20,28,.92)', 5); txt('💬 COMMENTE TON RÔLE = T\'ES DANS LA VIDÉO', 0, 6, 52, '#fff', { stroke: false }); x.restore(); };
+  if (id === 'q') { riddle(t, true, tLui, tNous, tA, tB, tC); resetCam(); flashCut(t, S('q'));
+    { card('1 SEUL ESSAI 🚨', t >= tA - 0.15 ? 'A, B OU C ? 👇' : 'TROUVE LE CODE 🔐', C.red, 1); const hi = t >= tC ? 2 : t >= tB ? 1 : t >= tA ? 0 : -1; ABC.forEach(([k, lab, tt], i) => { if (t >= tt - 0.15) btn(i, k, lab, clamp((t - tt + 0.15) / 0.25), hi === i); }); }
+    promise(); return; }
   let K;
-  if (id === 's0') K = [[S('s0'), 0, 2050, 1500, 2.2], [S('s0') + 0.2, 2, 2050, 1480, 2.0], [tVote - 0.1, 0, 1700, 1450, 1.35], [tVote + 0.1, 2, 1780, 1450, 1.5], [tFaux - 0.1, 0, 1850, 1480, 1.8]];
-  else if (id === 's3') K = [[S('s3'), 0, 2100, 1420, 1.3], [tLike - 0.1, 0, 300, 1450, 1.05], [tPri - 0.1, 0.4, -1450, 1420, 1.5]];
+  if (id === 'ff') K = [[0, 0, -1560, 1400, 1.9], [0.05, 3.5, -1560, 1420, 1.65]];
+  else if (id === 's0') K = [[S('s0'), 0, 2050, 1500, 2.2], [S('s0') + 0.2, 2, 2050, 1480, 2.0], [tVote - 0.1, 0, 1700, 1450, 1.35], [tVote + 0.1, 2, 1780, 1450, 1.5], [tFaux - 0.1, 0, 1850, 1480, 1.8]];
+  else if (id === 's3') K = [[S('s3'), 0, 2100, 1420, 1.3], [tLike - 0.1, 0, 300, 1450, 1.05], [tLike, 4, 380, 1450, 1.15]];
   else if (id === 'end') K = [[S('end'), 0, 1850, 1480, 1.8], [S('end') + 0.2, 3, 1850, 1480, 2.0]];
   else K = [[S('cta'), 0, 600, 1450, 0.8], [S('cta') + 0.2, 2.5, -200, 1450, 0.95]];
   camPath(t, K, id === 's0' && t >= tAl && t < tAl + 0.4 ? 12 : 0);
@@ -102,8 +104,8 @@ function draw(t) {
   cast('rico', 60, GY, 0.75, t, { mood: 'smug', look: 1, blink: true }); cast('woman', 260, GY, 0.75, t, { ...LOLA, mood: 'smile', look: 1, blink: true });
   p47(460, GY, 0.78, t, { mood: 'smug', look: 1, blink: true }); cast('inspector', 660, GY, 0.75, t, { ...RYZEN, mood: 'smile', look: 1, blink: true }); cast('inspector', 860, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: true });
   cast('inspector', -340, GY, 0.75, t, { ...ARCHER, mood: 'smug', look: 1, blink: true });
-  [MEDIC, ELITE, ARCH2, BRAIN, SUB].forEach((look, i) => cast('inspector', -540 - i * 200, GY, 0.75, t, { ...look, mood: 'smug', look: 1, blink: true }));
-  const priIn = id === 's3' && t >= tPri ? eBack(clamp(P(t, tPri))) : (id === 'cta' ? 1 : 0); if (priIn > 0) { x.save(); x.translate(-1560, GY); x.scale(priIn, priIn); cast('woman', 0, 0, 0.75, t, { ...PRI, mood: 'smile', look: 1, blink: true }); x.restore(); x.save(); x.translate(-1490, GY - 330); x.scale(1.2 * priIn, 1.2 * priIn); bow(0, 0); x.restore(); }
+  [MEDIC, ELITE, ARCH2, BRAIN, SUB].forEach((look, i) => cast('inspector', -540 - i * 200, GY, 0.75, t, { ...look, mood: 'smug', look: 1, blink: t > 0.8 }));
+  const priIn = id === 'ff' ? 0.75 + 0.25 * eBack(clamp(P(t, 0, 0.3))) : (id === 'cta' ? 1 : 0); if (priIn > 0) { x.save(); x.translate(-1560, GY); x.scale(priIn, priIn); cast('woman', 0, 0, 0.75, t, { ...PRI, mood: 'smile', look: 1, blink: t > 0.8 }); x.restore(); x.save(); x.translate(-1490, GY - 330); x.scale(1.2 * priIn, 1.2 * priIn); bow(0, 0); x.restore(); if (id !== 'ff' || t < tToi) { x.save(); x.translate(-1560, GY - 760 + Math.sin(t * 5) * 8); rrc(0, 0, 250, 80, 20, '#fff', 5); txt('PRI 👑', 0, 6, 46, OL, { stroke: false }); poly([[-24, 38], [24, 38], [0, 74]], '#fff', 0); x.restore(); } }
   if (id === 'cta' && t >= tRole2) { x.save(); x.globalAlpha = clamp((t - tRole2) / 0.3); cast('inspector', -1760, GY, 0.75, t, { hat: 'hair', hairCol: '#888', body: '#bbb', body2: '#999', pants: '#777', num: false, mood: 'smile', look: 1 }); x.restore(); x.save(); x.translate(-1760, GY - 720); rrc(0, 0, 150, 70, 16, '#fff', 4); txt('TOI ?', 0, 6, 40, C.red, { stroke: false }); x.restore(); }
   const walkIn = id === 's0' && t < tInf + 0.8, bobX = id === 's0' ? lerp(1350, 1640, seg(t, tVote, tInf + 0.8)) : 1640; cast('inspector', bobX, GY, 0.75, t, { ...SPY, mood: (id === 's0' && t >= tFaux) || id === 'end' ? 'worried' : 'smug', look: 1, blink: true, walk: walkIn && t >= tVote ? t * 2 : 0 });
   cast('guard', 2650, GY, 0.75, t, { mood: 'neutral', look: -1, blink: true }); cast('boss', 2380, GY + 40, 0.9, t, { mood: 'smile', look: -1, blink: true });
@@ -111,12 +113,14 @@ function draw(t) {
   x.save(); x.translate(rattle, 0); cast('inspector', 2050, GY, 0.75, t, { ...FIGHTER, mood: 'shock', look: -1, armsUp: rattle !== 0 }); x.restore(); x.save(); x.translate(rattle * 0.6, 0); cage(2050, GY + 20, 0.95, t); x.restore();
   rbox(1750, GY - 520, 70, 110, 10, '#c9cdd2', 5); ell(1935 - 150, GY - 490, 14, 14, Math.floor(t * 3) % 2 ? '#e8302a' : '#7a1a1a', 0);
   resetCam();
+  if (id === 'ff') { card('PRI 👑 A COMMENTÉ HIER', t >= tVid - 0.6 ? '→ ELLE EST DANS LA VIDÉO ✅' : '« MET MOI EN… 🏹 »', '#2a8a3a', 1);
+    if (t >= tToi) { x.save(); x.translate(540, 620); const k = eBack(clamp(P(t, tToi))) * (1 + 0.04 * Math.sin(t * 9)); x.scale(k, k); rrc(0, 0, 820, 150, 36, C.red, 9); txt('DEMAIN, C\'EST TOI ? 👇', 0, 8, 74, '#fff', { stroke: false }); x.restore(); } promise(); }
   if (id === 's0') { flashCut(t, S('s0')); if (t < tVote - 0.1) { card('DANS CETTE CAGE : SALAH', 'UN ABONNÉ CAPTURÉ 😭', C.red, P(t, S('s0'), 0.2)); bubble(540, 620, 'sa.lah.7', 'LIBÉRER MOII 😭', P(t, S('s0') + 0.5, 0.25)); }
     else if (t < tFaux - 0.1) { flashCut(t, tVote - 0.1); card('VOUS AVEZ VOTÉ C (54 %)', '🕵️ BOB S\'INFILTRE', '#2457a8', P(t, tVote - 0.1, 0.2)); }
     else { flashCut(t, tFaux - 0.1); card('CODE FAUX = ALARME 🚨', 'ET ON PERD BOB', C.red, P(t, tFaux - 0.1, 0.2)); if (t >= tAl && Math.floor(t * 6) % 2 === 0) { x.fillStyle = 'rgba(230,40,40,.22)'; x.fillRect(0, 0, W, H); } } }
   if (id === 's3') { flashCut(t, S('s3')); const step = t >= tPri ? 3 : t >= tRole ? 2 : t >= tLike - 0.1 ? 1 : 0;
     if (step === 0) { x.save(); x.translate(540, 330); rrc(0, 0, 1000, 240, 36, 'rgba(20,20,28,.92)', 7); txt('LE BARON', -270, -62, 54, '#f5c542', { stroke: false }); txt('1000', -270, 40, 120, '#fff', { stroke: false }); ell(0, 0, 70, 70, C.red, 6); txt('VS', 0, 8, 56, '#fff', { stroke: false }); txt('NOUS', 270, -62, 54, C.orange, { stroke: false }); txt('96', 270, 40, 120, '#fff', { stroke: false }); if (t >= tAbo + 0.4) txt('+1 ?', 420, 40, 60, '#7cff8a', { stroke: false }); x.restore(); pill('➕ 1 ABONNÉ = 1 SOLDAT EN PLUS', 540, 560, P(t, tAbo), '#2a8a3a'); }
-    if (step === 1) { flashCut(t, tLike - 0.1); card('❤️ TON LIKE', '= +1 € DANS LA CAISSE', C.red, P(t, tLike - 0.1, 0.2)); const k = clamp((t - tLike - 0.2) / 0.6); x.save(); x.translate(540, lerp(420, 640, k * k)); ell(0, 0, 50, 50, '#f5c542', 6); txt('€', 0, 6, 54, '#a07a1a', { stroke: false }); x.restore(); x.save(); x.translate(540, 760); rrc(0, 0, 520, 120, 30, '#2b2b30', 6); txt('💰 ' + (k >= 1 ? 247 : 246) + ' €', 0, 8, 80, k >= 1 ? '#7cff8a' : '#fff', { stroke: false }); x.restore(); }
+    if (step === 1) { flashCut(t, tLike - 0.1); card(t >= tVide ? '❤️ LIKE = +1 €' : 'HIER : SEULEMENT 48 LIKES', t >= tVide ? 'LA CAISSE EST PRESQUE VIDE 😬' : '= +48 € 😬', C.red, P(t, tLike - 0.1, 0.2)); const k = clamp((t - tVide - 0.2) / 0.6); if (k > 0) { x.save(); x.translate(540, lerp(500, 650, k * k)); ell(0, 0, 50, 50, '#f5c542', 6); txt('€', 0, 6, 54, '#a07a1a', { stroke: false }); x.restore(); } x.save(); x.translate(540, 760); rrc(0, 0, 780, 120, 30, '#2b2b30', 6); txt('💰 ' + (k >= 1 ? 247 : 246) + ' € / 1000 €', 0, 8, 70, k >= 1 ? '#7cff8a' : '#fff', { stroke: false }); x.restore(); }
     if (step === 2) card('💬 TON RÔLE EN COMMENTAIRE', '= TU REJOINS LA BANDE', '#2457a8', P(t, tRole, 0.2));
     if (step === 3) card('« PRI 👑 »', 'TIREUSE D\'ÉLITE 🏹 ✅', '#2a8a3a', P(t, tPri, 0.2)); }
   if (id === 'cta') { flashCut(t, S('cta')); ABC.forEach(([k, lab], i) => btn(i, k, lab, 1, false)); card('ÉCRIS A, B OU C 👇', t >= tRole2 ? '+ LE RÔLE QUE TU VEUX' : 'EN COMMENTAIRE', '#2457a8', P(t, S('cta'), 0.2)); if (t >= tRole2) comment2('toi', '« ma lettre +', 'le rôle que je veux »', P(t, tRole2 + 0.2, 0.2), 620); }
