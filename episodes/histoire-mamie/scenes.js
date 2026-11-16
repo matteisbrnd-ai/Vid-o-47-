@@ -2,6 +2,7 @@
 window.LOOK = 'gala';
 const GY = 1500;
 const MAMIE = { hat: 'hair', hairCol: '#ecebe6', glasses: true, body: '#8a6aa8', body2: '#6f5590', pants: '#5a4a6a', num: false, collar: true };
+const KEV = { hat: 'hair', hairCol: '#2a1a12', body: '#c9a23a', body2: '#a8862c' };
 const TOM = { hat: 'hair', hairCol: '#7a4a22', body: '#4f9a5a', body2: '#3f7e48', pants: '#3a4a6a', num: false };
 function mamie(px, py, s, t, o = {}) { toon(px, py, s, { t, blink: true, ...MAMIE, ...o }); ell(px, py - 840 * s, 62 * s, 50 * s, '#ecebe6', 7 * s); }
 function tom(px, py, s, t, o = {}) { toon(px, py, s, { t, blink: true, ...TOM, ...o }); }
@@ -41,52 +42,87 @@ function letter(t, p) { resetCam(); x.fillStyle = '#2a2230'; x.fillRect(0, 0, W,
   txt('Mon petit 47,', -150, -470, 58, '#33405a', { stroke: false }); keyIcon(300, -470, 0.6, t); [['Mes 3 petits-enfants', -330], ['vont fouiller ma maison.', -220], ['Laisse-les prendre', -60], ['ce qu\'ils veulent…', 50], ['… et REGARDE.', 210]].forEach(([s, y], i) => txt(s, 0, y, i === 4 ? 80 : 64, i === 4 ? C.red : '#33405a', { stroke: false }));
   txt('Jeanne ♥', 200, 420, 60, '#33405a', { stroke: false }); x.restore(); }
 function verdict(t, tP, tT) { resetCam(); x.fillStyle = '#20182a'; x.fillRect(0, 0, W, H); rbox(40, 260, 1000, 620, 30, '#2f3a52', 0); rbox(40, 960, 1000, 620, 30, '#4a2f3a', 0);
-  jewel(540, 600, 1.3, t, t >= tT); tvSet(540, 1260, 1.2, t, t >= tP);
-  if (t >= tP) { x.save(); resetCam(); x.globalAlpha = 0.6; for (let i = 0; i < 4; i++) { const k = ((t - tP) * 0.8 + i * 0.25) % 1; ell(640 + Math.sin(i * 2) * 60, 1080 - k * 200, 40 + k * 60, 40 + k * 60, '#888', 0); } x.restore(); stamp('EN PANNE', P(t, tP, 0.25), 1490); }
+  jewel(540, 600, 1.3, t, t >= tT); tvSet(540, 1260, 1.2, t, false);
+  if (t >= tP) { x.save(); resetCam(); x.globalAlpha = 0; for (let i = 0; i < 4; i++) { const k = ((t - tP) * 0.8 + i * 0.25) % 1; ell(640 + Math.sin(i * 2) * 60, 1080 - k * 200, 40 + k * 60, 40 + k * 60, '#888', 0); } x.restore(); stamp('LOUÉ', P(t, tP, 0.25), 1490); }
   if (t >= tT) stamp('DU TOC', P(t, tT, 0.25), 760); }
-function recipe(t) { resetCam(); x.fillStyle = vg(0, H, '#f3d9a8', '#e0b878'); x.fillRect(0, 0, W, H); x.save(); x.translate(540, 940); notebook(0, 0, 1.05, true);
-  txt('LA SOUPE', -215, -210, 70, '#7a3a2a', { stroke: false }); txt('DE MAMIE', -215, -130, 70, '#7a3a2a', { stroke: false }); bowl(-215, 90, 1.1, t);
-  [['3 carottes', -200], ['2 poireaux', -110], ['1 pincée de sel', -20], ['et beaucoup', 90], ['d\'amour ♥', 180]].forEach(([s, y], i) => txt(s, 215, y, 50, i > 2 ? C.red : '#33405a', { stroke: false })); x.restore(); }
+function recipe(t, tSel) { resetCam(); x.fillStyle = vg(0, H, '#f3d9a8', '#e0b878'); x.fillRect(0, 0, W, H); x.save(); x.translate(540, 940); notebook(0, 0, 1.05, true);
+  txt('PAGE 12', -215, -250, 44, '#7a3a2a', { stroke: false }); txt('LA SOUPE', -215, -170, 70, '#7a3a2a', { stroke: false }); txt('DU DIMANCHE', -215, -95, 54, '#7a3a2a', { stroke: false }); bowl(-215, 110, 1.0, t);
+  [['3 carottes', -230], ['2 poireaux', -150], ['1 pincée de sel', -70]].forEach(([s, y]) => txt(s, 215, y, 50, '#33405a', { stroke: false }));
+  if (t >= tSel - 0.6) { const p = clamp(P(t, tSel - 0.6, 0.4)); x.globalAlpha = p; [['Le sel est sous', 40], ['la 3e marche', 110], ['de la cave.', 180]].forEach(([s, y]) => txt(s, 215, y, 52, C.red, { stroke: false })); x.globalAlpha = 1;
+    if (t >= tSel) { x.strokeStyle = C.red; x.lineWidth = 9; x.beginPath(); x.ellipse(215, 110, 230, 120, 0, -0.5, -0.5 + Math.PI * 2 * clamp(P(t, tSel, 0.3))); x.stroke(); } } x.restore(); }
+function freezer(t, p) { resetCam(); x.fillStyle = vg(0, H, '#dfeef6', '#b9d3e2'); x.fillRect(0, 0, W, H); rbox(140, 360, 800, 1180, 30, '#f4f8fb', 10); rbox(180, 420, 720, 1060, 16, '#cfe6f2', 6);
+  x.fillStyle = 'rgba(255,255,255,.6)'; for (let i = 0; i < 30; i++) ell(200 + (i * 137) % 680, 440 + (i * 89) % 1020, 6, 6, 'rgba(255,255,255,.7)', 0);
+  rbox(250, 900, 580, 360, 30, '#3f9a4a', 8); txt('PETITS POIS', 540, 1000, 64, '#fff', { stroke: false }); [0, 1, 2, 3, 4].forEach(i => ell(380 + i * 80, 1150, 30, 30, '#8fd06a', 5));
+  const k = eOut(clamp(p)); for (let i = 0; i < 4; i++) { x.save(); x.translate(540 + (i - 1.5) * 90, 900 - k * (160 + i * 30)); x.rotate((i - 1.5) * 0.25 * k); rbox(-110, -55, 220, 110, 8, '#7ac47a', 6); txt('50', 0, 4, 54, '#2a6a2a', { stroke: false }); x.restore(); } }
+function jar(t, p) { resetCam(); x.fillStyle = vg(0, H, '#f3d9a8', '#e0b878'); x.fillRect(0, 0, W, H); rbox(300, 520, 480, 120, 20, '#c9973a', 8); rbox(270, 620, 540, 760, 70, 'rgba(200,230,200,.55)', 10);
+  for (let i = 0; i < 9; i++) { x.save(); x.translate(360 + (i % 3) * 180, 760 + Math.floor(i / 3) * 200); x.rotate(i * 0.7); rrc(0, 0, 70, 170, 34, '#6a8a2a', 6); x.restore(); }
+  const k = eBack(clamp(p)); if (k > 0) { x.save(); x.translate(540, 980); x.scale(k, k); x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createRadialGradient(0, 0, 10, 0, 0, 220); g.addColorStop(0, 'rgba(255,230,140,.7)'); g.addColorStop(1, 'rgba(255,230,140,0)'); x.fillStyle = g; x.fillRect(-220, -220, 440, 440); x.restore();
+    x.strokeStyle = '#e2b649'; x.lineWidth = 34; x.beginPath(); x.ellipse(0, 0, 110, 90, 0, 0, 7); x.stroke(); x.strokeStyle = OL; x.lineWidth = 6; x.beginPath(); x.ellipse(0, 0, 128, 108, 0, 0, 7); x.stroke(); x.beginPath(); x.ellipse(0, 0, 92, 72, 0, 0, 7); x.stroke(); x.restore(); } }
+function testament(t, tUn) { resetCam(); x.fillStyle = '#2a2230'; x.fillRect(0, 0, W, H); x.save(); x.translate(540, 980); x.rotate(-0.03); rbox(-440, -520, 880, 1040, 8, '#f6efdc', 8);
+  txt('TESTAMENT', 0, -420, 90, '#7a3a2a', { stroke: false }); x.fillStyle = '#7a3a2a'; x.fillRect(-300, -360, 600, 6);
+  [['Chaque petit-enfant', -220], ['prend', -100]].forEach(([s, y]) => txt(s, 0, y, 66, '#33405a', { stroke: false })); txt('UN SEUL', 0, 40, 130, C.red, { stroke: false }); txt('objet de la maison.', 0, 170, 66, '#33405a', { stroke: false });
+  txt('Jeanne ♥', 200, 380, 60, '#33405a', { stroke: false }); x.restore(); if (t >= tUn) { x.save(); x.strokeStyle = C.red; x.lineWidth = 12; const p = clamp(P(t, tUn, 0.3)); x.beginPath(); x.ellipse(540, 1020, 300, 100, -0.04, -0.5, -0.5 + Math.PI * 2 * p); x.stroke(); x.restore(); } }
+function cellar(t, tE) { resetCam(); x.fillStyle = vg(0, H, '#3a2e26', '#1e1712'); x.fillRect(0, 0, W, H);
+  for (let i = 0; i < 6; i++) { rbox(80 + i * 60, 300 + i * 190, 1000, 190, 0, i === 3 ? '#8a6a4a' : '#6a4f38', 7); }
+  const k = eOut(clamp(seg(t, S('s12'), S('s12') + 0.6))); x.save(); x.translate(540, 1150); x.scale(1.25, 1.25); rbox(-260, -150, 520, 300, 16, '#6a6a72', 9);
+  rbox(-260, -150 - 70 - 120 * k, 520, 70 + 120 * k, 10, '#7a7a84', 8);
+  if (k > 0.3) { x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createRadialGradient(0, -150, 10, 0, -150, 500); g.addColorStop(0, `rgba(255,220,120,${0.6 * k})`); g.addColorStop(1, 'rgba(255,220,120,0)'); x.fillStyle = g; x.fillRect(-600, -700, 1200, 1000); x.restore();
+    for (let i = 0; i < 12; i++) rbox(-230 + (i % 4) * 115, -140 - Math.floor(i / 4) * 34, 105, 60, 6, '#7ac47a', 5); } x.restore();
+  if (t >= S('s12') + 0.6 && t < WF('s12', /mot/i)) { x.save(); resetCam(); x.translate(540, 640); const kk = eBack(clamp(P(t, S('s12') + 0.6))); x.scale(kk, kk); txt('90 000 €', 0, 0, 170, '#ffd23f', { sw: 14 }); x.restore(); } }
+function noteCard(t, p) { paperCard([['« Ils ont tous fouillé', 54], ['ma maison.', 54], ['Toi, tu t\'asseyais', 66, C.red], ['à ma table. »', 66, C.red]], 540, 480, p, { w: 900 }); }
 function draw(t) {
-  const id = curId(t), tV = WF('ff', /voleur/i), tDen = WF('s1', /dénoncé/i), tSo = WF('s1', /soupe/i), tEt = WF('s2', /était/i), tDim = WF('s2', /dimanche/i),
-    tTel = WF('s4', /télé/i), tBij = WF('s5', /bijoux/i), tCah = WF('s6', /cahier/i), tPan = WF('s7', /panne/i), tToc = WF('s7', /toc/i), tDet = WF('s7', /dettes/i),
-    tCle = WF('s8', /clé/i), tMam = WF('s8', /Mamie/i), tCah2 = WF('s8', /cahier/i), tSoup = WF('s9', /soupe/i), tVr = WF('s9', /vraiment/i);
+  const id = curId(t), tRet = WF('ff', /retourné/i), tArg = WF('s1', /argent/i), tTout = WF('s1', /TOUT/), tCong = WF('s2', /congélateur/i), tAll = WF('s2', /alliance/i), tCor = WF('s2', /cornichons/i),
+    tRien = WF('s3', /rien/i), tSo = WF('s3', /soupe/i), tEt = WF('s4', /était/i), tDim = WF('s4', /dimanche/i), tUn = WF('s5', /UN/), tBij = WF('s6', /bijoux/i), tEc = WF('s7', /écran/i), tCah = WF('s8', /cahier/i),
+    tRire = WF('s9', /rire/i), tToc = WF('s10', /toc/i), tDet = WF('s10', /dettes/i), tPan = WF('s10', /Loué/i), tPage = WF('s11', /Page/i), tSel = WF('s11', /sel/i), tEur = WF('s12', /euros/i), tMot = WF('s12', /mot/i), tVoir = WF('s13', /voir/i);
   // ---------- inserts ----------
-  if (id === 'ff') { if (t < tV - 0.15) portrait(t); else { reveal(t, tV); flashCut(t, tV - 0.15); } hookCard(t, [['L\'HÉRITIER ?', 84], ['UN VOLEUR VA LE CHOISIR 😳', 62, C.red]], B.ff.end + 0.1); return; }
-  if (id === 's3') { letter(t, seg(t, S('s3'), S('s3') + 0.5)); flashCut(t, S('s3')); return; }
-  if (id === 's7') { verdict(t, tPan, tToc); if (t >= tDet) pill('💸 POUR PAYER LES DETTES DE KEVIN', 540, 900, P(t, tDet), C.red); flashCut(t, S('s7')); return; }
-  if (id === 's9' && t < tVr - 0.2) { recipe(t); flashCut(t, S('s9')); return; }
+  if (id === 'ff' && t < tRet - 0.1) { portrait(t); hookCard(t, [['MAMIE EST MORTE…', 80], ['ET SON TRÉSOR A DISPARU 🤫', 60, C.red]], B.ff.end + 0.1); return; }
+  if (id === 's2') { if (t < tAll - 0.1) { freezer(t, seg(t, tCong + 0.2, tCong + 0.8)); flashCut(t, S('s2')); pill('🧊 LES BILLETS ?', 540, 260, P(t, S('s2')), C.blue); }
+    else { jar(t, seg(t, tCor - 0.1, tCor + 0.4)); flashCut(t, tAll - 0.1); pill('💍 L\'ALLIANCE ?', 540, 260, P(t, tAll), C.orange); } return; }
+  if (id === 's5') { testament(t, tUn); flashCut(t, S('s5')); return; }
+  if (id === 's10') { verdict(t, tPan, tToc); if (t >= tDet) pill('💸 POUR PAYER LES DETTES DE KEVIN', 540, 900, P(t, tDet), C.red); flashCut(t, S('s10')); return; }
+  if (id === 's11' && t >= tPage - 0.15) { recipe(t, tSel); flashCut(t, tPage - 0.15); return; }
+  if (id === 's12') { cellar(t, tEur); if (t >= tMot) { noteCard(t, P(t, tMot)); } flashCut(t, S('s12')); return; }
   // ---------- world ----------
   let K;
-  if (id === 's1') K = [[S('s1'), 0, 540, 1000, 0.9], [tSo - 0.1, 0.3, 700, 980, 1.1]];
-  else if (id === 's2') K = [[S('s2'), 0, 540, 1000, 1.1], [tDim, 1.0, 540, 1050, 0.95]];
-  else if (id === 's4' || id === 's5' || id === 's6') K = [[S(id), 0, 560, 1080, 1.1], [S(id) + 0.2, 2, 580, 1080, 1.2]];
-  else if (id === 's8') K = [[S('s8'), 0, 540, 1000, 0.95], [tCle, 0.3, 380, 950, 1.2], [tMam, 0.4, 540, 1000, 0.95]];
+  if (id === 'ff') K = [[0, 0, 560, 1050, 1.0], [tRet, 1.5, 560, 1050, 1.12]];
+  else if (id === 's1') K = [[S('s1'), 0, 560, 1000, 1.15], [tTout - 0.1, 0.25, 560, 950, 1.4]];
+  else if (id === 's3') K = [[S('s3'), 0, 540, 1000, 0.9], [tSo - 0.1, 0.3, 700, 980, 1.1]];
+  else if (id === 's4') K = [[S('s4'), 0, 540, 1000, 1.1], [tDim, 1.0, 540, 1050, 0.95]];
+  else if (id === 's6' || id === 's7' || id === 's8') K = [[S(id), 0, 560, 1080, 1.1], [S(id) + 0.2, 2, 580, 1080, 1.2]];
+  else if (id === 's9') K = [[S('s9'), 0, 540, 1080, 0.85]];
   else K = [[0, 0, 540, 1000, 0.95]];
-  camPath(t, K);
-  if (id === 's1') { kitchen(t, true); p47(300, GY, 0.85, t, { mood: t < tSo ? 'shock' : 'smile', look: 1 }); bag(80, GY - 20, 0.8); mamie(800, GY, 0.82, t, { mood: t < tDen ? 'worried' : 'smile', look: -1 }); table(560, GY - 360, 420);
-    if (t >= tSo) bowl(560, GY - 400, 0.9 * eBack(clamp(P(t, tSo))), t); night(0.22); }
-  if (id === 's2') { kitchen(t); table(540, GY - 360, 760); p47(280, GY, 0.85, t, { mood: 'smile', look: 1 }); mamie(800, GY, 0.82, t, { mood: 'smile', look: -1 }); bowl(400, GY - 400, 0.75, t); bowl(680, GY - 400, 0.75, t); }
-  if (id === 's4') { living(t); cast('rico', 400, GY, 0.9, t, { mood: 'smug', look: 1, hat: 'hair', hairCol: '#2a1a12', body: '#c9a23a', body2: '#a8862c' }); jewel(740, GY - 330, 0.8 * eBack(clamp(P(t, S('s4') + 1.0))), t); }
-  if (id === 's5') { living(t); cast('woman', 400, GY, 0.9, t, { mood: 'smile', look: -1 }); tvSet(740, GY - 330, 0.75 * eBack(clamp(P(t, S('s5') + 0.9))), t); }
-  if (id === 's6') { living(t); tom(400, GY, 0.75, t, { mood: t >= tCah - 1.5 ? 'smile' : 'worried', look: 1 }); notebook(700, GY - 300, 0.65 * eBack(clamp(P(t, tCah - 1.5)))); }
-  if (id === 's8') { sky('#9fcbea', '#dceef8', GY); rbox(-1200, 150, 3500, GY - 150, 0, '#e8c9a0', 0); bricks('#d8b48a', '#c9a27a', 150, GY); door(780, GY - 640, 300, 640, '#3a6a9a'); x.fillStyle = '#9a9a9a'; x.fillRect(-1200, GY, 3500, 1400);
-    p47(320, GY, 0.85, t, { mood: 'smile', look: 1, armUp: t >= tCle }); if (t >= tCle) keyIcon(470, GY - 900, 0.9 * eBack(clamp(P(t, tCle))), t); tom(800, GY, 0.75, t, { mood: t >= tCah2 ? 'shock' : 'worried', look: -1 }); }
-  if (id === 's9' || id === 'end') { kitchen(t); table(540, GY - 360, 760); p47(280, GY, 0.85, t, { mood: 'smile', look: 1 }); tom(800, GY, 0.75, t, { mood: 'smile', look: -1 }); bowl(400, GY - 400, 0.75, t); bowl(680, GY - 400, 0.75, t);
-    if (id === 's9') { x.save(); x.globalAlpha = 0.5; mamieHead(540, 400, 0.4, t); x.restore(); } }
+  camPath(t, K, id === 'ff' && t >= tRet && t < tRet + 0.3 ? 12 : 0);
+  if (id === 'ff') { living(t); const sh = Math.sin(t * 30) * 6; cast('rico', 330 + sh, GY, 0.85, t, { ...KEV, mood: 'shock', look: 1, armsUp: true, walk: t }); cast('woman', 780 - sh, GY, 0.85, t, { mood: 'worried', look: -1, armUp: true, walk: t * 1.1 });
+    for (let i = 0; i < 9; i++) { const a = (t * 1.3 + i * 0.37) % 1; x.save(); x.translate(560 + Math.sin(i * 2.3) * 420, 400 + a * 900); x.rotate(t * 3 + i); rbox(-50, -36, 100, 72, 4, i % 3 ? '#f6efdc' : '#b5566a', 5); x.restore(); } }
+  if (id === 's1') { kitchen(t); mamie(560, GY, 0.95, t, { mood: t >= tTout ? 'smug' : 'smile', look: 0, armUp: t >= tTout });
+    if (t >= tTout) { x.save(); resetCam(); x.fillStyle = 'rgba(255,240,200,.18)'; x.fillRect(0, 0, W, H); x.restore(); } }
+  if (id === 's3') { kitchen(t, true); const dr = t < tRien; p47(300, GY, 0.85, t, { mood: t < tRien ? 'worried' : (t < tSo ? 'shock' : 'smile'), look: 1, walk: dr ? t : 0 }); bag(80, GY - 20, 0.8);
+    if (t >= tRien - 0.4) mamie(800, GY, 0.82, t, { mood: 'smile', look: -1 }); table(560, GY - 360, 420); if (t >= tSo) bowl(560, GY - 400, 0.9 * eBack(clamp(P(t, tSo))), t);
+    if (dr) for (let i = 0; i < 6; i++) { const a = (t * 1.6 + i * 0.3) % 1; x.save(); x.translate(200 + i * 120, 500 + a * 700); x.rotate(t * 4 + i); rbox(-40, -30, 80, 60, 4, '#f6efdc', 4); x.restore(); } night(0.22); }
+  if (id === 's4') { kitchen(t); table(540, GY - 360, 760); p47(280, GY, 0.85, t, { mood: 'smile', look: 1 }); mamie(800, GY, 0.82, t, { mood: 'smile', look: -1 }); bowl(400, GY - 400, 0.75, t); bowl(680, GY - 400, 0.75, t); }
+  if (id === 's6') { living(t); cast('rico', 400, GY, 0.9, t, { ...KEV, mood: 'smug', look: 1 }); jewel(740, GY - 330, 0.8 * eBack(clamp(P(t, S('s6') + 1.0))), t); }
+  if (id === 's7') { living(t); cast('woman', 400, GY, 0.9, t, { mood: 'smile', look: -1 }); tvSet(740, GY - 330, 0.75 * eBack(clamp(P(t, S('s7') + 0.9))), t); }
+  if (id === 's8') { living(t); tom(400, GY, 0.75, t, { mood: t >= tCah - 1.5 ? 'smile' : 'worried', look: 1 }); notebook(700, GY - 300, 0.65 * eBack(clamp(P(t, tCah - 1.5)))); }
+  if (id === 's9') { living(t); const lol = t >= tRire; cast('rico', 180, GY, 0.82, t, { ...KEV, mood: lol ? 'smile' : 'smug', look: 1, armUp: lol }); cast('woman', 470, GY, 0.82, t, { mood: lol ? 'smile' : 'smug', look: 1 });
+    tom(830, GY, 0.72, t, { mood: 'worried', look: -1 }); notebook(830, GY - 300, 0.55); if (lol) { onoma('HA HA !', 300, 600 + Math.sin(t * 20) * 8, P(t, tRire, 0.2), 130); } }
+  if (id === 's11') { kitchen(t); table(540, GY - 360, 760); p47(280, GY, 0.85, t, { mood: 'smile', look: 1 }); tom(800, GY, 0.75, t, { mood: 'smile', look: -1 }); notebook(560, GY - 440, 0.5); }
+  if (id === 's13' || id === 'end') { kitchen(t); table(540, GY - 360, 760); p47(280, GY, 0.85, t, { mood: 'smile', look: 1 }); tom(800, GY, 0.75, t, { mood: 'smile', look: -1 }); bowl(400, GY - 400, 0.75, t); bowl(680, GY - 400, 0.75, t);
+    if (id === 's13') { x.save(); x.globalAlpha = 0.55 * clamp(seg(t, S('s13'), S('s13') + 1)); mamieHead(540, 420, 0.42, t); x.restore(); } }
   vignette(0.25);
   // ---------- overlays ----------
-  if (id === 's1') { pill('🌙 IL Y A 10 ANS', 540, 300, P(t, S('s1') + 0.1), C.blue); if (t >= tDen) pill('🚫 PAS DE POLICE', 540, 420, P(t, tDen), C.red); if (t >= tSo) pill('🍲 … MAIS UNE SOUPE', 540, 540, P(t, tSo), C.orange); }
-  if (id === 's2') { if (t >= tEt) banner('LE VOLEUR = 47', 540, 330, P(t, tEt), C.orange); if (t >= tDim) pill('🍲 CHAQUE DIMANCHE', 540, 480, P(t, tDim), C.green); }
-  if (id === 's4') { banner('KEVIN', 540, 300, P(t, S('s4') + 0.05), C.blue); pill('💸 VENAIT POUR L\'ARGENT', 540, 440, P(t, S('s4') + 0.6), C.brown); pill('💎 PREND LES BIJOUX', 540, 560, P(t, S('s4') + 1.0), C.red); }
-  if (id === 's5') { banner('INÈS', 540, 300, P(t, S('s5') + 0.05), '#b5486a'); pill('📞 1 APPEL PAR AN', 540, 440, P(t, S('s5') + 0.6), C.brown); pill('📺 PREND LA TÉLÉ', 540, 560, P(t, S('s5') + 0.9), C.red); }
-  if (id === 's6') { banner('TOM', 540, 300, P(t, S('s6') + 0.05), C.green); pill('🍲 LÀ CHAQUE DIMANCHE', 540, 440, P(t, S('s6') + 0.6), C.brown); pill('📖 PREND… UN CAHIER ?!', 540, 560, P(t, tCah - 1.5), C.orange); }
-  if (id === 's8') { if (t >= tMam) paperCard([['LA MAISON', 80], ['→ À CELUI QUI PREND LE CAHIER', 46, C.red]], 540, 360, P(t, tMam), { w: 940 }); }
-  if (id === 's9') { flashCut(t, tVr - 0.2); pill('IL SAVAIT CE QU\'ELLE VALAIT ♥', 540, 330, P(t, tVr - 0.1), C.red); }
-  if (id === 'end') { flashCut(t, S('end')); paperCard([['ET TOI ?', 80], ['T\'AURAIS PRIS QUOI ? 💬', 54, C.red]], 540, 300, P(t, S('end')), { w: 900 });
-    [['📺 TÉLÉ', 200, C.blue], ['💎 BIJOUX', 540, '#b5486a'], ['📖 CAHIER', 880, C.green]].forEach(([s, px, col], i) => { const p = P(t, S('end') + 0.3 + i * 0.15); if (p <= 0) return; x.save(); resetCam(); x.translate(px, 560); const k = eBack(clamp(p)) * (1 + 0.04 * Math.sin(t * 8 + i)); x.scale(k, k); rrc(0, 0, 310, 120, 28, col, 8); txt(s, 0, 4, 54, '#fff', { stroke: false }); x.restore(); }); }
-  if (id === 's1') flashCut(t, S('s1')); if (id === 's2') flashCut(t, S('s2')); ['s4', 's5', 's6', 's8'].forEach(k => { if (id === k) flashCut(t, S(k)); });
+  if (id === 'ff') { flashCut(t, tRet - 0.1); hookCard(t, [['MAMIE EST MORTE…', 80], ['ET SON TRÉSOR A DISPARU 🤫', 60, C.red]], B.ff.end + 0.1); }
+  if (id === 's1') { flashCut(t, S('s1')); pill('💰 DE L\'ARGENT', 540, 300, P(t, tArg), C.green); if (t >= tTout) pill('🤫 ELLE CACHAIT TOUT', 540, 420, P(t, tTout), C.red); }
+  if (id === 's3') { flashCut(t, S('s3')); pill('🌙 UN SOIR…', 540, 300, P(t, S('s3') + 0.1), C.blue); if (t >= tRien) pill('🔍 1 HEURE… 0 TROUVÉ', 540, 420, P(t, tRien), C.red); if (t >= tSo) pill('🍲 … ET UNE SOUPE', 540, 540, P(t, tSo), C.orange); }
+  if (id === 's4') { flashCut(t, S('s4')); if (t >= tEt) banner('LE VOLEUR = 47', 540, 330, P(t, tEt), C.orange); if (t >= tDim) pill('🍲 CHAQUE DIMANCHE', 540, 480, P(t, tDim), C.green); }
+  if (id === 's6') { flashCut(t, S('s6')); banner('KEVIN', 540, 300, P(t, S('s6') + 0.05), C.blue); pill('💸 VENAIT POUR L\'ARGENT', 540, 440, P(t, S('s6') + 0.6), C.brown); pill('💎 PREND LES BIJOUX', 540, 560, P(t, S('s6') + 1.0), C.red); }
+  if (id === 's7') { flashCut(t, S('s7')); banner('INÈS', 540, 300, P(t, S('s7') + 0.05), '#b5486a'); pill('📞 1 APPEL PAR AN', 540, 440, P(t, S('s7') + 0.6), C.brown); pill('📺 PREND L\'ÉCRAN PLAT', 540, 560, P(t, S('s7') + 0.9), C.red); }
+  if (id === 's8') { flashCut(t, S('s8')); banner('TOM', 540, 300, P(t, S('s8') + 0.05), C.green); pill('🍲 LÀ CHAQUE DIMANCHE', 540, 440, P(t, S('s8') + 0.6), C.brown); pill('📖 PREND… UN CAHIER ?!', 540, 560, P(t, tCah - 1.5), C.orange); }
+  if (id === 's9') { flashCut(t, S('s9')); paperCard([['« TOM REPART AVEC', 60], ['3 CAROTTES ET UN POIREAU ! »', 52, C.red]], 540, 330, P(t, tRire + 0.3), { w: 920 }); }
+  if (id === 's11') { flashCut(t, S('s11')); pill('📅 LE DIMANCHE D\'APRÈS', 540, 330, P(t, S('s11') + 0.1), C.green); }
+  if (id === 's13') { flashCut(t, S('s13')); paperCard([['MAMIE CACHAIT TOUT…', 66], ['SAUF À CEUX QUI', 54, C.red], ['VENAIENT LA VOIR ♥', 66, C.red]], 540, 330, P(t, S('s13') + 0.2), { w: 900 }); }
+  if (id === 'end') { flashCut(t, S('end')); paperCard([['ET TOI ?', 80], ['TA DERNIÈRE SOUPE', 54, C.red], ['CHEZ TA GRAND-MÈRE ? 💬', 54, C.red]], 540, 330, P(t, S('end')), { w: 900 }); }
 }
+
 function bag(px, py, s) { rbox(px - 70 * s, py - 160 * s, 140 * s, 170 * s, 24 * s, '#2a2a30', 6); x.strokeStyle = OL; x.lineWidth = 8; x.beginPath(); x.arc(px, py - 160 * s, 40 * s, Math.PI, 0); x.stroke(); }
 
 function reveal(t, tV) { resetCam(); x.fillStyle = '#16121e'; x.fillRect(0, 0, W, H); x.save(); x.globalCompositeOperation = 'lighter'; const g = x.createRadialGradient(540, 1000, 40, 540, 1100, 700); g.addColorStop(0, 'rgba(255,200,120,.45)'); g.addColorStop(1, 'rgba(255,200,120,0)'); x.fillStyle = g; x.fillRect(0, 0, W, H); x.restore();
