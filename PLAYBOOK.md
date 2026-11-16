@@ -144,7 +144,7 @@ baignoire/test d'entrée · 3 portes (feu/gardes/tigres) · ascenseur 9e/5e · p
 deux gardes vérité/mensonge · pont + garde 5 min · saut sans parachute (avion au sol) · lampe tunnel 17 min ·
 3 interrupteurs · 2 mèches 45 min · douane brouettes · chalet neige sur le capot · gardien de nuit qui a rêvé ·
 alibi du dimanche (facteur) · 2 ramoneurs · 3 coffres (Monty Hall) · prisonnier qui veut rester (tunnel, cuillères, pot) ·
-clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet) · les bonnets (4 prisonniers, 2 rouges 2 bleus, le silence du dernier) · les scooters (le plus lent gagne → échanger les scooters) · le drapeau (yacht, drapeau japonais « à l'envers ») · les traces (neige, sorti à reculons) · les diamants (« jamais touché à ses diamants » alors que personne ne l'avait dit) · le sauna (assommé avec un bloc de glace) · les lingots (17 lingots ½ ⅓ 1/9 → en ajouter un) · la chambre (hôtel, il a frappé à « sa » chambre) · le roi (phrase vraie → cachot / fausse → lions : « je finirai aux lions ») · le chien (le chien n'a pas aboyé → le jardinier) · les sacs (10 sacs, 1 faux, 1 pesée : 1, 2, 3… pièces) · le petit (ascenseur, trop petit pour le bouton 20, parapluie) · la chaussure (une chaussure au coffre pour ne rien oublier) · la barque (loup, chèvre, chou) · l'escargot (puits 10 m, +3/−2 → 8 jours) · les sabliers (7 + 4 min → 9 min pile) · le camion (GTA 6, pont 3,50 m → dégonfler les pneus) · le contrebandier (douane, il passe des scooters — brouillon, déjà fait) · le fleuve (largeur sans mètre → main en visière, se retourner, compter les pas)
+clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons) · fenêtre trop haute · la panne (lire dans le noir) · le recrutement (jacuzzi : verre/casserole/seau, retirer la bonde) · la page (billet entre p. 47 et 48 = même feuille) · l'hôtel (voiture poussée jusqu'à l'hôtel = Monopoly) · l'enterrement (test du psychopathe : revoir la fille à un autre enterrement) · le verre d'eau (Tasty Crousty, BOUH = le hoquet) · les bonnets (4 prisonniers, 2 rouges 2 bleus, le silence du dernier) · les scooters (le plus lent gagne → échanger les scooters) · le drapeau (yacht, drapeau japonais « à l'envers ») · les traces (neige, sorti à reculons) · les diamants (« jamais touché à ses diamants » alors que personne ne l'avait dit) · le sauna (assommé avec un bloc de glace) · les lingots (17 lingots ½ ⅓ 1/9 → en ajouter un) · la chambre (hôtel, il a frappé à « sa » chambre) · le roi (phrase vraie → cachot / fausse → lions : « je finirai aux lions ») · le chien (le chien n'a pas aboyé → le jardinier) · les sacs (10 sacs, 1 faux, 1 pesée : 1, 2, 3… pièces) · le petit (ascenseur, trop petit pour le bouton 20, parapluie) · la chaussure (une chaussure au coffre pour ne rien oublier) · la barque (loup, chèvre, chou) · l'escargot (puits 10 m, +3/−2 → 8 jours) · les sabliers (7 + 4 min → 9 min pile) · le camion (GTA 6, pont 3,50 m → dégonfler les pneus) · le contrebandier (douane, il passe des scooters — brouillon, déjà fait) · le fleuve (largeur sans mètre → main en visière, se retourner, compter les pas) · l'échelle (bateau, marée +50 cm/h → toujours 2 barreaux, le bateau flotte) · les étiquettes (3 sacs OR/ARGENT/MÉLANGE tous mal étiquetés → piocher dans « MÉLANGE ») · l'ours (4 murs au sud = pôle Nord → blanc) · les jetons (10 rouges + 10 bleus, sans regarder → 3 jetons) · les pièces (20 pièces yeux bandés, 10 face → prendre 10 et les retourner toutes)
 
 ## Stats log
 
@@ -173,6 +173,29 @@ clé de l'autre côté (journal sous la porte) · cocktail empoisonné (glaçons
 | 2026-11-08 | L'hôtel (paradox hook + hookCard) | 29 s | 735 | 65 | 3 | 0 | – | – | – | Metricool 2026-11-09, posted 06:49 (early morning) |
 | 2026-11-07 | La page (update) | 23 s | 778 | 44 | 2 | 0 | – | – | – | Metricool 2026-11-09 |
 | 2026-11-07 | La panne (update) | 27 s | 797 | 81 | 7 | 2 | – | – | – | Metricool 2026-11-09 |
+| 2026-11-08 16:09 | L'enterrement (test psycho, GTA 6) | 29 s | 1 144 | 81 | 15 | 2 | – | – | – | Metricool 2026-11-16 |
+| 2026-11-09 07:17 | Les bonnets | 32 s | 935 | 41 | 4 | 0 | – | – | – | Metricool 2026-11-16 (all times Paris) |
+| 2026-11-09 18:01 | Le roi (compte à rebours) | 35 s | 977 | 73 | 5 | 0 | – | – | – | |
+| 2026-11-10 15:55 | Les sacs (sans solution) | 33 s | 811 | 32 | 10 | 1 | – | – | – | |
+| 2026-11-10 18:03 | Le chien (3 suspects) | 34 s | 794 | 64 | 11 | 0 | – | – | – | |
+| 2026-11-11 10:04 | **Le petit (format allemand)** | 44 s | **3 478** | **393** | 4 | 4 | – | – | – | **record**: paradoxe du quotidien + solution |
+| 2026-11-11 18:03 | Le drapeau | 33 s | 813 | 77 | 5 | 0 | – | – | – | |
+| 2026-11-12 07:02 | La chaussure (allemand) | 43 s | 761 | 53 | 1 | 1 | – | – | – | posted early morning |
+| 2026-11-12 11:10 | L'escargot (allemand) | 39 s | 842 | 58 | 2 | 0 | – | – | – | « presque tout le monde répond… » hook |
+| 2026-11-12 18:02 | Le sauna | 36 s | 779 | 28 | 2 | 0 | – | – | – | |
+| 2026-11-12 18:18 | Bande Jour 1 | 35 s | 1 051 | 63 | 6 | 0 | – | – | – | série (créateur) |
+| 2026-11-13 12:05 | Les diamants | 30 s | 741 | 34 | 4 | 0 | – | – | – | Metricool 12 h |
+| 2026-11-13 17:44 | Bande Jour 2 | 35 s | 740 | 67 | 3 | 1 | – | – | – | série |
+| 2026-11-14 12:31 | Le camion (allemand, GTA 6) | 45 s | 1 324 | 68 | 9 | 1 | – | – | – | 2nd best of the week |
+| 2026-11-14 18:13 | Bande Jour 3 | 40 s | 727 | 49 | 11 | 1 | – | – | – | série |
+| 2026-11-15 15:19 | Le fleuve (allemand) | 44 s | 1 045 | 62 | 0 | 1 | – | – | – | |
+| 2026-11-15 17:56 | Bande Jour 4 | 34 s | 437 | 28 | 2 | 1 | – | – | – | série, < 24 h at reading time |
+
+**Week 2026-11-09 → 11-15 (Metricool 2026-11-16, 16 videos):** riddle median ≈ 812 views; watch time, completion and saves still null in Metricool → ask the creator for TikTok Studio screenshots.
+Lessons:
+- **Format allemand wins**: the 5 riddles with the solution explained average 1 490 views (le petit 3 478, camion 1 324, fleuve 1 045, escargot 842, chaussure 761) vs 836 for the 7 without solution (countdown / suspects 741–977). Le petit = account record (393 likes, 11 % like rate) with a famous lateral riddle + an everyday paradox hook (« il habite au 20e… et s'arrête au 10e »). → Week of 2026-11-16: 5 famous riddles, all in format allemand.
+- Comments still come from « qui / combien » questions with a short answer (chien 11, sacs 10, camion 9); « comment il fait ? » with a long answer got 0 (fleuve). Prefer questions answerable in one word or one number.
+- 12 h slot vs series 18 h: same-day riddles beat the series (camion 1 324 vs Jour 3 727; fleuve 1 045 vs Jour 4 437). The series is decreasing (1 051 → 740 → 727 → 437) but gets more comments per view (Jour 3: 11). The slot matters less than the riddle: diamants at 12 h stayed at 741.
 
 **Week 2026-11-02 → 11-08 (Metricool, 14 videos):** median ≈ 785 views, only « Le gardien » (2 203) left the test batch.
 Metricool returns no watch time / completion for these posts any more (null): ask the creator for TikTok Studio screenshots.
