@@ -213,3 +213,4 @@ the lever is the first 3 s (hook) + shares.
 ## Les histoires de 47 (format récit, depuis 2026-11-16)
 - #1 « Le fantôme du musée » (episodes/histoire-musee, 49 s) : 47 remet les vrais tableaux, le directeur était le faussaire. CTA binaire « L'ARRÊTER / MERCI 47 » en commentaire.
 - Règles : histoire originale (format kagen0w seulement), plan nouveau toutes les 2–3 s, objets-preuves lisibles en muet (caméra REC, journal, labo, menottes + photo du coupable), ne jamais montrer des étiquettes qui contredisent la voix.
+- #2 « Le cahier de Mamie Jeanne » (episodes/histoire-mamie, 61 s) : structure du viral « papi Léon » (mort au hook + 3 héritiers + piège + morale), histoire originale. Hook : « ce n'est pas le notaire qui a choisi l'héritier… c'est un voleur ». Miniatures : textes dans la zone 3:4 (y 240–1680).
