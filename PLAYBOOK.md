@@ -230,3 +230,13 @@ the lever is the first 3 s (hook) + shares.
 - Abonnés gagnés : série Jour 1 = 14, Jour 2 = 14, Jour 3 = 11, Musée = 10, puis Jour 4 = 3, Jour 5 (repost) = 1 ; énigmes 0–4. La série est le meilleur moteur d'abonnés mais s'essouffle depuis le Jour 4.
 - Ne pas supprimer/reposter (doublon, vues perdues).
 - Jour 6 (2026-11-17) : rebond = vraie récompense (904 ✅, la cage s'ouvre, Salah libre) + escalade (le Baron attaque à J-3) ; 96 → 104 abonnés, caisse 264 € ; vote défense A mur 300 € (−36 €) / B pièges 150 € / C Bob espionne (risqué) ; Greg = commandant. Cartes A/B/C : 290 px de large, x ≤ 930 (barre d'icônes TikTok) et une ligne de risque sur chaque carte. build.sh : lowpass puis alimiter 0.8 (pic AAC).
+
+## Concurrents analysés (2026-11-17, format seulement — jamais le thème politique)
+- @comment.survivre6 (« ville » politique, 76,6 K abonnés en 8 vidéos ; Jour 4 = 801 K vues, 102 K likes, 9,2 K com.). Transcriptions lues : 
+  1. 1re phrase = le compteur qui grimpe : « Hier on était X… aujourd'hui on est Y » (preuve sociale, pas d'énigme).
+  2. Règle répétée vers 8 s : « 1 abonné = 1 habitant, ton pseudo, ta maison ».
+  3. Cœur = 6–8 VRAIS commentateurs cités par leur prénom, chacun exaucé à l'image en 2–3 s (« Juliette voulait une maison rose… et voilà »), avec le nombre de com. et de likes du com. gagnant.
+  4. Un rival avec un chiffre plus gros et l'écart exact (« encore 5 101 et on passe devant ») ; la vidéo qui a explosé = celle où ils dépassent le rival.
+  5. Fin = UNE question ouverte sur toi (« ta maison tu la veux où ? », « quel métier tu feras ? »), pas un QCM. 45–66 s, voix dense, description courte « Jour N ».
+- @asgadoue (club de foot, « 1 abonné = 1 supporter en tribune », ~10 K abonnés en 8 vidéos) : même mécanique sans politique (vidéos non lisibles sur le web).
+- À appliquer à la bande : ouvrir sur « Hier 96… aujourd'hui 104 », exaucer à l'écran chaque commentateur par son pseudo, écart chiffré vs le Baron (« encore 896 »), finir sur une question ouverte (« quel rôle tu prends ? »).
