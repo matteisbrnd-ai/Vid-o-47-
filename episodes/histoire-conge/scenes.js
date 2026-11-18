@@ -103,24 +103,24 @@ function tv(t, zoom) { resetCam(); x.fillStyle = '#1b1820'; x.fillRect(0, 0, W, 
   shop(t, false, false); for (let i = 0; i < 6; i++) { cast(['rico', 'woman', 'inspector', 'rico', 'woman', 'rico'][i], 600 + i * 190, GY, 0.7, t, { mood: 'smile', look: -1 }); } tent(60, GY); boss(60, GY, 0.8, t, { ...BOSSG, mood: 'smile', look: 1, armUp: true }); x.save(); x.translate(60, GY - 300); txt('GTA', 0, 0, 56, '#fff', { stroke: false }); x.restore(); x.restore();
   x.fillStyle = 'rgba(255,255,255,.04)'; for (let y = 460; y < 1380; y += 6) x.fillRect(70, y, 940, 2); rbox(90, 480, 360, 70, 12, C.red, 0); txt('🔴 EN DIRECT', 270, 520, 40, '#fff', { stroke: false }); rbox(70, 570, 940, 90, 0, 'rgba(20,20,28,.85)', 0); txt('SORTIE DE GTA 6 : LA FILE DEPUIS HIER SOIR', 540, 618, 40, '#fff', { stroke: false }); }
 function draw(t) {
-  const id = curId(t), tNov = WF('ff', /novembre/i), tRef = WF('ff', /refusé/i), tGam = WF('s1', /gamins/i), tRig = WF('s1', /rigolé/i), tLa = WF('s2', /pas là/i) || WF('s2', /là/i), tMal = WF('s2', /Malade/i), tTele = WF('s3', /télé/i), tPrem = WF('s3', /premier/i), tMot = WF('s5', /mot/i), tSem = WF('s6', /semaine/i), tMan = WF('s6', /manette/i);
+  const id = curId(t), tNov = WF('ff2', /novembre/i), tRef = WF('ff', /refusé/i), tGam = WF('s1', /gamins/i), tRig = WF('s1', /rigolé/i), tLa = WF('s2', /pas là/i) || WF('s2', /là/i), tMal = WF('s2', /Malade/i), tTele = WF('s3', /télé/i), tPrem = WF('s3', /premier/i), tMot = WF('s5', /mot/i), tSem = WF('s6', /semaine/i), tMan = WF('s6', /manette/i);
   const HOOK = [['1 JOUR DE CONGÉ POUR GTA 6…', 56], ['REFUSÉ PAR SON PATRON 😤', 64, C.red]];
   if (id === 'mid') { resetCam(); x.fillStyle = vg(0, H, '#2a2440', '#14121c'); x.fillRect(0, 0, W, H); flashCut(t, S('mid')); paperCard([['LE PATRON « MALADE »…', 62], ['IL ÉTAIT OÙ ? 🤔', 84, C.red]], 540, 600, P(t, S('mid'), 0.25), { w: 920 });
     x.save(); x.translate(540, 1100); const k = eBack(clamp(P(t, S('mid') + 0.6))) * (1 + 0.05 * Math.sin(t * 9)); x.scale(k, k); rrc(0, 0, 820, 140, 36, C.red, 8); txt('ÉCRIS TA RÉPONSE 👇', 0, 8, 70, '#fff', { stroke: false }); x.restore(); return; }
   if (id === 's3' || id === 's4') { tv(t, id === 's4' ? 1 : clamp(seg(t, tPrem, B.s3.end))); flashCut(t, S('s3')); if (id === 's4') { onoma('LE PATRON ?!', 540, 330, P(t, S('s4'), 0.2), 130); flashCut(t, S('s4')); } return; }
   if (id === 's5' && t >= tMot - 0.2) { resetCam(); x.fillStyle = vg(0, H, '#c9a27a', '#a8845e'); x.fillRect(0, 0, W, H); x.save(); x.translate(540, 900); x.rotate(-0.06); const k = eBack(clamp(P(t, tMot - 0.2))); x.scale(k, k); rbox(-360, -220, 720, 440, 6, '#fff8a8', 7); txt('Bonne partie,', 0, -40, 90, '#33405a', { stroke: false }); txt('patron 😉', 0, 90, 90, C.red, { stroke: false }); txt('— 47', 220, 180, 50, '#555', { stroke: false }); x.restore(); flashCut(t, tMot - 0.2); return; }
   let K;
-  if (id === 'ff') K = [[0, 0, 600, 1050, 1.0], [tRef - 0.1, 0.3, 700, 1050, 1.15]];
+  if (id === 'ff' || id === 'ff2') K = [[0, 0, 600, 1050, 1.0], [tRef - 0.1, 0.3, 700, 1050, 1.15]];
   else K = [[S(id), 0, 560, 1080, 1.0], [S(id) + 0.2, 4, 580, 1080, 1.1]];
-  camPath(t, K, id === 'ff' && t >= tRef && t < tRef + 0.3 ? 10 : 0);
+  camPath(t, K, (id === 'ff' || id === 'ff2') && t >= tRef && t < tRef + 0.3 ? 10 : 0);
   bureau(t);
-  if (id === 'ff' || id === 's1') { desk(860, GY - 380, 420); boss(860, GY - 30, 0.85, t, { mood: id === 's1' && t >= tRig ? 'smile' : 'smug', look: -1, armUp: id === 's1' && t >= tGam }); desk(860, GY - 380, 420); p47(330, GY, 0.85, t, { mood: id === 's1' ? 'worried' : 'smile', look: 1 });
-    if (id === 'ff') cal(600, 900, 1.0 * eBack(clamp(P(t, 0.05))), t, seg(t, tNov, tNov + 0.5)); if (id === 's1' && t >= tRig) { cast('woman', 600, GY, 0.8, t, { mood: 'smile', look: 1 }); cast('rico', 90, GY, 0.8, t, { ...KEV, mood: 'smile', look: 1 }); onoma('HA HA !', 540, 600 + Math.sin(t * 20) * 8, P(t, tRig, 0.2), 120); } }
+  if (id === 'ff' || id === 'ff2' || id === 's1') { desk(860, GY - 380, 420); boss(860, GY - 30, 0.85, t, { mood: id === 's1' && t >= tRig ? 'smile' : 'smug', look: -1, armUp: id === 's1' && t >= tGam }); desk(860, GY - 380, 420); p47(330, GY, 0.85, t, { mood: id === 's1' ? 'worried' : 'smile', look: 1 });
+    if (id === 'ff' || id === 'ff2') { cal(600, 900, 1.0 * eBack(clamp(P(t, 0.05))), t, seg(t, tNov, tNov + 0.5)); box(1000, 1030, 0.9); } if (id === 's1' && t >= tRig) { cast('woman', 600, GY, 0.8, t, { mood: 'smile', look: 1 }); cast('rico', 90, GY, 0.8, t, { ...KEV, mood: 'smile', look: 1 }); onoma('HA HA !', 540, 600 + Math.sin(t * 20) * 8, P(t, tRig, 0.2), 120); } }
   if (id === 's2') { desk(860, GY - 380, 420); rbox(760, GY - 620, 200, 240, 30, '#4a4d55', 7); p47(330, GY, 0.85, t, { mood: t >= tLa ? 'shock' : 'neutral', look: 1 }); if (t >= tMal - 0.3) cast('woman', 1200, GY, 0.85, t, { mood: 'neutral', look: -1 }); }
   if (id === 's5') { desk(860, GY - 380, 420); p47(330, GY, 0.85, t, { mood: 'smug', look: 1 }); }
   if (id === 's6' || id === 'end') { p47(540, GY, 0.95, t, { mood: 'smile', look: 0, armUp: true }); pad2(760, GY - 740, 1.0); }
   vignette(0.2);
-  if (id === 'ff') { hookCard(t, HOOK, B.ff.end + 0.1); if (t >= tRef) stamp('REFUSÉ', P(t, tRef, 0.25), 1150); }
+  if (id === 'ff' || id === 'ff2') { hookCard(t, HOOK, B.ff2.end + 0.1); if (t >= tRef) stamp('REFUSÉ', P(t, tRef, 0.25), 1150); }
   if (id === 's1') { flashCut(t, S('s1')); paperCard([['« LES JEUX VIDÉO, C\'EST', 52], ['POUR LES GAMINS ! »', 64, C.red]], 540, 330, P(t, S('s1'), 0.2), { w: 900 }); }
   if (id === 's2') { flashCut(t, S('s2')); pill('⏰ LE 19 NOVEMBRE…', 540, 300, P(t, S('s2') + 0.1), C.blue); if (t >= tLa) pill('🪑 LE PATRON N\'EST PAS LÀ', 540, 420, P(t, tLa), C.red); if (t >= tMal) pill('😷 « MALADE »', 540, 540, P(t, tMal), C.brown); }
   if (id === 's5') { flashCut(t, S('s5')); pill('📱 IL AURAIT PU MONTRER LA VIDÉO…', 540, 320, P(t, S('s5') + 0.1), C.red); }
