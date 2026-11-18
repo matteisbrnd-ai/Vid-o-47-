@@ -10,7 +10,7 @@ MUSIC = 0.15
 TEMPO_BEAT = {'ff': 1.1}
 SKIP_EV = []
 BEATS = [
-  ('ff', "Quand Papi Robert est mort, il avait un ticket de loto gagnant : un million d'euros.", "Quand Papi Robert est mort, il avait un ticket de loto gagnant : un million d'euros.", 0.15),
+  ('ff', "Quand Papi Robert est mort, il avait un ticket gagnant : un million d'euros.", "Quand Papi Robert est mort, il avait un ticket gagnant : un million d'euros.", 0.15),
   ('s1', "Mais ce ticket… il l'avait confié à un voleur.", "Mais ce ticket... il l'avait confié à un voleur.", 0.2),
   ('s2', "47. Son adversaire aux cartes, chaque dimanche. Avec une consigne : « Donne-le à celui qui sait ce que veulent dire mes numéros. »", "Quarante-sept. Son adversaire aux cartes, chaque dimanche. Avec une consigne : Donne-le à celui qui sait ce que veulent dire mes numéros.", 0.15),
   ('s3', "Depuis quarante ans, Papi jouait les mêmes : 6, 4, 19, 49.", "Depuis quarante ans, Papi jouait les mêmes : six, quatre, dix-neuf, quarante-neuf.", 0.2),
