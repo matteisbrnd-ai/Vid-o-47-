@@ -17,7 +17,7 @@ BEATS = [
   ('s5', "Et 47, son apprenti, le seul qui venait au parloir chaque dimanche, ne disait rien. Marco a ri : « Le petit voleur va nous faire la leçon ? »", "Et Quarante-sept, son apprenti, le seul qui venait au parloir chaque dimanche, ne disait rien. Marco a ri : Le petit voleur va nous faire la leçon ?", 0.2),
   ('mid', "Avant la réponse : toi, c'est quoi ? Écris-le en commentaire !", "Avant la réponse : toi, c'est quoi ? Écris-le en commentaire !", 0.4),
   ('s6', "47 a dit : « Rien. » Rien n'est plus fort que Dieu. Rien n'est pire que le diable. Les pauvres n'ont rien, les riches n'ont besoin de rien… et si tu ne manges rien, tu meurs.", "Quarante-sept a dit : Rien. Rien n'est plus fort que Dieu. Rien n'est pire que le diable. Les pauvres n'ont rien, les riches n'ont besoin de rien... et si tu ne manges rien, tu meurs.", 0.2),
-  ('s7', "Le trésor ? Il n'y en avait plus. Avant de mourir, Papi Jo avait tout rendu.", "Le trésor ? Il n'y en avait plus. Avant de mourir, Papi Jo avait tout rendu.", 0.2),
+  ('s7', "Le trésor ? Il n'y en avait plus. Avant de mourir, Papi Jo avait tout rendu. En secret.", "Le trésor ? Il n'y en avait plus. Avant de mourir, Papi Jo avait tout rendu. En secret.", 0.2),
   ('s8', "Il ne restait qu'une clé, et un mot : « Je te laisse le seul endroit où j'ai été honnête. Fais-en quelque chose de bien. » C'était un vieux garage. Le Garage 47.", "Il ne restait qu'une clé, et un mot : Je te laisse le seul endroit où j'ai été honnête. Fais-en quelque chose de bien. C'était un vieux garage. Le Garage Quarante-sept.", 0.3),
   ('end', "T'avais trouvé ? Envoie-la à quelqu'un qui croit tout savoir.", "T'avais trouvé ? Envoie-la à quelqu'un qui croit tout savoir.", 1.2),
 ]
