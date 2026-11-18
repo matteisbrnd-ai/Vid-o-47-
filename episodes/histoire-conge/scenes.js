@@ -1,4 +1,4 @@
-// Les histoires de 47 #6 — « Le jour de congé ». Helpers from #2–#5 (shop/box) + boss, TV, controller.
+// Les histoires de 47 #6 v2 — « 19 novembre, congé refusé » : 47 joue à GTA 6 en cachette au travail (plan A bureau, plan B réunion), fin : le patron bloque sur une mission.
 window.LOOK = 'gala';
 const GY = 1500;
 const MAMIE = { hat: 'hair', hairCol: '#ecebe6', glasses: true, body: '#8a6aa8', body2: '#6f5590', pants: '#5a4a6a', num: false, collar: true };
@@ -102,30 +102,48 @@ function pad2(cx, cy, s) { x.save(); x.translate(cx, cy); x.scale(s, s); x.begin
 function tv(t, zoom) { resetCam(); x.fillStyle = '#1b1820'; x.fillRect(0, 0, W, H); rbox(30, 420, 1020, 1000, 40, '#222', 12); x.save(); x.beginPath(); x.rect(70, 460, 940, 920); x.clip(); x.translate(540, 920); const z = lerp(0.42, 1.1, zoom); x.scale(z, z); x.translate(-lerp(540, 60, zoom), -lerp(1000, 1180, zoom));
   shop(t, false, false); for (let i = 0; i < 6; i++) { cast(['rico', 'woman', 'inspector', 'rico', 'woman', 'rico'][i], 600 + i * 190, GY, 0.7, t, { mood: 'smile', look: -1 }); } tent(60, GY); boss(60, GY, 0.8, t, { ...BOSSG, mood: 'smile', look: 1, armUp: true }); x.save(); x.translate(60, GY - 300); txt('GTA', 0, 0, 56, '#fff', { stroke: false }); x.restore(); x.restore();
   x.fillStyle = 'rgba(255,255,255,.04)'; for (let y = 460; y < 1380; y += 6) x.fillRect(70, y, 940, 2); rbox(90, 480, 360, 70, 12, C.red, 0); txt('🔴 EN DIRECT', 270, 520, 40, '#fff', { stroke: false }); rbox(70, 570, 940, 90, 0, 'rgba(20,20,28,.85)', 0); txt('SORTIE DE GTA 6 : LA FILE DEPUIS HIER SOIR', 540, 618, 40, '#fff', { stroke: false }); }
+
+function vice(x0, y0, w, h, t) { x.save(); x.beginPath(); x.rect(x0, y0, w, h); x.clip(); x.fillStyle = vg(y0, y0 + h, '#ff7a59', '#ffd27a'); x.fillRect(x0, y0, w, h); ell(x0 + w * 0.5, y0 + h * 0.62, w * 0.16, w * 0.16, '#fff1a8', 0);
+  x.fillStyle = '#3a8fc9'; x.fillRect(x0, y0 + h * 0.68, w, h * 0.32); x.fillStyle = 'rgba(255,255,255,.35)'; for (let i = 0; i < 6; i++) x.fillRect(x0 + ((i * 97 + t * 60) % w), y0 + h * (0.72 + i * 0.04), w * 0.12, 4);
+  [[0.15, 1], [0.85, -1]].forEach(([fx, d]) => { const px = x0 + w * fx, py = y0 + h * 0.7; x.strokeStyle = '#3a2a1e'; x.lineWidth = w * 0.02; x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + d * w * 0.03, py - h * 0.3, px + d * w * 0.06, py - h * 0.45); x.stroke();
+    for (let k = 0; k < 5; k++) { x.save(); x.translate(px + d * w * 0.06, py - h * 0.45); x.rotate(k * 1.25); poly([[0, 0], [w * 0.12, -h * 0.03], [w * 0.12, h * 0.02]], '#1f6a3a', 0); x.restore(); } });
+  txt('VICE CITY', x0 + w * 0.5, y0 + h * 0.25, w * 0.11, '#ff4fa3', { sw: Math.max(4, w * 0.01) }); x.restore(); }
+function excel(x0, y0, w, h) { x.fillStyle = '#fff'; x.fillRect(x0, y0, w, h); x.fillStyle = '#1f7a45'; x.fillRect(x0, y0, w, h * 0.12); x.strokeStyle = '#c8d0c8'; x.lineWidth = 2; for (let i = 1; i < 8; i++) { x.beginPath(); x.moveTo(x0, y0 + h * 0.12 + i * h * 0.11); x.lineTo(x0 + w, y0 + h * 0.12 + i * h * 0.11); x.stroke(); } for (let j = 1; j < 5; j++) { x.beginPath(); x.moveTo(x0 + j * w / 5, y0 + h * 0.12); x.lineTo(x0 + j * w / 5, y0 + h); x.stroke(); } }
+function monitor(cx, cy, s, t, mode) { x.save(); x.translate(cx, cy); x.scale(s, s); rbox(-260, -190, 520, 360, 16, '#22242a', 9); if (mode === 'excel') excel(-235, -165, 470, 300); else if (mode === 'game') vice(-235, -165, 470, 300, t); else { x.fillStyle = '#0d0f14'; x.fillRect(-235, -165, 470, 300); } rbox(-30, 170, 60, 70, 4, '#22242a', 6); rbox(-120, 235, 240, 24, 8, '#22242a', 6); x.restore(); }
+function consoleBox(cx, cy, s) { x.save(); x.translate(cx, cy); x.scale(s, s); rbox(-120, -40, 240, 80, 14, '#f2f2f4', 7); rbox(-120, -40, 240, 18, 8, '#1b1b1f', 0); ell(80, 10, 10, 10, '#4fa3ff', 0); x.restore(); }
+function meeting(t, on) { room('#d8d3c8', '#c4bdb0', '#7a6a5a', GY); rbox(40, 260, 1000, 600, 12, '#2a2a30', 10); if (on) vice(70, 290, 940, 540, t); else { x.fillStyle = '#eef0f3'; x.fillRect(70, 290, 940, 540); }
+  rbox(-100, GY - 360, 1280, 50, 20, '#6b4428', 8); }
 function draw(t) {
-  const id = curId(t), tNov = WF('ff2', /novembre/i), tRef = WF('ff', /refusé/i), tGam = WF('s1', /gamins/i), tRig = WF('s1', /rigolé/i), tLa = WF('s2', /pas là/i) || WF('s2', /là/i), tMal = WF('s2', /Malade/i), tTele = WF('s3', /télé/i), tPrem = WF('s3', /premier/i), tMot = WF('s5', /mot/i), tSem = WF('s6', /semaine/i), tMan = WF('s6', /manette/i);
-  const HOOK = [['1 JOUR DE CONGÉ POUR GTA 6…', 56], ['REFUSÉ PAR SON PATRON 😤', 64, C.red]];
-  if (id === 'mid') { resetCam(); x.fillStyle = vg(0, H, '#2a2440', '#14121c'); x.fillRect(0, 0, W, H); flashCut(t, S('mid')); paperCard([['LE PATRON « MALADE »…', 62], ['IL ÉTAIT OÙ ? 🤔', 84, C.red]], 540, 600, P(t, S('mid'), 0.25), { w: 920 });
+  const id = curId(t), tRef = WF('ff', /refusé/i), tCons = WF('ff', /console/i), tLance = WF('s1', /lance/i), tOuv = WF('s1', /ouvre/i), tExc = WF('s2', /Excel/i), tMot = WF('s3', /moteur/i), tPho = WF('s3', /photocopieuse/i),
+    tBra = WF('s4', /branchée/i), tProj = WF('s5', /projecteur/i), tVC = WF('s5', /City/i), tCli = WF('s6', /client/i), tApp = WF('s6', /applaudissent/i), tMail = WF('s7', /mail/i), tVir = WF('s7', /viré/i), tEcr = WF('s8', /écran/i), tBloq = WF('s8', /bloque/i), tSou = WF('s9', /souri/i), tCon = WF('s9', /congé/i);
+  const HOOK = [['19 NOVEMBRE : SORTIE DE GTA 6', 52], ['CONGÉ REFUSÉ 😤', 84, C.red]];
+  if (id === 'mid') { resetCam(); meeting(t, true); x.fillStyle = 'rgba(15,12,22,.72)'; x.fillRect(0, 0, W, H); flashCut(t, S('mid')); paperCard([['LÀ, IL EST GRILLÉ…', 66], ['COMMENT IL S\'EN SORT ? 🤔', 62, C.red]], 540, 640, P(t, S('mid'), 0.25), { w: 940 });
     x.save(); x.translate(540, 1100); const k = eBack(clamp(P(t, S('mid') + 0.6))) * (1 + 0.05 * Math.sin(t * 9)); x.scale(k, k); rrc(0, 0, 820, 140, 36, C.red, 8); txt('ÉCRIS TA RÉPONSE 👇', 0, 8, 70, '#fff', { stroke: false }); x.restore(); return; }
-  if (id === 's3' || id === 's4') { tv(t, id === 's4' ? 1 : clamp(seg(t, tPrem, B.s3.end))); flashCut(t, S('s3')); if (id === 's4') { onoma('LE PATRON ?!', 540, 330, P(t, S('s4'), 0.2), 130); flashCut(t, S('s4')); } return; }
-  if (id === 's5' && t >= tMot - 0.2) { resetCam(); x.fillStyle = vg(0, H, '#c9a27a', '#a8845e'); x.fillRect(0, 0, W, H); x.save(); x.translate(540, 900); x.rotate(-0.06); const k = eBack(clamp(P(t, tMot - 0.2))); x.scale(k, k); rbox(-360, -220, 720, 440, 6, '#fff8a8', 7); txt('Bonne partie,', 0, -40, 90, '#33405a', { stroke: false }); txt('patron 😉', 0, 90, 90, C.red, { stroke: false }); txt('— 47', 220, 180, 50, '#555', { stroke: false }); x.restore(); flashCut(t, tMot - 0.2); return; }
+  if (id === 's7' && t < tVir + 0.6) { resetCam(); x.fillStyle = '#14161c'; x.fillRect(0, 0, W, H); x.save(); x.translate(540, 820); const k = eBack(clamp(P(t, tMail - 0.1))); x.scale(k, k); rbox(-440, -260, 880, 520, 24, '#fff', 8); x.fillStyle = '#2457a8'; x.fillRect(-440, -260, 880, 90); txt('✉️ NOUVEAU MAIL — LE PATRON', 0, -212, 44, '#fff', { stroke: false }); txt('« Dans mon bureau.', 0, -40, 66, OL, { stroke: false }); txt('Tout de suite. »', 0, 60, 66, C.red, { stroke: false }); x.restore();
+    if (t >= tVir - 0.3) pill('😰 IL VA SE FAIRE VIRER…', 540, 1260, P(t, tVir - 0.3), C.red); flashCut(t, S('s7')); return; }
   let K;
-  if (id === 'ff' || id === 'ff2') K = [[0, 0, 600, 1050, 1.0], [tRef - 0.1, 0.3, 700, 1050, 1.15]];
-  else K = [[S(id), 0, 560, 1080, 1.0], [S(id) + 0.2, 4, 580, 1080, 1.1]];
-  camPath(t, K, (id === 'ff' || id === 'ff2') && t >= tRef && t < tRef + 0.3 ? 10 : 0);
-  bureau(t);
-  if (id === 'ff' || id === 'ff2' || id === 's1') { desk(860, GY - 380, 420); boss(860, GY - 30, 0.85, t, { mood: id === 's1' && t >= tRig ? 'smile' : 'smug', look: -1, armUp: id === 's1' && t >= tGam }); desk(860, GY - 380, 420); p47(330, GY, 0.85, t, { mood: id === 's1' ? 'worried' : 'smile', look: 1 });
-    if (id === 'ff' || id === 'ff2') { cal(600, 900, 1.0 * eBack(clamp(P(t, 0.05))), t, seg(t, tNov, tNov + 0.5)); box(1000, 1030, 0.9); } if (id === 's1' && t >= tRig) { cast('woman', 600, GY, 0.8, t, { mood: 'smile', look: 1 }); cast('rico', 90, GY, 0.8, t, { ...KEV, mood: 'smile', look: 1 }); onoma('HA HA !', 540, 600 + Math.sin(t * 20) * 8, P(t, tRig, 0.2), 120); } }
-  if (id === 's2') { desk(860, GY - 380, 420); rbox(760, GY - 620, 200, 240, 30, '#4a4d55', 7); p47(330, GY, 0.85, t, { mood: t >= tLa ? 'shock' : 'neutral', look: 1 }); if (t >= tMal - 0.3) cast('woman', 1200, GY, 0.85, t, { mood: 'neutral', look: -1 }); }
-  if (id === 's5') { desk(860, GY - 380, 420); p47(330, GY, 0.85, t, { mood: 'smug', look: 1 }); }
-  if (id === 's6' || id === 'end') { p47(540, GY, 0.95, t, { mood: 'smile', look: 0, armUp: true }); pad2(760, GY - 740, 1.0); }
+  if (id === 'ff' || id === 's1' || id === 's2' || id === 's3') K = [[S(id), 0, 560, 1080, 1.0], [S(id) + 0.2, 4, 600, 1060, 1.12]];
+  else if (id === 's4' || id === 's5' || id === 's6') K = [[S(id), 0, 540, 1000, 0.9]];
+  else K = [[S(id), 0, 560, 1080, 1.0], [S(id) + 0.2, 4, 600, 1060, 1.1]];
+  camPath(t, K, id === 's5' && t >= tVC && t < tVC + 0.3 ? 12 : 0);
+  if (id === 'ff' || id === 's1' || id === 's2' || id === 's3') { bureau(t); door(110, GY - 640, 300, 640, '#6b4428'); desk(640, GY - 380, 560); const mode = id === 'ff' ? (t >= tCons ? 'game' : 'off') : id === 's1' ? (t >= tLance ? 'game' : 'off') : (t >= tExc ? 'excel' : 'game');
+    monitor(640, GY - 640, 0.9, t, mode); consoleBox(500, GY - 60, 0.8); p47(880, GY, 0.85, t, { mood: id === 's1' && t >= tOuv ? 'shock' : (id === 's2' ? 'worried' : 'smile'), look: -1 }); if (id !== 'ff' && !(id === 's2' && t >= tExc)) pad2(900, GY - 420, 0.5);
+    if ((id === 's1' && t >= tOuv) || id === 's2' || id === 's3') boss(150, GY, 0.85, t, { mood: id === 's3' ? 'neutral' : 'angry', look: 1 }); if (id === 'ff') { cal(250, 900, 0.9, t, 1); } }
+  if (id === 's4' || id === 's5' || id === 's6') { meeting(t, id !== 's4' && t >= tProj); [[100, 'rico', KEV], [310, 'woman', {}], [520, 'inspector', {}]].forEach(([px, ty, o]) => cast(ty, px, GY, 0.75, t, { ...o, mood: id === 's6' && t >= tApp ? 'smile' : (id === 's5' && t >= tVC ? 'shock' : 'neutral'), look: 1, armUp: id === 's6' && t >= tApp }));
+    p47(740, GY, 0.85, t, { mood: id === 's5' && t >= tVC ? 'shock' : (id === 's6' ? 'smug' : 'smile'), look: -1, armUp: id === 's6' && t >= tCli }); if (id === 's5' || id === 's6') boss(970, GY, 0.85, t, { mood: id === 's6' ? (t >= tApp ? 'smile' : 'shock') : (t >= tVC ? 'shock' : 'neutral'), look: -1, armUp: id === 's5' && t >= tProj }); }
+  if (id === 's8' || id === 's9' || id === 'end') { room('#2a2e3a', '#232631', '#3a3530', GY); ell(860, 520, 300, 300, 'rgba(255,220,140,.12)', 0); desk(640, GY - 380, 560); monitor(640, GY - 640, 0.9, t, id === 's8' && t < tEcr ? 'off' : 'game'); boss(380, GY, 0.85, t, { mood: id === 's8' && t >= tBloq ? 'worried' : 'neutral', look: 1, armUp: id === 's8' && t >= tBloq }); pad2(470, GY - 520, 0.5);
+    p47(900, GY, 0.85, t, { mood: id === 's8' ? 'shock' : 'smug', look: -1, armUp: id === 's9' && t >= tCon }); }
   vignette(0.2);
-  if (id === 'ff' || id === 'ff2') { hookCard(t, HOOK, B.ff2.end + 0.1); if (t >= tRef) stamp('REFUSÉ', P(t, tRef, 0.25), 1150); }
-  if (id === 's1') { flashCut(t, S('s1')); paperCard([['« LES JEUX VIDÉO, C\'EST', 52], ['POUR LES GAMINS ! »', 64, C.red]], 540, 330, P(t, S('s1'), 0.2), { w: 900 }); }
-  if (id === 's2') { flashCut(t, S('s2')); pill('⏰ LE 19 NOVEMBRE…', 540, 300, P(t, S('s2') + 0.1), C.blue); if (t >= tLa) pill('🪑 LE PATRON N\'EST PAS LÀ', 540, 420, P(t, tLa), C.red); if (t >= tMal) pill('😷 « MALADE »', 540, 540, P(t, tMal), C.brown); }
-  if (id === 's5') { flashCut(t, S('s5')); pill('📱 IL AURAIT PU MONTRER LA VIDÉO…', 540, 320, P(t, S('s5') + 0.1), C.red); }
-  if (id === 's6') { flashCut(t, S('s6')); if (t >= tSem - 0.2) pill('🏖️ UNE SEMAINE DE CONGÉ', 540, 300, P(t, tSem - 0.2), '#2a8a3a'); if (t >= tMan + 0.3) paperCard([['« MERCI DE PAS', 60], ['L\'AVOIR DIT. »', 70, C.red]], 540, 520, P(t, tMan + 0.3), { w: 760 }); }
-  if (id === 'end') { flashCut(t, S('end')); paperCard([['TAGUE TON PATRON 👇', 66, C.red], ['T\'AS POSÉ TON JOUR DEMAIN ?', 48]], 540, 330, P(t, S('end')), { w: 940 }); }
+  if (id === 'ff') { hookCard(t, HOOK, B.ff.end + 0.1); if (t >= tCons) pill('🎮 IL RAMÈNE SA CONSOLE… AU BOULOT', 540, 1450, P(t, tCons), C.orange); }
+  if (id === 's1') { flashCut(t, S('s1')); pill('PLAN A : SOUS LE BUREAU 🤫', 540, 300, P(t, S('s1') + 0.1), C.blue); if (t >= tOuv) onoma('LA PORTE !', 300, 520, P(t, tOuv, 0.2), 120); }
+  if (id === 's2') { flashCut(t, S('s2')); pill('⏱️ 2 SECONDES…', 540, 300, P(t, S('s2') + 0.3), C.red); if (t >= tExc) pill('📊 EXCEL ! OUF…', 540, 420, P(t, tExc), '#1f7a45'); }
+  if (id === 's3') { flashCut(t, S('s3')); paperCard([['« C\'EST QUOI CE BRUIT', 52], ['DE MOTEUR ? »', 64, C.red]], 540, 330, P(t, S('s3'), 0.2), { w: 860 }); if (t >= tPho - 0.2) paperCard([['« LA PHOTOCOPIEUSE.', 54], ['ELLE EST VIEILLE. »', 60, '#2457a8']], 540, 600, P(t, tPho - 0.2), { w: 860 }); }
+  if (id === 's4') { flashCut(t, S('s4')); pill('PLAN B : EN RÉUNION 🤫', 540, 1000, P(t, S('s4') + 0.1), C.blue); if (t >= tBra) pill('⚠️ BRANCHÉE SUR LE GRAND ÉCRAN', 540, 1120, P(t, tBra), C.red); }
+  if (id === 's5') { flashCut(t, S('s5')); if (t >= tVC) onoma('GRILLÉ !', 540, 1000, P(t, tVC, 0.2), 150); }
+  if (id === 's6') { flashCut(t, S('s6')); paperCard([['« NOTRE NOUVEAU CLIENT :', 50], ['L\'OFFICE DU TOURISME', 54, C.red], ['DE VICE CITY »', 64, C.red]], 540, 1000, P(t, tCli - 0.3), { w: 940 }); if (t >= tApp) pill('👏 LES COLLÈGUES APPLAUDISSENT', 540, 1280, P(t, tApp), '#2a8a3a'); }
+  if (id === 's8') { flashCut(t, S('s8')); if (t >= tBloq - 0.3) paperCard([['« JE BLOQUE DEPUIS MIDI…', 54], ['AIDE-MOI. »', 74, C.red]], 540, 330, P(t, tBloq - 0.3), { w: 900 }); }
+  if (id === 's9') { flashCut(t, S('s9')); paperCard([['« D\'ACCORD.', 66], ['MAIS DEMAIN, JE SUIS', 52, C.red], ['EN CONGÉ. »', 70, C.red]], 540, 330, P(t, S('s9') + 0.2), { w: 900 }); }
+  if (id === 'end') { flashCut(t, S('end')); paperCard([['T\'AURAIS FAIT QUOI ? 💬', 62], ['TAGUE LE COLLÈGUE QUI FERAIT ÇA', 42, C.red]], 540, 330, P(t, S('end')), { w: 960 }); }
 }
 
 function bag(px, py, s) { rbox(px - 70 * s, py - 160 * s, 140 * s, 170 * s, 24 * s, '#2a2a30', 6); x.strokeStyle = OL; x.lineWidth = 8; x.beginPath(); x.arc(px, py - 160 * s, 40 * s, Math.PI, 0); x.stroke(); }
