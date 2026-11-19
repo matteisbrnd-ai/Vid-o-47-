@@ -10,7 +10,7 @@ TEMPO_BEAT = {'ff': 1.2, 'ff2': 1.15}
 TEMPO = 1.08
 SKIP_EV = []
 BEATS = [
-  ('ff', "Son congé pour GTA 6 a été refusé… alors il y a joué en pleine réunion. Devant son patron.", "Son congé pour Gé-Té-A six a été refusé... alors il y a joué en pleine réunion. Devant son patron !", 0.05),
+  ('ff', "Son congé pour GTA 6 a été refusé… alors il y a joué en pleine réunion. Attends de voir la réaction du patron.", "Son congé pour Gé-Té-A six a été refusé... alors il y a joué en pleine réunion. Attends de voir la réaction du patron !", 0.05),
   ('ff2', "Retour en arrière. Ce matin : demande refusée. Alors il ramène sa console… au boulot.", "Retour en arrière. Ce matin : demande refusée. Alors il ramène sa console... au boulot.", 0.05),
   ('s1', "Plan A : la console sous le bureau, la manette dans le tiroir. Il lance le jeu… et la porte s'ouvre.", "Plan A : la console sous le bureau, la manette dans le tiroir. Il lance le jeu... et la porte s'ouvre.", 0.1),
   ('s2', "Le patron. 47 a deux secondes : il bascule l'écran sur un tableau Excel.", "Le patron. Quarante-sept a deux secondes : il bascule l'écran sur un tableau Excel.", 0.1),
