@@ -19,8 +19,8 @@ BEATS = [
   ('s4', "Il a collé une affiche : « Interdit de sonner. » Le soir même… ça sonnait.", "Il a collé une affiche : Interdit de sonner. Le soir même... ça sonnait.", 0.1),
   ('s5', "Alors il a installé une caméra.", "Alors il a installé une caméra.", 0.05),
   ('s6', "Sur la vidéo : un bonnet orange. Il sonne… se cache derrière la haie… attend que la lumière s'allume… et il repart.", "Sur la vidéo : un bonnet orange. Il sonne... se cache derrière la haie... attend que la lumière s'allume... et il repart.", 0.15),
-  ('mid', "Pourquoi il attend la lumière ? Écris ta théorie… ou raconte ton histoire : la plus likée passe dans le prochain épisode !", "Pourquoi il attend la lumière ? Écris ta théorie... ou raconte ton histoire : la plus likée passe dans le prochain épisode !", 0.15),
-  ('s7', "Le lendemain, à 20h59, Henri l'attendait derrière la porte. « Je te tiens ! »", "Le lendemain, à vingt heures cinquante-neuf, Henri l'attendait derrière la porte. Je te tiens !", 0.1),
+  ('mid', "Pourquoi il attend la lumière ? Ta théorie… ou ton histoire en commentaire : la plus likée devient un épisode !", "Pourquoi il attend la lumière ? Ta théorie... ou ton histoire en commentaire : la plus likée devient un épisode !", 0.05),
+  ('s7', "Le lendemain soir, Henri l'attendait derrière la porte. « Je te tiens ! »", "Le lendemain soir, Henri l'attendait derrière la porte. Je te tiens !", 0.1),
   ('s8', "Mais 47 n'a pas fui. Il a juste demandé : « Vous allez bien, Monsieur Henri ? »", "Mais Quarante-sept n'a pas fui. Il a juste demandé : Vous allez bien, Monsieur Henri ?", 0.15),
   ('s9', "L'hiver dernier, Henri était tombé dans sa cuisine. Personne ne l'avait su… pendant deux jours.", "L'hiver dernier, Henri était tombé dans sa cuisine. Personne ne l'avait su... pendant deux jours.", 0.1),
   ('s10', "Le livreur qui l'avait entendu appeler à l'aide à travers la porte… c'était 47.", "Le livreur qui l'avait entendu appeler à l'aide à travers la porte... c'était Quarante-sept.", 0.2),
@@ -30,6 +30,6 @@ BEATS = [
 ]
 CUES = [('ff', '+0', 'dingdong'), ('ff', 'Henri', 'sting'), ('ff', 'courant', 'run'), ('s1', 'six', 'tick'), ('s1', 'soirs', 'dingdong'), ('s2', 'personne', 'wind'), ('s2', 'ombre', 'sting'),
         ('s3', 'police', 'ring'), ('s3', 'rigolé', 'pop'), ('s4', 'affiche', 'paper'), ('s4', 'sonnait', 'dingdong'), ('s5', 'caméra', 'click'), ('s6', 'orange', 'sting'), ('s6', 'sonne', 'dingdong'),
-        ('s6', 'haie', 'whoosh'), ('s6', 'lumière', 'click'), ('s6', 'repart', 'steps'), ('mid', '+0', 'ding'), ('s7', 'cinquante', 'tick'), ('s7', 'tiens', 'bam'), ('s8', 'fui', 'sting'), ('s8', 'bien', 'ding'),
+        ('s6', 'haie', 'whoosh'), ('s6', 'lumière', 'click'), ('s6', 'repart', 'steps'), ('mid', '+0', 'ding'), ('s7', 'soir', 'tick'), ('s7', 'tiens', 'bam'), ('s8', 'fui', 'sting'), ('s8', 'bien', 'ding'),
         ('s9', 'tombé', 'bam'), ('s9', 'jours', 'tick'), ('s10', 'livreur', 'paper'), ('s10', 'Quarante', 'sting'), ('s11', 'lumière', 'click'), ('s11', 'vivant', 'dingdong'),
         ('s12', 'sonné', 'dingdong'), ('s12', 'tarte', 'pop'), ('s12', 'vérifie', 'ding'), ('end', '+0', 'ding')]
