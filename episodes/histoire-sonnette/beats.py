@@ -19,7 +19,7 @@ BEATS = [
   ('s4', "Il a collé une affiche : « Interdit de sonner. » Le soir même… ça sonnait.", "Il a collé une affiche : Interdit de sonner. Le soir même... ça sonnait.", 0.1),
   ('s5', "Alors il a installé une caméra.", "Alors il a installé une caméra.", 0.05),
   ('s6', "Sur la vidéo : un bonnet orange. Il sonne… se cache derrière la haie… attend que la lumière s'allume… et il repart.", "Sur la vidéo : un bonnet orange. Il sonne... se cache derrière la haie... attend que la lumière s'allume... et il repart.", 0.15),
-  ('mid', "Pourquoi il attend la lumière ? Écris ta théorie !", "Pourquoi il attend la lumière ? Écris ta théorie !", 0.15),
+  ('mid', "Pourquoi il attend la lumière ? Écris ta théorie… ou raconte ton histoire : la plus likée passe dans le prochain épisode !", "Pourquoi il attend la lumière ? Écris ta théorie... ou raconte ton histoire : la plus likée passe dans le prochain épisode !", 0.15),
   ('s7', "Le lendemain, à 20h59, Henri l'attendait derrière la porte. « Je te tiens ! »", "Le lendemain, à vingt heures cinquante-neuf, Henri l'attendait derrière la porte. Je te tiens !", 0.1),
   ('s8', "Mais 47 n'a pas fui. Il a juste demandé : « Vous allez bien, Monsieur Henri ? »", "Mais Quarante-sept n'a pas fui. Il a juste demandé : Vous allez bien, Monsieur Henri ?", 0.15),
   ('s9', "L'hiver dernier, Henri était tombé dans sa cuisine. Personne ne l'avait su… pendant deux jours.", "L'hiver dernier, Henri était tombé dans sa cuisine. Personne ne l'avait su... pendant deux jours.", 0.1),
