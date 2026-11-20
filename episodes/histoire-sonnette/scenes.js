@@ -32,9 +32,9 @@ function draw0(t) {
   if (id === 'mid') { resetCam(); const on = Math.sin((t - S('mid')) * 4) > 0; x.save(); x.filter = 'saturate(0.9) contrast(1.05)'; street(t, { lit: on ? 1 : 0 }); p47(1080, GY + 220, 0.82, t, { mood: 'worried', look: -1 }); hedge(960); x.restore(); cctv(t, S('s6') + 7);
     x.fillStyle = 'rgba(10,10,20,.35)'; x.fillRect(0, 0, W, H); flashCut(t, S('mid')); const tHis = WF('mid', /histoire/i);
     paperCard([['POURQUOI IL ATTEND', 60], ['LA LUMIÈRE ? 💡', 72, C.red]], 540, 330, P(t, S('mid'), 0.25), { w: 860 }); pill(on ? '💡 ALLUMÉE' : '⚫ ÉTEINTE', 740, 620, P(t, S('mid') + 0.3), on ? C.orange : OL);
-    if (t >= tHis - 0.3) paperCard([['💬 TA THÉORIE… OU TON HISTOIRE', 46], ['LA + LIKÉE = UN ÉPISODE 🎬', 52, C.red]], 540, 1080, P(t, tHis - 0.3), { w: 940 }); return; }
+    if (t >= tHis - 0.3) paperCard([['TON HISTOIRE EN DESSIN ANIMÉ 🎬', 50], ['LA + LIKÉE = PROCHAIN ÉPISODE', 46, C.red]], 540, 1080, P(t, tHis - 0.3), { w: 960 }); return; }
   if (id === 'end') { resetCam(); street(t, { lit: 1 }); p47(760, GY, 0.85, t, { mood: 'smile', look: -1 }); henri(320, GY, 0.85, t, { mood: 'smile', look: 1 }); vignette(0.3); flashCut(t, S('end'));
-    paperCard([['ET TOI ? 🔔', 64], ['TU SONNERAIS CHEZ QUI', 46, C.red], ['TOUS LES SOIRS ?', 46, C.red]], 540, 380, P(t, S('end')), { w: 940 }); if (t >= S('end') + 2.6) pill('🎬 TON HISTOIRE = PROCHAIN ÉPISODE', 540, 1400, P(t, S('end') + 2.6), C.orange); return; }
+    paperCard([['ET TOI ? 🔔', 64], ['TU SONNERAIS CHEZ QUI', 46, C.red], ['TOUS LES SOIRS ?', 46, C.red]], 540, 380, P(t, S('end')), { w: 940 }); if (t >= S('end') + 2.6) pill('🎬 TON HISTOIRE EN DESSIN ANIMÉ 👇', 540, 1400, P(t, S('end') + 2.6), C.orange); return; }
   const flash = id === 's9' || id === 's10';
   let K;
   if (id === 'ff') K = [[0, 0, 520, 1100, 1.22], [0.1, 3, 560, 1100, 1.06]];
@@ -77,4 +77,4 @@ function draw0(t) {
 }
 
 function draw(t) { draw0(t); const id = curId(t); if (id === 'ff' || id === 'end') return; resetCam(); const a = clamp((t - S('s1')) / 0.4);
-  x.save(); x.globalAlpha = a; rbox(70, 1490, 940, 92, 46, 'rgba(242,120,31,.96)', 6); txt('🎬 TON HISTOIRE EN COMMENTAIRE = PROCHAIN ÉPISODE', 540, 1537, 41, '#fff', { stroke: false }); x.restore(); }
+  x.save(); x.globalAlpha = a; rbox(70, 1490, 940, 92, 46, 'rgba(242,120,31,.96)', 6); txt('🎬 TON HISTOIRE EN DESSIN ANIMÉ ? ÉCRIS-LA EN COMMENTAIRE', 540, 1537, 38, '#fff', { stroke: false }); x.restore(); }
