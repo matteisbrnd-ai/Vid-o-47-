@@ -23,7 +23,7 @@ function tart(cx, cy, s) { ell(cx, cy, 120 * s, 46 * s, '#d9a45a', 6); ell(cx, c
 function kitchen(t) { room('#f3d9a8', '#e7c48a', '#b98a5a', GY); rbox(-100, GY - 420, 700, 420, 10, '#e8e4dc', 8); rbox(-100, GY - 440, 700, 30, 6, '#8a6a4a', 6); for (let i = 0; i < 3; i++) rbox(-60 + i * 220, GY - 360, 180, 300, 8, '#f4f1ea', 5);
   rbox(720, 420, 300, 280, 10, '#bfe4ff', 8); }
 function cal(cx, cy, top, big, p) { if (p <= 0) return; resetCam(); x.save(); x.translate(cx, cy); const k = eBack(clamp(p)); x.scale(k, k); rbox(-170, -160, 340, 320, 20, '#fff', 8); rbox(-170, -160, 340, 90, 20, C.red, 8); txt(top, 0, -115, 44, '#fff', { stroke: false }); txt(big, 0, 40, 110, OL, { stroke: false }); x.restore(); }
-function draw(t) {
+function draw0(t) {
   const id = curId(t), tHen = WF('ff', /Henri/i), tCou = WF('ff', /courant/i), tSix = WF('s1', /six/i), tSoi = WF('s1', /soirs/i), tPer = WF('s2', /personne/i), tOmb = WF('s2', /ombre/i),
     tPol = WF('s3', /police/i), tRig = WF('s3', /rigolé/i), tAff = WF('s4', /affiche/i), tSon4 = WF('s4', /sonnait/i), tCam = WF('s5', /caméra/i), tOra = WF('s6', /orange/i), tSon = WF('s6', /sonne/i),
     tHai = WF('s6', /haie/i), tLum = WF('s6', /lumière/i), tRep = WF('s6', /repart/i), tTie = WF('s7', /tiens/i), tFui = WF('s8', /fui/i), tBien = WF('s8', /bien/i), tTom = WF('s9', /tombé/i), tJou = WF('s9', /jours/i),
@@ -72,3 +72,6 @@ function draw(t) {
   if (id === 's11') { flashCut(t, S('s11')); paperCard([['« SI LA LUMIÈRE S\'ALLUME…', 50], ['JE SAIS QUE VOUS', 50], ['ÊTES VIVANT. »', 66, C.red]], 540, 420, P(t, S('s11') + 0.2), { w: 960 }); }
   if (id === 's12') { flashCut(t, S('s12')); pill('🔔 21H… CHEZ 47', 540, 300, P(t, S('s12') + 0.1), C.orange); if (t >= tVer - 0.6) paperCard([['« CE SOIR, C\'EST MOI', 54], ['QUI VÉRIFIE. »', 70, C.red]], 540, 520, P(t, tVer - 0.6), { w: 880 }); }
 }
+
+function draw(t) { draw0(t); const id = curId(t); if (id === 'ff' || id === 'end') return; resetCam(); const a = clamp((t - S('s1')) / 0.4);
+  x.save(); x.globalAlpha = a; rbox(70, 1490, 940, 92, 46, 'rgba(242,120,31,.96)', 6); txt('🎬 TON HISTOIRE EN COMMENTAIRE = PROCHAIN ÉPISODE', 540, 1537, 41, '#fff', { stroke: false }); x.restore(); }
