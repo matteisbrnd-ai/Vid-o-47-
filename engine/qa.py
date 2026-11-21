@@ -21,7 +21,7 @@ for bid, w, k in ns.get('CUES', []):
 o = subprocess.run(['ffmpeg', '-hide_banner', '-i', V, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr
 I = float(re.findall(r'I:\s+(-?[\d.]+) LUFS', o)[-1]); pk = float(re.findall(r'Peak:\s+(-?[\d.]+) dBFS', o)[-1]); dur = T['total']; mb = os.path.getsize(V) / 1e6
 print(f'loudness {I} LUFS, peak {pk} dBFS, {dur:.1f} s, {mb:.0f} MB')
-(pk > -0.3) and fails.append('audio peak too high'); (I < -18 or I > -12) and fails.append('loudness off'); (dur > (120 if slug.startswith('histoire-') else 62)) and fails.append('too long'); (mb > 90) and fails.append('file > 90 MB')
+(pk > -0.3) and fails.append('audio peak too high'); (I < -18 or I > -12) and fails.append('loudness off'); (dur > (120 if slug.startswith(('histoire-', 'horreur-')) else 62)) and fails.append('too long'); (mb > 90) and fails.append('file > 90 MB')
 # 4. frames to review
 subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', V, '-vf', 'fps=1,scale=180:-1,tile=8x5', '-frames:v', '1', os.path.join(D, 'qa.jpg')])
 subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', V, '-frames:v', '1', '-vf', 'scale=360:-1', os.path.join(D, 'qa_f0.jpg')])
