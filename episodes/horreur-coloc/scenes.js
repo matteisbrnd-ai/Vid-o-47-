@@ -16,7 +16,7 @@ function kitchen(t, clean) { room('#dfe6ee', '#c8d2de', '#7a6a5a', GY); rbox(-10
 function bedroom(t) { room('#d9d2e6', '#c4bcd6', '#6a5a4a', GY); rbox(120, GY - 340, 840, 300, 20, '#f2f2f6', 8); rbox(120, GY - 380, 240, 120, 30, '#ffffff', 7); rbox(100, GY - 60, 880, 60, 8, '#7a5a3e', 7);
   x.strokeStyle = '#c9c9d6'; x.lineWidth = 5; x.beginPath(); x.moveTo(380, GY - 300); x.lineTo(940, GY - 300); x.stroke(); rbox(100, GY - 560, 60, 520, 8, '#7a5a3e', 7); }
 function entrance(t, flip) { room('#e6dcc8', '#d6c8ae', '#6a5a4a', GY); door(540, GY - 760, 360, 760, '#4a5a7a', null);
-  for (let i = 0; i < 3; i++) { const cx = 300 + i * 240; [[-34], [34]].forEach(([d]) => { x.save(); x.translate(cx + d, GY + 60); if (flip) x.scale(1, -1); rbox(-28, -70, 56, 130, 26, ['#c0392b', '#2a2d36', '#e8e8ec'][i], 6); ell(0, -50, 24, 22, '#f4f4f4', 3); x.restore(); }); } }
+  for (let i = 0; i < 3; i++) { const cx = 300 + i * 240; [[-34], [34]].forEach(([d]) => { x.save(); x.translate(cx + d * 1.5, GY - 40); x.scale(1.5, 1.5); if (flip) x.scale(1, -1); rbox(-28, -70, 56, 130, 26, ['#c0392b', '#2a2d36', '#e8e8ec'][i], 6); ell(0, -50, 24, 22, '#f4f4f4', 3); x.restore(); }); } }
 function nvBegin() { NV = true; x.save(); x.filter = 'grayscale(1) brightness(1.05) contrast(1.25)'; }
 function nvEnd(t, clock) { x.restore(); NV = false; resetCam(); x.save(); x.globalCompositeOperation = 'multiply'; x.fillStyle = '#7dff9e'; x.fillRect(0, 0, W, H); x.restore();
   for (let y = 0; y < H; y += 6) { x.fillStyle = 'rgba(0,0,0,.16)'; x.fillRect(0, y, W, 2); } x.fillStyle = `rgba(255,255,255,${0.03 + 0.03 * Math.random()})`; x.fillRect(0, 0, W, H); vignette(0.55);
@@ -51,7 +51,7 @@ function draw(t) {
       else if (t >= tRou) { const w = clamp(seg(t, tRou, B.s10.end)); p47(lerp(520, 560, w), lerp(GY, GY + 700, w), lerp(0.85, 1.6, w), t, { mood: 'neutral', look: 1, armsUp: true, walk: t * 1.2 }); } }
     if (id === 's12' && t < tPla + 0.2) p47(760, GY + 1200, 2.2, t, { mood: 'neutral', look: -1 });
     nvEnd(t, clock); }
-  if (id === 's11') { nvBegin(); living(t, { door: 0.8, clean: true, closet: 0.55 }); p47(540, GY + 1350, 2.3, t, { mood: 'neutral', look: 0 }); nvEnd(t, '03:22'); }
+  if (id === 's11') { nvBegin(); living(t, { door: 0.8, clean: true, closet: 0.55 }); p47(540, GY + 1000, 2.3, t, { mood: 'neutral', look: 0 }); nvEnd(t, '03:22'); }
   if (id === 's8' || id === 's9') { living(t, { door: 0, clean: true }); p47(560, GY, 0.9, t, { mood: id === 's8' ? (t >= tRir ? 'smile' : 'neutral') : (t >= tFin ? 'shock' : 'smile'), look: 1, armUp: true }); rbox(660, GY - 760, 90, 160, 14, '#1b1b1f', 5); }
   if (!['s6', 'mid', 's7', 's10', 's11', 's12', 'end'].includes(id)) { resetCam(); x.fillStyle = 'rgba(30,40,80,.18)'; x.fillRect(0, 0, W, H); vignette(0.35); }
   resetCam();
@@ -67,7 +67,7 @@ function draw(t) {
   if (id === 's8') { flashCut(t, S('s8')); if (t >= tRir) pill('MYSTÈRE RÉSOLU 😂', 540, 300, P(t, tRir), '#2a8a3a'); }
   if (id === 's9') { flashCut(t, S('s9')); pill('🗑️ SUPPRIMER LA VIDÉO ?', 540, 300, P(t, S('s9') + 0.1), OL); if (t >= tFin - 0.2) pill('… ATTENDS. LA FIN. 😶', 540, 420, P(t, tFin - 0.2), C.red); }
   if (id === 's10') { flashCut(t, S('s10')); if (t >= tTel10 - 0.3) pill('IL VIENT VERS LE TÉLÉPHONE…', 540, 1150, P(t, tTel10 - 0.3), C.red); }
-  if (id === 's11') { if (t >= tChu - 0.2) paperCard([['« ARRÊTE DE FILMER.', 56], ['ON N\'EST PAS SEULS. »', 64, C.red]], 540, 1150, P(t, tChu - 0.2), { w: 900 }); }
+  if (id === 's11') { if (t >= tChu - 0.2) paperCard([['« ARRÊTE DE FILMER.', 56], ['ON N\'EST PAS SEULS. »', 64, C.red]], 540, 300, P(t, tChu - 0.2), { w: 900 }); }
   if (id === 's12') { if (t >= tPla) pill('LE PLACARD… 😱', 540, 1150, P(t, tPla), C.red); }
   if (id === 'end') { flashCut(t, S('end')); paperCard([['ET TOI… CE SOIR ? 😨', 58], ['LE PLACARD :', 50, C.red], ['OUVERT OU FERMÉ ?', 56, C.red]], 540, 380, P(t, S('end')), { w: 900 }); }
   if (id !== 'ff') { const a = clamp((t - S('s1')) / 0.4); x.save(); x.globalAlpha = a; rbox(50, 1490, 980, 92, 46, 'rgba(160,20,30,.94)', 6); txt('🎬 TON HISTOIRE FLIPPANTE EN DESSIN ANIMÉ ? ÉCRIS-LA 👇', 540, 1537, 37, '#fff', { stroke: false }); x.restore(); }
