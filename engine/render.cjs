@@ -5,6 +5,7 @@ const { chromium } = require('playwright');
 const { spawn, execFileSync } = require('child_process');
 const fs = require('fs'), path = require('path');
 const ep = path.resolve(process.argv[2]), eng = __dirname;
+const fr = process.argv.indexOf('--from'), F0 = fr > 0 ? Math.round(Number(process.argv[fr + 1]) * 30) : 0;   // --from S: re-render only the tail into silent_from.mp4
 const si = process.argv.indexOf('--stills'), stills = si > 0 ? process.argv[si + 1].split(',').map(Number) : null;
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Bebas;src:url(file://${eng}/node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
@@ -32,9 +33,9 @@ s.save('${ep}/sheet.jpg',quality=80)`]);
     console.log('stills ok'); return;
   }
   const dur = await p.evaluate(() => window.DURATION), N = Math.ceil(dur * 30);
-  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', path.join(ep, 'silent.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
-  for (let i = 0; i < N; i++) { const buf = Buffer.from(await grab(i / 30), 'base64'); if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r)); }
+  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', path.join(ep, F0 ? 'silent_from.mp4' : 'silent.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
+  for (let i = F0; i < N; i++) { const buf = Buffer.from(await grab(i / 30), 'base64'); if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r)); }
   ff.stdin.end(); await new Promise(r => ff.on('close', r));
-  fs.writeFileSync(path.join(ep, 'events.json'), JSON.stringify(await p.evaluate(() => window.EV)));
+  if (!F0) fs.writeFileSync(path.join(ep, 'events.json'), JSON.stringify(await p.evaluate(() => window.EV)));
   await b.close(); console.log('rendered', N, 'frames');
 })();
