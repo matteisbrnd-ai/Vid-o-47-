@@ -206,7 +206,7 @@ function draw(t) {
   const pk = (b, t0) => id === b ? eBack(clamp(P(t, t0 - 0.2))) : (after(b) ? 1 : 0);
   // director on a crate, fire master by the tunnel
   { const k = pk('s3', S('s3') + 0.1); if (k > 0) { x.save(); x.translate(1260, GY); x.scale(k, k); rbox(-90, -120, 180, 120, 6, '#b98a5a', 6); cast('inspector', 0, -120, 0.72, t, { ...DIR, mood: 'angry', look: -1, blink: true, armUp: Math.sin(t * 6) > 0 }); x.restore(); if (id === 's3' && t < tFeu - 0.2) tag(1260, GY - 900, 'l.ca · DIRECTEUR DES OPÉRATIONS 📋', t); } }
-  { const k = pk('s3', tFeu); if (k > 0) { x.save(); x.translate(620, GY); x.scale(k, k); cast('inspector', 0, 0, 0.75, t, { ...FIRE, mood: 'smug', look: -1, blink: true, armsUp: true }); x.restore(); if (id === 's3' && t >= tFeu + 0.3) tag(620, GY - 820, 'LIRONE · MAÎTRE DU FEU 🔥', t); } }
+  { const k = (id === 's7' || id === 'end') ? 0 : pk('s3', tFeu); if (k > 0) { x.save(); x.translate(620, GY); x.scale(k, k); cast('inspector', 0, 0, 0.75, t, { ...FIRE, mood: 'smug', look: -1, blink: true, armsUp: true }); x.restore(); if (id === 's3' && t >= tFeu + 0.3) tag(620, GY - 820, 'LIRONE · MAÎTRE DU FEU 🔥', t); } }
   // the tunnel + flames
   hole(300, 1, t); const out = id === 's2' ? clamp(seg(t, tSort - 0.3, tDri)) : (id === 'ff' && t >= tTun ? 0.5 : 0);
   if (out > 0 || id === 's3') { x.save(); x.beginPath(); x.rect(-200, 0, 1000, GY + 30); x.clip(); const back = id === 's3' ? clamp(seg(t, tFla, tFla + 0.8)) : 0; [[200, 0], [300, 0.15], [400, 0.3]].forEach(([gx, d]) => cast('guard', gx, GY + 500 - 500 * eOut(clamp((id === 's3' ? 1 : out) - d)) + 500 * back, 0.6, t, { mood: id === 's2' && t >= tDri ? 'shock' : 'angry', look: 1, blink: true })); x.restore(); }

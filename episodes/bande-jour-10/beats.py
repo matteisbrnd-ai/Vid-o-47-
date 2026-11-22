@@ -26,6 +26,6 @@ BEATS = [
   ('end', "Pourquoi le Baron n'ose pas toucher 47 ?… Réponse demain matin.", "Pourquoi le Baron n'ose pas toucher Quarante-sept ?... Réponse demain matin.", 0.3),
 ]
 CUES = [('ff', 'Hier', 'pop'), ('ff', 'cent', 'cash'), ('ff', 'tunnel', 'sting'), ('s0', 'soldat', 'pop'), ('s0', 'euro', 'cash'), ('s1', 'manquait', 'tick'), ('s1', 'likes', 'cash'), ('s1', 'alarme', 'ding'),
-        ('s2', 'tunnel', 'whoosh'), ('s2', 'DRIIING', 'ring'), ('s2', 'voient', 'sting'), ('s3', 'ordres', 'pop'), ('s3', 'flammes', 'whoosh'), ('s4', 'boucliers', 'clink'), ('s4', 'toit', 'whoosh'),
+        ('s2', 'tunnel', 'whoosh'), ('s2', 'DRIIING', 'ring'), ('s2', 'voit', 'sting'), ('s3', 'ordres', 'pop'), ('s3', 'flammes', 'whoosh'), ('s4', 'boucliers', 'clink'), ('s4', 'toit', 'whoosh'),
         ('s5', 'ciel', 'whoosh'), ('s5', 'eau', 'pop'), ('s6', 'banquier', 'cash'), ('s6', 'caisse', 'ding'), ('s7', 'reculent', 'run'), ('s7', 'net', 'bam'), ('s7', 'frapper', 'sting'),
         ('s8', 'six', 'cash'), ('s8', 'projecteurs', 'ding'), ('s8', 'manque', 'sting'), ('cta', 'noir', 'sting'), ('cta', 'rôle', 'pop'), ('cta', 'liké', 'ding'), ('end', 'matin', 'sting')]
