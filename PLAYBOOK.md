@@ -279,3 +279,14 @@ the lever is the first 3 s (hook) + shares.
 - **Dernière ligne glaçante** : la créature répond avec la voix du héros, et l'histoire s'arrête net, sans morale.
 - **Image** : décors désaturés bleu-gris, nuit, sources de lumière ponctuelles (flamme, lampe), gros plans lents sur les visages, sous-titres mot par mot au centre.
 - **Pour nous** : appel « ton histoire flippante en dessin animé » au milieu (voix + bandeau), 75–120 s autorisés (qa : slugs `horreur-`).
+
+## Format « Dans ma ville… » (3 vidéos de référence du même créateur, analysées le 22/11, 113–146 s ; on copie la FORME, jamais le contenu, les règles ni le design)
+1. **0–3 s :** « Dans ma/cette ville, [règle magique] » (les morts reviennent un jour / on paie avec des souvenirs / les larmes deviennent de l'or).
+2. **3–30 s :** les limites et le prix de la règle, avec 2 ou 3 exemples concrets, drôles ou cruels, de voisins nommés (« M. Bernard a payé sa voiture avec son premier baiser ») et une conséquence sociale (« tous les riches sont aveugles »).
+3. **30–50 s :** ma famille, pauvre ou en deuil, avec un parent qui semble froid ou distant, et une promesse ou une phrase-règle répétée (« Économise tes larmes ! »).
+4. **50–75 s :** le parent change, avec des signes étranges (il oublie la couleur de la porte, il met du sel dans son café). Le spectateur commence à deviner.
+5. **75–95 s :** une preuve découverte (reçus, fiole, mot du médecin) révèle que le parent se sacrifiait en secret pour moi depuis des années.
+6. **95–120 s :** je me sacrifie à mon tour avec la même règle, et un objet ou un son planté tôt revient (« Cling »).
+7. **Dernière ligne :** douce-amère, elle reprend la règle du début. Pas de morale.
+- Narration à la 1re personne, phrases de 1 à 3 s, des noms propres (Hugo, M. Bernard, Michel), des sons-signatures. Ce n'est pas de l'horreur pure : c'est de l'émotion avec un retournement, idéal pour le matin. La variante horreur (village d'aveugles) suit le même plan avec une créature.
+- ⚠️ Leur héros a aussi un bonnet orange : garder le look de 47 bien distinct (pas de sweat jaune ni de pompon), et ne reprendre aucune de leurs règles.
