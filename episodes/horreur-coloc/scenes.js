@@ -25,7 +25,7 @@ function phoneCard(p, t) { if (p <= 0) return; resetCam(); x.save(); x.translate
 function draw(t) {
   const id = curId(t), tSeul = WF('ff', /seul/i), tVai = WF('ff', /vaisselle/i), tOub = WF('s1', /oublié/i), tRef = WF('s2', /refait/i), tCar = WF('s2', /carré/i), tCha = WF('s3', /chaussures/i), tInt = WF('s3', /intérieur/i),
     tSer = WF('s4', /serrure/i), tLen = WF('s4', /lendemain/i), tTel = WF('s5', /téléphone/i), tNuit = WF('s5', /nuit/i), tMin = WF('s6', /Minuit/i), tHeu = WF('s6', /heure/i), tQua = WF('s6', /quatorze|3h14/i), tOuv = WF('s6', /ouvre/i),
-    tFli = WF('mid', /flippant/i), tSom = WF('s7', /Somnambule/i), tRir = WF('s8', /rire/i), tFin = WF('s9', /fin/i), tCou = WF('s10', /coucher/i), tRou = WF('s10', /rouvre/i), tTel10 = WF('s10', /téléphone/i), tChu = WF('s11', /chuchote/i), tSeuls = WF('s11', /seuls/i), tPla = WF('s12', /placard/i), tDou = WF('s12', /Doucement/i);
+    tFli = WF('mid', /flippant/i), tSom = WF('s7', /Somnambule/i), tRir = WF('s8', /dormant/i), tDeux = WF('s7', /deux/i), tAss = WF('s8', /assiettes/i), tFin = WF('s9', /fin/i), tCou = WF('s10', /coucher/i), tRou = WF('s10', /rouvre/i), tTel10 = WF('s10', /téléphone/i), tChu = WF('s11', /chuchote/i), tSeuls = WF('s11', /seuls/i), tPla = WF('s12', /placard/i), tDou = WF('s12', /Doucement/i);
   const HOOK = [['IL VIT SEUL… 🏠', 76, '#1b1b1f'], ['QUELQU\'UN FAIT SA VAISSELLE 😨', 52, '#a0141e']];
   let K;
   if (id === 's11') K = [[S('s11'), 0, 540, 960, 1.0], [S('s11') + 0.2, 5, 540, 900, 1.12]];
@@ -42,17 +42,17 @@ function draw(t) {
     let door = 0, clean = false, closetO = 0.08, eyes = 0, clock = '00:00';
     if (id === 's6') { clock = t >= tQua ? '03:14' : (t >= tHeu ? '01:00' : '00:00'); door = t >= tOuv - 0.2 ? clamp((t - tOuv + 0.2) / 1.2) * 0.8 : 0; }
     if (id === 'mid') { clock = '03:14'; door = 0.8 + 0.05 * Math.sin(t * 2); }
-    if (id === 's7') { clock = '03:15'; door = 0.8; }
+    if (id === 's7') { clock = '03:15'; door = 0.8; closetO = 0.22; eyes = (t >= tDeux && Math.sin(t * 9) > 0.6) ? 0.9 : 0; }
     if (id === 's10') { clock = t < tRou ? '03:20' : '03:21'; door = t < tCou ? 0.8 : (t < tRou - 0.3 ? 0 : clamp((t - tRou + 0.3) / 0.6) * 0.8); clean = true; }
     if (id === 's12' || id === 'end') { clock = '03:22'; door = 0.8; clean = true; closetO = id === 'end' ? 0.25 : lerp(0.55, 0.08, clamp(seg(t, tPla, tDou + 0.6))); eyes = id === 'end' ? 1 : clamp((t - tPla) / 0.4) * (closetO > 0.2 ? 1 : 0); }
     living(t, { door, clean, closet: closetO, eyes });
-    if (id === 's7') { const w = clamp(seg(t, S('s7'), B.s7.end)); p47(lerp(520, 760, w), GY, 0.85, t, { mood: 'neutral', look: 1, armsUp: true, walk: t * 1.2 }); }
+    if (id === 's7') { const w = clamp(seg(t, S('s7'), tDeux - 0.4)); p47(lerp(520, 760, w), GY, 0.85, t, { mood: 'neutral', look: 1, armsUp: true, walk: w < 1 ? t * 1.2 : 0 }); if (t >= tDeux - 0.4) { ell(820, GY - 450, 70, 14, '#f6f6fa', 5); ell(980, GY - 450, 70, 14, '#f6f6fa', 5); } }
     if (id === 's10') { if (t < tCou + 0.3) { const w = clamp(seg(t, S('s10'), tCou + 0.3)); p47(lerp(820, 520, w), GY, 0.85, t, { mood: 'neutral', look: -1, armsUp: true, walk: t * 1.2 }); }
       else if (t >= tRou) { const w = clamp(seg(t, tRou, B.s10.end)); p47(lerp(520, 560, w), lerp(GY, GY + 700, w), lerp(0.85, 1.6, w), t, { mood: 'neutral', look: 1, armsUp: true, walk: t * 1.2 }); } }
     if (id === 's12' && t < tPla + 0.2) p47(760, GY + 1200, 2.2, t, { mood: 'neutral', look: -1 });
     nvEnd(t, clock); }
   if (id === 's11') { nvBegin(); living(t, { door: 0.8, clean: true, closet: 0.55 }); p47(540, GY + 1000, 2.3, t, { mood: 'neutral', look: 0 }); nvEnd(t, '03:22'); }
-  if (id === 's8' || id === 's9') { living(t, { door: 0, clean: true }); p47(560, GY, 0.9, t, { mood: id === 's8' ? (t >= tRir ? 'smile' : 'neutral') : (t >= tFin ? 'shock' : 'smile'), look: 1, armUp: true }); rbox(660, GY - 760, 90, 160, 14, '#1b1b1f', 5); }
+  if (id === 's8' || id === 's9') { living(t, { door: 0, clean: true }); if (id === 's8') { ell(820, GY - 450, 70, 14, '#f6f6fa', 5); ell(980, GY - 450, 70, 14, '#f6f6fa', 5); } p47(560, GY, 0.9, t, { mood: id === 's8' ? (t >= tRir ? 'smile' : 'neutral') : (t >= tFin ? 'shock' : 'smile'), look: 1, armUp: true }); rbox(660, GY - 760, 90, 160, 14, '#1b1b1f', 5); }
   if (!['s6', 'mid', 's7', 's10', 's11', 's12', 'end'].includes(id)) { resetCam();
     if ((id === 's2' && t >= tCar + 0.2 && t < tCar + 0.55) || (id === 's4' && t >= tLen + 0.3 && t < tLen + 0.6)) { x.save(); x.globalAlpha = 0.85; x.fillStyle = '#050508'; ell(980, 1050, 70, 80, '#050508', 0); rbox(915, 1110, 130, 420, 50, '#050508', 0); ell(958, 1040, 9, 6, '#ff2a2a', 0); ell(1002, 1040, 9, 6, '#ff2a2a', 0); x.restore(); }
     const fl = Math.random() < 0.06 ? 0.25 : 0; x.fillStyle = `rgba(8,10,28,${0.5 + fl})`; x.fillRect(0, 0, W, H);
@@ -67,8 +67,8 @@ function draw(t) {
   if (id === 's5') { flashCut(t, S('s5')); phoneCard(P(t, tTel - 0.2), t); }
   if (id === 's6') { flashCut(t, S('s6')); if (t >= tOuv - 0.2) onoma('…CRRRIC', 540, 330, P(t, tOuv - 0.2, 0.2), 90); }
   if (id === 'mid') { flashCut(t, S('mid')); paperCard([['QUI EST ENTRÉ ? 😨', 66]], 540, 300, P(t, S('mid'), 0.25), { w: 760 }); if (t >= tFli - 0.6) paperCard([['TON HISTOIRE FLIPPANTE', 50], ['EN DESSIN ANIMÉ 🎬', 56, C.red], ['LE + LIKÉ = PROCHAIN ÉPISODE', 40]], 540, 1060, P(t, tFli - 0.6), { w: 940 }); }
-  if (id === 's7') { flashCut(t, S('s7')); if (t >= tSom - 0.2) pill('😴 SOMNAMBULE', 540, 330, P(t, tSom - 0.2), C.orange); }
-  if (id === 's8') { flashCut(t, S('s8')); if (t >= tRir) pill('MYSTÈRE RÉSOLU 😂', 540, 300, P(t, tRir), '#2a8a3a'); }
+  if (id === 's7') { flashCut(t, S('s7')); if (t >= tSom - 0.2) pill('😴 SOMNAMBULE', 540, 330, P(t, tSom - 0.2), C.orange); if (t >= tDeux - 0.3) pill('🍽️ … POUR DEUX ?!', 540, 450, P(t, tDeux - 0.3), C.red); }
+  if (id === 's8') { flashCut(t, S('s8')); pill('😴 JE RANGE EN DORMANT…', 540, 300, P(t, S('s8') + 0.1), '#2a8a3a'); if (t >= tAss - 0.3) pill('🍽️ MAIS POURQUOI 2 ASSIETTES ?', 540, 420, P(t, tAss - 0.3), C.red); }
   if (id === 's9') { flashCut(t, S('s9')); pill('🗑️ SUPPRIMER LA VIDÉO ?', 540, 300, P(t, S('s9') + 0.1), OL); if (t >= tFin - 0.2) pill('… ATTENDS. LA FIN. 😶', 540, 420, P(t, tFin - 0.2), C.red); }
   if (id === 's10') { flashCut(t, S('s10')); if (t >= tTel10 - 0.3) pill('IL VIENT VERS LE TÉLÉPHONE…', 540, 1150, P(t, tTel10 - 0.3), C.red); }
   if (id === 's11') { if (t >= tChu - 0.2) paperCard([['« ARRÊTE DE FILMER.', 56], ['ON N\'EST PAS SEULS. »', 64, C.red]], 540, 300, P(t, tChu - 0.2), { w: 900 }); }

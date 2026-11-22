@@ -290,3 +290,4 @@ the lever is the first 3 s (hook) + shares.
 7. **Dernière ligne :** douce-amère, elle reprend la règle du début. Pas de morale.
 - Narration à la 1re personne, phrases de 1 à 3 s, des noms propres (Hugo, M. Bernard, Michel), des sons-signatures. Ce n'est pas de l'horreur pure : c'est de l'émotion avec un retournement, idéal pour le matin. La variante horreur (village d'aveugles) suit le même plan avec une créature.
 - ⚠️ Leur héros a aussi un bonnet orange : garder le look de 47 bien distinct (pas de sweat jaune ni de pompon), et ne reprendre aucune de leurs règles.
+- Règle de rétention (créateur, 22/11) : après une révélation qui répond à la question du début, il faut immédiatement ouvrir une nouvelle question (un détail qui cloche), sinon les gens partent avec la réponse. Exemple (coloc) : « c'était moi, somnambule… et je mettais la table pour deux », puis « pourquoi deux assiettes ? ».

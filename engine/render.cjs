@@ -36,6 +36,6 @@ s.save('${ep}/sheet.jpg',quality=80)`]);
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', '30', '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-pix_fmt', 'yuv420p', path.join(ep, F0 ? 'silent_from.mp4' : 'silent.mp4')], { stdio: ['pipe', 'inherit', 'inherit'] });
   for (let i = F0; i < N; i++) { const buf = Buffer.from(await grab(i / 30), 'base64'); if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r)); }
   ff.stdin.end(); await new Promise(r => ff.on('close', r));
-  if (!F0) fs.writeFileSync(path.join(ep, 'events.json'), JSON.stringify(await p.evaluate(() => window.EV)));
+  fs.writeFileSync(path.join(ep, F0 ? 'events_from.json' : 'events.json'), JSON.stringify(await p.evaluate(() => window.EV)));
   await b.close(); console.log('rendered', N, 'frames');
 })();
