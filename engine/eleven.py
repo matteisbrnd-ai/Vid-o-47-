@@ -10,7 +10,8 @@ BEATS, EMO = ns['BEATS'], ns.get('EMO', {})
 VOICE = ns.get('ELEVEN_VOICE', 'aQROLel5sQbj1vuIVi6B'); MODEL = ns.get('ELEVEN_MODEL', 'eleven_v4'); SPEED = ns.get('ELEVEN_SPEED', 1.08); TEMPO = ns.get('TEMPO', 1.12)  # TEMPO: free local speed-up (pitch kept) for a punchier delivery
 KEY = os.environ.get('ELEVEN_KEY') or open(os.path.expanduser('~/.elevenlabs_key')).read().strip()
 TAG = {'mystere': '[mysterious]', 'menace': '[serious]', 'tension': '[tense]', 'neutre': '', 'complice': '[playful]', 'question': '[curious]',
-       'excite': '[excited]', 'choc': '[surprised]', 'amuse': '[amused]'}
+       'excite': '[excited]', 'choc': '[surprised]', 'amuse': '[amused]',
+       'chuchote': '[whispers]', 'peur': '[scared]', 'sinistre': '[mysterious]'}   # horreur
 HOOK_VS = {'stability': 0.15, 'style': 0.9}   # hook: very expressive (creator: « trop monotone, ça interpelle pas »)
 SR = 44100; LEAD = 0.02; os.makedirs(os.path.join(D, 'vo'), exist_ok=True)
 def tts(text, TEMPO=TEMPO, vs=None):

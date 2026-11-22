@@ -108,6 +108,15 @@ while t0 < N / SR:
     if k % 2: hh = noise(0.04) * env(int(SR * 0.04), 0.001, 0.01) * 0.25; j = min(N, i + len(hh)); mus[i:j] += hh[:j - i]
     i8 += 1; t0 += b8
 mus /= np.max(np.abs(mus)) + 1e-9
+if ns.get('MUSIC_STYLE') == 'horreur':        # dark drone + slow heartbeat + faint dissonant high tone instead of pizzicato
+    tt = np.arange(N) / SR; lfo = 0.6 + 0.4 * np.sin(2 * np.pi * 0.07 * tt)
+    mus = lfo * (np.sin(2 * np.pi * 55 * tt) + 0.8 * np.sin(2 * np.pi * 55.7 * tt) + 0.35 * np.sin(2 * np.pi * 82.4 * tt))
+    mus += 0.08 * np.sin(2 * np.pi * 622.3 * tt) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.13 * tt)) + 0.05 * np.sin(2 * np.pi * 880 * tt + 3 * np.sin(2 * np.pi * 0.3 * tt))
+    hb = np.sin(2 * np.pi * 48 * T(0.18)) * env(int(SR * 0.18), 0.004, 0.08)
+    for k in range(int(N / SR / 0.95)):
+        for d, g in ((0.0, 1.0), (0.22, 0.7)):
+            i = int((k * 0.95 + d) * SR); j = min(N, i + len(hb)); mus[i:j] += 1.6 * g * hb[:j - i]
+    mus /= np.max(np.abs(mus)) + 1e-9
 voN = np.zeros(N); voN[:len(vo)] = vo
 e = np.convolve(np.abs(voN), np.ones(int(SR * 0.15)) / int(SR * 0.15), 'same'); duck = 1 - 0.5 * np.clip(e * 7, 0, 1)
 voN = voN / (np.max(np.abs(voN)) + 1e-9) * 0.9

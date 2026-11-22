@@ -1,15 +1,16 @@
 # « Les histoires flippantes de 47 » #1 — « Le colocataire invisible » (21h). Histoire originale, frissons sans gore.
 # Grille 2 s : vaisselle faite → lit au carré → chaussures tournées vers l'intérieur → serrure changée, encore → téléphone qui filme → 3h14 la porte s'ouvre
 # → question + appel « ton histoire flippante en dessin animé » → c'est 47 somnambule (soulagement) → mais la fin de la vidéo… → il chuchote à l'objectif → placard.
-EMO = {'ff': 'tension', 's1': 'tension', 's2': 'tension', 's3': 'tension', 's4': 'tension', 's5': 'tension', 's6': 'tension', 'mid': 'question', 's7': 'choc',
-       's8': 'complice', 's9': 'tension', 's10': 'tension', 's11': 'choc', 's12': 'choc', 'end': 'question'}
+EMO = {'ff': 'sinistre', 's1': 'peur', 's2': 'sinistre', 's3': 'peur', 's4': 'peur', 's5': 'sinistre', 's6': 'chuchote', 'mid': 'question', 's7': 'choc',
+       's8': 'complice', 's9': 'sinistre', 's10': 'peur', 's11': 'chuchote', 's12': 'chuchote', 'end': 'chuchote'}
+MUSIC_STYLE = 'horreur'
 SFX = 0.4
 SFX_COMP = 3
 SFX_DUCK = 0.7
 SFX_BEAT = {'ff': 0.3}
-MUSIC = 0.15
-TEMPO_BEAT = {'ff': 1.12}
-TEMPO = 1.04
+MUSIC = 0.22
+TEMPO_BEAT = {'ff': 1.05}
+TEMPO = 1.0
 SKIP_EV = []
 BEATS = [
   ('ff', "47 vit seul. Pourtant, chaque matin… quelqu'un fait sa vaisselle.", "Quarante-sept vit seul. Pourtant, chaque matin... quelqu'un fait sa vaisselle.", 0.1),

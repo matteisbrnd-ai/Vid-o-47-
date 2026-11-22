@@ -26,7 +26,7 @@ function draw(t) {
   const id = curId(t), tSeul = WF('ff', /seul/i), tVai = WF('ff', /vaisselle/i), tOub = WF('s1', /oublié/i), tRef = WF('s2', /refait/i), tCar = WF('s2', /carré/i), tCha = WF('s3', /chaussures/i), tInt = WF('s3', /intérieur/i),
     tSer = WF('s4', /serrure/i), tLen = WF('s4', /lendemain/i), tTel = WF('s5', /téléphone/i), tNuit = WF('s5', /nuit/i), tMin = WF('s6', /Minuit/i), tHeu = WF('s6', /heure/i), tQua = WF('s6', /quatorze|3h14/i), tOuv = WF('s6', /ouvre/i),
     tFli = WF('mid', /flippant/i), tSom = WF('s7', /Somnambule/i), tRir = WF('s8', /rire/i), tFin = WF('s9', /fin/i), tCou = WF('s10', /coucher/i), tRou = WF('s10', /rouvre/i), tTel10 = WF('s10', /téléphone/i), tChu = WF('s11', /chuchote/i), tSeuls = WF('s11', /seuls/i), tPla = WF('s12', /placard/i), tDou = WF('s12', /Doucement/i);
-  const HOOK = [['IL VIT SEUL… 🏠', 76], ['QUELQU\'UN FAIT SA VAISSELLE 😨', 52, C.red]];
+  const HOOK = [['IL VIT SEUL… 🏠', 76, '#1b1b1f'], ['QUELQU\'UN FAIT SA VAISSELLE 😨', 52, '#a0141e']];
   let K;
   if (id === 's11') K = [[S('s11'), 0, 540, 960, 1.0], [S('s11') + 0.2, 5, 540, 900, 1.12]];
   else if (id === 's12') K = [[S('s12'), 0, 540, 1000, 1.0], [tPla - 0.2, 2.5, 230, 1080, 1.6]];
@@ -53,7 +53,11 @@ function draw(t) {
     nvEnd(t, clock); }
   if (id === 's11') { nvBegin(); living(t, { door: 0.8, clean: true, closet: 0.55 }); p47(540, GY + 1000, 2.3, t, { mood: 'neutral', look: 0 }); nvEnd(t, '03:22'); }
   if (id === 's8' || id === 's9') { living(t, { door: 0, clean: true }); p47(560, GY, 0.9, t, { mood: id === 's8' ? (t >= tRir ? 'smile' : 'neutral') : (t >= tFin ? 'shock' : 'smile'), look: 1, armUp: true }); rbox(660, GY - 760, 90, 160, 14, '#1b1b1f', 5); }
-  if (!['s6', 'mid', 's7', 's10', 's11', 's12', 'end'].includes(id)) { resetCam(); x.fillStyle = 'rgba(30,40,80,.18)'; x.fillRect(0, 0, W, H); vignette(0.35); }
+  if (!['s6', 'mid', 's7', 's10', 's11', 's12', 'end'].includes(id)) { resetCam();
+    if ((id === 's2' && t >= tCar + 0.2 && t < tCar + 0.55) || (id === 's4' && t >= tLen + 0.3 && t < tLen + 0.6)) { x.save(); x.globalAlpha = 0.85; x.fillStyle = '#050508'; ell(980, 1050, 70, 80, '#050508', 0); rbox(915, 1110, 130, 420, 50, '#050508', 0); ell(958, 1040, 9, 6, '#ff2a2a', 0); ell(1002, 1040, 9, 6, '#ff2a2a', 0); x.restore(); }
+    const fl = Math.random() < 0.06 ? 0.25 : 0; x.fillStyle = `rgba(8,10,28,${0.5 + fl})`; x.fillRect(0, 0, W, H);
+    x.save(); x.globalCompositeOperation = 'multiply'; x.fillStyle = '#9fb0d8'; x.fillRect(0, 0, W, H); x.restore(); vignette(0.6); }
+  resetCam(); for (let i = 0; i < 260; i++) { x.fillStyle = `rgba(255,255,255,${Math.random() * 0.08})`; x.fillRect(Math.random() * W, Math.random() * H, 3, 3); }
   resetCam();
   if (id === 'ff') { hookCard(t, HOOK, B.ff.end + 0.05); }
   if (id === 's1') { flashCut(t, S('s1')); pill('JOUR 1 · LA VAISSELLE ✨', 540, 300, P(t, S('s1') + 0.1), C.blue); if (t >= tOub - 0.3) paperCard([['« J\'AI OUBLIÉ… ? »', 60]], 540, 480, P(t, tOub - 0.3), { w: 700 }); }
