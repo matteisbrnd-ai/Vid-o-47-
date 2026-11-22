@@ -45,6 +45,7 @@ FX = {
  'dingdong': lambda: cat((0, 0.22 * np.sin(2 * np.pi * 784 * T(0.7)) * env(int(SR * 0.7), 0.002, 0.35)), (0.45, 0.22 * np.sin(2 * np.pi * 622 * T(1.0)) * env(int(SR * 1.0), 0.002, 0.45))),
  'ring': lambda: 0.08 * (np.sin(2 * np.pi * 440 * T(1.6)) + np.sin(2 * np.pi * 480 * T(1.6))) * (np.sin(2 * np.pi * 20 * T(1.6)) > 0) * ((T(1.6) % 0.8) < 0.5),
  'steps': lambda: cat(*[(k * 0.38, 0.35 * lp(noise(0.12), 0.4) * env(int(SR * 0.12), 0.002, 0.04)) for k in range(4)]),
+ 'knock': lambda: cat(*[(k * 0.32, 0.5 * lp(noise(0.1), 0.25) * env(int(SR * 0.1), 0.001, 0.025) + chirp(0.15, lambda t: 140 + 0 * t, 0.35, 0.001, 0.04)) for k in range(3)]),
  'click': lambda: 0.3 * noise(0.04) * env(int(SR * 0.04), 0.0003, 0.004),
  'clink': lambda: 0.12 * (np.sin(2 * np.pi * 2600 * T(0.6)) + 0.6 * np.sin(2 * np.pi * 3400 * T(0.6))) * env(int(SR * 0.6), 0.001, 0.12),
  'rattle': lambda: cat(*[(rng.uniform(0, 0.9), noise(0.012) * env(int(SR * 0.012), 0.0005, 0.003) * rng.uniform(0.1, 0.35)) for _ in range(70)]),
