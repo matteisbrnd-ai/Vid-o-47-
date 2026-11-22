@@ -267,3 +267,15 @@ the lever is the first 3 s (hook) + shares.
 - Nouveau format 21h « Histoire flippante » (créateur, 21/11) : matin = histoire normale, 18h = bande, 21h = horreur (frissons sans gore). #1 « Le colocataire invisible » (horreur-coloc, 62 s, voix de secours Henri car quota ElevenLabs épuisé : 17 crédits restants le 21/11, plafond 40 000/mois). Le bandeau rouge « ton histoire flippante en dessin animé ? écris-la » et l'appel à la voix sont placés au milieu. qa.py accepte maintenant 120 s pour les slugs `horreur-`.
 - Histoire #7 « La lettre au Père Noël » (histoire-noel, 69 s, matin 22/11) : le facteur 47 lit la lettre d'un enfant (« que papa retrouve un travail »), glisse le CV du papa dans 300 courriers « de la part du Père Noël », le papa est embauché le 23/12, et l'enfant écrit « dis merci au facteur… je l'ai vu par la fenêtre ». Quota ElevenLabs rechargé le 22/11 (attention : un .json vide laissé dans vo/ après un échec bloque le build, il faut le supprimer). Horreur : nouvelles émotions de voix chuchote/peur/sinistre et MUSIC_STYLE='horreur' (nappe grave, battement de cœur, note dissonante) dans mix.py.
 - 22/11 : « La lettre au Père Noël » programmée par Claude dans Metricool le dimanche à 9h30 (accord du créateur : « programme-la pour l'heure adaptée »). Le week-end, viser 9h–10h plutôt que 8h30.
+
+## Histoires flippantes : format de référence (vidéo analysée le 22/11, 125 s, on copie la FORME, jamais le contenu)
+- **Narration à la 1re personne** (« Dans mon village… », « Je vis seul… »), voix calme, basse, presque chuchotée, avec des phrases de 1,5 à 3 s.
+- **Ligne 1 = un monde à règle anormale + moi l'exception** (« tout le monde est X, sauf moi »). L'enjeu vital tombe dans les 10 premières secondes (« si elle apprend que…, je suis le prochain »).
+- **Créature décrite par 1 ou 2 détails visuels précis et dérangeants.** Elle a une capacité qui retourne le familier contre nous, par exemple imiter les voix.
+- **Lore en règles courtes** (« quand quelqu'un disparaît, on dit toujours… C'est faux. ») : chaque phrase ajoute une règle ou en casse une.
+- **Un objet planté tôt** (cadeau d'une alliée disparue) et utilisé au climax.
+- **Rebondissement au 2/3** : un proche qu'on croyait protecteur était la créature depuis des années.
+- **Climax** : le geste du héros le trahit (un aveugle n'allume pas d'allumette).
+- **Dernière ligne glaçante** : la créature répond avec la voix du héros, et l'histoire s'arrête net, sans morale.
+- **Image** : décors désaturés bleu-gris, nuit, sources de lumière ponctuelles (flamme, lampe), gros plans lents sur les visages, sous-titres mot par mot au centre.
+- **Pour nous** : appel « ton histoire flippante en dessin animé » au milieu (voix + bandeau), 75–120 s autorisés (qa : slugs `horreur-`).
