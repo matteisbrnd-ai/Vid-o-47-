@@ -74,7 +74,7 @@ function draw(t) {
   if (id === 's5') { const op = clamp((t - tGri + 0.1) / 0.8) * 0.5; bedroom(t, op); camPath(t, K, shk); p47(330, GY + 380, 1.25, t, { mood: t >= tGri ? 'shock' : 'worried', look: t >= tGri ? 1 : 0, blink: t < tTro });
     rbox(-60, GY - 120, 900, 500, 40, '#2a3352', 8); rbox(-60, GY - 120, 900, 60, 30, '#3a4466', 6);
     if (op > 0.2) { x.save(); x.globalAlpha = op * 1.6; ell(1000, GY - 560, 70, 70, '#3a3d44', 0); x.restore(); } }
-  if (id === 's6') { orphanage(t, { bx: 620 }); lamp(80, t); camPath(t, K, shk); const k = clamp((t - tOmb) / (tMon - tOmb + 0.3)); x.save(); x.globalAlpha = 0.95; x.filter = 'brightness(0.15)'; cast('boss', 180 + 640 * k, GY, 0.55, t, { walk: t, look: 1, blink: false }); x.restore();
+  if (id === 's6') { orphanage(t, { bx: 620 }); lamp(80, t); camPath(t, K, shk); const k = clamp((t - tOmb) / (tMon - tOmb + 0.3)); x.save(); x.globalAlpha = 0.95; x.filter = 'brightness(0.15)'; cast('boss', 400 + 420 * k, GY, 0.55, t, { walk: t, look: 1, blink: false }); x.restore();
     p47(60, GY, 0.6, t, { mood: 'worried', look: 1, blink: true }); }
   if (id === 's7') { resetCam(); const sx = 540 + 320 * Math.sin((t - s0) * 0.9), sy = 820 + 260 * Math.cos((t - s0) * 0.7); wall(t, [sx, sy, 420 + 120 * clamp((t - tPre) / 0.6)], clamp((t - tPre + 0.2) / 0.8)); torch(sx + 300, sy + 420); }
   if (id === 's8' || id === 's9') { resetCam(); x.fillStyle = '#05060a'; x.fillRect(0, 0, W, H); x.save(); x.beginPath(); x.arc(540, 780, 640, 0, 7); x.clip(); x.fillStyle = '#2e2a26'; x.fillRect(0, 0, W, H);
@@ -102,8 +102,8 @@ function draw(t) {
   if (id === 's5') { banner('CETTE NUIT · 3 H 00', 540, 300, P(t, s0 + 0.1), '#2f3d63'); if (t >= tGri - 0.1) onoma('CRIIIC', 800, 640, P(t, tGri - 0.1), 150); }
   if (id === 's6') { if (t >= tOmb) pill('UNE OMBRE…', 540, 330, P(t, tOmb), '#4a4a55'); if (t >= tMon - 0.1) pill('…MON ORPHELINAT 😨', 540, 450, P(t, tMon - 0.1), C.red); }
   if (id === 's7') { if (t >= tTra - 0.1) pill('UN TRAIT = UN MENSONGE', 540, 250, P(t, tTra - 0.1), '#4a4a55'); if (t >= tPre - 0.1) stamp('47 · 47 · 47', P(t, tPre - 0.1), 1060, ORA); }
-  if (id === 's8' || id === 's9') { const items = [['« C\'est moi qui ai volé, pas le petit. »'], ['« Je suis ton ennemi. »', C.red]]; notebook(id === 's8' ? P(t, tCar - 0.1) : 1, items.slice(0, id === 's8' ? (t >= tVol - 0.6 ? 1 : 0) : 2));
-    if (id === 's8' && t >= tVol - 0.6) pill('👮 À LA POLICE', 540, 300, P(t, tVol - 0.6), C.blue); if (id === 's9') pill('🎯 À 47, TOUS LES JOURS', 540, 300, P(t, s0 + 0.1), C.red); }
+  if (id === 's8' || id === 's9') { const items = [['« C\'est moi qui ai volé, pas le petit. »'], ['« Je suis ton ennemi. »', C.red]]; notebook(id === 's8' ? P(t, tCar - 0.1) : 1, items.slice(0, id === 's8' ? (t >= tCar + 0.4 ? 1 : 0) : 2));
+    if (id === 's8' && t >= tCar + 0.4) pill('👮 À LA POLICE', 540, 300, P(t, tCar + 0.4), C.blue); if (id === 's9') pill('🎯 À 47, TOUS LES JOURS', 540, 300, P(t, s0 + 0.1), C.red); }
   if (id === 's10' && t >= tEpa - 0.1) pill('UNE MAIN… GRISE 😱', 540, 330, P(t, tEpa - 0.1), '#4a4a55');
   if (id === 's11') { if (t >= tNai - 0.2) pill('« JE MENS POUR TOI DEPUIS TA NAISSANCE »', 540, 300, P(t, tNai - 0.2), OL); if (t >= tFre - 0.1) { dim(0.25); stamp('PETIT FRÈRE', P(t, tFre - 0.1), 640, ORA); } }
   if (id === 's12') { if (t >= tVer - 0.2) paperCard([['« SI TU DIS LA VÉRITÉ… »', 50]], 540, 300, P(t, tVer - 0.2), { w: 820 }); if (t >= tIls - 0.1) { paperCard([['« …ILS SAURONT OÙ TU ES. »', 54, C.red]], 540, 470, P(t, tIls - 0.1), { w: 900 }); pill('QUI SONT « ILS » ? 👀', 540, 660, P(t, tIls + 0.3), C.red); } }
