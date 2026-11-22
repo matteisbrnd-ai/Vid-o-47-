@@ -23,7 +23,7 @@ BEATS = [
   ('s8', "Derrière la photo, un carnet. Son écriture. Une liste de mensonges.", "Derrière la photo, un carnet. Son écriture. Une liste de mensonges.", 0.1),
   ('s9', "Numéro un, à la police : « C'est moi qui ai volé. Pas le petit. »", "Numéro un, à la police : C'est moi qui ai volé. Pas le petit.", 0.1),
   ('s10', "Numéro deux, à l'orphelinat : « Ce bébé n'a pas de famille. Laissez-le à la bande. »", "Numéro deux, à l'orphelinat : Ce bébé n'a pas de famille. Laissez-le à la bande.", 0.1),
-  ('s11', "Le dernier, à moi : « Je suis ton ennemi. » Pour que personne ne sache que j'étais son petit frère.", "Le dernier, à moi : Je suis ton ennemi. Pour que personne ne sache que j'étais son petit frère.", 0.2),
+  ('s11', "Le dernier, à moi : « Je suis ton ennemi. » Pour que personne ne sache que j'étais son petit frère.", "Le dernier, à moi : Je suis ton ennemi. Pour que personne ne sache que j'étais son petit frère.", 0.8),
   ('s12', "Ce soir, la police a frappé au garage. Ils cherchaient le Baron. Il était caché… derrière moi.", "Ce soir, la police a frappé au garage. Ils cherchaient le Baron. Il était caché... derrière moi.", 0.1),
   ('s13', "« Tu l'as vu ? » Pour la première fois de ma vie, j'ai menti. « Non. » Et mon bonnet est devenu gris.", "Tu l'as vu ? Pour la première fois de ma vie, j'ai menti. Non. Et mon bonnet est devenu gris.", 0.2),
   ('s14', "Derrière moi, le Baron a souri. Sur sa joue… une petite tache orange.", "Derrière moi, le Baron a souri. Sur sa joue... une petite tache orange.", 0.3),

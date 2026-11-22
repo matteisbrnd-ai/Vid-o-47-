@@ -190,20 +190,21 @@ function draw(t) {
   else if (id === 's5') K = [[S('s5'), 0, 460, 1400, 1.4], [S('s5') + 0.3, 1.5, 1400, 1400, 0.7], [tAtt - 0.3, 1.2, 2380, 1350, 1.6]];
   else if (id === 's6' || id === 's7') K = [[S(id), 0, 1300, 1450, 1.0], [S(id) + 0.2, 4, 1300, 1430, 1.08]];
   else if (id === 's11') K = [[S('s11'), 0, 1400, 1400, 0.75], [S('s11') + 0.2, 5, 1400, 1400, 0.8]];
-  else K = [[S(id), 0, 420, 1450, 1.25], [S(id) + 0.2, 5, 440, 1430, 1.35]];
+  else if (id === 's12') K = [[S(id), 0, 420, 1450, 1.2], [S(id) + 0.2, 5, 440, 1430, 1.3]];
+  else K = [[S(id), 0, 640, 1600, 1.6], [S(id) + 0.2, 5, 650, 1590, 1.75]];
   camPath(t, K, (id === 's12' && t >= tFra && t < tFra + 0.4) ? 14 : 0);
   city(t);
   // the band
   const ricoGrey = id === 's1' ? clamp((t - tGris1 + 0.2) / 0.6) : (['ff'].includes(id) ? 0 : 1);
-  cast('rico', 60, GY, 0.75, t, { hatCol: mixC('#3f6fb5', '#9a9aa0', ricoGrey), hatCol2: mixC('#2f568f', '#7a7a80', ricoGrey), mood: id === 's1' && t >= tGris1 ? 'shock' : 'smug', look: 1, blink: true });
+  if (!night) cast('rico', 60, GY, 0.75, t, { hatCol: mixC('#3f6fb5', '#9a9aa0', ricoGrey), hatCol2: mixC('#2f568f', '#7a7a80', ricoGrey), mood: id === 's1' && t >= tGris1 ? 'shock' : 'smug', look: 1, blink: true });
   const lolaPale = id === 's2' ? clamp((t - tBla + 0.2) / 0.6) : (['ff', 's1'].includes(id) ? 0 : 1);
-  x.save(); x.filter = `saturate(${1 - 0.8 * lolaPale}) brightness(${1 + 0.15 * lolaPale})`; cast('woman', 260, GY, 0.75, t, { ...LOLA, mood: id === 's2' && t >= tBla ? 'worried' : 'smile', look: 1, blink: true }); x.restore();
+  if (!night) { x.save(); x.filter = `saturate(${1 - 0.8 * lolaPale}) brightness(${1 + 0.15 * lolaPale})`; cast('woman', 260, GY, 0.75, t, { ...LOLA, mood: id === 's2' && t >= tBla ? 'worried' : 'smile', look: 1, blink: true }); x.restore(); }
   const beanieG = id === 's13' ? clamp((t - tGris13 + 0.3) / 0.8) : (['s14', 'end'].includes(id) ? 1 : 0);
   const p47x = night ? 560 : 460, look47 = ['s5', 'mid', 's11'].includes(id) ? 1 : (night ? -1 : 1);
-  const bx = night ? 700 : 2380, bScale = night ? 0.85 : 0.9;
-  if (night) { gray(() => cast('boss', bx, GY + 40, bScale, t, { mood: id === 's14' || id === 'end' ? 'smile' : 'worried', look: -1, blink: true })); if ((id === 's14' && t >= tOra14 - 0.2) || id === 'end') { const k = id === 's14' ? clamp((t - tOra14 + 0.2) / 0.5) : 1; ell(bx - 40, GY + 40 - 560, 22 * k, 16 * k, C.orange, 0); } }
+  const bx = night ? 690 : 2380, bScale = night ? 0.85 : 0.9;
+  if (night) { gray(() => cast('boss', bx, GY + 40, bScale, t, { mood: id === 's14' || id === 'end' ? 'smile' : 'worried', look: -1, blink: true })); if ((id === 's14' && t >= tOra14 - 0.2) || id === 'end') { const k = id === 's14' ? clamp((t - tOra14 + 0.2) / 0.5) : 1; ell(bx + 64, GY - 466, 24 * k, 18 * k, C.orange, 0); } }
   p47(p47x, GY, 0.78, t, { hatCol: mixC('#f2782a', '#9a9aa0', beanieG), hatCol2: mixC('#c85a18', '#7a7a80', beanieG), mood: id === 's4' ? 'smug' : (id === 's5' || id === 'mid' ? 'angry' : (id === 's13' && t >= tNon ? 'worried' : (id === 's11' ? 'shock' : 'smug'))), look: look47, blink: true });
-  cast('inspector', 660, GY, 0.75, t, { ...RYZEN, mood: 'smug', look: 1, blink: true }); cast('inspector', 860, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: true });
+  if (!night) cast('inspector', 660, GY, 0.75, t, { ...RYZEN, mood: 'smug', look: 1, blink: true }); if (!night) cast('inspector', 860, GY, 0.75, t, { ...ANGE, mood: 'smug', look: 1, blink: true });
   if (!night) { cast('inspector', id === 's6' || id === 's7' ? 1180 : 1700, GY, 0.75, t, { ...SPY, mood: 'smug', look: -1, blink: true, armUp: id === 's6' && t >= tPho }); }
   if (!night) gray(() => cast('boss', 2380, GY + 40, 0.9, t, { mood: id === 's5' && t >= tAtt ? 'worried' : 'smug', look: -1, blink: true }), id === 's3' ? clamp((t - tGris3 + 0.6) / 0.6) : (id === 'ff' && t < tCou ? 0 : 1));
   if (id === 's12' || id === 's13') { cast('guard', 160, GY, 0.85, t, { mood: 'angry', look: 1, blink: true, armUp: id === 's12' && t >= tFra && t < tFra + 0.6 }); }
@@ -216,7 +217,7 @@ function draw(t) {
   if (id === 's4') { flashCut(t, S('s4')); if (t >= tJam - 0.2) pill('47 : 0 MENSONGE 🧡', 540, 330, P(t, tJam - 0.2), C.orange); }
   if (id === 's5') { flashCut(t, S('s5')); if (t >= tAtt - 0.3) pill('… COMME S\'IL ATTENDAIT QUELQUE CHOSE', 540, 330, P(t, tAtt - 0.3), OL); }
   if (id === 'mid') { flashCut(t, S('mid')); paperCard([['POURQUOI IL EST TOUT GRIS ? 🤔', 54]], 540, 330, P(t, S('mid'), 0.25), { w: 940 }); if (t >= tHis - 0.4) paperCard([['TON HISTOIRE EN DESSIN ANIMÉ 🎬', 48], ['LA + LIKÉE = PROCHAIN ÉPISODE', 44, C.red]], 540, 1080, P(t, tHis - 0.4), { w: 960 }); }
-  if (id === 's6' || id === 's7') { flashCut(t, S(id)); const pp = id === 's6' ? P(t, tPho - 0.1) : 1; polaroid(540, 640, 560, 600, pp, (w, h) => { x.save(); x.filter = 'sepia(0.35)'; x.fillStyle = '#e8dcc4'; x.fillRect(0, 0, w, h); cast('boss', w / 2, h + 260, 0.9, t, { mood: 'smile', look: 1, blink: false, shades: false }); if (id === 's7' && t >= tBeb - 0.2) baby(w / 2 + 40, h - 150, 1.2); x.restore(); }, id === 's6' && t >= tQui ? 'IL Y A 15 ANS' : 'LA BANDE', -0.04);
+  if (id === 's6' || id === 's7') { flashCut(t, S(id)); const pp = id === 's6' ? P(t, tPho - 0.1) : 1; polaroid(540, 640, 560, 600, pp, (w, h) => { x.save(); x.filter = 'sepia(0.35)'; x.fillStyle = '#e8dcc4'; x.fillRect(0, 0, w, h); cast('inspector', w / 2, h + 260, 0.9, t, { hat: 'hair', hairCol: '#1f1a18', body: '#e8794a', body2: '#c9622f', pants: '#2a4a7a', num: false, mood: 'smile', look: 1, blink: false }); if (id === 's7' && t >= tBeb - 0.2) baby(w / 2 + 40, h - 150, 1.2); x.restore(); }, id === 's6' && t >= tQui ? 'IL Y A 15 ANS' : 'LA BANDE', -0.04);
     if (id === 's7' && t >= tOra7 - 0.1) pill('👶 UN BÉBÉ… BONNET ORANGE', 540, 1150, P(t, tOra7 - 0.1), C.orange); }
   if (['s8', 's9', 's10', 's11'].includes(id)) { if (id === 's8') flashCut(t, S('s8')); const items = [['1. Police : « C\'est moi, pas le petit. »'], ['2. Orphelinat : « Il n\'a pas de famille. »'], ['3. À lui : « Je suis ton ennemi. »', C.red]];
     const n = { s8: 0, s9: 1, s10: 2, s11: 3 }[id]; notebook(id === 's8' ? P(t, tCar - 0.1) : 1, items.slice(0, n), n - 1);
