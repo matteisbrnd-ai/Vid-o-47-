@@ -296,3 +296,14 @@ the lever is the first 3 s (hook) + shares.
 - Jour 10 (59 s) : 179 → 193 · « il manquait 53 €, vous avez mis 59 likes » → alarme · DRIIING quand les hommes sortent du tunnel · l.ca directeur des opérations, Lirone mur de feu, Noah forgeron de boucliers (« armurier »), Ewan acrobate avec son propre emblème (« spiderman »), juste le goat pilote à ballons d'eau (« F35 qui bombarde »), T' banquier (« Tony Montana ») · le Baron fonce sur 47 et s'arrête net, il n'ose pas frapper → « réponse demain matin » = renvoi au hors-série du Baron · projecteurs 60 €, il manque 54 €. Jour 11 : caisse = 6 + likes Jour 10.
 - Refus (22/11) : pas de sosies « ressemblants mais pas exacts » de persos protégés (Spider-Man avec logo d'araignée modifié, Tony Montana) ; on fait des versions originales qui gardent l'idée du rôle.
 - Jour 10 v2 (demande du créateur) : les rôles sont faits AU PLUS PRÈS de la demande (armurier avec un atelier d'armes et d'armures façon cartoon, avion de chasse qui bombarde avec des bombes rondes de dessin animé, T' en parrain avec costume rayé et chapeau), et les bulles reprennent les vrais commentaires mot pour mot. Seule limite gardée : aucun look reconnaissable de perso protégé (pas de héros bleu et rouge pour « Spider-Man » ; Ewan = héros masqué turquoise et noir avec un emblème « E »). Le hors-série du Baron sort le lundi 23/11 à 18h (et pas le matin) : la fin du Jour 10 annonce « réponse demain 18h ».
+
+### Handles Jour 10 (vérifiés 22/11 via API commentaires du Jour 9)
+| Pseudo | @ |
+|---|---|
+| l.ca | @l.ca628 |
+| Ewan.mssd | @ewan.mssd |
+| Lirone | @l2l0612 |
+| juste le goat | @chainsow26 |
+| T' 🇲🇫🏀 | @zitrox14 |
+| Noah | @npgla01 |
+Astuce : dans la page tiktok.com (connecté), `fetch('/api/comment/list/?aid=1988&aweme_id=ID&count=50&cursor=0')` donne nickname + unique_id.
