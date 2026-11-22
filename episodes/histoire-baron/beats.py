@@ -26,7 +26,7 @@ BEATS = [
   ('s7', "Le soir même : trois coups. Le matin, Lola était grise. Assise sur son lit. Les yeux ouverts.", "Le soir même : trois coups. Le matin, Lola était grise. Assise sur son lit. Les yeux ouverts.", 0.2),
   ('s8', "Alors ici, tout le monde ment un peu. Pour rester gris. Pour rester vivant.", "Alors ici, tout le monde ment un peu. Pour rester gris. Pour rester vivant.", 0.1),
   ('s9', "Le plus gris de tous, c'est le Baron. Il me déteste. Et pourtant… il ne m'a jamais touché.", "Le plus gris de tous, c'est le Baron. Il me déteste. Et pourtant... il ne m'a jamais touché.", 0.1),
-  ('mid', "Pourquoi ?… T'as une histoire de ouf ? Écris-la en commentaire : la plus likée, je l'anime avec 47 !", "Pourquoi ?... T'as une histoire de ouf ? Écris-la en commentaire : la plus likée, je l'anime avec Quarante-sept !", 0.05),
+  ('mid', "Pourquoi ?… La fin, tu vas pas t'y attendre. Et toi, t'as une histoire de ouf ? Écris-la en commentaire : la plus likée, je l'anime avec 47 !", "Pourquoi ?... La fin, tu vas pas t'y attendre. Et toi, t'as une histoire de ouf ? Écris-la en commentaire : la plus likée, je l'anime avec Quarante-sept !", 0.05),
   ('s10', "Chaque nuit, j'entends les trois coups. Chez les voisins. Jamais chez moi.", "Chaque nuit, j'entends les trois coups. Chez les voisins. Jamais chez moi.", 0.1),
   ('s11', "Et chaque matin, devant ma porte… des traces de pas grises.", "Et chaque matin, devant ma porte... des traces de pas grises.", 0.1),
   ('s12', "Cette nuit, je n'ai pas dormi. Trois heures. Toc. Toc. Toc.", "Cette nuit, je n'ai pas dormi. Trois heures. Toc. Toc. Toc.", 0.3),

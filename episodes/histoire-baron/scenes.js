@@ -116,7 +116,7 @@ function draw(t) {
     knockFx(t, knockTimes(tCoupsE - 0.1, 3, 0.35), 540, 700, 150); }
   vignette(0.6); resetCam();
   // ---------- overlays ----------
-  if (id === 'ff') { hookCard(t, [['IL N\'A JAMAIS MENTI…', 64], ['ALORS ELLE VA LE MANGER 😨', 58, C.red]], 2.6); if (t >= tCou - 0.1) pill('🤥 1 MENSONGE = 1 COULEUR EN MOINS', 540, 330, P(t, tCou - 0.1), '#4a4a55'); if (t >= tMan - 0.1) pill('🌙 LA NUIT, ELLE MANGE LES + COLORÉS', 540, 450, P(t, tMan - 0.1), C.red); }
+  if (id === 'ff') { hookCard(t, [['IL N\'A JAMAIS MENTI…', 64], ['ALORS ELLE VA LE MANGER 😨', 58, C.red]], 2.6, 'TU T\'ATTENDS PAS À LA FIN 😳'); if (t >= tCou - 0.1) pill('🤥 1 MENSONGE = 1 COULEUR EN MOINS', 540, 330, P(t, tCou - 0.1), '#4a4a55'); if (t >= tMan - 0.1) pill('🌙 LA NUIT, ELLE MANGE LES + COLORÉS', 540, 450, P(t, tMan - 0.1), C.red); }
   if (id !== 'ff') flashCut(t, s0);
   if (id === 's1') { if (t >= tJam - 0.2) pill('47 : 0 MENSONGE', 540, 330, P(t, tJam - 0.2), '#4a4a55'); if (t >= tOra1 - 0.2) pill('= LE + COLORÉ DE LA VILLE 🧡', 540, 450, P(t, tOra1 - 0.2), ORA); }
   if (id === 's2' && t >= tMor - 0.1) stamp('LE PROCHAIN ?', P(t, tMor - 0.1), 380, C.red);
@@ -127,7 +127,7 @@ function draw(t) {
   if (id === 's7') { if (t >= tMat7 - 0.1) { flashCut(t, tMat7 - 0.1); banner('LE MATIN', 540, 300, P(t, tMat7), '#4a4a55'); } if (t >= tOuv - 0.1) pill('GRISE. LES YEUX OUVERTS.', 540, 420, P(t, tOuv - 0.1), OL); }
   if (id === 's8') { banner('TOUT LE MONDE MENT UN PEU 🤥', 540, 300, P(t, s0 + 0.1), '#4a4a55'); if (t >= tViv - 0.2) pill('GRIS = VIVANT', 540, 430, P(t, tViv - 0.2), OL); }
   if (id === 's9') { if (t >= tBar9 - 0.2) pill('LE BARON : LE + GRIS DE TOUS', 540, 300, P(t, tBar9 - 0.2), OL); if (t >= tTch - 0.1) stamp('JAMAIS TOUCHÉ 47', P(t, tTch - 0.1), 450, C.red); }
-  if (id === 'mid') { paperCard([['POURQUOI IL NE LE TOUCHE PAS ? 🤔', 50]], 540, 330, P(t, s0, 0.25), { w: 980 }); if (t >= tHis - 0.4) paperCard([['TON HISTOIRE EN DESSIN ANIMÉ 🎬', 48], ['LA + LIKÉE = PROCHAIN ÉPISODE', 44, C.red]], 540, 1050, P(t, tHis - 0.4), { w: 960 }); }
+  if (id === 'mid') { paperCard([['POURQUOI IL NE LE TOUCHE PAS ? 🤔', 50]], 540, 330, P(t, s0, 0.25), { w: 980 }); const tFin = WF('mid', /fin/i); if (t >= tFin - 0.2 && t < tHis - 0.4) pill('LA FIN, TU T\'Y ATTENDS PAS 😳', 540, 520, P(t, tFin - 0.2), C.red); if (t >= tHis - 0.4) paperCard([['TON HISTOIRE EN DESSIN ANIMÉ 🎬', 48], ['LA + LIKÉE = PROCHAIN ÉPISODE', 44, C.red]], 540, 1050, P(t, tHis - 0.4), { w: 960 }); }
   if (id === 's10' && t >= tJam10 - 0.2) pill('CHEZ LES VOISINS… JAMAIS CHEZ MOI', 540, 330, P(t, tJam10 - 0.2), '#4a4a55');
   if (id === 's11') { banner('CHAQUE MATIN', 540, 300, P(t, s0 + 0.1), '#2f3d63'); if (t >= tGri11 - 0.2) pill('👣 DES PAS GRIS DEVANT MA PORTE', 540, 430, P(t, tGri11 - 0.2), '#4a4a55'); }
   if (id === 's12') { banner('CETTE NUIT · 3 H 00', 540, 300, P(t, s0 + 0.1), '#2f3d63'); }
