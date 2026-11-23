@@ -37,6 +37,7 @@ FX = {
  'paper': lambda: 0.18 * lp(noise(0.22), 0.35) * np.sin(np.pi * T(0.22) / 0.22) ** 1.5,
  'bubble': lambda: chirp(0.16, lambda t: 300 + 1400 * (t / 0.16) ** 1.5, 0.26, 0.002, 0.07),
  'buzz': lambda: 0.16 * lp(np.sign(np.sin(2 * np.pi * 110 * T(0.38))) * 0.5 + np.sign(np.sin(2 * np.pi * 116 * T(0.38))) * 0.5, 0.25) * env(int(SR * 0.38), 0.004, 0.25),
+ 'coin': lambda: 0.12 * (np.sin(2 * np.pi * 3520 * T(0.35)) + 0.6 * np.sin(2 * np.pi * 5280 * T(0.35)) + 0.4 * np.sin(2 * np.pi * 2637 * T(0.35))) * env(int(SR * 0.35), 0.0005, 0.08),
  'tick': lambda: 0.3 * noise(0.05) * env(int(SR * 0.05), 0.0005, 0.006) + 0.18 * np.sin(2 * np.pi * 2400 * T(0.05)) * env(int(SR * 0.05), 0.0005, 0.01),
  'bam': lambda: cat((0, chirp(0.7, lambda t: 90 * np.exp(-t * 4) + 38, 0.6, 0.002, 0.3)), (0, 0.45 * lp(noise(0.5), 0.5) * env(int(SR * 0.5), 0.001, 0.12))),
  'stamp': lambda: cat((0, chirp(0.4, lambda t: 140 * np.exp(-t * 8) + 60, 0.45, 0.001, 0.12)), (0, 0.3 * lp(noise(0.12), 0.6) * env(int(SR * 0.12), 0.001, 0.03))),
