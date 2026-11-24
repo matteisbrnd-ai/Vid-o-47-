@@ -248,7 +248,7 @@ function draw(t) {
   // night grade + projector beams
   resetCam(); x.fillStyle = `rgba(8,12,36,${on ? 0.38 : 0.7})`; x.fillRect(0, 0, W, H); camPath(t, K, shk); beams(on, t); resetCam(); vignette(0.4);
   // ---------- overlays ----------
-  if (id === 'ff') { hookCard(t, [['LE BARON ATTAQUE…', 66], ['DANS LE NOIR 😨', 70, C.red]], 2.4); if (t >= tLk - 0.2) card('❤️ HIER : 78 LIKES', '= 78 € DANS LA CAISSE', '#2a8a3a', P(t, tLk - 0.2, 0.2)); if (t >= 2.4) pill('➕ 27 NOUVEAUX SOLDATS · 220 💪', 540, 640, P(t, 2.4), '#2a8a3a'); }
+  if (id === 'ff') { hookCard(t, [['LE BARON ATTAQUE…', 66], ['DANS LE NOIR 😨', 70, C.red]], 2.4); if (t >= tLk - 0.2) card('❤️ HIER : 78 LIKES', '= 78 € DANS LA CAISSE', '#2a8a3a', P(t, tLk - 0.2, 0.2)); if (t >= 2.4) pill('➕ 27 NOUVEAUX SOLDATS · 219 💪', 540, 640, P(t, 2.4), '#2a8a3a'); }
   if (id !== 'ff') flashCut(t, s0);
   if (id === 's1') { if (t < tPro - 0.1) card('🔦 PROJECTEURS : 60 €', 'IL MANQUAIT 54 €', C.red, P(t, s0, 0.2)); else { card('6 + 78 = 84 € ✅', 'PROJECTEURS ACHETÉS', '#2a8a3a', P(t, tPro - 0.1, 0.2)); if (t >= tClac) { onoma('CLAC !', 540, 760, P(t, tClac, 0.2), 140); confetti(t, tClac); } } }
   if (id === 's2' && t >= tMil - 0.1) card('😨 1000 SOLDATS DU BARON', 'DEVANT LE GARAGE', C.red, P(t, tMil - 0.1, 0.2));
@@ -260,5 +260,5 @@ function draw(t) {
   if (id === 's8') { x.save(); x.translate(540, 400); const k = eBack(clamp(P(t, s0, 0.25))); x.scale(k, k); rrc(0, 0, 960, 420, 44, 'rgba(20,20,28,.94)', 9); txt('💰 CAISSE : 24 €', 0, -120, 66, '#f5c542', { stroke: false });
       if (t >= tTal - 0.1) txt('📻 TALKIES-WALKIES : 70 €', 0, 0, 54, '#fff', { stroke: false }); if (t >= tMan - 0.1) txt('IL MANQUE 46 € !', 0, 130, 76, '#ff6a5a', { stroke: false }); x.restore(); }
   if (id === 'cta') { if (t < tRole2 - 0.1) card('❤️ 46 LIKES', '= LES TALKIES-WALKIES 📻', C.red, P(t, s0, 0.2)); else { card('QUEL RÔLE TU PRENDS ? 💬', 'POUR LA BATAILLE', '#2457a8', P(t, tRole2 - 0.1, 0.2)); if (t >= tLik2 - 0.2) pill('👑 LE + LIKÉ ENTRE DANS LA BANDE', 540, 560, P(t, tLik2 - 0.2), C.red); } }
-  if (id === 'end') { pill('NOUS 220 · LUI 1000 · ENCORE 780 💪', 540, 300, 1, '#2a8a3a'); if (t >= tPol - 0.2) card('QUI FILME ? 👮', 'DEMAIN 18H 🌆', C.red, P(t, tPol - 0.2, 0.2), 1420); }
+  if (id === 'end') { pill('NOUS 219 · LUI 1000 · ENCORE 781 💪', 540, 300, 1, '#2a8a3a'); if (t >= tPol - 0.2) card('QUI FILME ? 👮', 'DEMAIN 18H 🌆', C.red, P(t, tPol - 0.2, 0.2), 1420); }
 }

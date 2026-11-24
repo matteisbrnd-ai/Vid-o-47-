@@ -1,4 +1,4 @@
-# La bande de 47 — Saison 2 · Jour 11 (bataille de nuit). Facts (TikTok 24/11 15h46) : Jour 10 = 754 vues, 78 likes, 16 com, +27 abonnés (193 → 220), rétention 11,4 s / 61 s.
+# La bande de 47 — Saison 2 · Jour 11 (bataille de nuit). Facts (TikTok 24/11 15h46) : Jour 10 = 754 vues, 78 likes, 16 com, +27 abonnés (219 abonnés le 24/11), rétention 11,4 s / 61 s.
 # Caisse 6 + 78 = 84 € ≥ projecteurs 60 € → ACHETÉS (payoff), reste 24 €. Prochain objectif : talkies-walkies 70 € → il manque 46 €.
 # Rôles (vrais commentaires Jour 10, au plus près) : th_3o serveur (le + liké, 4♥), G.31K géant robot, goku infirmier, ZETA/JUNIOR « le fou du bus », JoproYTB le bg,
 # ZFM_KIZØKS16 masterclass stratégique de Napoléon. Ignorés : C.LV'31K « armurier 2 » (créateur a demandé un autre rôle, pas de réponse), « caca ».
