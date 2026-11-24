@@ -207,7 +207,7 @@ const COP = { hat: 'cap', hatCol: '#1f3a8a', hatCol2: '#172e6e', body: '#1f3a8a'
 function draw(t) {
   const id = curId(t), s0 = S(id), w = (b, r) => WF(b, r);
   const tNoir = w('ff', /noir/i), tLk = w('ff', /likes/i), tPro = w('s1', /projecteurs/i), tClac = w('s1', /CLAC/), tLum = w('s2', /lumière/i), tMil = w('s2', /mille/i), tCar = w('s3', /carte/i), tMas = w('s3', /Masterclass/i),
-    tBus = w('s4', /bus/i), tZet = w('s4', /ZETA/i), tRob = w('s5', /robot/i), tRec = w('s5', /reculent/i), tInf = w('s6', /infirmier/i), tSer = w('s6', /serveur/i), tSan = w('s6', /sandwichs/i), tMec = w('s7', /mèche/i), tAmo = w('s7', /amoureux/i),
+    tBus = w('s4', /bus/i), tZet = w('s4', /volant/i), tRob = w('s5', /robot/i), tRec = w('s5', /reculent/i), tInf = w('s6', /infirmier/i), tSer = w('s6', /serveur/i), tSan = w('s6', /sandwichs/i), tMec = w('s7', /mèche/i), tAmo = w('s7', /amoureux/i),
     tVin = w('s8', /vingt/i), tTal = w('s8', /talkies/i), tMan = w('s8', /manque/i), tRole2 = w('cta', /rôle/i), tLik2 = w('cta', /liké/i), tToit = w('end', /toit/i), tPol = w('end', /police/i);
   window.CAP_Y = 1250; window.NOCAP_UNTIL = 99; window.PORT47 = true;
   let K;

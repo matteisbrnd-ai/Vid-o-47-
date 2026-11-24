@@ -26,6 +26,6 @@ BEATS = [
   ('end', "Mais sur le toit, quelqu'un filme tout… avec une casquette de police. Demain, 18h.", "Mais sur le toit, quelqu'un filme tout... avec une casquette de police. Demain, dix-huit heures.", 0.3),
 ]
 CUES = [('ff', '+0', 'sting'), ('ff', 'noir', 'wind'), ('ff', 'likes', 'cash'), ('s1', 'manquait', 'tick'), ('s1', 'projecteurs', 'ding'), ('s1', 'CLAC', 'bam'),
-        ('s2', 'lumière', 'whoosh'), ('s2', 'mille', 'sting'), ('s3', 'carte', 'page'), ('s3', 'Masterclass', 'pop'), ('s4', 'bus', 'whoosh'), ('s4', 'ZETA', 'beep'), ('s4', 'fou', 'bam'),
+        ('s2', 'lumière', 'whoosh'), ('s2', 'mille', 'sting'), ('s3', 'carte', 'page'), ('s3', 'Masterclass', 'pop'), ('s4', 'bus', 'whoosh'), ('s4', 'volant', 'beep'), ('s4', 'fou', 'bam'),
         ('s5', 'robot', 'bam'), ('s5', 'reculent', 'run'), ('s6', 'infirmier', 'ding'), ('s6', 'sandwichs', 'pop'), ('s7', 'mèche', 'whoosh'), ('s7', 'amoureux', 'dingdong'),
         ('s8', 'vingt', 'cash'), ('s8', 'talkies', 'ding'), ('s8', 'manque', 'sting'), ('cta', 'rôle', 'pop'), ('cta', 'liké', 'ding'), ('end', 'toit', 'sting'), ('end', 'police', 'bam')]
